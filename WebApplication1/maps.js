@@ -21,16 +21,12 @@
 function codeAddress() {
     geocoder = new google.maps.Geocoder();
     var address = document.getElementById("my-address").value;
-    geocoder.geocode( { 'address': address}, function(results, status) {
+    geocoder.geocode({ 'address': address }, function (results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
 
-            alert("Latitude: "+results[0].geometry.location.lat());
+            alert("Latitude: " + results[0].geometry.location.lat());
             alert("Longitude: " + results[0].geometry.location.lng());
-            var lat = results[0].geometry.location.lat();
-            var lng = results[0].geometry.location.lng();
-            document.getElementById("Hidden1").value = lat;
-            document.getElementById("Hidden2").value = lng;
-        } 
+        }
 
         else {
             alert("Geocode was not successful for the following reason: " + status);
