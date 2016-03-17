@@ -14,6 +14,12 @@
 
         <input type="text" id="my-address" style="width: 448px">
         <button id="getCords" onClick="codeAddress();">getLat&Long</button> 
+        <form id="WebForm1" runat="server">
+        <asp:HiddenField ID="lat" runat="server" />
+        <asp:HiddenField ID="lng" runat="server" />
+        <asp:Button ID="Button1" runat="server" Text="Button" OnClick="Button1_Click" />
 
+        </form>
     </body>
 </html>
+
