@@ -17,6 +17,33 @@
         .auto-style4 {
             width: 212px;
         }
+        .auto-style5 {
+            width: 237px;
+        }
+        .auto-style6 {
+            width: 237px;
+            height: 21px;
+        }
+        .auto-style7 {
+            height: 21px;
+        }
+        .auto-style8 {
+            width: 172px;
+            height: 26px;
+        }
+        .auto-style9 {
+            height: 26px;
+        }
+        .auto-style10 {
+            width: 128px;
+        }
+        .auto-style11 {
+            width: 237px;
+            height: 29px;
+        }
+        .auto-style12 {
+            height: 29px;
+        }
     </style>
 </head>
 <body>
@@ -27,7 +54,7 @@
         <table style="width:100%;">
             <tr>
                 <td class="auto-style2">
-        <asp:Calendar ID="Calendar1" runat="server" BackColor="White" BorderColor="Black" BorderStyle="Solid" CellSpacing="1" Font-Names="Verdana" Font-Size="9pt" ForeColor="Black" Height="396px" NextPrevFormat="ShortMonth" Width="488px">
+        <asp:Calendar ID="Calendar1" runat="server" BackColor="White" BorderColor="Black" BorderStyle="Solid" CellSpacing="1" Font-Names="Verdana" Font-Size="9pt" ForeColor="Black" Height="396px" NextPrevFormat="ShortMonth" Width="488px" ToolTip="Select the day of the week to see avaliable appointment times. ">
             <DayHeaderStyle Font-Bold="True" Font-Size="8pt" ForeColor="#333333" Height="8pt" />
             <DayStyle BackColor="#CCCCCC" />
             <NextPrevStyle Font-Bold="True" Font-Size="8pt" ForeColor="White" />
@@ -36,12 +63,12 @@
             <TitleStyle BackColor="#333399" BorderStyle="Solid" Font-Bold="True" Font-Size="12pt" ForeColor="White" Height="12pt" />
             <TodayDayStyle BackColor="#999999" ForeColor="White" />
         </asp:Calendar> </td>
-                <td> &nbsp;<asp:Panel ID="Panel1" runat="server" Width="485px">
+                <td> &nbsp;<asp:Panel ID="ClientPanel" runat="server" Width="485px">
                         <table style="width:100%;">
                             <tr>
-                                <td class="auto-style1">Sign Up for Session</td>
-                                <td>
-                                    &nbsp;</td>
+                                <td class="auto-style8">Sign Up for Session</td>
+                                <td class="auto-style9">
+                                    </td>
                             </tr>
                             <tr>
                                 <td class="auto-style1">Trainer</td>
@@ -111,10 +138,92 @@
         </asp:Panel>
 
                     <br />
-                    <asp:Panel ID="Panel2" runat="server">
+                    <asp:Panel ID="TrainerControlPannel" runat="server">
                         <table style="width:100%;">
                             <tr>
-                                <td class="auto-style4">Manage Your Clients</td>
+                                <td class="auto-style10">Select:</td>
+                                <td>
+                                    <asp:Button ID="ConfirmClientApptBtn" runat="server" OnClick="ConfirmClientApptBtn_Click" Text="Confirm Client Appointment" Width="231px" />
+                                </td>
+                                <td>
+                                    <asp:Button ID="ManageTimeBtn" runat="server" OnClick="ManageTimeBtn_Click" Text="Manage Time Avaliable" Width="195px" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="auto-style10">&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td class="auto-style10">&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                        </table>
+                    </asp:Panel>
+                    <br />
+                    <asp:Panel ID="BlockTimesPanel" runat="server" Visible="False">
+                        <table style="width:100%;">
+                            <tr>
+                                <td class="auto-style5">Block Out Times and Dates</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td class="auto-style11">Selcted Date</td>
+                                <td class="auto-style12">
+                                    <asp:TextBox ID="SelectedDateTxtBxTrainer0" runat="server"></asp:TextBox>
+                                </td>
+                                <td class="auto-style12"></td>
+                            </tr>
+                            <tr>
+                                <td class="auto-style5">Start Time:</td>
+                                <td>
+                                    <asp:DropDownList ID="StartTimeDrpDwn0" runat="server" ToolTip="The time the session will start.">
+                                    </asp:DropDownList>
+                                </td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td class="auto-style5">End Time:</td>
+                                <td>
+                                    <asp:DropDownList ID="EndTimeDrpDwn0" runat="server" ToolTip="The time the session will end.">
+                                    </asp:DropDownList>
+                                </td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td class="auto-style6"></td>
+                                <td class="auto-style7"></td>
+                                <td class="auto-style7"></td>
+                            </tr>
+                            <tr>
+                                <td class="auto-style5">
+                                    <asp:Button ID="Button3" runat="server" Text="Block Out Slected Times" />
+                                </td>
+                                <td>
+                                    <asp:Button ID="Button5" runat="server" Text="Block Out Entire Day" />
+                                </td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td class="auto-style5">
+                                    <asp:Button ID="Button4" runat="server" Text="Reopen Slected Times" Width="266px" />
+                                </td>
+                                <td>
+                                    <asp:Button ID="Button6" runat="server" Text="Reopen Entire Day" Width="234px" />
+                                </td>
+                                <td>&nbsp;</td>
+                            </tr>
+                        </table>
+                    </asp:Panel>
+                    <br />
+
+                    <br />
+                    <asp:Panel ID="ConfirmSessionPanel" runat="server" Visible="False">
+                        <table style="width:100%;">
+                            <tr>
+                                <td class="auto-style4">Confirm Client Session</td>
                                 <td>&nbsp;</td>
                             </tr>
                             <tr>
@@ -138,10 +247,18 @@
                             </tr>
                             <tr>
                                 <td class="auto-style4">
-                                    <asp:Button ID="ConfirmBtnTrainer" runat="server" OnClick="ConfirmBtnTrainer_Click" Text="Comfirm Appointment" />
+                                    <asp:Button ID="ConfirmBtnTrainer" runat="server" OnClick="ConfirmBtnTrainer_Click" Text="Comfirm Appointment" Width="269px" />
                                 </td>
                                 <td>
                                     <asp:Button ID="DeclineBtnTrainer" runat="server" OnClick="DeclineBtnTrainer_Click" Text="Decline Appointment" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="auto-style4">
+                                    <asp:Button ID="Button1" runat="server" Text="Reschedule Appointment" />
+                                </td>
+                                <td>
+                                    <asp:Button ID="Button2" runat="server" Text="Cancel Appointment" Width="226px" />
                                 </td>
                             </tr>
                         </table>

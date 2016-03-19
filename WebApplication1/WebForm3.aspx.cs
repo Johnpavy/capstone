@@ -12,36 +12,48 @@ namespace WebApplication1
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            bool isTrainer = false;
+            bool isTrainer = true;
             if(isTrainer)
             {
-                Panel1.Visible = true;
-                Panel2.Visible = false;
+                ClientPanel.Visible = false;
+                TrainerControlPannel.Visible = true;
             }
             else
             {
-                Panel1.Visible = false;
-                Panel2.Visible = true;
+                ClientPanel.Visible = true;
+                TrainerControlPannel.Visible = false;
             }
 
         }
 
         protected void SubmitBtn_Click(object sender, EventArgs e)
         {
-            Panel1.Visible = true;
+            ClientPanel.Visible = true;
             //Nothing for now
         }
 
         protected void ConfirmBtnTrainer_Click(object sender, EventArgs e)
         {
-            Panel2.Visible = true;
+            ConfirmSessionPanel.Visible = true;
             //Nothing for now
         }
 
         protected void DeclineBtnTrainer_Click(object sender, EventArgs e)
         {
-            Panel2.Visible = true;
+            ConfirmSessionPanel.Visible = true;
             //Nothing for now
+        }
+
+        protected void ConfirmClientApptBtn_Click(object sender, EventArgs e)
+        {
+            TrainerControlPannel.Visible = false;
+            ConfirmSessionPanel.Visible = true;
+        }
+
+        protected void ManageTimeBtn_Click(object sender, EventArgs e)
+        {
+            TrainerControlPannel.Visible = false;
+            BlockTimesPanel.Visible = true;
         }
     }
 }

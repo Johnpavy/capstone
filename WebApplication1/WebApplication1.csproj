@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Pictures\MobileFitnessNetworkPic.jpg" />
+    <Content Include="TrainerManagementPage.aspx" />
     <Content Include="WebForm2.aspx" />
     <Content Include="packages.config" />
     <Content Include="WebForm3.aspx" />
@@ -90,6 +91,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TrainerManagementPage.aspx.cs">
+      <DependentUpon>TrainerManagementPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TrainerManagementPage.aspx.designer.cs">
+      <DependentUpon>TrainerManagementPage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="WebForm1.aspx.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
