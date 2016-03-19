@@ -14,6 +14,9 @@
         .auto-style2 {
             width: 772px;
         }
+        .auto-style4 {
+            width: 212px;
+        }
     </style>
 </head>
 <body>
@@ -33,58 +36,62 @@
             <TitleStyle BackColor="#333399" BorderStyle="Solid" Font-Bold="True" Font-Size="12pt" ForeColor="White" Height="12pt" />
             <TodayDayStyle BackColor="#999999" ForeColor="White" />
         </asp:Calendar> </td>
-                <td> Sign up for session:<br />
-                    <asp:Panel ID="Panel1" runat="server" Width="485px">
+                <td> &nbsp;<asp:Panel ID="Panel1" runat="server" Width="485px">
                         <table style="width:100%;">
+                            <tr>
+                                <td class="auto-style1">Sign Up for Session</td>
+                                <td>
+                                    &nbsp;</td>
+                            </tr>
                             <tr>
                                 <td class="auto-style1">Trainer</td>
                                 <td>
-                                    <asp:TextBox ID="TextBox3" runat="server" ReadOnly="True" ToolTip="Slected Trainer for Session"></asp:TextBox>
+                                    <asp:TextBox ID="TrainerNameTxtBox" runat="server" ReadOnly="True" ToolTip="Slected Trainer for Session"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="auto-style1">Client</td>
                                 <td>
-                                    <asp:TextBox ID="TextBox4" runat="server" ReadOnly="True" ToolTip="Name of Client for Session"></asp:TextBox>
+                                    <asp:TextBox ID="ClientNameTxtBox" runat="server" ReadOnly="True" ToolTip="Name of Client for Session"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="auto-style1">Selected Date</td>
                                 <td>
-                                    <asp:TextBox ID="TextBox1" runat="server" ReadOnly="True" ToolTip="The desired date for the session."></asp:TextBox>
+                                    <asp:TextBox ID="SelectedDateTxtBox" runat="server" ReadOnly="True" ToolTip="The desired date for the session."></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="auto-style1">Start Time</td>
                                 <td>
-                                    <asp:DropDownList ID="DropDownList1" runat="server" ToolTip="The time the session will start.">
+                                    <asp:DropDownList ID="StartTimeDrpDwn" runat="server" ToolTip="The time the session will start.">
                                     </asp:DropDownList>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="auto-style1">End Time</td>
                                 <td>
-                                    <asp:DropDownList ID="DropDownList2" runat="server" ToolTip="The time the session will end.">
+                                    <asp:DropDownList ID="EndTimeDrpDwn" runat="server" ToolTip="The time the session will end.">
                                     </asp:DropDownList>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="auto-style1">Location</td>
                                 <td>
-                                    <asp:TextBox ID="TextBox2" runat="server" ToolTip="The address where the session will take place." Width="295px"></asp:TextBox>
+                                    <asp:TextBox ID="AddresTxtBox" runat="server" ToolTip="The address where the session will take place." Width="295px"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="auto-style1">Number of People</td>
                                 <td>
-                                    <asp:DropDownList ID="DropDownList3" runat="server" ToolTip="Number of people attending the session. Additional rates apply.">
+                                    <asp:DropDownList ID="NumberOfPeopleDrpDwn" runat="server" ToolTip="Number of people attending the session. Additional rates apply.">
                                     </asp:DropDownList>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="auto-style1">Type of Session</td>
                                 <td>
-                                    <asp:DropDownList ID="DropDownList4" runat="server" ToolTip="The type of workout session. Additonal rates apply.">
+                                    <asp:DropDownList ID="TypeOfSessionDrpDwn" runat="server" ToolTip="The type of workout session. Additonal rates apply.">
                                     </asp:DropDownList>
                                 </td>
                             </tr>
@@ -94,7 +101,7 @@
                             </tr>
                             <tr>
                                 <td class="auto-style1">
-                                    <asp:Button ID="Button1" runat="server" Text="Submit" />
+                                    <asp:Button ID="SubmitBtn" runat="server" Text="Submit" OnClick="SubmitBtn_Click" />
                                 </td>
                                 <td>
                                     <asp:Label ID="ErrorLbl" runat="server" ForeColor="Red" Text="Label"></asp:Label>
@@ -102,6 +109,44 @@
                             </tr>
                         </table>
         </asp:Panel>
+
+                    <br />
+                    <asp:Panel ID="Panel2" runat="server">
+                        <table style="width:100%;">
+                            <tr>
+                                <td class="auto-style4">Manage Your Clients</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td class="auto-style4">Selected Date</td>
+                                <td>
+                                    <asp:TextBox ID="SelectedDateTxtBxTrainer" runat="server"></asp:TextBox>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="auto-style4">Select Your Client</td>
+                                <td>
+                                    <asp:DropDownList ID="ClientDrpDwnTrainer" runat="server">
+                                    </asp:DropDownList>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="auto-style4">View Client Details</td>
+                                <td>
+                                    <asp:TextBox ID="ClientDetailsTxtBox" runat="server" Height="109px" TextMode="MultiLine" Width="235px"></asp:TextBox>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="auto-style4">
+                                    <asp:Button ID="ConfirmBtnTrainer" runat="server" OnClick="ConfirmBtnTrainer_Click" Text="Comfirm Appointment" />
+                                </td>
+                                <td>
+                                    <asp:Button ID="DeclineBtnTrainer" runat="server" OnClick="DeclineBtnTrainer_Click" Text="Decline Appointment" />
+                                </td>
+                            </tr>
+                        </table>
+                    </asp:Panel>
+                    <br />
 
                 </td>
             </tr>
