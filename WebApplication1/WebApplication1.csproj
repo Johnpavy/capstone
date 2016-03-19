@@ -75,6 +75,7 @@
     <Content Include="packages.config" />
     <Content Include="WebForm3.aspx" />
     <Content Include="SplashPage.aspx" />
+    <Content Include="Login.aspx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -116,6 +117,13 @@
     </Compile>
     <Compile Include="SplashPage.aspx.designer.cs">
       <DependentUpon>SplashPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup />
