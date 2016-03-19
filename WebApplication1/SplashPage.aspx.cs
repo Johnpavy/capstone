@@ -13,5 +13,20 @@ namespace WebApplication1
         {
 
         }
+
+        protected void login_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void signup_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void about_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
