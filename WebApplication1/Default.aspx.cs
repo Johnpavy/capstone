@@ -16,7 +16,7 @@ namespace WebApplication1
 
         protected void login_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("Login.aspx");
         }
 
         protected void signup_Click(object sender, EventArgs e)
