@@ -70,6 +70,8 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CSS\TrainerSignup.css" />
+    <Content Include="TrainerSignup.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Pictures\MobileFitnessNetworkPic.jpg" />
     <Content Include="Default.aspx" />
@@ -89,6 +91,13 @@
     <Content Include="WebForm1.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TrainerSignup.aspx.cs">
+      <DependentUpon>TrainerSignup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TrainerSignup.aspx.designer.cs">
+      <DependentUpon>TrainerSignup.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

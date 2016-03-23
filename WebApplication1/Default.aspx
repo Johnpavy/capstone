@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-  <title>Bootstrap Example</title>
+  <title>Welcome to MFN</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -48,8 +48,9 @@
         </div>
         <div class="LoginButtonContainer text-center">
             <asp:LinkButton ID="login" Class="btn btn-primary btn-lg btn-block" runat="server" OnClick="login_Click">Login</asp:LinkButton>
-            <asp:LinkButton ID="signup" Class="btn btn-secondary btn-lg btn-block" runat="server" OnClick="signup_Click" >Sign Up</asp:LinkButton> 
-             <asp:LinkButton ID="about" Class="btn btn-primary btn-lg btn-block" runat="server" OnClick="about_Click">How It Works</asp:LinkButton>
+            <asp:LinkButton ID="TrainerSignup" Class="btn btn-secondary btn-lg btn-block" runat="server" OnClick="signup_Click" >Trainer Sign Up</asp:LinkButton> 
+             <asp:LinkButton ID="ClientSignup" Class="btn btn-primary btn-lg btn-block" runat="server" OnClick="ClientSignup_Click" >Client Sign Up</asp:LinkButton>
+             <asp:LinkButton ID="about" Class="btn btn-secondary btn-lg btn-block" runat="server" OnClick="about_Click">How It Works</asp:LinkButton>
           
         </div>
     </form>

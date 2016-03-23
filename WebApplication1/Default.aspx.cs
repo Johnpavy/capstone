@@ -21,10 +21,15 @@ namespace WebApplication1
 
         protected void signup_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("TrainerSignup.aspx");
         }
 
         protected void about_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ClientSignup_Click(object sender, EventArgs e)
         {
 
         }

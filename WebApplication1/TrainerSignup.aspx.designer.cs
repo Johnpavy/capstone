@@ -10,7 +10,7 @@
 namespace WebApplication1 {
     
     
-    public partial class WebForm4 {
+    public partial class ClientAccountaspx {
         
         /// <summary>
         /// form1 control.
@@ -22,39 +22,30 @@ namespace WebApplication1 {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// login control.
+        /// button control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton login;
+        protected global::System.Web.UI.WebControls.LinkButton button;
         
         /// <summary>
-        /// TrainerSignup control.
+        /// lblLattitude control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton TrainerSignup;
+        protected global::System.Web.UI.WebControls.Label lblLattitude;
         
         /// <summary>
-        /// ClientSignup control.
+        /// lblLongtitude control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton ClientSignup;
-        
-        /// <summary>
-        /// about control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton about;
+        protected global::System.Web.UI.WebControls.Label lblLongtitude;
     }
 }
