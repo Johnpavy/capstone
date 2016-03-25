@@ -89,19 +89,21 @@
           <span class="input-group-addon primary" id="sizing-addon2">
             <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
             </span>
-          <input type="text" class="UsernameInput form-control" placeholder="Username" name="Name"  aria-describedby="sizing-addon2">
+          <input type="text" class="UsernameInput form-control" placeholder="Email" name="Name"  aria-describedby="sizing-addon2">
         </div>
         
         <div class="Password input-group">
           <span class="input-group-addon primary" id="sizing-addon2">
             <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
             </span>
-          <input type="password" class="PasswordInput form-control" placeholder="Password" aria-describedby="sizing-addon2">
+          <input type="password" class="PasswordInput form-control" placeholder="Password" name="Password" aria-describedby="sizing-addon2">
         </div>
         
         <div class="LoginButtonContainer text-center">
             <!-- <button type="Login" class="LoginButton btn btn-default">Log In</button> -->
-            <asp:LinkButton ID="button" Class="btn btn-lg btn-inf" runat="server" OnClick="Login">Login</asp:LinkButton>
+            <asp:LinkButton ID="button" class="LoginButton btn btn-default" runat="server" OnClick="Login">Login</asp:LinkButton>
+            <br />
+            <asp:Label ID="ErrorLbl" runat="server" Text="*Error" ForeColor="#FF3300" Visible="False"></asp:Label>
         </div>
 	</div>
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" SelectCommand="SELECT * FROM [MFNTrainerTable]"></asp:SqlDataSource>
