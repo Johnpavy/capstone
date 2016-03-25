@@ -104,7 +104,8 @@
             <asp:LinkButton ID="button" Class="btn btn-lg btn-inf" runat="server" OnClick="Login">Login</asp:LinkButton>
         </div>
 	</div>
-	
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" SelectCommand="SELECT * FROM [MFNTrainerTable]"></asp:SqlDataSource>
 </form>  
 </body>
 </html>
+
