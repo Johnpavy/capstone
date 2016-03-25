@@ -30,7 +30,7 @@ namespace WebApplication1
                 Tobj = (TrainerObject)Session["TrainerInfo"];
                 Session.Abandon();
             }
-            Label1.Text = Tobj.FirstName + " " + Tobj.LastName;
+            //Label1.Text = Tobj.FirstName + " " + Tobj.LastName;
         }
 
     }
