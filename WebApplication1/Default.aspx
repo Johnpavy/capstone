@@ -39,6 +39,44 @@
         border-color: rgb(40, 94, 142);
     }
 
+    .LoginButton
+    {
+        padding-bottom: 5px;
+        width: 50%;
+        max-width: 960px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .TrainerSignupButton
+    {
+        background-color: rgb(255,255,255);
+        padding-bottom: 5px;
+        width: 50%;
+        max-width: 960px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .ClientSignupButton
+    {
+        padding-bottom: 5px;
+        width: 50%;
+        max-width: 960px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .AboutButton
+    {
+        background-color: rgb(255,255,255);
+        padding-bottom: 5px;
+        width: 50%;
+        max-width: 960px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
   </style>
 </head>
 <body>
@@ -47,10 +85,10 @@
             <img class="FitnessNetworkImage" src="Pictures/MobileFitnessNetworkPic.jpg" alt="Mountain View">
         </div>
         <div class="LoginButtonContainer text-center">
-            <asp:LinkButton ID="login" Class="btn btn-primary btn-lg btn-block" runat="server" OnClick="login_Click">Login</asp:LinkButton>
-            <asp:LinkButton ID="TrainerSignup" Class="btn btn-secondary btn-lg btn-block" runat="server" OnClick="signup_Click" >Trainer Sign Up</asp:LinkButton> 
-             <asp:LinkButton ID="ClientSignup" Class="btn btn-primary btn-lg btn-block" runat="server" OnClick="ClientSignup_Click" >Client Sign Up</asp:LinkButton>
-             <asp:LinkButton ID="about" Class="btn btn-secondary btn-lg btn-block" runat="server" OnClick="about_Click">How It Works</asp:LinkButton>
+            <asp:LinkButton ID="login" Class="LoginButton btn btn-primary btn-lg btn-block" runat="server" OnClick="login_Click">Login</asp:LinkButton>
+            <asp:LinkButton ID="TrainerSignup" Class="TrainerSignupButton btn btn-secondary btn-lg btn-block" runat="server" OnClick="signup_Click" >Trainer Sign Up</asp:LinkButton> 
+             <asp:LinkButton ID="ClientSignup" Class="ClientSignupButton btn btn-primary btn-lg btn-block" runat="server" OnClick="ClientSignup_Click" >Client Sign Up</asp:LinkButton>
+             <asp:LinkButton ID="about" Class="AboutButton btn btn-secondary btn-lg btn-block" runat="server" OnClick="about_Click">How It Works</asp:LinkButton>
           
         </div>
     </form>
