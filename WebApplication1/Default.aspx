@@ -60,6 +60,7 @@
 
     .ClientSignupButton
     {
+        background-color: rgb(0, 141, 183);
         padding-bottom: 5px;
         width: 50%;
         max-width: 960px;
@@ -89,7 +90,7 @@
             <asp:LinkButton ID="TrainerSignup" Class="TrainerSignupButton btn btn-secondary btn-lg btn-block" runat="server" OnClick="signup_Click" >Trainer Sign Up</asp:LinkButton> 
              <asp:LinkButton ID="ClientSignup" Class="ClientSignupButton btn btn-primary btn-lg btn-block" runat="server" OnClick="ClientSignup_Click" >Client Sign Up</asp:LinkButton>
              <asp:LinkButton ID="about" Class="AboutButton btn btn-secondary btn-lg btn-block" runat="server" OnClick="about_Click">How It Works</asp:LinkButton>
-          
+              <br />
         </div>
     </form>
 </body>
