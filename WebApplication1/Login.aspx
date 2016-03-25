@@ -76,7 +76,7 @@
     
 </head>
 <body>
-    
+<form id="form1" runat="server"> 
 	<div class="container col-xs-12 col-sm-12">
         
         <div class="FitnessNetworkImageContainer">
@@ -100,10 +100,11 @@
         </div>
         
         <div class="LoginButtonContainer text-center">
-            <button type="Login" class="LoginButton btn btn-default">Log In</button>
+            <!-- <button type="Login" class="LoginButton btn btn-default">Log In</button> -->
+            <asp:LinkButton ID="button" Class="btn btn-lg btn-inf" runat="server" OnClick="Login">Login</asp:LinkButton>
         </div>
 	</div>
 	
-    
+</form>  
 </body>
 </html>

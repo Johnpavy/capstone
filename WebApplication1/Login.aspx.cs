@@ -9,9 +9,19 @@ namespace WebApplication1
 {
     public partial class WebForm5 : System.Web.UI.Page
     {
+        TrainerObject Tobj = new TrainerObject();
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            Tobj.FirstName = "Test";
+            Tobj.LastName = "Name";
+        }
 
+        protected void Login(object sender, EventArgs e)
+        {
+            Session["TrainerInfo"] = Tobj;
+
+            Response.Redirect("WebForm2.aspx");
         }
     }
 }

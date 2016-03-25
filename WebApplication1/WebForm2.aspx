@@ -59,6 +59,7 @@
     
 </head>
 <body>
+    <form id="form1" runat="server">
     <div class="content">
         <div class="HeaderContainer container-fluid">
             <div class="row">
@@ -150,7 +151,11 @@
     </div>
     <footer class="FooterContainer col-xs-12 col-sm-12 text-center">
         <p class="FooterContent">TEST FOOTER</p>
+        <p class="FooterContent">
+            <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+        </p>
     </footer>
+    </form>
 </body>
 </html>
 
