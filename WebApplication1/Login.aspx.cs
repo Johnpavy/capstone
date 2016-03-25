@@ -15,17 +15,18 @@ namespace WebApplication1
         int count = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
-            Tobj.FirstName = "Test";
-            Tobj.LastName = "Name";
+            Session["TrainerInfo"] = null;
         }
 
         protected void Login(object sender, EventArgs e)
         {
+            string UserName = Request.Form["Name"];
+            string Password = Request.Form["Password"];
             SqlConnection db = new SqlConnection(SqlDataSource1.ConnectionString);
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = System.Data.CommandType.Text;
             cmd.Connection = db;
-            cmd.CommandText = "Select COUNT(*) FROM [MFNTrainerTable] WHERE Trainer_Id = '0'";
+            cmd.CommandText = "Select COUNT(*) FROM [MFNTrainerTable] WHERE Trainer_Email = '"+ UserName +"' AND Trainer_PasswordHash = '"+Password +"'";
 
 
 

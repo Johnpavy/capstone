@@ -13,16 +13,25 @@ namespace WebApplication1
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(Session["TrainerInfo"] == null)
+            //This block of code prevents caching. You cannot use the browser's foward and back
+            //buttons to return to a page. Will be helpful with preventing double payment and double
+            //database access.
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            Response.Cache.SetExpires(DateTime.UtcNow.AddHours(-1));
+            Response.Cache.SetNoStore();
+
+            if (Session["TrainerInfo"] == null)
             {
-                Tobj.FirstName = "Failed";
-                Tobj.LastName = "Pass";
+                //Forces a redirect to splash page if this page is loaded without a session state.
+                Response.Redirect("Default.aspx");
             }
             else
             {
                 Tobj = (TrainerObject)Session["TrainerInfo"];
+                Session.Abandon();
             }
             Label1.Text = Tobj.FirstName + " " + Tobj.LastName;
         }
+
     }
 }

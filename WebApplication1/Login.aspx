@@ -89,14 +89,14 @@
           <span class="input-group-addon primary" id="sizing-addon2">
             <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
             </span>
-          <input type="text" class="UsernameInput form-control" placeholder="Username" aria-describedby="sizing-addon2">
+          <input type="text" class="UsernameInput form-control" placeholder="Username" name="Name"  aria-describedby="sizing-addon2">
         </div>
         
         <div class="Password input-group">
           <span class="input-group-addon primary" id="sizing-addon2">
             <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
             </span>
-          <input type="text" class="PasswordInput form-control" placeholder="Password" aria-describedby="sizing-addon2">
+          <input type="password" class="PasswordInput form-control" placeholder="Password" aria-describedby="sizing-addon2">
         </div>
         
         <div class="LoginButtonContainer text-center">
