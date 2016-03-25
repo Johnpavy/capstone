@@ -91,6 +91,7 @@
     <Content Include="WebForm1.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TrainerObject.cs" />
     <Compile Include="TrainerSignup.aspx.cs">
       <DependentUpon>TrainerSignup.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -113,6 +114,7 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="UserObject.cs" />
     <Compile Include="WebForm1.aspx.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
