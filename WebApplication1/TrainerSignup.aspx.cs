@@ -9,6 +9,8 @@ using System.IO;
 using System.Xml;
 using System.Net;
 using System.Text;
+using System.Data.Sql;
+using System.Data.SqlClient;
 
 namespace WebApplication1
 {
@@ -30,6 +32,36 @@ namespace WebApplication1
             adrs.GeoCode();
             lblLattitude.Text = adrs.Latitude;
             lblLongtitude.Text = adrs.Longitude;
+            String dBLat = adrs.Latitude;
+            String dBLng = adrs.Longitude;
+            Session["Email"] = Request.Form["Email"];
+            SqlConnection trainerLocDB = new SqlConnection(SqlDataSource1.ConnectionString);
+            trainerLocDB.Open();
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = System.Data.CommandType.Text;
+            cmd.CommandText = "insert into MFNTrainerLocTable ([TrainerLoc_Lat], [TrainerLoc_Long]) values (@lat, @lng)";
+            // add values to sql table
+            cmd.Parameters.AddWithValue("@lat", dBLat);
+            cmd.Parameters.AddWithValue("@lng", dBLng);
+            cmd.Connection = trainerLocDB;
+            try
+            {
+                cmd.ExecuteNonQuery();
+
+            }
+            catch
+            {
+
+                Label1.Visible = true;
+                Label1.Text = "Unable to write to the database";
+                
+            }
+            finally
+            {
+                trainerLocDB.Close();
+                Response.Redirect("Webform2.aspx");
+            }
+            
         }
     }
     public class Adress
