@@ -11,6 +11,7 @@ namespace WebApplication1
 {
     public partial class WebForm4 : System.Web.UI.Page
     {
+        TrainerObject Tobj = new TrainerObject();
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -48,6 +49,7 @@ namespace WebApplication1
             String email = Request.Form["email"];
             String password = Request.Form["password"];
             String CPassword = Request.Form["Cpassword"];
+
             bool userNameExists;
             SqlConnection trainerDb = new SqlConnection(SqlDataSource1.ConnectionString);
 
@@ -72,6 +74,7 @@ namespace WebApplication1
             }
             else
             {
+
                 trainerDb.Open();
                 // Check to see if email exists in the database
                 using (SqlCommand checkCmd = new SqlCommand("select count(*) from MFNTrainerTable where Trainer_Email = @email", trainerDb))
@@ -91,18 +94,27 @@ namespace WebApplication1
                     SqlCommand cmd = new SqlCommand();
                     cmd.CommandType = System.Data.CommandType.Text;
                     // create sql command
-                    cmd.CommandText = "insert into MFNTrainerTable (Trainer_Email, Trainer_FirstName, Trainer_LastName, Trainer_PasswordHash) values (@email, @fName, @lName, @password)";
+                    cmd.CommandText = "insert into MFNTrainerTable (Trainer_Email, Trainer_FirstName, Trainer_LastName, Trainer_PasswordHash) OUTPUT INSERTED.Trainer_Id values (@email, @fName, @lName, @password)";
                     // add values to sql table
                     cmd.Parameters.AddWithValue("@email", email);
                     cmd.Parameters.AddWithValue("@fName", firstName);
                     cmd.Parameters.AddWithValue("@lName", lastName);
                     cmd.Parameters.AddWithValue("@password", password);
-
                     cmd.Connection = trainerDb;
+                    // try to execute query and save session object variables
                     try
                     {
-                        cmd.ExecuteNonQuery();
+                        int trainerID = (int)cmd.ExecuteScalar();
+                        Session["trainerID"] = trainerID;
+
+                   
+                        Tobj.FirstName = firstName;
+                        Tobj.LastName = lastName;
+                        Tobj.Email = email;
+                        Tobj.TrainerId = trainerID;
+                        Session["TrainerInfo"] = Tobj;
                         Response.Redirect("TrainerSignup.aspx");
+
                     }
                     catch
                     {
@@ -116,9 +128,7 @@ namespace WebApplication1
                     {
                         trainerDb.Close();
                     }
-
-
-                    
+                  
                 }
                
             }
