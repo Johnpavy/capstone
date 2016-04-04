@@ -19,19 +19,18 @@ namespace WebApplication1
         protected void Page_Load(object sender, EventArgs e)
         {
             
-            //this.button.Attributes.Add("onClick", getaddress())
+            
         }
 
         protected void button_Click(object sender, EventArgs e)
         {
+            
             Adress adrs = new Adress();
             String street = Request.Form["Street"];
             String trainerAddress = Request.Form["Street"] + " " + Request.Form["City"] + " " + Request.Form["State"];
             adrs.Address = street;
             adrs.Address = trainerAddress;
             adrs.GeoCode();
-            lblLattitude.Text = adrs.Latitude;
-            lblLongtitude.Text = adrs.Longitude;
             String dBLat = adrs.Latitude;
             String dBLng = adrs.Longitude;
             Session["Email"] = Request.Form["Email"];
@@ -64,6 +63,7 @@ namespace WebApplication1
             
         }
     }
+    // Credit to  http://www.codeproject.com/Tips/650139/Finding-Co-ordinates-of-an-Address-in-ASP-NET-Csha for lat and long retrieval
     public class Adress
     {
         public Adress()

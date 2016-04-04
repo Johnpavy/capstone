@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CSS\TrainerSignup.css" />
+    <Content Include="JS\JavaScript.js" />
     <Content Include="TrainerSignup.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Pictures\MobileFitnessNetworkPic.jpg" />
@@ -86,9 +87,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="maps.js" />
     <Content Include="Web.config" />
-    <Content Include="WebForm1.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="TrainerObject.cs" />
@@ -115,13 +114,6 @@
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="UserObject.cs" />
-    <Compile Include="WebForm1.aspx.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebForm1.aspx.designer.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-    </Compile>
     <Compile Include="WebForm2.aspx.cs">
       <DependentUpon>WebForm2.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
