@@ -29,6 +29,7 @@ namespace WebApplication1
                 else
                 {
                     Tobj = (TrainerObject)Session["TrainerInfo"];
+               
                 }
             }
 
@@ -96,6 +97,16 @@ namespace WebApplication1
                 }
 
             }
+
+        }
+
+        protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void DropDownList2_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
         }
     }

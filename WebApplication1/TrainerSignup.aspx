@@ -43,40 +43,38 @@
 						</div>
 						<div class="row">
 							<div class="col-sm-4 form-group">
-								<label>Height</label>
-								<div class="input-group-btn">
-                                     <div class="input-group-btn">
-                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Feet
-                                <span class="caret"></span>
-                                </button>
-                                 <ul id="feet" class="dropdown-menu">
-                                        <li><a href="#">4</a></li>
-                                        <li><a href="#">5</a></li>
-                                        <li><a href="#">6</a></li>
-                                        <li><a href="#">7</a></li>
-                                   </ul>
-                                    </div>
+								<label>Height Feet</label>
+								<div class="dropdown">
+
+                                      <asp:DropDownList ID="DropDownList1" runat="server" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged" CssClass="form-control">
+                                       <asp:ListItem Text="Select Feet" Value="0"></asp:ListItem>
+                                       <asp:ListItem Text="4" Value="4"></asp:ListItem>
+                                       <asp:ListItem Text="5" Value="5"></asp:ListItem>
+                                       <asp:ListItem Text="5" Value="5"></asp:ListItem>
+                                       <asp:ListItem Text="6" Value="6"></asp:ListItem>
+                                       <asp:ListItem Text="7" Value="7"></asp:ListItem>
+                                      </asp:DropDownList>
                                  </div>
-                                </div>
+                            </div>
                             <div class="col-sm-4 form-group">
-                                <label></label>
+                                <label>Inches</label>
                                 <div class="dropdown">
-                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Inches
-                                <span class="caret"></span></button>
-                                 <ul id="inches" class="dropdown-menu">
-                                        <li><a href="#">1</a></li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a href="#">4</a></li>
-                                        <li><a href="#">5</a></li>
-                                        <li><a href="#">6</a></li>
-                                        <li><a href="#">7</a></li>
-                                        <li><a href="#">8</a></li>
-                                        <li><a href="#">9</a></li>
-                                        <li><a href="#">10</a></li>
-                                        <li><a href="#">11</a></li>
-                                        <li><a href="#">12</a></li>
-                                   </ul>
+
+                                    <asp:DropDownList ID="DropDownList2" runat="server" CssClass="form-control" OnSelectedIndexChanged="DropDownList2_SelectedIndexChanged">
+                                       <asp:ListItem Text="Select Inches" Value="0"></asp:ListItem>
+                                       <asp:ListItem Text="1" Value="1"></asp:ListItem>
+                                       <asp:ListItem Text="2" Value="2"></asp:ListItem>
+                                       <asp:ListItem Text="3" Value="3"></asp:ListItem>
+                                       <asp:ListItem Text="4" Value="4"></asp:ListItem>
+                                       <asp:ListItem Text="5" Value="5"></asp:ListItem>
+                                       <asp:ListItem Text="6" Value="6"></asp:ListItem>
+                                       <asp:ListItem Text="7" Value="7"></asp:ListItem>
+                                       <asp:ListItem Text="8" Value="8"></asp:ListItem>
+                                       <asp:ListItem Text="9" Value="9"></asp:ListItem>
+                                       <asp:ListItem Text="10" Value="10"></asp:ListItem>
+                                       <asp:ListItem Text="11" Value="11"></asp:ListItem>
+                                       <asp:ListItem Text="12" Value="12"></asp:ListItem>
+                                    </asp:DropDownList>
                                  </div>	
                                </div>	
 							<div class="col-sm-4 form-group">
@@ -97,7 +95,8 @@
 					    <br />
                         <br />
 
-        <asp:Label ID="Label1" runat="server" Text="Label" Visible="False"></asp:Label>
+                        <asp:Label ID="Label1" runat="server" Text="Label" Visible="False"></asp:Label>
+
 					</div>
 				</div>
 	</div>

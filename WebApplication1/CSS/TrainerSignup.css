@@ -18,6 +18,7 @@ body {
         max-width: 960px;
         margin-right: auto;
         margin-left: auto;
+    margin-top: 3px;
 }
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
