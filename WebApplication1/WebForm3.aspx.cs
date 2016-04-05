@@ -12,7 +12,7 @@ namespace WebApplication1
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            bool isTrainer = true;
+            bool isTrainer = false;
             if(isTrainer)
             {
                 ClientPanel.Visible = false;

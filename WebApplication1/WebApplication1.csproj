@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CSS\TrainerSignup.css" />
+    <Content Include="TestFileUpload.aspx" />
     <Content Include="TrainerSignup.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Pictures\MobileFitnessNetworkPic.jpg" />
@@ -88,9 +89,15 @@
   <ItemGroup>
     <Content Include="maps.js" />
     <Content Include="Web.config" />
-    <Content Include="WebForm1.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TestFileUpload.aspx.cs">
+      <DependentUpon>TestFileUpload.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestFileUpload.aspx.designer.cs">
+      <DependentUpon>TestFileUpload.aspx</DependentUpon>
+    </Compile>
     <Compile Include="TrainerObject.cs" />
     <Compile Include="TrainerSignup.aspx.cs">
       <DependentUpon>TrainerSignup.aspx</DependentUpon>
@@ -115,13 +122,6 @@
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="UserObject.cs" />
-    <Compile Include="WebForm1.aspx.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebForm1.aspx.designer.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-    </Compile>
     <Compile Include="WebForm2.aspx.cs">
       <DependentUpon>WebForm2.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -137,7 +137,12 @@
       <DependentUpon>WebForm3.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="MFNRoot\Admins\" />
+    <Folder Include="MFNRoot\Trainers\" />
+    <Folder Include="MFNRoot\Users\" />
+    <Folder Include="Pictures\TestLocation\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

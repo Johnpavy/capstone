@@ -5,9 +5,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
   <title>Welcome to MFN</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <style>
@@ -83,13 +83,13 @@
 <body>
     <form id="form1" runat="server">
         <div class="FitnessNetworkImageContainer">
-            <img class="FitnessNetworkImage" src="Pictures/MobileFitnessNetworkPic.jpg" alt="Mountain View">
+            <img class="FitnessNetworkImage" src="Pictures/MobileFitnessNetworkPic.jpg" alt="Mountain View"/>
         </div>
         <div class="LoginButtonContainer text-center">
-            <asp:LinkButton ID="login" Class="LoginButton btn btn-primary btn-lg btn-block" runat="server" OnClick="login_Click">Login</asp:LinkButton>
-            <asp:LinkButton ID="TrainerSignup" Class="TrainerSignupButton btn btn-secondary btn-lg btn-block" runat="server" OnClick="signup_Click" >Trainer Sign Up</asp:LinkButton> 
-             <asp:LinkButton ID="ClientSignup" Class="ClientSignupButton btn btn-primary btn-lg btn-block" runat="server" OnClick="ClientSignup_Click" >Client Sign Up</asp:LinkButton>
-             <asp:LinkButton ID="about" Class="AboutButton btn btn-secondary btn-lg btn-block" runat="server" OnClick="about_Click">How It Works</asp:LinkButton>
+            <asp:LinkButton ID="login" class="LoginButton btn btn-primary btn-lg btn-block" runat="server" OnClick="login_Click">Login</asp:LinkButton>
+            <asp:LinkButton ID="TrainerSignup" class="TrainerSignupButton btn btn-secondary btn-lg btn-block" runat="server" OnClick="signup_Click" >Trainer Sign Up</asp:LinkButton> 
+             <asp:LinkButton ID="ClientSignup" class="ClientSignupButton btn btn-primary btn-lg btn-block" runat="server" OnClick="ClientSignup_Click" >Client Sign Up</asp:LinkButton>
+             <asp:LinkButton ID="about" class="AboutButton btn btn-secondary btn-lg btn-block" runat="server" OnClick="about_Click">How It Works</asp:LinkButton>
               <br />
         </div>
     </form>
