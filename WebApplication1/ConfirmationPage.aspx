@@ -10,7 +10,7 @@
     <form id="form1" runat="server">
     <div>
     <h1><asp:Literal ID="ltMessage" runat="server" />
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" SelectCommand="SELECT * FROM [MFNTrainerTable]"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" SelectCommand="SELECT * FROM [UserActivation]"></asp:SqlDataSource>
         </h1>
     </div>
     </form>
