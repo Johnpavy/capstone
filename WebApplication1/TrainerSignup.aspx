@@ -19,26 +19,26 @@
 <div class="container">
     <h1 class="well">Trainer Registration</h1>
 	<div class="col-lg-12 well">
-	<div class="row">
-				</div>
+	        <div class="row">
+			</div>
 					<div class="col-sm-12">
 			
 						<div class="form-group">
-							<label>Address</label>
-							<textarea placeholder="Enter Address Here.." rows="3" class="form-control" name ="Street"></textarea>
+							<label>Street Address</label>
+							<textarea placeholder="Enter Street Address" rows="3" class="form-control" name ="Street"></textarea>
 						</div>	
 						<div class="row">
 							<div class="col-sm-4 form-group">
 								<label>City</label>
-								<input type="text" placeholder="Enter City Name Here.." class="form-control" name="City">
+								<input type="text" placeholder="Enter City Name" class="form-control" name="City">
 							</div>	
 							<div class="col-sm-4 form-group">
 								<label>State</label>
-								<input type="text" placeholder="Enter State Name Here.." class="form-control" name="State">
+								<input type="text" placeholder="Enter State Name" class="form-control" name="State">
 							</div>	
 							<div class="col-sm-4 form-group">
 								<label>Zip</label>
-								<input type="text" placeholder="Enter Zip Code Here.." class="form-control">
+								<input type="text" placeholder="Enter Zip Code" class="form-control">
 							</div>		
 						</div>
 						<div class="row">
@@ -78,27 +78,38 @@
                                  </div>	
                                </div>	
 							<div class="col-sm-4 form-group">
-								<label>Weight</label>
-								<input type="text" placeholder="Enter Weight in pounds here.." class="form-control"/>
+								<label>Weight Pounds</label>
+								<input type="text" placeholder="Enter Weight in pounds" class="form-control"/>
 							</div>	
 						</div>	
                        </div>					
-					<div class="form-group">
+					<div class="col-sm-4 form-group">
 						<label>Phone Number</label>
-						<input type="text" placeholder="Enter Phone Number Here.." class="form-control"/>
+						<input type="text" placeholder="Enter Phone Number" class="form-control"/>
 					</div>		
+                    <div class="col-sm-4 form-group">
+						<label>Gender</label>
+                        <div class="dropdown">
+                            <asp:DropDownList ID="DropDownList3" runat="server" CssClass="form-control">
+                                <asp:ListItem Text="Select Gender" Value="0"></asp:ListItem>
+                                <asp:ListItem Text="Male" Value="Male"></asp:ListItem>
+                                <asp:ListItem Text="Female" Value="Female"></asp:ListItem>
+
+                            </asp:DropDownList>
+                        </div>
+					</div>	
+                    
 					<div class="form-group">
+
 						<label>Biography</label>
-						<input type="text" placeholder="Enter a bio Here.." class="form-control" name ="bio"/>
-                    <div class="CreateAccountContainer text-center">
-					  <asp:LinkButton ID="button" Class="btn btn-lg btn-inf" runat="server" OnClick="button_Click">Create Account</asp:LinkButton>									
-					    <br />
-                        <br />
-
-                        <asp:Label ID="Label1" runat="server" Text="Label" Visible="False"></asp:Label>
-
-					</div>
-				</div>
+						<textarea placeholder="Enter Bio" rows="3" class="form-control" name ="Bio"></textarea>
+                        <div class="CreateAccountContainer text-center">
+                            <br />
+					        <asp:LinkButton ID="button" Class="btn btn-lg btn-inf" runat="server" OnClick="button_Click">Create Account</asp:LinkButton>									
+					        <br />
+					        <asp:Label ID="Label1" runat="server" Text="Label" Visible="False"></asp:Label>
+                        </div>
+				    </div>
 	</div>
       <br />
 
