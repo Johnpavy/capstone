@@ -170,8 +170,8 @@ namespace WebApplication1
             cmd2.CommandType = System.Data.CommandType.Text;
             //cmd2.CommandText= "UPDATE MFNTrainerTable SET Trainer_ActivationCode = @code WHERE Trainer_Id = @id";
             cmd2.CommandText = "INSERT INTO UserActivation ([Id],[User_ActivationCode]) VALUES(@UserId, @ActivationCode)";
-            cmd2.Parameters.AddWithValue("@code", activationCode);
-            cmd2.Parameters.AddWithValue("@id", userId);
+            cmd2.Parameters.AddWithValue("@ActivationCode", activationCode);
+            cmd2.Parameters.AddWithValue("@UserId", userId);
             SqlConnection trainerDb2 = new SqlConnection(SqlDataSource1.ConnectionString);
             cmd2.Connection = trainerDb2;
 
@@ -190,22 +190,6 @@ namespace WebApplication1
             }
             
 
-            /* using (SqlConnection con = new SqlConnection(constr))
-             {
-                 using (SqlCommand cmd = new SqlCommand("INSERT INTO MFNTrainerTable VALUES(@UserId, @ActivationCode)"))
-                 {
-                     using (SqlDataAdapter sda = new SqlDataAdapter())
-                     {
-                         cmd.CommandType = CommandType.Text;
-                         cmd.Parameters.AddWithValue("@UserId", userId);
-                         cmd.Parameters.AddWithValue("@ActivationCode", activationCode);
-                         cmd.Connection = con;
-                         con.Open();
-                         cmd.ExecuteNonQuery();
-                         con.Close();
-                     }
-                 }
-             }*/
             using (MailMessage mm = new MailMessage("MobileFitnessNetwork@gmail.com", email))
             {
                 mm.Subject = "Account Activation";
