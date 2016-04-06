@@ -120,7 +120,12 @@ namespace WebApplication1
                         Tobj.TrainerId = trainerID;
                         Session["TrainerInfo"] = Tobj;
 
-                       // Response.Redirect("TrainerSignup.aspx");
+                        SendActivationEmail((int)Session["trainerID"]);
+                        message = "Activation email sent, please click the link in the email from us to finish registration.";
+
+                        ClientScript.RegisterStartupScript(GetType(), "alert", "alert('" + message + "');", true);
+
+                        // Response.Redirect("TrainerSignup.aspx");
 
                     }
                     catch
@@ -137,10 +142,6 @@ namespace WebApplication1
                     // trainerDb.Close();
                     //    }
 
-                    SendActivationEmail((int)Session["trainerID"]);
-                    message = "Activation email sent, please click the link in the email from us to finish registration.";
-
-                    ClientScript.RegisterStartupScript(GetType(), "alert", "alert('" + message + "');", true);
 
                 }
 
