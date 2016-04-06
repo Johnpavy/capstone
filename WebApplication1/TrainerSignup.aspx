@@ -85,7 +85,7 @@
                        </div>					
 					<div class="col-sm-4 form-group">
 						<label>Phone Number</label>
-						<input type="text" placeholder="Enter Phone Number" class="form-control"/>
+						<input type="text" placeholder="Enter Phone Number" class="form-control" name="pnumber"/>
 					</div>		
                     <div class="col-sm-4 form-group">
 						<label>Gender</label>

@@ -70,6 +70,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ConfirmationPage.aspx" />
     <Content Include="CSS\TrainerSignup.css" />
     <Content Include="JS\JavaScript.js" />
     <Content Include="TrainerSignup.aspx" />
@@ -90,6 +91,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfirmationPage.aspx.cs">
+      <DependentUpon>ConfirmationPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ConfirmationPage.aspx.designer.cs">
+      <DependentUpon>ConfirmationPage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="TrainerObject.cs" />
     <Compile Include="TrainerSignup.aspx.cs">
       <DependentUpon>TrainerSignup.aspx</DependentUpon>

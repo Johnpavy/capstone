@@ -42,58 +42,86 @@ namespace WebApplication1
             Adress adrs = new Adress();
             String trainerAddress = Request.Form["Street"] + " " + Request.Form["City"] + " " + Request.Form["State"];
             String bio = Request.Form["bio"];
+            String gender = DropDownList3.SelectedValue;
+            String pnumber = Request.Form["pnumber"];
             adrs.Address = trainerAddress;
             adrs.GeoCode();
             int trainerID = (int)Session["trainerID"];
             String dBLat = adrs.Latitude;
             String dBLng = adrs.Longitude;
-            if(trainerAddress.Equals("") || bio.Equals(""))
+            // Check to make sure all fields are filled out
+            if(trainerAddress.Equals("") || bio.Equals("") || gender.Equals("0") || pnumber.Equals(""))
             {
                 Label1.ForeColor = System.Drawing.Color.Red;
-                Label1.Text = "All textboxes required";
+                Label1.Text = "All fields required";
                 Label1.Visible = true;
             }
             else
             {
            //     int trainerID = Tobj.TrainerId;
                 SqlConnection trainerLocDB = new SqlConnection(SqlDataSource1.ConnectionString);
-                trainerLocDB.Open();
+                SqlConnection trainerDB = new SqlConnection(SqlDataSource2.ConnectionString);
                 // sql command to insert address lat and long into the location table
                 SqlCommand cmd = new SqlCommand();
                 // sql command to save address, bio, height and weight in trainer table
                 SqlCommand cmd2 = new SqlCommand();
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd2.CommandType = System.Data.CommandType.Text;
-                cmd.CommandText = "insert into MFNTrainerLocTable ([TrainerLoc_Lat], [TrainerLoc_Long], [TrainerLoc_StreetAddress], [Trainer_Id]) values (@lat, @lng, @home, @id)";
-                cmd2.CommandText = "insert into MFNTrainerTable ([TrainerLoc_HomeAddress], [TrainerLoc_Bio]) values (@home, @bio)";
+                cmd.CommandText = "insert into MFNTrainerLocTable ([TrainerLoc_Lat], [TrainerLoc_Long], [TrainerLoc_StreetAddress], [Trainer_Id], [TrainerLoc_Description]) values (@lat, @lng, @home, @id, @description)";
+                cmd2.CommandText = "UPDATE MFNTrainerTable SET Trainer_HomeAddress = @home, Trainer_Bio = @bio, Trainer_Gender = @gender, Trainer_Phone = @phone WHERE Trainer_Id = @id"; 
                 // add values to location table
                 cmd.Parameters.AddWithValue("@lat", dBLat);
                 cmd.Parameters.AddWithValue("@lng", dBLng);
                 cmd.Parameters.AddWithValue("@home", trainerAddress);
                 cmd.Parameters.AddWithValue("@id", trainerID);
+                cmd.Parameters.AddWithValue("@description", "Home");
                 //add values to trainer table
+
                 cmd2.Parameters.AddWithValue("@home", trainerAddress);
                 cmd2.Parameters.AddWithValue("@bio", bio);
-
+                cmd2.Parameters.AddWithValue("@gender", gender);
+                cmd2.Parameters.AddWithValue("@id", trainerID);
+                cmd2.Parameters.AddWithValue("@phone", pnumber);
 
                 cmd.Connection = trainerLocDB;
+                cmd2.Connection = trainerDB;
+                // Write to the trainer location table
                 try
                 {
+                    trainerLocDB.Open();
                     cmd.ExecuteNonQuery();
-                    Response.Redirect("Webform2.aspx");
-
                 }
                 catch
                 {
-
+                    Label1.ForeColor = System.Drawing.Color.Red;
                     Label1.Visible = true;
-                    Label1.Text = "Unable to write to the database";
+                    Label1.Text = "Unable to write to the location database";
 
                 }
                 finally
                 {
                     trainerLocDB.Close();
                     
+                }
+                // write to the trainer table
+                try
+                {
+                    trainerDB.Open()
+;                   cmd2.ExecuteNonQuery();
+                    Response.Redirect("Webform2.aspx");
+
+                }
+                catch
+                {
+                    Label1.ForeColor = System.Drawing.Color.Red;
+                    Label1.Visible = true;
+                    Label1.Text = "Unable to write to the trainer database";
+
+                }
+                finally
+                {
+                    trainerLocDB.Close();
+
                 }
 
             }

@@ -6,6 +6,10 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.Sql;
 using System.Data.SqlClient;
+using System.Configuration;
+using System.Data;
+using System.Net.Mail;
+using System.Net;
 
 namespace WebApplication1
 {
@@ -49,6 +53,7 @@ namespace WebApplication1
             String email = Request.Form["email"];
             String password = Request.Form["password"];
             String CPassword = Request.Form["Cpassword"];
+            string message = string.Empty;
 
             bool userNameExists;
             SqlConnection trainerDb = new SqlConnection(SqlDataSource1.ConnectionString);
@@ -92,6 +97,7 @@ namespace WebApplication1
                 else
                 {
                     SqlCommand cmd = new SqlCommand();
+
                     cmd.CommandType = System.Data.CommandType.Text;
                     // create sql command
                     cmd.CommandText = "insert into MFNTrainerTable (Trainer_Email, Trainer_FirstName, Trainer_LastName, Trainer_PasswordHash) OUTPUT INSERTED.Trainer_Id values (@email, @fName, @lName, @password)";
@@ -105,15 +111,16 @@ namespace WebApplication1
                     try
                     {
                         int trainerID = (int)cmd.ExecuteScalar();
+                        trainerDb.Close();
                         Session["trainerID"] = trainerID;
-
-                   
+                        
                         Tobj.FirstName = firstName;
                         Tobj.LastName = lastName;
                         Tobj.Email = email;
                         Tobj.TrainerId = trainerID;
                         Session["TrainerInfo"] = Tobj;
-                        Response.Redirect("TrainerSignup.aspx");
+
+                       // Response.Redirect("TrainerSignup.aspx");
 
                     }
                     catch
@@ -124,13 +131,19 @@ namespace WebApplication1
                         ErrorLabel.Visible = true;
 
                     }
-                    finally
-                    {
-                        trainerDb.Close();
-                    }
-                  
+
+                    //       finally
+                    //    {
+                    // trainerDb.Close();
+                    //    }
+
+                    SendActivationEmail((int)Session["trainerID"]);
+                    message = "Activation email sent, please click the link in the email from us to finish registration.";
+
+                    ClientScript.RegisterStartupScript(GetType(), "alert", "alert('" + message + "');", true);
+
                 }
-               
+
             }
         }
         bool IsValidEmail(string email)
@@ -143,6 +156,72 @@ namespace WebApplication1
             catch
             {
                 return false;
+            }
+        }
+
+        // From http://www.aspsnippets.com/Articles/Send-user-Confirmation-email-after-Registration-with-Activation-Link-in-ASPNET.aspx
+        private void SendActivationEmail(int userId)
+        {
+            String firstName = Request.Form["FName"];
+            String email = Request.Form["email"];
+            string activationCode = Guid.NewGuid().ToString();
+            SqlCommand cmd2 = new SqlCommand();
+            cmd2.CommandType = System.Data.CommandType.Text;
+            //cmd2.CommandText= "UPDATE MFNTrainerTable SET Trainer_ActivationCode = @code WHERE Trainer_Id = @id";
+            cmd2.CommandText = "INSERT INTO UserActivation ([Id],[User_ActivationCode]) VALUES(@UserId, @ActivationCode)";
+            cmd2.Parameters.AddWithValue("@code", activationCode);
+            cmd2.Parameters.AddWithValue("@id", userId);
+            SqlConnection trainerDb2 = new SqlConnection(SqlDataSource1.ConnectionString);
+            cmd2.Connection = trainerDb2;
+
+            try
+            {
+                trainerDb2.Open();
+                cmd2.ExecuteNonQuery();
+                trainerDb2.Close();
+            }
+
+            catch
+            {
+                ErrorLabel.ForeColor = System.Drawing.Color.Red;
+                ErrorLabel.Text = "Error writing verification number to the database";
+                ErrorLabel.Visible = true;
+            }
+            
+
+            /* using (SqlConnection con = new SqlConnection(constr))
+             {
+                 using (SqlCommand cmd = new SqlCommand("INSERT INTO MFNTrainerTable VALUES(@UserId, @ActivationCode)"))
+                 {
+                     using (SqlDataAdapter sda = new SqlDataAdapter())
+                     {
+                         cmd.CommandType = CommandType.Text;
+                         cmd.Parameters.AddWithValue("@UserId", userId);
+                         cmd.Parameters.AddWithValue("@ActivationCode", activationCode);
+                         cmd.Connection = con;
+                         con.Open();
+                         cmd.ExecuteNonQuery();
+                         con.Close();
+                     }
+                 }
+             }*/
+            using (MailMessage mm = new MailMessage("MobileFitnessNetwork@gmail.com", email))
+            {
+                mm.Subject = "Account Activation";
+                string body = "Hello " + firstName + ",";
+                body += "<br /><br />Please click the following link to activate your account";
+                body += "<br /><a href = '" + Request.Url.AbsoluteUri.Replace("Default.aspx", "ConfirmationPage.aspx?ActivationCode=" + activationCode) + "'>Click here to activate your account.</a>";
+                body += "<br /><br />Thanks";
+                mm.Body = body;
+                mm.IsBodyHtml = true;
+                SmtpClient smtp = new SmtpClient();
+                smtp.Host = "smtp.gmail.com";
+                smtp.EnableSsl = true;
+                NetworkCredential NetworkCred = new NetworkCredential("MobileFitnessNetwork@gmail.com", "6tfc^TFC");
+                smtp.UseDefaultCredentials = true;
+                smtp.Credentials = NetworkCred;
+                smtp.Port = 587;
+                smtp.Send(mm);
             }
         }
     }
