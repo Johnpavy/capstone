@@ -59,6 +59,18 @@
         margin-left: auto;
     }
 
+    .LoginButton2
+    {
+        padding-bottom: 5px;
+        width: 15%;
+        max-width: 960px;
+        margin-right: auto;
+        margin-left: auto;
+        background-color: rgb(0, 141, 183);
+        width: 15%;
+        float: right;
+    }
+
     .TrainerSignupButton
     {
         background-color: rgb(255,255,255);
@@ -101,15 +113,47 @@
     {
         background-color: rgb(0, 141, 183);
     }
+    .LoginInformationPannel
+    {
+        width: 100%;
+        display: block;
+        float: right;
+    }
+
+    .UsernameInput
+    {
+        width: 20%;
+        float: right;
+    }
+    .PasswordInput
+    {
+        width: 20%;
+        float: right;
+    }
+
+    .ErrorLbl
+    {
+        float: right;
+    }
+
   </style>
 </head>
 <body>
     <form id="form1" runat="server">
+        <div class ="LoginInformationPannel">
+            <input type="password" class="PasswordInput form-control" placeholder="Password" name="Password2" aria-describedby="sizing-addon2"/>
+            <input type="text" class="UsernameInput form-control" placeholder="Email" name="UserEmail"  aria-describedby="sizing-addon2"/>
+            <br />
+            <br />
+            <asp:LinkButton ID="LinkButton2" Class="LoginButton2 btn btn-primary btn-lg btn-block" runat="server" OnClick="login_Click">Login</asp:LinkButton>
+            <br />
+            <asp:Label ID="ErrorLbl" runat="server" Text="*Error" ForeColor="#FF3300" Visible="False"></asp:Label>
+        </div>
         <div class="FitnessNetworkImageContainer">
-            <img class="FitnessNetworkImage" src="Pictures/MobileFitnessNetworkPic.jpg" alt="Mountain View">
+            <img class="FitnessNetworkImage" src="Pictures/MobileFitnessNetworkPic.jpg" alt="Mountain View"/>
         </div>
         <div class="LoginButtonContainer text-center">
-            <asp:LinkButton ID="login" Class="LoginButton btn btn-primary btn-lg btn-block" runat="server" OnClick="login_Click">Login</asp:LinkButton>
+            <asp:LinkButton ID="login" Class="LoginButton btn btn-primary btn-lg btn-block" runat="server">Login</asp:LinkButton>
             <asp:LinkButton ID="TrainerSignup" Class="TrainerSignupButton btn btn-secondary btn-lg btn-block" runat="server" OnClick="signup_Click" >Trainer Sign Up</asp:LinkButton> 
              <asp:LinkButton ID="ClientSignup" Class="ClientSignupButton btn btn-primary btn-lg btn-block" runat="server" OnClick="ClientSignup_Click" >Client Sign Up</asp:LinkButton>
              <asp:LinkButton ID="about" Class="AboutButton btn btn-secondary btn-lg btn-block" runat="server" OnClick="about_Click">How It Works</asp:LinkButton>
@@ -165,6 +209,8 @@
     </div>
 
                 <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" SelectCommand="SELECT * FROM [MFNTrainerTable]"></asp:SqlDataSource>
+        <br />
+        <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" SelectCommand="SELECT * FROM [MFNTrainerTable]"></asp:SqlDataSource>
     </form>
 </body>
 </html>
