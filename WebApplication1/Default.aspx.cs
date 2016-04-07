@@ -94,9 +94,8 @@ namespace WebApplication1
                 else
                 {
                     //Login fail
-                    ErrorLbl.Text = UserName + " " + Password;
                     ErrorLbl.Visible = true;
-                    // ErrorLbl.Text = "Invalid Email or Password";
+                    ErrorLbl.Text = "Invalid Email or Password";
                 }
                 //Response.Redirect("Login.aspx");
             }
@@ -163,11 +162,9 @@ namespace WebApplication1
                 else
                 {
                     //Login fail
-                    ErrorLbl.Text = UserName + " " + Password;
                     ErrorLbl.Visible = true;
-                    // ErrorLbl.Text = "Invalid Email or Password";
+                    ErrorLbl.Text = "Invalid Email or Password";
                 }
-                //Response.Redirect("Login.aspx");
             }
         }
 
