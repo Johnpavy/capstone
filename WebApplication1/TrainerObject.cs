@@ -56,7 +56,7 @@ namespace WebApplication1
 
         public string Gender
         {
-            get { return Gender; }
+            get { return gender; }
             set { gender = value; }
         }
 

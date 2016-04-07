@@ -10,6 +10,8 @@
     <form id="form1" runat="server">
     <div>
     USER PROFILE TEMP HOLDER
+        <br />
+        <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
     </div>
     </form>
 </body>

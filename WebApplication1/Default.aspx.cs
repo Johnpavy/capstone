@@ -144,9 +144,9 @@ namespace WebApplication1
 
                         while (sdr.Read())
                         {
-                            Tobj.TrainerId = Int32.Parse(sdr["User_Id"].ToString());
-                            Tobj.FirstName = sdr["User_FirstName"].ToString();
-                            Tobj.LastName = sdr["User_LastName"].ToString();
+                            Uobj.UserId = Int32.Parse(sdr["User_Id"].ToString());
+                            Uobj.FirstName = sdr["User_FirstName"].ToString();
+                            Uobj.LastName = sdr["User_LastName"].ToString();
                         }
 
                         Session["UserInfo"] = Uobj;
