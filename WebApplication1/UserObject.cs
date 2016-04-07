@@ -95,5 +95,26 @@ namespace WebApplication1
             get { return bio; }
             set { bio = value; }
         }
+
+        public string Phone
+        {
+            get { return phone; }
+            set { phone = value; }
+        }
+
+        public void CopyUserObject(UserObject objToCopy)
+        {
+            this.UserId = objToCopy.UserId;
+            this.ImagePath = objToCopy.ImagePath;
+            this.Email = objToCopy.Email;
+            this.Gender = objToCopy.Gender;
+            this.DateOfBirth = objToCopy.DateOfBirth;
+            this.FirstName = objToCopy.FirstName;
+            this.MiddleName = objToCopy.MiddleName;
+            this.LastName = objToCopy.LastName;
+            this.Phone = objToCopy.Phone;
+            this.HomeAddress = objToCopy.HomeAddress;
+            this.Bio = objToCopy.Bio;
+        }
     }
 }
