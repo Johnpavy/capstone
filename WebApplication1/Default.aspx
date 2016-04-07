@@ -136,6 +136,12 @@
         float: right;
     }
 
+    .TrainerToggle
+    {
+        width: 25%;
+        float: right;
+    }
+
   </style>
 </head>
 <body>
@@ -146,6 +152,7 @@
             <br />
             <br />
             <asp:LinkButton ID="LinkButton2" Class="LoginButton2 btn btn-primary btn-lg btn-block" runat="server" OnClick="login_Click">Login</asp:LinkButton>
+            <asp:CheckBox ID="CheckBox1" Class="TrainerToggle" runat="server"  CssClass="TrainerToggle form-control" Text="Login as Trainer"/>
             <br />
             <asp:Label ID="ErrorLbl" runat="server" Text="*Error" ForeColor="#FF3300" Visible="False"></asp:Label>
         </div>
@@ -211,6 +218,8 @@
                 <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" SelectCommand="SELECT * FROM [MFNTrainerTable]"></asp:SqlDataSource>
         <br />
         <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" SelectCommand="SELECT * FROM [MFNTrainerTable]"></asp:SqlDataSource>
+        <br />
+        <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" SelectCommand="SELECT * FROM [MFNUserTable]"></asp:SqlDataSource>
     </form>
 </body>
 </html>

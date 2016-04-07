@@ -77,6 +77,7 @@
     <Content Include="Login.aspx" />
     <Content Include="Pictures\MobileFitnessNetworkPic.jpg" />
     <Content Include="Default.aspx" />
+    <Content Include="UserProfile.aspx" />
     <Content Include="WebForm2.aspx" />
     <Content Include="packages.config" />
     <Content Include="WebForm3.aspx" />
@@ -122,6 +123,13 @@
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="UserObject.cs" />
+    <Compile Include="UserProfile.aspx.cs">
+      <DependentUpon>UserProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserProfile.aspx.designer.cs">
+      <DependentUpon>UserProfile.aspx</DependentUpon>
+    </Compile>
     <Compile Include="WebForm2.aspx.cs">
       <DependentUpon>WebForm2.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

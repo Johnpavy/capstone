@@ -16,6 +16,8 @@ namespace WebApplication1
     public partial class WebForm4 : System.Web.UI.Page
     {
         TrainerObject Tobj = new TrainerObject();
+        UserObject Uobj = new UserObject();
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -28,71 +30,145 @@ namespace WebApplication1
             UserName = Request.Form["UserEmail"];
             string Password = "";
             Password = Request.Form["Password2"].ToString();
-            SqlConnection db = new SqlConnection(SqlDataSource2.ConnectionString);
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandType = System.Data.CommandType.Text;
-            cmd.Connection = db;
-            cmd.CommandText = "Select COUNT(*) FROM [MFNTrainerTable] WHERE Trainer_Email = '" + UserName + "'COLLATE SQL_Latin1_General_CP1_CS_AS AND Trainer_PasswordHash = '" + Password + "' COLLATE SQL_Latin1_General_CP1_CS_AS";
 
-            try
+            //login as trainer
+            if (CheckBox1.Checked)
             {
-                db.Open();
-                count = (int)cmd.ExecuteScalar();
-            }
-            catch
-            {
-                count = -1;
-            }
-            finally
-            {
-                db.Close();
-            }
-            /*
-            If the the trainer is verified and the database has succesfully placed data
-            into trainer object.
-            */
-            if (count == -1)
-            {
-                //Login fail
-                ErrorLbl.Visible = true;
-                ErrorLbl.Text = "Dtabase is not connected!";
-            }
-            else if (count > 0)
-            {
+                SqlConnection db = new SqlConnection(SqlDataSource2.ConnectionString);
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.Connection = db;
+                cmd.CommandText = "Select COUNT(*) FROM [MFNTrainerTable] WHERE Trainer_Email = '" + UserName + "'COLLATE SQL_Latin1_General_CP1_CS_AS AND Trainer_PasswordHash = '" + Password + "' COLLATE SQL_Latin1_General_CP1_CS_AS";
 
                 try
                 {
-                    cmd.CommandText = "Select * FROM [MFNTrainerTable] WHERE Trainer_Email = '" + UserName + "'";
                     db.Open();
-
-                    SqlDataReader sdr = cmd.ExecuteReader();
-
-                    while (sdr.Read())
-                    {
-                        Tobj.TrainerId = Int32.Parse(sdr["Trainer_Id"].ToString());
-                        Tobj.FirstName = sdr["Trainer_FirstName"].ToString();
-                        Tobj.LastName = sdr["Trainer_LastName"].ToString();
-                    }
-
-                    Session["TrainerInfo"] = Tobj;
-                    Response.Redirect("WebForm2.aspx");
-
+                    count = (int)cmd.ExecuteScalar();
                 }
                 catch
                 {
-                    ErrorLbl.Visible = true;
-                    ErrorLbl.Text = "Error while reading from Database";
+                    count = -1;
                 }
+                finally
+                {
+                    db.Close();
+                }
+                /*
+                If the the trainer is verified and the database has succesfully placed data
+                into trainer object.
+                */
+                if (count == -1)
+                {
+                    //Login fail
+                    ErrorLbl.Visible = true;
+                    ErrorLbl.Text = "Dtabase is not connected!";
+                }
+                else if (count > 0)
+                {
 
+                    try
+                    {
+                        cmd.CommandText = "Select * FROM [MFNTrainerTable] WHERE Trainer_Email = '" + UserName + "'";
+                        db.Open();
+
+                        SqlDataReader sdr = cmd.ExecuteReader();
+
+                        while (sdr.Read())
+                        {
+                            Tobj.TrainerId = Int32.Parse(sdr["Trainer_Id"].ToString());
+                            Tobj.FirstName = sdr["Trainer_FirstName"].ToString();
+                            Tobj.LastName = sdr["Trainer_LastName"].ToString();
+                        }
+
+                        Session["TrainerInfo"] = Tobj;
+                        Response.Redirect("WebForm2.aspx");
+
+                    }
+                    catch
+                    {
+                        ErrorLbl.Visible = true;
+                        ErrorLbl.Text = "Error while reading from Database";
+                    }
+
+                }
+                else
+                {
+                    //Login fail
+                    ErrorLbl.Text = UserName + " " + Password;
+                    ErrorLbl.Visible = true;
+                    // ErrorLbl.Text = "Invalid Email or Password";
+                }
+                //Response.Redirect("Login.aspx");
             }
+            //login as user
             else
             {
-                //Login fail
-                ErrorLbl.Text = UserName + " " + Password;
-                ErrorLbl.Visible = true;
-               // ErrorLbl.Text = "Invalid Email or Password";
+                SqlConnection db = new SqlConnection(SqlDataSource3.ConnectionString);
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.Connection = db;
+                cmd.CommandText = "Select COUNT(*) FROM [MFNUserTable] WHERE User_Email = '" + UserName + "'COLLATE SQL_Latin1_General_CP1_CS_AS AND User_PasswordHash = '" + Password + "' COLLATE SQL_Latin1_General_CP1_CS_AS";
+
+                try
+                {
+                    db.Open();
+                    count = (int)cmd.ExecuteScalar();
+                }
+                catch
+                {
+                    count = -1;
+                }
+                finally
+                {
+                    db.Close();
+                }
+                /*
+                If the the trainer is verified and the database has succesfully placed data
+                into trainer object.
+                */
+                if (count == -1)
+                {
+                    //Login fail
+                    ErrorLbl.Visible = true;
+                    ErrorLbl.Text = "Dtabase is not connected!";
+                }
+                else if (count > 0)
+                {
+
+                    try
+                    {
+                        cmd.CommandText = "Select * FROM [MFNUserTable] WHERE User_Email = '" + UserName + "'";
+                        db.Open();
+
+                        SqlDataReader sdr = cmd.ExecuteReader();
+
+                        while (sdr.Read())
+                        {
+                            Tobj.TrainerId = Int32.Parse(sdr["User_Id"].ToString());
+                            Tobj.FirstName = sdr["User_FirstName"].ToString();
+                            Tobj.LastName = sdr["User_LastName"].ToString();
+                        }
+
+                        Session["UserInfo"] = Uobj;
+                        Response.Redirect("UserProfile.aspx");
+
+                    }
+                    catch
+                    {
+                        ErrorLbl.Visible = true;
+                        ErrorLbl.Text = "Error while reading from Database";
+                    }
+
+                }
+                else
+                {
+                    //Login fail
+                    ErrorLbl.Text = UserName + " " + Password;
+                    ErrorLbl.Visible = true;
+                    // ErrorLbl.Text = "Invalid Email or Password";
+                }
+                //Response.Redirect("Login.aspx");
             }
-            //Response.Redirect("Login.aspx");
         }
 
         protected void signup_Click(object sender, EventArgs e)
