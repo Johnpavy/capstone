@@ -13,12 +13,9 @@ namespace WebApplication1
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //This block of code prevents caching. You cannot use the browser's foward and back
-            //buttons to return to a page. Will be helpful with preventing double payment and double
-            //database access.
-            Response.Cache.SetCacheability(HttpCacheability.NoCache);
-            Response.Cache.SetExpires(DateTime.UtcNow.AddHours(-1));
-            Response.Cache.SetNoStore();
+            HttpContext.Current.Response.AddHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+            HttpContext.Current.Response.AddHeader("Pragma", "no-cache");
+            HttpContext.Current.Response.AddHeader("Expires", "0");
 
             if (Session["TrainerInfo"] == null)
             {
@@ -27,10 +24,15 @@ namespace WebApplication1
             }
             else
             {
-                Tobj = (TrainerObject)Session["TrainerInfo"];
-                Session.Abandon();
+                Tobj.CopyTrainerObject((TrainerObject)Session["TrainerInfo"]);
+                UserNameLbl.Text = Tobj.FirstName + " " + Tobj.LastName + " ";
+
+                //changes default profile pic to user uploaded one
+                if (Tobj.ImagePath != "")
+                {
+                    ProfilePic.Attributes["src"] = Tobj.ImagePath;
+                }
             }
-            //Label1.Text = Tobj.FirstName + " " + Tobj.LastName;
         }
 
     }

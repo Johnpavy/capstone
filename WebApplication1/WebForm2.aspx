@@ -1,4 +1,4 @@
-﻿<%--<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm2.aspx.cs" Inherits="WebApplication1.WebForm2" %>--%>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm2.aspx.cs" Inherits="WebApplication1.WebForm2" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -37,7 +37,7 @@
         background-color: #008DB7;
     }
     .HeaderContainer { background-color: #231F1E; padding-bottom: 21px; padding-top: 8%;}
-    .TrainerPicture {width: 50%; height: 50%; margin-left: auto;
+    .TrainerPicture {width: 25%; height: 25%; margin-left: auto;
     margin-right: auto; border-radius: 50%;}
     .TrainerHeaderInfo{padding-top: 1%; }
     .TrainerName {color: #FFFFFF; font-size: 4.5vw;}
@@ -82,13 +82,14 @@
         background-color: #008DB7;
     }
         .FooterContent{color: #FFFFFF; font-size: 2.0vw;}
+            
+        .UserNameLbl {color: #FFFFFF; font-size: 4.5vw;}
     </style>
     
     
 </head>
 <body>
-    <div class="content">
-        
+    <div class="content">  
         <div class="TopNavContainer col-xs-12 col-sm-12">
             <nav class="navbar navbar-primary navbar-fixed-top">
               <div class="container-fluid">
@@ -119,7 +120,8 @@
                       <ul class="dropdown-menu">
                         <li><a href="#">Settings</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">Logout</a></li>
+                        <li><a href="LogOut.aspx">Log Out</a></li>
+                        <li role="separator" class="divider"></li>
                       </ul>
                     </li>
                   </ul>
@@ -131,12 +133,13 @@
         <div class="HeaderContainer container-fluid">
             <div class="row">
                 <div class="PictureColumn col-xs-12 col-sm-12 text-center">
-                    <img src="Pictures/trainerPic.jpg" class="TrainerPicture img-circle img-responsive" alt="Trainer Picture">
+                    <asp:Image id="ProfilePic" runat="server" src="Pictures/trainerPic.jpg" class="TrainerPicture img-circle img-responsive" alt="Trainer Picture" />
+                    <br />
                 </div>
             </div>
             <div class="row">
                 <div class="TrainerHeaderInfo text-center">
-                    <p class="TrainerName">Trainer Joe</p>
+                    <p class="TrainerName"><asp:Label ID="UserNameLbl" CssClass="UserNameLbl" runat="server" Text="Label"></asp:Label></p>
                     <p class="TrainerRating">Overall Rating: </p>
                 </div>
             </div>

@@ -76,6 +76,7 @@ namespace WebApplication1
                         while (sdr.Read())
                         {
                             Tobj.TrainerId = Int32.Parse(sdr["Trainer_Id"].ToString());
+                            Tobj.ImagePath = sdr["Trainer_Image"].ToString();
                             Tobj.FirstName = sdr["Trainer_FirstName"].ToString();
                             Tobj.LastName = sdr["Trainer_LastName"].ToString();
                         }
