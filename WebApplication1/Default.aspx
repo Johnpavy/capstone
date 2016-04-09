@@ -142,6 +142,7 @@
         float: right;
     }
 
+
   </style>
 </head>
 <body>
@@ -154,6 +155,8 @@
             <asp:LinkButton ID="LinkButton2" Class="LoginButton2 btn btn-primary btn-lg btn-block" runat="server" OnClick="login_Click">Login</asp:LinkButton>
             <asp:CheckBox ID="CheckBox1" Class="TrainerToggle" runat="server"  CssClass="TrainerToggle form-control" Text="Login as Trainer"/>
             <br />
+            <br />
+            <br /> <a style="float:right; padding-right:5px" href ="ResetPassword.aspx">Reset Password</a>
             <asp:Label ID="ErrorLbl" runat="server" Text="*Error" ForeColor="#FF3300" Visible="False"></asp:Label>
         </div>
         <div class="FitnessNetworkImageContainer">

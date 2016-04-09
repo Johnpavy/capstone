@@ -238,32 +238,55 @@ namespace WebApplication1
 
             if (firstName.Equals("")|| lastName.Equals("")||email.Equals("")|| password.Equals("") || CPassword.Equals("")){
                 ErrorLabel.ForeColor = System.Drawing.Color.Red;
-                ErrorLabel.Text = "All textboxes required";
+                ErrorLabel.Text = "All feilds required.";
                 ErrorLabel.Visible = true;
             }
-            /*
-            else if (password.length < 8)
-            {
-            }
-            else if(contains 0 capital)
-            {
-            }
-            else if(contains 0 numbers)
-            {
-            }
-            else if(contains 0 special)
-            */
-            else if(!password.Equals(CPassword))
+            else if (password.Length < 8)
             {
                 ErrorLabel.ForeColor = System.Drawing.Color.Red;
-                ErrorLabel.Text = "Passwords must match";
+                ErrorLabel.Text = "Passwords must be at least 8 characters long.";
+                ErrorLabel.Visible = true;
+                trainerDb.Close();
+            }
+            else if(!password.Any(c => char.IsUpper(c))) //checks if string does not contain uppercase letter
+            {
+                ErrorLabel.ForeColor = System.Drawing.Color.Red;
+                ErrorLabel.Text = "Passwords must contain at least one capital letter.";
+                ErrorLabel.Visible = true;
+                trainerDb.Close();
+            }
+            else if (!password.Any(c => char.IsLower(c))) //checks if string does not contain uppercase letter
+            {
+                ErrorLabel.ForeColor = System.Drawing.Color.Red;
+                ErrorLabel.Text = "Passwords must contain at least one lowercase letter.";
+                ErrorLabel.Visible = true;
+                trainerDb.Close();
+            }
+            else if(!password.Any(c => char.IsDigit(c))) //checks if string does not contain a digit
+            {
+                ErrorLabel.ForeColor = System.Drawing.Color.Red;
+                ErrorLabel.Text = "Passwords must contain at least one digit.";
+                ErrorLabel.Visible = true;
+                trainerDb.Close();
+            }
+            else if(!password.Any(c => char.IsSymbol(c)))
+            {
+                ErrorLabel.ForeColor = System.Drawing.Color.Red;
+                ErrorLabel.Text = "Passwords must contain at least one special charcter.";
+                ErrorLabel.Visible = true;
+                trainerDb.Close();
+            }
+            else if (!password.Equals(CPassword))
+            {
+                ErrorLabel.ForeColor = System.Drawing.Color.Red;
+                ErrorLabel.Text = "Passwords must match.";
                 ErrorLabel.Visible = true;
                 trainerDb.Close();
             }
             else if(!IsValidEmail(email))
             {
                 ErrorLabel.ForeColor = System.Drawing.Color.Red;
-                ErrorLabel.Text = "Invalid E-mail address";
+                ErrorLabel.Text = "Invalid E-mail address.";
                 ErrorLabel.Visible = true;
                 trainerDb.Close();
             }
