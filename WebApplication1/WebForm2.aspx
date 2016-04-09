@@ -119,7 +119,7 @@
                             <li class="dropdown">
                               <a href="#" class="NavDropdownMenu dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menu <span class="caret"></span></a>
                               <ul class="dropdown-menu">
-                                <li><a href="#">Settings</a></li>
+                                <li><a href="AccountSettings.aspx">Settings</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="LogOut.aspx">Log Out</a></li>
                                 <li role="separator" class="divider"></li>

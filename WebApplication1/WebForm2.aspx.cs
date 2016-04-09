@@ -42,5 +42,12 @@ namespace WebApplication1
 
         }
 
+        protected void ChangeAccountSetting_Click(object sender, EventArgs e)
+        {
+            Session["TrainerInfo"] = Tobj;
+            Response.Redirect("AccountSettings.aspx");
+        }
+        
+
     }
 }
