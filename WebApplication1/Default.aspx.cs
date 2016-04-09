@@ -11,6 +11,10 @@ using System.Data;
 using System.Net.Mail;
 using System.Net;
 
+//For Hasing Passwords
+using System.Security.Cryptography;
+using System.Web.Security;
+
 namespace WebApplication1
 {
     public partial class WebForm4 : System.Web.UI.Page
@@ -31,6 +35,9 @@ namespace WebApplication1
             string Password = "";
             Password = Request.Form["Password2"].ToString();
 
+            string salt = "";
+
+
             //login as trainer
             if (CheckBox1.Checked)
             {
@@ -38,7 +45,35 @@ namespace WebApplication1
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd.Connection = db;
-                cmd.CommandText = "Select COUNT(*) FROM [MFNTrainerTable] WHERE Trainer_Email = '" + UserName + "'COLLATE SQL_Latin1_General_CP1_CS_AS AND Trainer_PasswordHash = '" + Password + "' COLLATE SQL_Latin1_General_CP1_CS_AS";
+
+                //hash entered password
+
+                try
+                {
+                    cmd.CommandText = "Select * FROM [MFNTrainerTable] WHERE Trainer_Email = '" + UserName + "'";
+                    db.Open();
+                    SqlDataReader sdr = cmd.ExecuteReader();
+                    while (sdr.Read())
+                    {
+                        salt = sdr["Trainer_PasswordSalt"].ToString();
+                    }
+
+                }
+                catch
+                {
+                    ErrorLbl.Visible = true;
+                    ErrorLbl.Text = "Error while reading from Database";
+                }
+                finally
+                {
+                    db.Close();
+                }
+
+
+
+                string hashedPassword = CreatePasswordHash(Password, salt);
+
+                cmd.CommandText = "Select COUNT(*) FROM [MFNTrainerTable] WHERE Trainer_Email = '" + UserName + "'COLLATE SQL_Latin1_General_CP1_CS_AS AND Trainer_PasswordHash = '" + hashedPassword + "' COLLATE SQL_Latin1_General_CP1_CS_AS" ;
 
                 try
                 {
@@ -61,7 +96,7 @@ namespace WebApplication1
                 {
                     //Login fail
                     ErrorLbl.Visible = true;
-                    ErrorLbl.Text = "Dtabase is not connected!";
+                    ErrorLbl.Text = "Database is not connected!";
                 }
                 else if (count > 0)
                 {
@@ -206,6 +241,18 @@ namespace WebApplication1
                 ErrorLabel.Text = "All textboxes required";
                 ErrorLabel.Visible = true;
             }
+            /*
+            else if (password.length < 8)
+            {
+            }
+            else if(contains 0 capital)
+            {
+            }
+            else if(contains 0 numbers)
+            {
+            }
+            else if(contains 0 special)
+            */
             else if(!password.Equals(CPassword))
             {
                 ErrorLabel.ForeColor = System.Drawing.Color.Red;
@@ -239,16 +286,23 @@ namespace WebApplication1
                 }
                 else
                 {
+
+                    string salt = CreateSalt(125);
+                    string hashedPassword = CreatePasswordHash(password, salt);
+
+
+
                     SqlCommand cmd = new SqlCommand();
 
                     cmd.CommandType = System.Data.CommandType.Text;
                     // create sql command
-                    cmd.CommandText = "insert into MFNTrainerTable (Trainer_Email, Trainer_FirstName, Trainer_LastName, Trainer_PasswordHash) OUTPUT INSERTED.Trainer_Id values (@email, @fName, @lName, @password)";
+                    cmd.CommandText = "INSERT INTO MFNTrainerTable (Trainer_Email, Trainer_FirstName, Trainer_LastName, Trainer_PasswordHash, Trainer_PasswordSalt) OUTPUT INSERTED.Trainer_Id values (@email, @fName, @lName, @password, @salt)";
                     // add values to sql table
                     cmd.Parameters.AddWithValue("@email", email);
                     cmd.Parameters.AddWithValue("@fName", firstName);
                     cmd.Parameters.AddWithValue("@lName", lastName);
-                    cmd.Parameters.AddWithValue("@password", password);
+                    cmd.Parameters.AddWithValue("@password", hashedPassword);
+                    cmd.Parameters.AddWithValue("@salt", salt);
                     cmd.Connection = trainerDb;
                     // try to execute query and save session object variables
                     try
@@ -351,6 +405,24 @@ namespace WebApplication1
                 smtp.Port = 587;
                 smtp.Send(mm);
             }
+        }
+
+        private static string CreateSalt(int size)
+        {
+            //Generate a cryptographic random number.
+            RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
+            byte[] buff = new byte[size];
+            rng.GetBytes(buff);
+
+            // Return a Base64 string representation of the random number.
+            return Convert.ToBase64String(buff);
+        }
+
+        private static string CreatePasswordHash(string pwd, string salt)
+        {
+            string saltAndPwd = String.Concat(pwd, salt);
+            string hashedPwd = FormsAuthentication.HashPasswordForStoringInConfigFile(saltAndPwd, "sha1");
+            return hashedPwd;
         }
     }
 }
