@@ -84,6 +84,13 @@
         .FooterContent{color: #FFFFFF; font-size: 2.0vw;}
         .UserNameLbl {color: #FFFFFF; font-size: 4.5vw;}
 
+     .LoginButton2
+    {
+        background-color: rgb(92, 184, 92);
+        border: 2px solid;
+        border-radius: 25px;
+    }
+
     </style>
     
     
@@ -115,7 +122,8 @@
                             <button type="submit" class="btn btn-default glyphicon glyphicon-search"></button>
                           </form>
                           <ul class="nav navbar-nav navbar-right">
-                              <li><button type="button" runat="server" class="BookButton btn btn-success" onclick="BookTrainer_Click">Book</button></li>
+                              <li><asp:LinkButton ID = "ManageSession" Class="LoginButton2 btn-info btn-block" runat="server" onclick="BookTrainer_Click">Manage Your Schedule</asp:LinkButton></li>
+                              <!--<li><button type="button" runat="server" class="BookButton btn btn-success" onclick="BookTrainer_Click">Manage Your Schedule</button></li>-->
                             <li class="dropdown">
                               <a href="#" class="NavDropdownMenu dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menu <span class="caret"></span></a>
                               <ul class="dropdown-menu">

@@ -80,6 +80,7 @@
     <Content Include="MFNRoot\Trainers\test%40email\ProfilePic.jpg" />
     <Content Include="Pictures\trainerPic.jpg" />
     <Content Include="ResetPassword.aspx" />
+    <Content Include="TrainerScheduler.aspx" />
     <Content Include="TrainerSignup.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Pictures\MobileFitnessNetworkPic.jpg" />
@@ -144,6 +145,13 @@
       <DependentUpon>ResetPassword.aspx</DependentUpon>
     </Compile>
     <Compile Include="TrainerObject.cs" />
+    <Compile Include="TrainerScheduler.aspx.cs">
+      <DependentUpon>TrainerScheduler.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TrainerScheduler.aspx.designer.cs">
+      <DependentUpon>TrainerScheduler.aspx</DependentUpon>
+    </Compile>
     <Compile Include="TrainerSignup.aspx.cs">
       <DependentUpon>TrainerSignup.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

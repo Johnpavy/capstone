@@ -38,8 +38,7 @@ namespace WebApplication1
 
         protected void BookTrainer_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Webform3.aspx");
-
+            Response.Redirect("TrainerScheduler.aspx");
         }
 
         protected void ChangeAccountSetting_Click(object sender, EventArgs e)
