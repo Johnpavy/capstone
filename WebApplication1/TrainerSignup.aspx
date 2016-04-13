@@ -72,7 +72,6 @@
                                        <asp:ListItem Text="9" Value="9"></asp:ListItem>
                                        <asp:ListItem Text="10" Value="10"></asp:ListItem>
                                        <asp:ListItem Text="11" Value="11"></asp:ListItem>
-                                       <asp:ListItem Text="12" Value="12"></asp:ListItem>
                                     </asp:DropDownList>
                                  </div>	
                                </div>	
@@ -102,9 +101,9 @@
                         <div class="dropdown">
                             <asp:DropDownList ID="DropDownList5" runat="server" CssClass="form-control">
                                 <asp:ListItem Text="Select Specialty" Value="0"></asp:ListItem>
-                                <asp:ListItem Text="Personal Training" Value="1"></asp:ListItem>
-                                <asp:ListItem Text="Yoga" Value="2"></asp:ListItem>
-                                <asp:ListItem Text="Both" Value="3"></asp:ListItem>
+                                <asp:ListItem Text="Personal Training" Value="Personal Training"></asp:ListItem>
+                                <asp:ListItem Text="Yoga" Value="Yoga"></asp:ListItem>
+                                <asp:ListItem Text="Both" Value="Personal Traning and Yoga"></asp:ListItem>
                             </asp:DropDownList>
                         </div>
 					</div>	

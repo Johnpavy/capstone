@@ -18,6 +18,7 @@ namespace WebApplication1
         private string lastName;
         private string homeAddress;
         private string bio;
+        private string speciality;
 
 
         public TrainerObject()
@@ -33,7 +34,7 @@ namespace WebApplication1
             phone = "";
             homeAddress = "";
             bio = "";
-
+            speciality = "";
         }
 
         public int TrainerId
@@ -96,6 +97,12 @@ namespace WebApplication1
             set { bio = value; }
         }
 
+        public string Speciality
+        {
+            get { return speciality; }
+            set { speciality = value; }
+        }
+
         public string Phone
         {
             get { return phone; }
@@ -115,6 +122,7 @@ namespace WebApplication1
             this.Phone = objToCopy.Phone;
             this.HomeAddress = objToCopy.HomeAddress;
             this.Bio = objToCopy.Bio;
+            this.Speciality = objToCopy.Speciality;
         }
     }
 }
