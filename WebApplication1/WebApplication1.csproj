@@ -78,6 +78,7 @@
     <Content Include="JS\JavaScript.js" />
     <Content Include="LogOut.aspx" />
     <Content Include="MFNRoot\Trainers\test%40email\ProfilePic.jpg" />
+    <Content Include="PasswordResetComfirm.aspx" />
     <Content Include="Pictures\trainerPic.jpg" />
     <Content Include="ResetPassword.aspx" />
     <Content Include="ThankYou.aspx" />
@@ -137,6 +138,13 @@
     </Compile>
     <Compile Include="LogOut.aspx.designer.cs">
       <DependentUpon>LogOut.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PasswordResetComfirm.aspx.cs">
+      <DependentUpon>PasswordResetComfirm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PasswordResetComfirm.aspx.designer.cs">
+      <DependentUpon>PasswordResetComfirm.aspx</DependentUpon>
     </Compile>
     <Compile Include="ResetPassword.aspx.cs">
       <DependentUpon>ResetPassword.aspx</DependentUpon>
