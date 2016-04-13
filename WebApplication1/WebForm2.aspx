@@ -172,7 +172,7 @@
                         </h4>
                       </div>
                       <div id="collapse2" class="panel-collapse collapse">
-                        <div class="panel-body">Test Text.</div>
+                        <div class="panel-body" id ="specialty" runat="server">Test Text.</div>
                       </div>
                     </div>
                     <div class="panel panel-default">
