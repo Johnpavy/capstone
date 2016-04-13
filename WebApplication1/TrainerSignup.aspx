@@ -50,7 +50,6 @@
                                        <asp:ListItem Text="Select Feet" Value="0"></asp:ListItem>
                                        <asp:ListItem Text="4" Value="4"></asp:ListItem>
                                        <asp:ListItem Text="5" Value="5"></asp:ListItem>
-                                       <asp:ListItem Text="5" Value="5"></asp:ListItem>
                                        <asp:ListItem Text="6" Value="6"></asp:ListItem>
                                        <asp:ListItem Text="7" Value="7"></asp:ListItem>
                                       </asp:DropDownList>
@@ -79,7 +78,7 @@
                                </div>	
 							<div class="col-sm-4 form-group">
 								<label>Weight Pounds</label>
-								<input type="text" placeholder="Enter Weight in pounds" class="form-control"/>
+								<input type="text" placeholder="Enter Weight in pounds" class="form-control" name="weight"/>
 							</div>	
 						</div>	
                        </div>					
@@ -98,7 +97,17 @@
                             </asp:DropDownList>
                         </div>
 					</div>	
-                    
+                    <div class="col-sm-4 form-group">
+						<label>Training Specialty</label>
+                        <div class="dropdown">
+                            <asp:DropDownList ID="DropDownList5" runat="server" CssClass="form-control">
+                                <asp:ListItem Text="Select Specialty" Value="0"></asp:ListItem>
+                                <asp:ListItem Text="Personal Training" Value="1"></asp:ListItem>
+                                <asp:ListItem Text="Yoga" Value="2"></asp:ListItem>
+                                <asp:ListItem Text="Both" Value="3"></asp:ListItem>
+                            </asp:DropDownList>
+                        </div>
+					</div>	
 					<div class="form-group">
 
 						<label>Biography</label>
