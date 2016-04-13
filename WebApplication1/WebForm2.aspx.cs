@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
 namespace WebApplication1
@@ -25,8 +26,8 @@ namespace WebApplication1
             else
             {
                 Tobj.CopyTrainerObject((TrainerObject)Session["TrainerInfo"]);
+                bio.InnerHtml = Tobj.Bio;
                 UserNameLbl.Text = Tobj.FirstName + " " + Tobj.LastName + " ";
-
                 //changes default profile pic to user uploaded one
                 if (Tobj.ImagePath != "")
                 {

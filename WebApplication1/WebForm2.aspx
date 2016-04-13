@@ -162,7 +162,7 @@
                         </h4>
                       </div>
                       <div id="collapse1" class="panel-collapse collapse in">
-                        <div class="panel-body">Test Text.</div>
+                        <div class="panel-body" id ="bio" runat="server">Test Text.</div>
                       </div>
                     </div>
                     <div class="panel panel-default">

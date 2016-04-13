@@ -214,6 +214,51 @@
 			    	</div>
                   <asp:Label ID="ErrorLabel" runat="server" Text="Label" Visible="False"></asp:Label>
 	    		</div>
+            <!Register as client below>
+    		</div>
+            <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+        	<div class="panel panel-default">
+        		<div class="panel-heading">
+			    		<h3 class="panel-title">Register as a Client</h3>
+			 			</div>
+			 			<div class="panel-body">
+
+			    			<div class="row">
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+			                <input type="text" name="cFName" id="cfirst_name" class="form-control input-sm" placeholder="First Name"/>
+			    					</div>
+			    				</div>
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+			    						<input type="text" name="cLName" id="clast_name" class="form-control input-sm" placeholder="Last Name"/>
+			    					</div>
+			    				</div>
+			    			</div>
+
+			    			<div class="form-group">
+			    				<input type="email" name="cemail" id="cemail" class="form-control input-sm" placeholder="Email Address"/>
+			    			</div>
+
+			    			<div class="row">
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+			    						<input type="password" name="clpassword" id="clpassword" class="form-control input-sm" placeholder="Password"/>
+			    					</div>
+			    				</div>
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+			    						<input type="password" name="CCpassword" id="cpassword_confirmation" class="form-control input-sm" placeholder="Confirm Password"/>
+			    					</div>
+			    				</div>
+			    			</div>
+			    			
+			    			<asp:LinkButton ID = "LinkButton3" Class="btn btn-info btn-block" runat="server" OnClick="cstartup_Click" >Get Started</asp:LinkButton>
+			    		
+
+			    	</div>
+                  <asp:Label ID="Label1" runat="server" Text="Label" Visible="False"></asp:Label>
+	    		</div>
     		</div>
     	</div>
     </div>
