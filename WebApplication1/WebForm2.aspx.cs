@@ -26,7 +26,7 @@ namespace WebApplication1
             else
             {
                 Tobj.CopyTrainerObject((TrainerObject)Session["TrainerInfo"]);
-                bio.InnerHtml = Tobj.Bio;
+                //bio.InnerHtml = Tobj.Bio;
                 specialty.InnerHtml = Tobj.Speciality;
                 UserNameLbl.Text = Tobj.FirstName + " " + Tobj.LastName + " ";
                 //changes default profile pic to user uploaded one
@@ -48,7 +48,33 @@ namespace WebApplication1
             Session["TrainerInfo"] = Tobj;
             Response.Redirect("AccountSettings.aspx");
         }
-        
+
+        protected void ComfirmUpdateBioButton1_Click(object sender, EventArgs e)
+        {
+            if(BioTextBox.ReadOnly == true)
+            {
+                BioTextBox.ReadOnly = false;
+                ConfirmBioUpdate.Text = "Save";
+                CancelBioUpdate.Visible = true;
+            }
+            else
+            {
+                BioTextBox.ReadOnly = true;
+                Tobj.Bio = BioTextBox.Text;
+                Session["TrainerInfo"] = Tobj;
+                ConfirmBioUpdate.Text = "Update";
+                CancelBioUpdate.Visible = false;
+            }
+        }
+
+        protected void CancelUpdateBioButton1_Click(object sender, EventArgs e)
+        {
+            BioTextBox.Text = Tobj.Bio;
+            CancelBioUpdate.Visible = false;
+            BioTextBox.ReadOnly = true;
+            ConfirmBioUpdate.Text = "Update";
+
+        }
 
     }
 }

@@ -447,5 +447,10 @@ namespace WebApplication1
             string hashedPwd = FormsAuthentication.HashPasswordForStoringInConfigFile(saltAndPwd, "sha1");
             return hashedPwd;
         }
+
+        protected void cstartup_Click(object sender, EventArgs e)
+        {
+            //something
+        }
     }
 }

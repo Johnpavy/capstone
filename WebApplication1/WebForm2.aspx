@@ -95,8 +95,8 @@
     
     
 </head>
-    <form id="form1" runat="server">
         <body>
+        <form id="form1" runat="server">
             <div class="content">  
                 <div class="TopNavContainer col-xs-12 col-sm-12">
                     <nav class="navbar navbar-primary navbar-fixed-top">
@@ -124,7 +124,7 @@
                           <ul class="nav navbar-nav navbar-right">
                               <li><asp:LinkButton ID = "ManageSession" Class="LoginButton2 btn-info btn-block" runat="server" onclick="BookTrainer_Click">Manage Your Schedule</asp:LinkButton></li>
                               <!--<li><button type="button" runat="server" class="BookButton btn btn-success" onclick="BookTrainer_Click">Manage Your Schedule</button></li>-->
-                            <li class="dropdown">
+                              <li class="dropdown">
                               <a href="#" class="NavDropdownMenu dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menu <span class="caret"></span></a>
                               <ul class="dropdown-menu">
                                 <li><a href="AccountSettings.aspx">Settings</a></li>
@@ -160,9 +160,16 @@
                         <h4 class="panel-title">
                           <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Biography</a>
                         </h4>
+                          <!-- Trigger the modal with a button 
+                          <button type="button" class="btn2 btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Bio Modal</button>-->
                       </div>
                       <div id="collapse1" class="panel-collapse collapse in">
-                        <div class="panel-body" id ="bio" runat="server">Test Text.</div>
+                        <div class="panel-body" id ="bio" runat="server">
+                            <asp:TextBox ID="BioTextBox" runat="server" width ="75%" Height="50%" ReadOnly="true" BorderStyle="None" TextMode="MultiLine"></asp:TextBox>
+                            <asp:LinkButton ID="ConfirmBioUpdate" cssclass="btn btn-default" runat ="server" onclick="ComfirmUpdateBioButton1_Click">Update</asp:LinkButton>
+                            <asp:LinkButton ID="CancelBioUpdate" cssclass="btn btn-default" runat ="server" onclick="CancelUpdateBioButton1_Click" Visible="false">Cancel</asp:LinkButton>
+
+                        </div>
                       </div>
                     </div>
                     <div class="panel panel-default">
@@ -246,8 +253,30 @@
             <footer class="FooterContainer col-xs-12 col-sm-12 text-center">
                 <p class="FooterContent">TEST FOOTER</p>
             </footer>
+
+            <!-- Bio Modal -->
+            <div id="myModal" class="modal fade" role="dialog">
+              <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Edit Bio </h4>
+                  </div>
+                  <div class="modal-body">
+                    <p>Edit your biography below:</p>
+                      <asp:TextBox ID="EditBioTextBox" class="form-control" runat="server" TextMode="MultiLine" Width="100%" Height="50%"></asp:TextBox>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </form>
         </body>
-            </form>
 </html>
 
 
