@@ -11,7 +11,7 @@
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     
     <style>
-       
+    
     body {background-color: #231F1E;}
     html, body, #container { height: 100%; }
     body > #container { height: auto; min-height: 100%; }
@@ -97,6 +97,12 @@
 </head>
         <body>
         <form id="form1" runat="server">
+              <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" SelectCommand="SELECT * FROM [MFNTrainerTable]"></asp:SqlDataSource>
+
+                 <asp:ScriptManager ID="ScriptManager1" runat="server">
+                </asp:ScriptManager>
+                            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                  <ContentTemplate>
             <div class="content">  
                 <div class="TopNavContainer col-xs-12 col-sm-12">
                     <nav class="navbar navbar-primary navbar-fixed-top">
@@ -160,15 +166,13 @@
                         <h4 class="panel-title">
                           <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Biography</a>
                         </h4>
-                          <!-- Trigger the modal with a button 
-                          <button type="button" class="btn2 btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Bio Modal</button>-->
+                          <!-- Trigger the modal with a button -->
+                          <button type="button" class="btn2 btn-info btn-lg" data-toggle="modal" data-target="#myModal" runat="server">Open Bio Modal</button>
                       </div>
                       <div id="collapse1" class="panel-collapse collapse in">
                         <div class="panel-body" id ="bio" runat="server">
                             <asp:TextBox ID="BioTextBox" runat="server" width ="75%" Height="50%" ReadOnly="true" BorderStyle="None" TextMode="MultiLine"></asp:TextBox>
-                            <asp:LinkButton ID="ConfirmBioUpdate" cssclass="btn btn-default" runat ="server" onclick="ComfirmUpdateBioButton1_Click">Update</asp:LinkButton>
-                            <asp:LinkButton ID="CancelBioUpdate" cssclass="btn btn-default" runat ="server" onclick="CancelUpdateBioButton1_Click" Visible="false">Cancel</asp:LinkButton>
-
+                            <asp:Label ID="Fish" runat="server" Text="Label"></asp:Label>
                         </div>
                       </div>
                     </div>
@@ -253,11 +257,9 @@
             <footer class="FooterContainer col-xs-12 col-sm-12 text-center">
                 <p class="FooterContent">TEST FOOTER</p>
             </footer>
-
             <!-- Bio Modal -->
-            <div id="myModal" class="modal fade" role="dialog">
+            <div id="myModal" class="modal fade" role="dialog" runat="server" >
               <div class="modal-dialog">
-
                 <!-- Modal content-->
                 <div class="modal-content">
                   <div class="modal-header">
@@ -265,16 +267,20 @@
                     <h4 class="modal-title">Edit Bio </h4>
                   </div>
                   <div class="modal-body">
-                    <p>Edit your biography below:</p>
-                      <asp:TextBox ID="EditBioTextBox" class="form-control" runat="server" TextMode="MultiLine" Width="100%" Height="50%"></asp:TextBox>
+                    <p>Enter your Biography:</p>
+                      <asp:TextBox ID="TempTextBox2" runat="server" Width="100%" Height="50%"  BorderStyle="Solid" TextMode="MultiLine"></asp:TextBox>
                   </div>
                   <div class="modal-footer">
+                    <asp:LinkButton ID="TempUpdate" cssclass="btn btn-default" runat ="server" onclick="ComfirmUpdateBioButton2_Click">Update</asp:LinkButton>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                   </div>
                 </div>
-
               </div>
             </div>
+            </div>
+
+            </ContentTemplate>
+            </asp:UpdatePanel>
           </form>
         </body>
 </html>

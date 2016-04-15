@@ -3,8 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
+using System.Data.Sql;
+using System.Data.SqlClient;
+using System.Configuration;
+using System.Data;
+using System.Net.Mail;
+using System.Net;
 
 namespace WebApplication1
 {
@@ -13,7 +18,8 @@ namespace WebApplication1
         TrainerObject Tobj = new TrainerObject();
 
         protected void Page_Load(object sender, EventArgs e)
-        {
+        { 
+
             HttpContext.Current.Response.AddHeader("Cache-Control", "no-cache, no-store, must-revalidate");
             HttpContext.Current.Response.AddHeader("Pragma", "no-cache");
             HttpContext.Current.Response.AddHeader("Expires", "0");
@@ -26,7 +32,7 @@ namespace WebApplication1
             else
             {
                 Tobj.CopyTrainerObject((TrainerObject)Session["TrainerInfo"]);
-                //bio.InnerHtml = Tobj.Bio;
+                BioTextBox.Text = Tobj.Bio;
                 specialty.InnerHtml = Tobj.Speciality;
                 UserNameLbl.Text = Tobj.FirstName + " " + Tobj.LastName + " ";
                 //changes default profile pic to user uploaded one
@@ -48,31 +54,40 @@ namespace WebApplication1
             Session["TrainerInfo"] = Tobj;
             Response.Redirect("AccountSettings.aspx");
         }
+        
 
-        protected void ComfirmUpdateBioButton1_Click(object sender, EventArgs e)
+        protected void ComfirmUpdateBioButton2_Click(object sender, EventArgs e)
         {
-            if(BioTextBox.ReadOnly == true)
-            {
-                BioTextBox.ReadOnly = false;
-                ConfirmBioUpdate.Text = "Save";
-                CancelBioUpdate.Visible = true;
-            }
-            else
-            {
-                BioTextBox.ReadOnly = true;
-                Tobj.Bio = BioTextBox.Text;
-                Session["TrainerInfo"] = Tobj;
-                ConfirmBioUpdate.Text = "Update";
-                CancelBioUpdate.Visible = false;
-            }
-        }
+            string newBio = TempTextBox2.Text;
+            Tobj.Bio = newBio;
+            Session["TrainerInfo"] = Tobj;
 
-        protected void CancelUpdateBioButton1_Click(object sender, EventArgs e)
-        {
-            BioTextBox.Text = Tobj.Bio;
-            CancelBioUpdate.Visible = false;
-            BioTextBox.ReadOnly = true;
-            ConfirmBioUpdate.Text = "Update";
+
+            SqlConnection db = new SqlConnection(SqlDataSource1.ConnectionString);
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = System.Data.CommandType.Text;
+            cmd.Connection = db;
+
+            cmd.CommandText = "UPDATE [MFNTrainerTable] SET Trainer_Bio = @bio where Trainer_Id = @id";
+
+            cmd.Parameters.AddWithValue("@id", Tobj.TrainerId);
+            cmd.Parameters.AddWithValue("@bio", newBio);
+
+            try
+            {
+                db.Open();
+                cmd.ExecuteNonQuery();
+            }
+            catch
+            {
+                Fish.Text = "We failed horribly!";
+            }
+            finally
+            {
+                db.Close();
+            }
+
+            Response.Redirect("WebForm2.aspx");
 
         }
 

@@ -114,6 +114,7 @@ namespace WebApplication1
                             Tobj.ImagePath = sdr["Trainer_Image"].ToString();
                             Tobj.FirstName = sdr["Trainer_FirstName"].ToString();
                             Tobj.LastName = sdr["Trainer_LastName"].ToString();
+                            Tobj.Bio = sdr["Trainer_Bio"].ToString();
                         }
 
                         Session["TrainerInfo"] = Tobj;
