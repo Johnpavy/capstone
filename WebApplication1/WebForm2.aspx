@@ -101,7 +101,7 @@
 
                  <asp:ScriptManager ID="ScriptManager1" runat="server">
                 </asp:ScriptManager>
-                            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                   <ContentTemplate>
             <div class="content">  
                 <div class="TopNavContainer col-xs-12 col-sm-12">
@@ -171,7 +171,7 @@
                         <div class="panel-body" id ="bio" runat="server">
                             <asp:TextBox ID="BioTextBox" runat="server" width ="75%" Height="300px" ReadOnly="true" BorderStyle="None" TextMode="MultiLine"></asp:TextBox>
                             <!-- Trigger the modal with a button -->
-                          <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal" runat="server" style="float:right;">Edit Biography</button>
+                          <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal" style="float:right;">Edit Biography</button>
                             <asp:Label ID="BioFailLbl" runat="server" Text="Label" Visible="False"></asp:Label>
                         </div>
                       </div>
