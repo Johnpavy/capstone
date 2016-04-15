@@ -16,7 +16,7 @@ namespace WebApplication1
 
         }
 
-        protected void Button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
             // ### Api Context
             // Pass in a `APIContext` object to authenticate 
@@ -115,7 +115,17 @@ namespace WebApplication1
             #endregion
 
             // Create a payment using a valid APIContext
-            var createdPayment = payment.Create(apiContext);
+            try
+            {
+                var createdPayment = payment.Create(apiContext);
+
+                Response.Redirect("PaymentConfirmation.aspx");
+
+            }
+            catch
+            {
+                Response.Write("<script>alert('" + "Invalid Infromation, please try again." + "')</script>");
+            }
 
             // ^ Ignore workflow code segment
             #region Track Workflow
@@ -123,8 +133,15 @@ namespace WebApplication1
             #endregion
 
             // For more information, please visit [PayPal Developer REST API Reference](https://developer.paypal.com/docs/api/).
-
-            Response.Redirect("PaymentConfirmation.aspx");
         }
+
+        //class Data
+        //{
+        //    public string FirstName
+        //    {
+        //        get { return first_name.Text; }
+        //    }
+        //}
+        
     }
 }

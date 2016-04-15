@@ -30,7 +30,7 @@
             type = "visa"
         -->
 
-         <div class="col-md-3">
+        <div class="col-md-3">
             <h2>Payment Information</h2>
              <p>Please Enter First Name: </p>
              <asp:TextBox ID="first_name" runat="server"></asp:TextBox>
@@ -43,7 +43,8 @@
              <p>Please Enter Country: </p>
              <asp:DropDownList ID="country_code" runat="server">
                  <asp:ListItem Value="US">United States</asp:ListItem>
-                </asp:DropDownList>
+                 <asp:ListItem Value="CA">Canada</asp:ListItem>
+             </asp:DropDownList>
              <asp:RequiredFieldValidator ID="RequiredFieldValidator8" ControlToValidate="country_code" runat="server" ErrorMessage="Required Field"></asp:RequiredFieldValidator>
 
              <p>Please Enter Street Address: </p>
@@ -68,7 +69,7 @@
         <div class="col-md-4">
             <p>Please Enter Card Type: </p>
              <asp:DropDownList ID="card_type" runat="server">
-                 <asp:ListItem Value="visa">visa</asp:ListItem>
+                 <asp:ListItem Value="visa">Visa</asp:ListItem>
                  <asp:ListItem Value="mastercard">Master Card</asp:ListItem>
              </asp:DropDownList>
              <asp:RequiredFieldValidator ID="RequiredFieldValidator5" ControlToValidate="card_type" runat="server" ErrorMessage="Required Field"></asp:RequiredFieldValidator> 
