@@ -166,12 +166,12 @@
                         <h4 class="panel-title">
                           <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Biography</a>
                         </h4>
-                              <!-- Trigger the modal with a button -->
-                          <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" runat="server" style="float:right;">Edit your Biography</button>
                       </div>
                       <div id="collapse1" class="panel-collapse collapse in">
                         <div class="panel-body" id ="bio" runat="server">
-                            <asp:TextBox ID="BioTextBox" runat="server" width ="75%" Height="500px" ReadOnly="true" BorderStyle="None" TextMode="MultiLine"></asp:TextBox>
+                            <asp:TextBox ID="BioTextBox" runat="server" width ="75%" Height="300px" ReadOnly="true" BorderStyle="None" TextMode="MultiLine"></asp:TextBox>
+                            <!-- Trigger the modal with a button -->
+                          <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal" runat="server" style="float:right;">Edit Biography</button>
                             <asp:Label ID="BioFailLbl" runat="server" Text="Label" Visible="False"></asp:Label>
                         </div>
                       </div>

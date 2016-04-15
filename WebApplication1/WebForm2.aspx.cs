@@ -35,6 +35,7 @@ namespace WebApplication1
                 BioTextBox.Text = Tobj.Bio;
                 specialty.InnerHtml = Tobj.Speciality;
                 UserNameLbl.Text = Tobj.FirstName + " " + Tobj.LastName + " ";
+
                 //changes default profile pic to user uploaded one
                 if (Tobj.ImagePath != "")
                 {
