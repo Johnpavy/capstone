@@ -80,7 +80,8 @@ namespace WebApplication1
             }
             catch
             {
-                Fish.Text = "We failed horribly!";
+                BioFailLbl.Text = "We failed horribly!";
+                BioFailLbl.Visible =true;
             }
             finally
             {

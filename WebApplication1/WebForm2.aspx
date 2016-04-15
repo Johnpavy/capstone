@@ -166,13 +166,13 @@
                         <h4 class="panel-title">
                           <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Biography</a>
                         </h4>
-                          <!-- Trigger the modal with a button -->
-                          <button type="button" class="btn2 btn-info btn-lg" data-toggle="modal" data-target="#myModal" runat="server">Open Bio Modal</button>
+                              <!-- Trigger the modal with a button -->
+                          <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" runat="server" style="float:right;">Edit your Biography</button>
                       </div>
                       <div id="collapse1" class="panel-collapse collapse in">
                         <div class="panel-body" id ="bio" runat="server">
-                            <asp:TextBox ID="BioTextBox" runat="server" width ="75%" Height="50%" ReadOnly="true" BorderStyle="None" TextMode="MultiLine"></asp:TextBox>
-                            <asp:Label ID="Fish" runat="server" Text="Label"></asp:Label>
+                            <asp:TextBox ID="BioTextBox" runat="server" width ="75%" Height="500px" ReadOnly="true" BorderStyle="None" TextMode="MultiLine"></asp:TextBox>
+                            <asp:Label ID="BioFailLbl" runat="server" Text="Label" Visible="False"></asp:Label>
                         </div>
                       </div>
                     </div>
@@ -268,7 +268,7 @@
                   </div>
                   <div class="modal-body">
                     <p>Enter your Biography:</p>
-                      <asp:TextBox ID="TempTextBox2" runat="server" Width="100%" Height="50%"  BorderStyle="Solid" TextMode="MultiLine"></asp:TextBox>
+                      <asp:TextBox ID="TempTextBox2" runat="server" Width="100%" Height="500px"  BorderStyle="Solid" TextMode="MultiLine"></asp:TextBox>
                   </div>
                   <div class="modal-footer">
                     <asp:LinkButton ID="TempUpdate" cssclass="btn btn-default" runat ="server" onclick="ComfirmUpdateBioButton2_Click">Update</asp:LinkButton>
