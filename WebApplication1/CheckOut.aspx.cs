@@ -18,6 +18,7 @@ namespace WebApplication1
 
         protected void Button1_Click(object sender, EventArgs e)
         {
+            string SampleTotal = "1.50";
             // ### Api Context
             // Pass in a `APIContext` object to authenticate 
             // the call and to send a unique request id 
@@ -32,14 +33,15 @@ namespace WebApplication1
                 amount = new Amount()
                 {
                     currency = "USD",
-                    total = "1.50",
+                    total = SampleTotal,
                     details = new Details()
                     {
-                        shipping = "0.50",
-                        subtotal = "0.50",
-                        tax = "0.50"
+                        shipping = "0.00",
+                        subtotal = "1.50",
+                        tax = "0.00"
                     }
                 },
+
                 description = "This is the payment transaction description.",
                 item_list = new ItemList()
                 {
@@ -49,7 +51,7 @@ namespace WebApplication1
                         {
                             name = "Session",
                             currency = "USD",
-                            price = "0.50",
+                            price = "1.50",
                             quantity = "1",
                             sku = "sku"
                         }
@@ -115,7 +117,26 @@ namespace WebApplication1
             #endregion
 
             // Create a payment using a valid APIContext
-            var createdPayment = payment.Create(apiContext);
+            try
+            {
+                var createdPayment = payment.Create(apiContext);
+
+                Session["first_name"] = first_name.Text + " " + last_name.Text;
+                Session["address"] = address.Text;
+                Session["city"] = city.Text;
+                Session["postal_code"] = postal_code.Text;
+                Session["card_type"] = card_type.Text;
+                //Session["card_number"] = card_number.Text;
+                Session["currency"] = "USD";
+                Session["total"] = SampleTotal;
+
+                Response.Redirect("PaymentConfirmation.aspx");
+
+            }
+            catch
+            {
+                Response.Write("<script>alert('" + "Invalid Infromation, please try again." + "')</script>");
+            }
 
             // ^ Ignore workflow code segment
             #region Track Workflow
@@ -123,8 +144,7 @@ namespace WebApplication1
             #endregion
 
             // For more information, please visit [PayPal Developer REST API Reference](https://developer.paypal.com/docs/api/).
-
-            Response.Redirect("PaymentConfirmation.aspx");
         }
+
     }
 }
