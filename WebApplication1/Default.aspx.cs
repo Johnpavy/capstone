@@ -26,7 +26,7 @@ namespace WebApplication1
         {
 
         }
-
+        // trainer login box checked, login clicked
         protected void login_Click(object sender, EventArgs e)
         {
             int count = 0;
@@ -73,7 +73,7 @@ namespace WebApplication1
 
                 string hashedPassword = CreatePasswordHash(Password, salt);
 
-                cmd.CommandText = "Select COUNT(*) FROM [MFNTrainerTable] WHERE Trainer_Email = '" + UserName + "'COLLATE SQL_Latin1_General_CP1_CS_AS AND Trainer_PasswordHash = '" + hashedPassword + "' COLLATE SQL_Latin1_General_CP1_CS_AS" ;
+                cmd.CommandText = "Select COUNT(*) FROM [MFNTrainerTable] WHERE Trainer_Email = '" + UserName + "'COLLATE SQL_Latin1_General_CP1_CS_AS AND Trainer_PasswordHash = '" + hashedPassword + "' COLLATE SQL_Latin1_General_CP1_CS_AS";
 
                 try
                 {
@@ -204,7 +204,7 @@ namespace WebApplication1
                 }
             }
         }
-
+        // deprecated, not used in newest iteration can probably be deleted
         protected void signup_Click(object sender, EventArgs e)
         {
             Response.Redirect("TrainerSignup.aspx");
@@ -214,7 +214,7 @@ namespace WebApplication1
         {
 
         }
-
+        // deprecated, not used in newest iteration can probably be deleted
         protected void ClientSignup_Click(object sender, EventArgs e)
         {
 
@@ -237,9 +237,10 @@ namespace WebApplication1
             bool userNameExists;
             SqlConnection trainerDb = new SqlConnection(SqlDataSource1.ConnectionString);
 
-            if (firstName.Equals("")|| lastName.Equals("")||email.Equals("")|| password.Equals("") || CPassword.Equals("")){
+            if (firstName.Equals("") || lastName.Equals("") || email.Equals("") || password.Equals("") || CPassword.Equals(""))
+            {
                 ErrorLabel.ForeColor = System.Drawing.Color.Red;
-                ErrorLabel.Text = "All feilds required.";
+                ErrorLabel.Text = "All fields required.";
                 ErrorLabel.Visible = true;
             }
             else if (password.Length < 8)
@@ -249,7 +250,7 @@ namespace WebApplication1
                 ErrorLabel.Visible = true;
                 trainerDb.Close();
             }
-            else if(!password.Any(c => char.IsUpper(c))) //checks if string does not contain uppercase letter
+            else if (!password.Any(c => char.IsUpper(c))) //checks if string does not contain uppercase letter
             {
                 ErrorLabel.ForeColor = System.Drawing.Color.Red;
                 ErrorLabel.Text = "Passwords must contain at least one capital letter.";
@@ -263,7 +264,7 @@ namespace WebApplication1
                 ErrorLabel.Visible = true;
                 trainerDb.Close();
             }
-            else if(!password.Any(c => char.IsDigit(c))) //checks if string does not contain a digit
+            else if (!password.Any(c => char.IsDigit(c))) //checks if string does not contain a digit
             {
                 ErrorLabel.ForeColor = System.Drawing.Color.Red;
                 ErrorLabel.Text = "Passwords must contain at least one digit.";
@@ -271,13 +272,13 @@ namespace WebApplication1
                 trainerDb.Close();
             }
 
-/*            else if(!password.Any(c => char.IsSymbol(c)))
-            {
-                ErrorLabel.ForeColor = System.Drawing.Color.Red;
-                ErrorLabel.Text = "Passwords must contain at least one special character.";
-                ErrorLabel.Visible = true;
-                trainerDb.Close();
-            } */
+            /*            else if(!password.Any(c => char.IsSymbol(c)))
+                        {
+                            ErrorLabel.ForeColor = System.Drawing.Color.Red;
+                            ErrorLabel.Text = "Passwords must contain at least one special character.";
+                            ErrorLabel.Visible = true;
+                            trainerDb.Close();
+                        } */
             else if (!password.Equals(CPassword))
             {
                 ErrorLabel.ForeColor = System.Drawing.Color.Red;
@@ -285,7 +286,7 @@ namespace WebApplication1
                 ErrorLabel.Visible = true;
                 trainerDb.Close();
             }
-            else if(!IsValidEmail(email))
+            else if (!IsValidEmail(email))
             {
                 ErrorLabel.ForeColor = System.Drawing.Color.Red;
                 ErrorLabel.Text = "Invalid E-mail address.";
@@ -303,7 +304,7 @@ namespace WebApplication1
                     userNameExists = (int)checkCmd.ExecuteScalar() > 0;
                 }
                 // if it exists, display error message
-                if(userNameExists)
+                if (userNameExists)
                 {
                     ErrorLabel.ForeColor = System.Drawing.Color.Red;
                     ErrorLabel.Text = "Email address taken";
@@ -336,7 +337,7 @@ namespace WebApplication1
                         int trainerID = (int)cmd.ExecuteScalar();
                         trainerDb.Close();
                         Session["trainerID"] = trainerID;
-                        
+
                         Tobj.FirstName = firstName;
                         Tobj.LastName = lastName;
                         Tobj.Email = email;
@@ -384,6 +385,7 @@ namespace WebApplication1
         }
 
         // From http://www.aspsnippets.com/Articles/Send-user-Confirmation-email-after-Registration-with-Activation-Link-in-ASPNET.aspx
+
         private void SendActivationEmail(int userId)
         {
             String firstName = Request.Form["FName"];
@@ -411,7 +413,7 @@ namespace WebApplication1
                 ErrorLabel.Text = "Error writing verification number to the database";
                 ErrorLabel.Visible = true;
             }
-            
+
 
             using (MailMessage mm = new MailMessage("MobileFitnessNetwork@gmail.com", email))
             {
@@ -450,10 +452,151 @@ namespace WebApplication1
             string hashedPwd = FormsAuthentication.HashPasswordForStoringInConfigFile(saltAndPwd, "sha1");
             return hashedPwd;
         }
-
+        // If the client/user clicks startup
         protected void cstartup_Click(object sender, EventArgs e)
         {
-            //something
+            //something something dark side
+
+            String firstName = Request.Form["cFName"];
+            String lastName = Request.Form["cLName"];
+            String email = Request.Form["cEmail"];
+            String password = Request.Form["CLpassword"];
+            String CPassword = Request.Form["CCpassword"];
+            string message = string.Empty;
+
+            bool clientNameExists;
+
+            SqlConnection clientDB = new SqlConnection(SqlDataSource3.ConnectionString);
+
+            if (firstName.Equals("") || lastName.Equals("") || email.Equals("") || password.Equals("") || CPassword.Equals(""))
+            {
+                ErrorLabel2.ForeColor = System.Drawing.Color.Red;
+                ErrorLabel2.Text = "All fields required.";
+                ErrorLabel2.Visible = true;
+            }
+            else if (password.Length < 8)
+            {
+                ErrorLabel2.ForeColor = System.Drawing.Color.Red;
+                ErrorLabel2.Text = "Passwords must be at least 8 characters long.";
+                ErrorLabel2.Visible = true;
+                clientDB.Close();
+            }
+            else if (!password.Any(c => char.IsUpper(c))) //checks if string does not contain uppercase letter
+            {
+                ErrorLabel2.ForeColor = System.Drawing.Color.Red;
+                ErrorLabel2.Text = "Passwords must contain at least one capital letter.";
+                ErrorLabel2.Visible = true;
+                clientDB.Close();
+            }
+            else if (!password.Any(c => char.IsLower(c))) //checks if string does not contain uppercase letter
+            {
+                ErrorLabel2.ForeColor = System.Drawing.Color.Red;
+                ErrorLabel2.Text = "Passwords must contain at least one lowercase letter.";
+                ErrorLabel2.Visible = true;
+                clientDB.Close();
+            }
+            else if (!password.Any(c => char.IsDigit(c))) //checks if string does not contain a digit
+            {
+                ErrorLabel2.ForeColor = System.Drawing.Color.Red;
+                ErrorLabel2.Text = "Passwords must contain at least one digit.";
+                ErrorLabel2.Visible = true;
+                clientDB.Close();
+            }
+
+            /*            else if(!password.Any(c => char.IsSymbol(c)))
+                        {
+                            ErrorLabel.ForeColor = System.Drawing.Color.Red;
+                            ErrorLabel.Text = "Passwords must contain at least one special character.";
+                            ErrorLabel.Visible = true;
+                            trainerDb.Close();
+                        } */
+            else if (!password.Equals(CPassword))
+            {
+                ErrorLabel2.ForeColor = System.Drawing.Color.Red;
+                ErrorLabel2.Text = "Passwords must match.";
+                ErrorLabel2.Visible = true;
+                clientDB.Close();
+            }
+            else if (!IsValidEmail(email))
+            {
+                ErrorLabel2.ForeColor = System.Drawing.Color.Red;
+                ErrorLabel2.Text = "Invalid E-mail address.";
+                ErrorLabel2.Visible = true;
+                clientDB.Close();
+            }
+            else
+            {
+
+                clientDB.Open();
+                // Check to see if email exists in the database
+                using (SqlCommand checkCmd = new SqlCommand("select count(*) from MFNUserTable where Trainer_Email = @email", clientDB))
+                {
+                    checkCmd.Parameters.AddWithValue("@email", email);
+                    clientNameExists = (int)checkCmd.ExecuteScalar() > 0;
+                }
+                // if it exists, display error message
+                if (clientNameExists)
+                {
+                    ErrorLabel.ForeColor = System.Drawing.Color.Red;
+                    ErrorLabel.Text = "Email address taken";
+                    ErrorLabel.Visible = true;
+                    clientDB.Close();
+                }
+                else
+                {
+
+                    string salt = CreateSalt(125);
+                    string hashedPassword = CreatePasswordHash(password, salt);
+
+
+
+                    SqlCommand cmd = new SqlCommand();
+
+                    cmd.CommandType = System.Data.CommandType.Text;
+                    // create sql command
+                    cmd.CommandText = "INSERT INTO MFNUserTable (User_Email, User_FirstName, User_LastName, User_PasswordHash, User_PasswordSalt) OUTPUT INSERTED.User_Id values (@email, @fName, @lName, @password, @salt)";
+                    // add values to sql table
+                    cmd.Parameters.AddWithValue("@email", email);
+                    cmd.Parameters.AddWithValue("@fName", firstName);
+                    cmd.Parameters.AddWithValue("@lName", lastName);
+                    cmd.Parameters.AddWithValue("@password", hashedPassword);
+                    cmd.Parameters.AddWithValue("@salt", salt);
+                    cmd.Connection = clientDB;
+                    // try to execute query and save session object variables
+                    try
+                    {
+                        int userID = (int)cmd.ExecuteScalar();
+                        clientDB.Close();
+                        Session["userID"] = userID;
+
+                        Uobj.FirstName = firstName;
+                        Uobj.LastName = lastName;
+                        Uobj.Email = email;
+                        Uobj.UserId = userID;
+                        Session["UserInfo"] = Uobj;
+
+                        SendActivationEmail((int)Session["userID"]);
+                        message = "Activation email sent, please click the link in the email from us to finish registration.";
+
+                        ClientScript.RegisterStartupScript(GetType(), "alert", "alert('" + message + "');", true);
+
+                        // Response.Redirect("TrainerSignup.aspx");
+
+                    }
+                    catch
+                    {
+
+                        ErrorLabel2.ForeColor = System.Drawing.Color.Red;
+                        ErrorLabel2.Text = "Error writing to the database";
+                        ErrorLabel2.Visible = true;
+
+                    }
+
+
+
+                }
+
+            }
         }
     }
 }

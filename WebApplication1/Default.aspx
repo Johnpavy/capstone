@@ -272,13 +272,13 @@
 			    			</div>
 
 			    			<div class="form-group">
-			    				<input type="email" name="cemail" id="cemail" class="form-control input-sm" placeholder="Email Address"/>
+			    				<input type="email" name="cEmail" id="cemail" class="form-control input-sm" placeholder="Email Address"/>
 			    			</div>
 
 			    			<div class="row">
 			    				<div class="col-xs-6 col-sm-6 col-md-6">
 			    					<div class="form-group">
-			    						<input type="password" name="clpassword" id="clpassword" class="form-control input-sm" placeholder="Password"/>
+			    						<input type="password" name="CLpassword" id="clpassword" class="form-control input-sm" placeholder="Password"/>
 			    					</div>
 			    				</div>
 			    				<div class="col-xs-6 col-sm-6 col-md-6">
@@ -292,7 +292,7 @@
 			    		
 
 			    	</div>
-                  <asp:Label ID="Label1" runat="server" Text="Label" Visible="False"></asp:Label>
+                  <asp:Label ID="ErrorLabel2" runat="server" Text="Label" Visible="False"></asp:Label>
 	    		</div>
     		</div>
     	</div>
