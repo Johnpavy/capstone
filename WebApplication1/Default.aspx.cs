@@ -114,6 +114,7 @@ namespace WebApplication1
                             Tobj.ImagePath = sdr["Trainer_Image"].ToString();
                             Tobj.FirstName = sdr["Trainer_FirstName"].ToString();
                             Tobj.LastName = sdr["Trainer_LastName"].ToString();
+                            Tobj.Bio = sdr["Trainer_Bio"].ToString();
                         }
 
                         Session["TrainerInfo"] = Tobj;
@@ -448,6 +449,11 @@ namespace WebApplication1
             string saltAndPwd = String.Concat(pwd, salt);
             string hashedPwd = FormsAuthentication.HashPasswordForStoringInConfigFile(saltAndPwd, "sha1");
             return hashedPwd;
+        }
+
+        protected void cstartup_Click(object sender, EventArgs e)
+        {
+            //something
         }
     }
 }

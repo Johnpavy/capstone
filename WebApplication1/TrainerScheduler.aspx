@@ -150,7 +150,7 @@
     <form id="form1" runat="server">
        <div class="row centered-form">
            <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
-            <asp:Calendar ID="Calendar1" runat="server" BackColor="White" BorderColor="Black" BorderStyle="Solid" CellSpacing="1" Font-Names="Verdana" Font-Size="20pt" ForeColor="Black" Height="500px" NextPrevFormat="ShortMonth" Width="100%">
+            <asp:Calendar ID="Calendar1" runat="server" BackColor="White" BorderColor="Black" BorderStyle="Solid" CellSpacing="1" Font-Names="Verdana" Font-Size="20pt" ForeColor="Black" Height="500px" NextPrevFormat="ShortMonth" Width="100%" OnSelectionChanged="Calendar1_SelectionChanged" OnDayRender= "Calendar1_DayRender">
                 <DayHeaderStyle Font-Bold="True" Font-Size="8pt" ForeColor="#333333" Height="8pt" />
                 <DayStyle BackColor="#CCCCCC" />
                 <NextPrevStyle Font-Bold="True" Font-Size="8pt" ForeColor="White" />
@@ -186,9 +186,9 @@
 			    		<h3 class="panel-title">Confirm Client Session</h3>
 			 			</div>
 			 			<div class="panel-body">
-                             Selected Date: <asp:TextBox ID="Date" runat="server" width = "50%"></asp:TextBox><br />
+                             Selected Date: <asp:TextBox ID="DateTextBox" runat="server" width = "50%" ReadOnly="True"></asp:TextBox><br />
                              Selected Client: <asp:DropDownList ID="AppointmentsDropbx" runat="server"></asp:DropDownList><br />
-                             <asp:TextBox ID="SummaryTextBox" runat="server" TextMode="MultiLine" width = "100%" ></asp:TextBox><br />
+                             <asp:TextBox ID="SummaryTextBox" runat="server" TextMode="MultiLine" width = "100%" ReadOnly="True" ></asp:TextBox><br />
                              <table style="width: 100%;">
                                  <tr>
                                      <td><asp:LinkButton ID = "ConfirmAppointment" Class="btn btn-info btn-block" runat="server">Confirm Appointment</asp:LinkButton></td>
@@ -214,7 +214,7 @@
 			    		        <h3 class="panel-title">Manage Blocked Out Dates</h3>
 			 			        </div>
 			 			        <div class="panel-body">
-                                     Selected Date: <asp:TextBox ID="TextBox1" runat="server"> </asp:TextBox><br />
+                                     Selected Date: <asp:TextBox ID="TextBox1" runat="server" ReadOnly="True" Width="50%"></asp:TextBox><br />
                                      Start Time: <asp:DropDownList ID="DropDownList1" runat="server"></asp:DropDownList><br />
                                      End Time:   <asp:DropDownList ID="DropDownList2" runat="server"></asp:DropDownList><br />
                                      <table style="width: 100%;">
@@ -230,6 +230,10 @@
 			    			    </div>
 			    	</div>
                           <asp:Label ID="Label1" runat="server" Text="Label" Visible="False"></asp:Label>
+	    		    <br />
+                    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" SelectCommand="SELECT * FROM [MFNTrainerTable]"></asp:SqlDataSource>
+                    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" SelectCommand="SELECT * FROM [MFNUserTable]"></asp:SqlDataSource>
+                    <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" SelectCommand="SELECT * FROM [MFNCalendarTable]"></asp:SqlDataSource>
 	    		    </div>
               </div>
     </form>
