@@ -19,7 +19,7 @@ namespace WebApplication1
         TrainerObject Tobj = new TrainerObject();
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(!IsPostBack)
+           /* if(!IsPostBack)
             {
                 if (Session["TrainerInfo"] == null)
                 {
@@ -32,7 +32,7 @@ namespace WebApplication1
                
                 }
             }
-
+        */
 
         }
 

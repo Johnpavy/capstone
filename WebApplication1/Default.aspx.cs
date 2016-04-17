@@ -269,13 +269,14 @@ namespace WebApplication1
                 ErrorLabel.Visible = true;
                 trainerDb.Close();
             }
-            else if(!password.Any(c => char.IsSymbol(c)))
+
+/*            else if(!password.Any(c => char.IsSymbol(c)))
             {
                 ErrorLabel.ForeColor = System.Drawing.Color.Red;
-                ErrorLabel.Text = "Passwords must contain at least one special charcter.";
+                ErrorLabel.Text = "Passwords must contain at least one special character.";
                 ErrorLabel.Visible = true;
                 trainerDb.Close();
-            }
+            } */
             else if (!password.Equals(CPassword))
             {
                 ErrorLabel.ForeColor = System.Drawing.Color.Red;
@@ -300,6 +301,7 @@ namespace WebApplication1
                     checkCmd.Parameters.AddWithValue("@email", email);
                     userNameExists = (int)checkCmd.ExecuteScalar() > 0;
                 }
+                // if it exists, display error message
                 if(userNameExists)
                 {
                     ErrorLabel.ForeColor = System.Drawing.Color.Red;
