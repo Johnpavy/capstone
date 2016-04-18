@@ -15,6 +15,10 @@ namespace WebApplication1
     public partial class TrainerScheduler : System.Web.UI.Page
     {
         TrainerObject Tobj = new TrainerObject();
+        int blockedFullDaysCount = 0;
+        string[] blockedFullDays = new string[1000];
+        int blockedParitalDaysCount = 0;
+        string[] blockedPartialDays = new string[1000];
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -49,7 +53,49 @@ namespace WebApplication1
                 DateTextBox.Text = (string) Session["SelectedDate"];
             }
 
-            //Calendar1.SelectedDate = Calendar1.TodaysDate;
+            //Begin Loading Calendar with Blocked Dates Data
+
+            SqlConnection db = new SqlConnection(SqlDataSource5.ConnectionString);
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = System.Data.CommandType.Text;
+            cmd.Connection = db;
+
+            cmd.CommandText = "SELECT * FROM [MFNBlockedDatesTable] WHERE Trainer_Id = @id ORDER BY BlockedDate_Date";
+            cmd.Parameters.AddWithValue("@id", Tobj.TrainerId);
+
+            try
+            {
+                db.Open();
+                SqlDataReader sdr = cmd.ExecuteReader();
+
+                while(sdr.Read())
+                {
+                    DateTime dt = Convert.ToDateTime(sdr["BlockedDate_Date"].ToString());
+                    string temp = dt.ToShortDateString();
+
+                    //reads bit type from sql db
+                    bool isDateFullyBlocked = sdr.GetBoolean(sdr.GetOrdinal("BlockedDate_IsFullDay"));
+
+                    if (isDateFullyBlocked)
+                    {
+                        blockedFullDays[blockedFullDaysCount] = temp;
+                        blockedFullDaysCount++;
+                    }
+                    else
+                    {
+                        blockedPartialDays[blockedParitalDaysCount] = temp;
+                        blockedParitalDaysCount++;
+                    }
+                }
+            }
+            catch
+            {
+                Response.Write(@"<script language='javascript'>alert('Error Loading Blocked Dates');</script>");
+            }
+            finally
+            {
+                db.Close();
+            }
 
         }
 
@@ -63,23 +109,34 @@ namespace WebApplication1
 
         protected void Calendar1_DayRender(object sender, DayRenderEventArgs e)
         { 
-            //If Date is listed on date blocked table, then mark as slate gray
-            //If Date is completly blocked, then mark gray
-            if(e.Day.Date == Convert.ToDateTime("4/12/2016"))
+
+            //PartialDay Color
+            for (int x = 0; x < blockedParitalDaysCount; x++)
             {
-                e.Cell.BackColor = System.Drawing.Color.SlateGray;
+                if (e.Day.Date == Convert.ToDateTime(blockedPartialDays[x]))
+                {
+                    e.Cell.BackColor = System.Drawing.Color.DimGray;
+                }
             }
 
-            if (e.Day.Date == Convert.ToDateTime("4/13/2016"))
+            //FullDay Color
+            for (int x = 0; x < blockedFullDaysCount; x++)
             {
-                e.Cell.BackColor = System.Drawing.Color.Gray;
+                if (e.Day.Date == Convert.ToDateTime(blockedFullDays[x]))
+                {
+                    e.Cell.BackColor = System.Drawing.Color.Silver;
+                }
             }
+
+
         }
 
         protected void BackToProfile_Click(object sender, EventArgs e)
         {
             Response.Redirect("WebForm2.aspx");
         }
+
+        //Currently Brokem :(
 
         protected void PopulateSummaryTextBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -730,39 +787,48 @@ namespace WebApplication1
         }
 
         //BlockOutSelectedTimes
-        protected void LinkButton2_Click(object sender, EventArgs e)
+        protected void BlockOutSelectedTimesBtn_Click(object sender, EventArgs e)
         {
-            SqlConnection db2 = new SqlConnection(SqlDataSource5.ConnectionString);
-            SqlCommand cmd2 = new SqlCommand();
-            cmd2.CommandType = System.Data.CommandType.Text;
-            cmd2.Connection = db2;
 
-            cmd2.CommandText = "INSERT INTO [MFNBlockedDatesTable] (BlockedDate_Date, Trainer_Id, BlockedDate_StartTime, BlockedDate_EndTime, BlockedDate_IsFullDay) VALUES (@date, @id, @startTime, @endTime, @fullDay)";
-            cmd2.Parameters.AddWithValue("@date", BlockedOutSelctedDateTxtBox.Text);
-            cmd2.Parameters.AddWithValue("@id", Tobj.TrainerId);
-            cmd2.Parameters.AddWithValue("@startTime", "12:00 AM");
-            cmd2.Parameters.AddWithValue("@endTime", "11:45 PM");
-            cmd2.Parameters.AddWithValue("@fullDay", true);
-
-
-            try
+            if(GetValidTime(StartTimeDrpList.Text, EndTimeDrpList.Text))
             {
-                db2.Open();
-                cmd2.ExecuteNonQuery();
-                Response.Write(@"<script language='javascript'>alert('" + BlockedOutSelctedDateTxtBox.Text + " has been selected as unavaliable.');</script>");
+                SqlConnection db2 = new SqlConnection(SqlDataSource5.ConnectionString);
+                SqlCommand cmd2 = new SqlCommand();
+                cmd2.CommandType = System.Data.CommandType.Text;
+                cmd2.Connection = db2;
+
+                cmd2.CommandText = "INSERT INTO [MFNBlockedDatesTable] (BlockedDate_Date, Trainer_Id, BlockedDate_StartTime, BlockedDate_EndTime, BlockedDate_IsFullDay) VALUES (@date, @id, @startTime, @endTime, @fullDay)";
+                cmd2.Parameters.AddWithValue("@date", BlockedOutSelctedDateTxtBox.Text);
+                cmd2.Parameters.AddWithValue("@id", Tobj.TrainerId);
+                cmd2.Parameters.AddWithValue("@startTime", StartTimeDrpList.Text);
+                cmd2.Parameters.AddWithValue("@endTime", EndTimeDrpList.Text);
+                cmd2.Parameters.AddWithValue("@fullDay", false);
+
+
+                try
+                {
+                    db2.Open();
+                    cmd2.ExecuteNonQuery();
+                    Response.Write(@"<script language='javascript'>alert('" + BlockedOutSelctedDateTxtBox.Text + " from "+ StartTimeDrpList.Text +"to"+ EndTimeDrpList.Text + "has been selected as unavaliable.');</script>");
+                }
+                catch
+                {
+                    Response.Write(@"<script language='javascript'>alert('Error Writing to Database!');</script>");
+                }
+                finally
+                {
+                    db2.Close();
+                }
             }
-            catch
+            else
             {
-                Response.Write(@"<script language='javascript'>alert('Error Writing to Database!');</script>");
-            }
-            finally
-            {
-                db2.Close();
+
             }
 
         }
 
-        protected void LinkButton3_Click(object sender, EventArgs e)
+        //BlockOutFullDay
+        protected void BlockOutEntireDayBtn_Click(object sender, EventArgs e)
         {
             bool SelectedFullDate = false;
             int count = 0;
@@ -772,9 +838,10 @@ namespace WebApplication1
             cmd.CommandType = System.Data.CommandType.Text;
             cmd.Connection = db;
 
-            cmd.CommandText = "SELECT COUNT(*) FROM [MFNBlockedDatesTable] WHERE BlockedDate_Date = @date AND BlockedDate_IsFullDay = @fullDay";
+            cmd.CommandText = "SELECT COUNT(*) FROM [MFNBlockedDatesTable] WHERE Trainer_Id = @id AND BlockedDate_Date = @date AND BlockedDate_IsFullDay = @fullDay";
+            cmd.Parameters.AddWithValue("@id", Tobj.TrainerId);
             cmd.Parameters.AddWithValue("@date", BlockedOutSelctedDateTxtBox.Text);
-            cmd.Parameters.AddWithValue("@fullDay", 1);
+            cmd.Parameters.AddWithValue("@fullDay", true);
 
             try
             {
@@ -790,23 +857,25 @@ namespace WebApplication1
                 db.Close();
             }
 
+
+
             if (count < 0)
             {
-            Response.Write(@"<script language='javascript'>alert('Error Connecting to Database!');</script>");
+                Response.Write(@"<script language='javascript'>alert('Error Connecting to Database!');</script>");
+                SelectedFullDate = true; //to prevent altering the db.
             }
             else if (count > 0)
             {
-                SelectedFullDate = false;
-            }
-            else
-            {
-            SelectedFullDate = true;
+                SelectedFullDate = true;
             }
 
 
             if (SelectedFullDate)
             {
-                Response.Write(@"<script language='javascript'>alert('" + BlockedOutSelctedDateTxtBox.Text + " has already been selected as unavaliable!');</script>"); 
+                if (count != -1)
+                {
+                   Response.Write(@"<script language='javascript'>alert('" + BlockedOutSelctedDateTxtBox.Text + " has already been selected as unavaliable!');</script>");
+                }
             }   
             else
             {
@@ -826,7 +895,7 @@ namespace WebApplication1
                 {
                     db2.Open();
                     cmd2.ExecuteNonQuery();
-                    Response.Write(@"<script language='javascript'>alert('" + BlockedOutSelctedDateTxtBox.Text + " has been selected as unavaliable.');</script>");
+                    Response.Write(@"<script language='javascript'>alert('" + BlockedOutSelctedDateTxtBox.Text + " has been marked as unavaliable.');</script>");
                 }
                 catch
                 {

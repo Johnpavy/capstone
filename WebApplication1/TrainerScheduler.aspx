@@ -156,12 +156,12 @@
            <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
             <asp:Calendar ID="Calendar1" runat="server" BackColor="White" BorderColor="Black" BorderStyle="Solid" CellSpacing="1" Font-Names="Verdana" Font-Size="20pt" ForeColor="Black" Height="500px" NextPrevFormat="ShortMonth" Width="100%" OnSelectionChanged="Calendar1_SelectionChanged" OnDayRender= "Calendar1_DayRender">
                 <DayHeaderStyle Font-Bold="True" Font-Size="8pt" ForeColor="#333333" Height="8pt" />
-                <DayStyle BackColor="#CCCCCC" />
+                <DayStyle BackColor="#F5FFFA" />
                 <NextPrevStyle Font-Bold="True" Font-Size="8pt" ForeColor="White" />
                 <OtherMonthDayStyle ForeColor="#999999" />
-                <SelectedDayStyle BackColor="#333399" ForeColor="White" />
-                <TitleStyle BackColor="#333399" BorderStyle="Solid" Font-Bold="True" Font-Size="12pt" ForeColor="White" Height="12pt" />
-                <TodayDayStyle BackColor="#999999" ForeColor="White" />
+                <SelectedDayStyle BackColor="#4682B4" ForeColor="White" />
+                <TitleStyle BackColor="#058EBC" BorderStyle="Solid" Font-Bold="True" Font-Size="12pt" ForeColor="White" Height="12pt" />
+                <TodayDayStyle BackColor="#058EBC" ForeColor="Black" />
                 </asp:Calendar>
 
                 <DayPilot:DayPilotScheduler ID="DayPilotScheduler1" runat="server"></DayPilot:DayPilotScheduler>
@@ -422,8 +422,8 @@
                                     </asp:DropDownList><br />
                                      <table style="width: 100%;">
                                         <tr>
-                                            <td><asp:LinkButton ID = "LinkButton2" Class="btn btn-info btn-block" runat="server" OnClick="LinkButton2_Click">Block Out Slected Times</asp:LinkButton></td>
-                                            <td><asp:LinkButton ID = "LinkButton3" Class="btn btn-info btn-block" runat="server" OnClick="LinkButton3_Click">Block Out Entire Day</asp:LinkButton></td>
+                                            <td><asp:LinkButton ID = "BlockOutSelectedTimesBtn" Class="btn btn-info btn-block" runat="server" OnClick="BlockOutSelectedTimesBtn_Click">Block Out Slected Times</asp:LinkButton></td>
+                                            <td><asp:LinkButton ID = "BlockOutEntireDayBtn" Class="btn btn-info btn-block" runat="server" OnClick="BlockOutEntireDayBtn_Click">Block Out Entire Day</asp:LinkButton></td>
                                         </tr>
                                         <tr>
                                             <td><asp:LinkButton ID = "LinkButton4" Class="btn btn-info btn-block" runat="server">Reopen Selected Times</asp:LinkButton></td>

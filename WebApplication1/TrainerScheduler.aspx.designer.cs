@@ -202,22 +202,22 @@ namespace WebApplication1 {
         protected global::System.Web.UI.WebControls.DropDownList EndTimeDrpList;
         
         /// <summary>
-        /// LinkButton2 control.
+        /// BlockOutSelectedTimesBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton2;
+        protected global::System.Web.UI.WebControls.LinkButton BlockOutSelectedTimesBtn;
         
         /// <summary>
-        /// LinkButton3 control.
+        /// BlockOutEntireDayBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton3;
+        protected global::System.Web.UI.WebControls.LinkButton BlockOutEntireDayBtn;
         
         /// <summary>
         /// LinkButton4 control.
