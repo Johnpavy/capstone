@@ -36,6 +36,18 @@ namespace WebApplication1
                 specialty.InnerHtml = Tobj.Speciality;
                 UserNameLbl.Text = Tobj.FirstName + " " + Tobj.LastName + " ";
 
+                //section to add client rates
+                if (Tobj.AdditionalPersonRate == null || Tobj.IndividualRate == null)
+                {
+                    IndividualRatesTxtBox.Text = "0.00";
+                    AdditionalPersonRateTxtBox.Text = "0.00";
+                }
+                else
+                {
+                    IndividualRatesTxtBox.Text = Tobj.IndividualRate;
+                    AdditionalPersonRateTxtBox.Text = Tobj.AdditionalPersonRate;
+                }
+
                 //changes default profile pic to user uploaded one
                 if (Tobj.ImagePath != "")
                 {
@@ -93,8 +105,56 @@ namespace WebApplication1
 
         }
 
+        //depricated
         protected void BioTextBox_TextChanged(object sender, EventArgs e)
         {
+                //does nothing
+        }
+
+        protected void ComfirmUpdateRatesButton_Click(object sender, EventArgs e)
+        {
+            string newIndividualRate = NewIndividualRateTxtBox.Text;
+            string newAdditonalRate = NewAdditionalPersonRateTxtBox.Text;
+
+            if(newIndividualRate == "")
+            {
+                newIndividualRate = IndividualRatesTxtBox.Text;
+
+            }
+           
+            if(newAdditonalRate == "")
+            {
+                newAdditonalRate = AdditionalPersonRateTxtBox.Text;
+            }
+
+
+            SqlConnection db = new SqlConnection(SqlDataSource1.ConnectionString);
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = System.Data.CommandType.Text;
+            cmd.Connection = db;
+
+            cmd.CommandText = "UPDATE [MFNTrainerTable] SET Trainer_IndividualRate = @ind AND Trainer_AdditionalPersonRate = @add WHERE Trainer_Id = @id";
+
+            cmd.Parameters.AddWithValue("@id", Tobj.TrainerId);
+            cmd.Parameters.AddWithValue("@ind", newIndividualRate);
+            cmd.Parameters.AddWithValue("@add", newAdditonalRate);
+
+
+            try
+            {
+                db.Open();
+                cmd.ExecuteNonQuery();
+            }
+            catch
+            {
+               //no change
+            }
+            finally
+            {
+                db.Close();
+            }
+
+            Response.Redirect("WebForm2.aspx");
 
         }
     }

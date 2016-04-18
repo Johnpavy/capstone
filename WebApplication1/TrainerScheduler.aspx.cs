@@ -859,17 +859,18 @@ namespace WebApplication1
         //BlockOutSelectedTimes
         protected void BlockOutSelectedTimesBtn_Click(object sender, EventArgs e)
         {
-            bool SelectedFullDate = false;
             int count = 0;
+
 
             if (GetValidTime(StartTimeDrpList.Text, EndTimeDrpList.Text))
             {
+
                 SqlConnection db = new SqlConnection(SqlDataSource5.ConnectionString);
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd.Connection = db;
 
-                cmd.CommandText = "SELECT COUNT(*) FROM [MFNBlockedDatesTable] WHERE Trainer_Id = @id AND BlockedDate_Date = @date AND BlockedDate_IsFullDay = @fullDay AND BlockedDate_StartTime = @startTime AND BlockedDate_EndTime";
+                cmd.CommandText = "SELECT COUNT(*) FROM [MFNBlockedDatesTable] WHERE Trainer_Id = @id AND BlockedDate_Date = @date AND BlockedDate_IsFullDay = @fullDay AND BlockedDate_StartTime = @startTime AND BlockedDate_EndTime = @endTime";
                 cmd.Parameters.AddWithValue("@id", Tobj.TrainerId);
                 cmd.Parameters.AddWithValue("@date", BlockedOutSelctedDateTxtBox.Text);
                 cmd.Parameters.AddWithValue("@startTime", StartTimeDrpList.Text);
@@ -890,42 +891,47 @@ namespace WebApplication1
                     db.Close();
                 }
 
-            }
-
-            if(count < 0)
-            {
-
-            }
-
-            if (GetValidTime(StartTimeDrpList.Text, EndTimeDrpList.Text))
-            {
-                SqlConnection db2 = new SqlConnection(SqlDataSource5.ConnectionString);
-                SqlCommand cmd2 = new SqlCommand();
-                cmd2.CommandType = System.Data.CommandType.Text;
-                cmd2.Connection = db2;
-
-                cmd2.CommandText = "INSERT INTO [MFNBlockedDatesTable] (BlockedDate_Date, Trainer_Id, BlockedDate_StartTime, BlockedDate_EndTime, BlockedDate_IsFullDay) VALUES (@date, @id, @startTime, @endTime, @fullDay)";
-                cmd2.Parameters.AddWithValue("@date", BlockedOutSelctedDateTxtBox.Text);
-                cmd2.Parameters.AddWithValue("@id", Tobj.TrainerId);
-                cmd2.Parameters.AddWithValue("@startTime", StartTimeDrpList.Text);
-                cmd2.Parameters.AddWithValue("@endTime", EndTimeDrpList.Text);
-                cmd2.Parameters.AddWithValue("@fullDay", false);
-
-
-                try
-                {
-                    db2.Open();
-                    cmd2.ExecuteNonQuery();
-                    Response.Write(@"<script language='javascript'>alert('" + BlockedOutSelctedDateTxtBox.Text + " from "+ StartTimeDrpList.Text +"to"+ EndTimeDrpList.Text + "has been selected as unavaliable.');</script>");
-                }
-                catch
+                if(count < 0)
                 {
                     Response.Write(@"<script language='javascript'>alert('Error Writing to Database!');</script>");
                 }
-                finally
+                else if(count > 0)
                 {
-                    db2.Close();
+                    Response.Write(@"<script language='javascript'>alert('This entry already exists!');</script>");
                 }
+                else
+                {
+                    SqlConnection db2 = new SqlConnection(SqlDataSource5.ConnectionString);
+                    SqlCommand cmd2 = new SqlCommand();
+                    cmd2.CommandType = System.Data.CommandType.Text;
+                    cmd2.Connection = db2;
+
+                    cmd2.CommandText = "INSERT INTO [MFNBlockedDatesTable] (BlockedDate_Date, Trainer_Id, BlockedDate_StartTime, BlockedDate_EndTime, BlockedDate_IsFullDay) VALUES (@date, @id, @startTime, @endTime, @fullDay)";
+                    cmd2.Parameters.AddWithValue("@date", BlockedOutSelctedDateTxtBox.Text);
+                    cmd2.Parameters.AddWithValue("@id", Tobj.TrainerId);
+                    cmd2.Parameters.AddWithValue("@startTime", StartTimeDrpList.Text);
+                    cmd2.Parameters.AddWithValue("@endTime", EndTimeDrpList.Text);
+                    cmd2.Parameters.AddWithValue("@fullDay", false);
+
+
+                    try
+                    {
+                        db2.Open();
+                        cmd2.ExecuteNonQuery();
+                        Response.Write(@"<script language='javascript'>alert('" + BlockedOutSelctedDateTxtBox.Text + " from " + StartTimeDrpList.Text + "to" + EndTimeDrpList.Text + "has been selected as unavaliable.');</script>");
+                    }
+                    catch
+                    {
+                        Response.Write(@"<script language='javascript'>alert('Error Writing to Database!');</script>");
+                    }
+                    finally
+                    {
+                        db2.Close();
+                    }
+
+                }
+
+                
             }
             else
             {
@@ -1071,7 +1077,7 @@ namespace WebApplication1
                 {
                     db2.Open();
                     cmd2.ExecuteNonQuery();
-                    Response.Write(@"<script language='javascript'>alert('" + BlockedOutSelctedDateTxtBox.Text + " from " + StartTimeDrpList.Text + "to" + EndTimeDrpList.Text + "has been selected as unavaliable.');</script>");
+                    Response.Write(@"<script language='javascript'>alert('" + BlockedOutSelctedDateTxtBox.Text + " from " + StartTimeDrpList.Text + "to" + EndTimeDrpList.Text + "has been reopened.');</script>");
                 }
                 catch
                 {

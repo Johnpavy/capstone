@@ -112,6 +112,24 @@ namespace WebApplication1 {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl specialty;
         
         /// <summary>
+        /// IndividualRatesTxtBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox IndividualRatesTxtBox;
+        
+        /// <summary>
+        /// AdditionalPersonRateTxtBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox AdditionalPersonRateTxtBox;
+        
+        /// <summary>
         /// myModal control.
         /// </summary>
         /// <remarks>
@@ -137,5 +155,41 @@ namespace WebApplication1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton TempUpdate;
+        
+        /// <summary>
+        /// myModal2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl myModal2;
+        
+        /// <summary>
+        /// NewIndividualRateTxtBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox NewIndividualRateTxtBox;
+        
+        /// <summary>
+        /// NewAdditionalPersonRateTxtBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox NewAdditionalPersonRateTxtBox;
+        
+        /// <summary>
+        /// UpdateRatesBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton UpdateRatesBtn;
     }
 }
