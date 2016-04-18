@@ -993,7 +993,7 @@ namespace WebApplication1
         protected void ManageBlackedOutTimes_Click(object sender, EventArgs e)
         {
             OptionsDiv.Visible = false;
-            ManageAppointmentDiv.Visible = true;
+            ManageBlackedOutTimes.Visible = true;
         }
 
         protected void CancelAppointmentManagement_Click(object sender, EventArgs e)
@@ -1005,7 +1005,7 @@ namespace WebApplication1
         protected void CancelManageBlockedOutDate_Click(object sender, EventArgs e)
         {
             OptionsDiv.Visible = true;
-            ManageAppointmentDiv.Visible = false;
+            ManageBlackedOutTimes.Visible = false;
         }
     }
 }

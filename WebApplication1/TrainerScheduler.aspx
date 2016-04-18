@@ -207,7 +207,7 @@
                                  </tr>
                                  <tr>
                                      <td><asp:LinkButton ID = "RescheduleAppointment" Class="btn btn-info btn-block" runat="server">Reschedule Appointment</asp:LinkButton></td>
-                                     <td> <asp:LinkButton ID = "CancelAppointmentManagement" Class="btn btn-info btn-block" runat="server" OnClick="CancelAppointmentManagement_Click">Cancel Appointment Management</asp:LinkButton></td>
+                                     <td> <asp:LinkButton ID = "CancelAppointmentManagement" Class="btn btn-info btn-block" Style="background-color:green"  runat="server" OnClick="CancelAppointmentManagement_Click">Cancel Appointment Management</asp:LinkButton></td>
                                  </tr>
                              </table>
 			    		
@@ -430,7 +430,7 @@
                                             <td> <asp:LinkButton ID = "ReopenEntireDayBtn" Class="btn btn-info btn-block" runat="server" OnClick="ReopenEntireDayBtn_Click">Reopen Entire Day</asp:LinkButton></td>
                                         </tr>
                                         <tr>
-                                            <td> <asp:LinkButton ID = "CancelManageBlockedOutDate" Class="btn btn-info btn-block" runat="server" OnClick="CancelManageBlockedOutDate_Click" >Cancel Manage Blocked Out Date</asp:LinkButton></td>
+                                            <td> <asp:LinkButton ID = "CancelManageBlockedOutDate" Class="btn btn-info btn-block" Style="background-color:green" runat="server" OnClick="CancelManageBlockedOutDate_Click" >Cancel Manage Blocked Out Date</asp:LinkButton></td>
                                         </tr>
                                     </table>
 			    			    </div>
