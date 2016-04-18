@@ -44,6 +44,7 @@ namespace WebApplication1
             String bio = Request.Form["bio"];
             String gender = DropDownList3.SelectedValue;
             String pnumber = Request.Form["pnumber"];
+
             adrs.Address = trainerAddress;
             adrs.GeoCode();
             int trainerID = (int)Session["trainerID"];
@@ -56,6 +57,7 @@ namespace WebApplication1
                 Label1.Text = "All fields required";
                 Label1.Visible = true;
             }
+            //else if()
             else
             {
            //     int trainerID = Tobj.TrainerId;

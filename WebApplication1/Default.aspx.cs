@@ -243,6 +243,21 @@ namespace WebApplication1
                 ErrorLabel.Text = "All fields required.";
                 ErrorLabel.Visible = true;
             }
+            // Check to see if names contain numbers
+            else if (firstName.Any(c => char.IsDigit(c))) //checks if string does not contain a digit
+            {
+                ErrorLabel.ForeColor = System.Drawing.Color.Red;
+                ErrorLabel.Text = "Names cannot contain numbers.";
+                ErrorLabel.Visible = true;
+                trainerDb.Close();
+            }
+            else if (lastName.Any(c => char.IsDigit(c))) //checks if string does not contain a digit
+            {
+                ErrorLabel.ForeColor = System.Drawing.Color.Red;
+                ErrorLabel.Text = "Names cannot contain numbers.";
+                ErrorLabel.Visible = true;
+                trainerDb.Close();
+            }
             else if (password.Length < 8)
             {
                 ErrorLabel.ForeColor = System.Drawing.Color.Red;
@@ -467,6 +482,9 @@ namespace WebApplication1
             String password = Request.Form["CLpassword"];
             String CPassword = Request.Form["CCpassword"];
             string message = string.Empty;
+            int intCheck, intCheck2;
+            bool containsInt = int.TryParse(firstName, out intCheck);
+            bool containsInt2 = int.TryParse(lastName, out intCheck2);
 
             bool clientNameExists;
 
@@ -477,6 +495,21 @@ namespace WebApplication1
                 ErrorLabel2.ForeColor = System.Drawing.Color.Red;
                 ErrorLabel2.Text = "All fields required.";
                 ErrorLabel2.Visible = true;
+            }
+            // if name contains numbers display this error
+            else if (firstName.Any(c => char.IsDigit(c))) //checks if string does not contain a digit
+            {
+                ErrorLabel.ForeColor = System.Drawing.Color.Red;
+                ErrorLabel.Text = "Names cannot contain numbers.";
+                ErrorLabel.Visible = true;
+                clientDB.Close();
+            }
+            else if (lastName.Any(c => char.IsDigit(c))) //checks if string does not contain a digit
+            {
+                ErrorLabel.ForeColor = System.Drawing.Color.Red;
+                ErrorLabel.Text = "Names cannot contain numbers.";
+                ErrorLabel.Visible = true;
+                clientDB.Close();
             }
             else if (password.Length < 8)
             {
