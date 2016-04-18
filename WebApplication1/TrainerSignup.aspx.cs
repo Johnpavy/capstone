@@ -44,14 +44,16 @@ namespace WebApplication1
             String bio = Request.Form["bio"];
             String gender = DropDownList3.SelectedValue;
             String pnumber = Request.Form["pnumber"];
-
+            String height = DropDownList1.SelectedValue + "'" + DropDownList2.SelectedValue + "\"";
+            String weight = Request.Form["weight"];
+            String specialty = DropDownList5.SelectedValue;
             adrs.Address = trainerAddress;
             adrs.GeoCode();
             int trainerID = (int)Session["trainerID"];
             String dBLat = adrs.Latitude;
             String dBLng = adrs.Longitude;
             // Check to make sure all fields are filled out
-            if(trainerAddress.Equals("") || bio.Equals("") || gender.Equals("0") || pnumber.Equals(""))
+            if(trainerAddress.Equals("") || bio.Equals("") || gender.Equals("0") || pnumber.Equals("") || height.Equals("0'0\"") || specialty.Equals("0"))
             {
                 Label1.ForeColor = System.Drawing.Color.Red;
                 Label1.Text = "All fields required";
@@ -60,7 +62,11 @@ namespace WebApplication1
 
             else
             {
-
+                // add info to session object
+                Tobj.CopyTrainerObject((TrainerObject)Session["TrainerInfo"]);
+                Tobj.Speciality = specialty;
+                Tobj.Bio = bio;
+                Session["TrainerInfo"] = Tobj;
                 SqlConnection trainerLocDB = new SqlConnection(SqlDataSource1.ConnectionString);
                 SqlConnection trainerDB = new SqlConnection(SqlDataSource2.ConnectionString);
                 // sql command to insert address lat and long into the location table
@@ -70,7 +76,7 @@ namespace WebApplication1
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd2.CommandType = System.Data.CommandType.Text;
                 cmd.CommandText = "insert into MFNTrainerLocTable ([TrainerLoc_Lat], [TrainerLoc_Long], [TrainerLoc_StreetAddress], [Trainer_Id], [TrainerLoc_Description]) values (@lat, @lng, @home, @id, @description)";
-                cmd2.CommandText = "UPDATE MFNTrainerTable SET Trainer_HomeAddress = @home, Trainer_Bio = @bio, Trainer_Gender = @gender, Trainer_Phone = @phone WHERE Trainer_Id = @id"; 
+                cmd2.CommandText = "UPDATE MFNTrainerTable SET Trainer_HomeAddress = @home, Trainer_Bio = @bio, Trainer_Gender = @gender, Trainer_Phone = @phone, Trainer_Specialty = @specialty, Trainer_Weight = @weight, Trainer_Height = @height WHERE Trainer_Id = @id"; 
                 // add values to location table
                 cmd.Parameters.AddWithValue("@lat", dBLat);
                 cmd.Parameters.AddWithValue("@lng", dBLng);
@@ -84,6 +90,10 @@ namespace WebApplication1
                 cmd2.Parameters.AddWithValue("@gender", gender);
                 cmd2.Parameters.AddWithValue("@id", trainerID);
                 cmd2.Parameters.AddWithValue("@phone", pnumber);
+                cmd2.Parameters.AddWithValue("@specialty", specialty);
+                cmd2.Parameters.AddWithValue("@weight", weight);
+                cmd2.Parameters.AddWithValue("@height", height);
+
 
                 cmd.Connection = trainerLocDB;
                 cmd2.Connection = trainerDB;

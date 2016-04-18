@@ -17,7 +17,8 @@ namespace WebApplication1
         private string middleName;
         private string lastName;
         private string homeAddress;
-        private string bio;
+        private string equipment;
+        private string trainingPref;
 
 
         public UserObject()
@@ -32,7 +33,8 @@ namespace WebApplication1
             lastName = "";
             phone = "";
             homeAddress = "";
-            bio = "";
+            equipment = "";
+            trainingPref = "";
 
         }
 
@@ -90,16 +92,22 @@ namespace WebApplication1
             set { homeAddress = value; }
         }
 
-        public string Bio
+        public string Equipment
         {
-            get { return bio; }
-            set { bio = value; }
+            get { return equipment; }
+            set { equipment = value; }
         }
 
         public string Phone
         {
             get { return phone; }
             set { phone = value; }
+        }
+
+        public string TrainingPref
+        {
+            get { return trainingPref; }
+            set { trainingPref = value; }
         }
 
         public void CopyUserObject(UserObject objToCopy)
@@ -114,7 +122,8 @@ namespace WebApplication1
             this.LastName = objToCopy.LastName;
             this.Phone = objToCopy.Phone;
             this.HomeAddress = objToCopy.HomeAddress;
-            this.Bio = objToCopy.Bio;
+            this.Equipment = objToCopy.Equipment;
+            this.TrainingPref = objToCopy.TrainingPref;
         }
     }
 }

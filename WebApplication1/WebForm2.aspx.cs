@@ -37,16 +37,16 @@ namespace WebApplication1
                 UserNameLbl.Text = Tobj.FirstName + " " + Tobj.LastName + " ";
 
                 //section to add client rates
-              //  if (Tobj.AdditionalPersonRate == null || Tobj.IndividualRate == null)
-              //  {
-              //      IndividualRatesTxtBox.Text = "0.00";
-              //      AdditionalPersonRateTxtBox.Text = "0.00";
-              //  }
-              //  else
-               // {
+                if (Tobj.AdditionalPersonRate == null || Tobj.IndividualRate == null)
+                {
+                    IndividualRatesTxtBox.Text = "0.00";
+                    AdditionalPersonRateTxtBox.Text = "0.00";
+               }
+                  else
+               {
                     IndividualRatesTxtBox.Text = Tobj.IndividualRate;
                     AdditionalPersonRateTxtBox.Text = Tobj.AdditionalPersonRate;
-               // }
+                }
 
                 //changes default profile pic to user uploaded one
                 if (Tobj.ImagePath != "")

@@ -63,6 +63,12 @@ namespace WebApplication1
             else
             {
 
+                // add info to session object
+                Uobj.CopyUserObject((UserObject)Session["UserInfo"]);
+                Uobj.TrainingPref = interests;
+                Uobj.Equipment = equipment;
+                Session["UserInfo"] = Uobj;
+
                 SqlConnection userLocDB = new SqlConnection(SqlDataSource2.ConnectionString);
                 SqlConnection userDB = new SqlConnection(SqlDataSource1.ConnectionString);
                 // sql command to insert address lat and long into the location table
@@ -79,6 +85,7 @@ namespace WebApplication1
                 cmd.Parameters.AddWithValue("@home", clientAddress);
                 cmd.Parameters.AddWithValue("@id", userID);
                 cmd.Parameters.AddWithValue("@description", "Home");
+                
                 //add values to trainer table
 
                 cmd2.Parameters.AddWithValue("@home", clientAddress);
@@ -87,6 +94,10 @@ namespace WebApplication1
                 cmd2.Parameters.AddWithValue("@phone", pnumber);
                 cmd2.Parameters.AddWithValue("@prefs", interests);
                 cmd2.Parameters.AddWithValue("@equipment", equipment);
+
+                //Add values to session object
+                Uobj.TrainingPref = interests;
+                Uobj.Equipment = equipment;
 
                 cmd.Connection = userLocDB;
                 cmd2.Connection = userDB;
