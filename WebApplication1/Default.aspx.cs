@@ -207,7 +207,8 @@ namespace WebApplication1
         // deprecated, not used in newest iteration can probably be deleted
         protected void signup_Click(object sender, EventArgs e)
         {
-            Response.Redirect("TrainerSignup.aspx");
+            TrainerSignupPanel.Visible = true;
+            //Response.Redirect("TrainerSignup.aspx");
         }
 
         protected void about_Click(object sender, EventArgs e)
@@ -217,7 +218,7 @@ namespace WebApplication1
         // deprecated, not used in newest iteration can probably be deleted
         protected void ClientSignup_Click(object sender, EventArgs e)
         {
-
+            ClientSignupPanel.Visible = true;
         }
 
         protected void getStarted_Click(object sender, EventArgs e)
@@ -233,6 +234,8 @@ namespace WebApplication1
             String password = Request.Form["password"];
             String CPassword = Request.Form["Cpassword"];
             string message = string.Empty;
+            // If true, trainer confirmation email is sent if false, client email confirmation is sent
+            bool isTrainer = true;
 
             bool userNameExists;
             SqlConnection trainerDb = new SqlConnection(SqlDataSource1.ConnectionString);
@@ -242,21 +245,6 @@ namespace WebApplication1
                 ErrorLabel.ForeColor = System.Drawing.Color.Red;
                 ErrorLabel.Text = "All fields required.";
                 ErrorLabel.Visible = true;
-            }
-            // Check to see if names contain numbers
-            else if (firstName.Any(c => char.IsDigit(c))) //checks if string does not contain a digit
-            {
-                ErrorLabel.ForeColor = System.Drawing.Color.Red;
-                ErrorLabel.Text = "Names cannot contain numbers.";
-                ErrorLabel.Visible = true;
-                trainerDb.Close();
-            }
-            else if (lastName.Any(c => char.IsDigit(c))) //checks if string does not contain a digit
-            {
-                ErrorLabel.ForeColor = System.Drawing.Color.Red;
-                ErrorLabel.Text = "Names cannot contain numbers.";
-                ErrorLabel.Visible = true;
-                trainerDb.Close();
             }
             else if (password.Length < 8)
             {
@@ -359,11 +347,11 @@ namespace WebApplication1
                         Tobj.TrainerId = trainerID;
                         Session["TrainerInfo"] = Tobj;
 
-                        SendActivationEmail((int)Session["trainerID"], email, firstName);
+                        SendActivationEmail((int)Session["trainerID"], email, firstName, isTrainer);
                         message = "Activation email sent, please click the link in the email from us to finish registration.";
 
                         ClientScript.RegisterStartupScript(GetType(), "alert", "alert('" + message + "');", true);
-
+                        TrainerSignupPanel.Visible = false;
                         // Response.Redirect("TrainerSignup.aspx");
 
                     }
@@ -401,9 +389,9 @@ namespace WebApplication1
 
         // From http://www.aspsnippets.com/Articles/Send-user-Confirmation-email-after-Registration-with-Activation-Link-in-ASPNET.aspx
 
-        private void SendActivationEmail(int userId, string email, string name)
+        private void SendActivationEmail(int userId, string email, string name, Boolean isTrainer)
         {
-            String firstName = Request.Form["FName"];
+           // String firstName = Request.Form["FName"];
            // String email = Request.Form["email"];
             string activationCode = Guid.NewGuid().ToString();
             SqlCommand cmd2 = new SqlCommand();
@@ -433,13 +421,21 @@ namespace WebApplication1
             using (MailMessage mm = new MailMessage("MobileFitnessNetwork@gmail.com", email))
             {
                 mm.Subject = "Account Activation";
-                string body = "Hello " + firstName + ",";
+                string body = "Hello " + name + ",";
                 body += "<br /><br />Please click the following link to activate your account";
-                // for live website, uncomment this and comment the local host
-                // body += "<br /><a href = '" + Request.Url.AbsoluteUri.Replace("http://mobilefitnessnetwork.azurewebsites.net/default.aspx", "http://mobilefitnessnetwork.azurewebsites.net/ConfirmationPage?ActivationCode=" + activationCode) + "'>Click here to activate your account.</a>";
+                if (isTrainer)
+                {
+                    
+                    // for live website, uncomment this and comment the local host
+                    // body += "<br /><a href = '" + Request.Url.AbsoluteUri.Replace("http://mobilefitnessnetwork.azurewebsites.net/default.aspx", "http://mobilefitnessnetwork.azurewebsites.net/ConfirmationPage?ActivationCode=" + activationCode) + "'>Click here to activate your account.</a>";
 
-                // for local host comment this and uncomment link generator above
-                body += "<br /><a href = '" + Request.Url.AbsoluteUri.Replace("Default.aspx", "ConfirmationPage.aspx?ActivationCode=" + activationCode) + "'>Click here to activate your account.</a>";
+                    // for local host comment this and uncomment link generator above
+                    body += "<br /><a href = '" + Request.Url.AbsoluteUri.Replace("Default.aspx", "ConfirmationPage.aspx?ActivationCode=" + activationCode) + "'>Click here to activate your account.</a>";
+                }
+                else
+                {
+                    body += "<br /><a href = '" + Request.Url.AbsoluteUri.Replace("Default.aspx", "ClientConfirmationPage.aspx?ActivationCode=" + activationCode) + "'>Click here to activate your account.</a>";
+                }
                 body += "<br /><br />Thanks";
                 mm.Body = body;
                 mm.IsBodyHtml = true;
@@ -482,9 +478,8 @@ namespace WebApplication1
             String password = Request.Form["CLpassword"];
             String CPassword = Request.Form["CCpassword"];
             string message = string.Empty;
-            int intCheck, intCheck2;
-            bool containsInt = int.TryParse(firstName, out intCheck);
-            bool containsInt2 = int.TryParse(lastName, out intCheck2);
+            // if false, client email verification is sent
+            bool isTrainer = false;
 
             bool clientNameExists;
 
@@ -495,21 +490,6 @@ namespace WebApplication1
                 ErrorLabel2.ForeColor = System.Drawing.Color.Red;
                 ErrorLabel2.Text = "All fields required.";
                 ErrorLabel2.Visible = true;
-            }
-            // if name contains numbers display this error
-            else if (firstName.Any(c => char.IsDigit(c))) //checks if string does not contain a digit
-            {
-                ErrorLabel.ForeColor = System.Drawing.Color.Red;
-                ErrorLabel.Text = "Names cannot contain numbers.";
-                ErrorLabel.Visible = true;
-                clientDB.Close();
-            }
-            else if (lastName.Any(c => char.IsDigit(c))) //checks if string does not contain a digit
-            {
-                ErrorLabel.ForeColor = System.Drawing.Color.Red;
-                ErrorLabel.Text = "Names cannot contain numbers.";
-                ErrorLabel.Visible = true;
-                clientDB.Close();
             }
             else if (password.Length < 8)
             {
@@ -613,12 +593,11 @@ namespace WebApplication1
                         Uobj.UserId = userID;
                         Session["UserInfo"] = Uobj;
 
-                        SendActivationEmail((int)Session["userID"], email, firstName);
+                        SendActivationEmail((int)Session["userID"], email, firstName, isTrainer);
                         message = "Activation email sent, please click the link in the email from us to finish registration.";
 
                         ClientScript.RegisterStartupScript(GetType(), "alert", "alert('" + message + "');", true);
-
-                        // Response.Redirect("TrainerSignup.aspx");
+                        ClientSignupPanel.Visible = false;
 
                     }
                     catch

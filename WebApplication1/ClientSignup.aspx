@@ -102,9 +102,20 @@
                             </asp:DropDownList>
                         </div>
 					</div>	
+                     <div class="col-sm-4 form-group">
+						<label>Training Type</label>
+                        <div class="dropdown">
+                            <asp:DropDownList ID="DropDownList5" runat="server" CssClass="form-control">
+                                <asp:ListItem Text="Select one" Value="0"></asp:ListItem>
+                                <asp:ListItem Text="Personal Training" Value="Personal Training"></asp:ListItem>
+                                <asp:ListItem Text="Yoga" Value="Yoga"></asp:ListItem>
+                                <asp:ListItem Text="Both" Value="Personal Traning and Yoga"></asp:ListItem>
+                            </asp:DropDownList>
+                        </div>
+					</div>	
 					<div class="form-group">
 
-						<span class="auto-style1">Fitness Goals</span>
+						<span class="auto-style1">Available Equipment</span>
 						<textarea placeholder="Enter Fitness Goals" rows="3" class="form-control" name ="Goals"></textarea>
                         <div class="CreateAccountContainer text-center">
                             <br />
@@ -112,6 +123,8 @@
 					        <br />
 					        <br />
 					        <asp:Label ID="Label1" runat="server" Text="Label" Visible="False"></asp:Label>
+                            <asp:SqlDataSource ID="SqlDataSource2" runat="server"></asp:SqlDataSource>
+                            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" SelectCommand="SELECT * FROM [MFNUserTable]"></asp:SqlDataSource>
                         </div>
 				    </div>
 	</div>

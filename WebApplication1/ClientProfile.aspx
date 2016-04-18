@@ -1,9 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm2.aspx.cs" Inherits="WebApplication1.WebForm2" EnableEventValidation="false"%>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ClientProfile.aspx.cs" Inherits="WebApplication1.WebForm1" %>
 
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Bootstrap Example</title>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+  <title>Client Profile</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -136,7 +137,7 @@
                                 </ul>
                           <ul class="nav navbar-nav navbar-right">
 
-                              <li><asp:LinkButton ID = "ManageSession" Class="LoginButton2 btn-info btn-block" runat="server" onclick="BookTrainer_Click">Manage Your Schedule</asp:LinkButton></li>
+
                               <!--<li><button type="button" runat="server" class="BookButton btn btn-success" onclick="BookTrainer_Click">Manage Your Schedule</button></li>-->
                               <li class="dropdown">
                               <a href="#" class="NavDropdownMenu dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menu <span class="caret"></span></a>
@@ -163,7 +164,6 @@
                     <div class="row">
                         <div class="TrainerHeaderInfo text-center">
                             <p class="TrainerName"><asp:Label ID="UserNameLbl" CssClass="UserNameLbl" runat="server" Text="Label"></asp:Label></p>
-                            <p class="TrainerRating">Overall Rating: </p>
                         </div>
                     </div>
                 </div>
@@ -172,22 +172,7 @@
                     <div class="panel panel-default">
                       <div class="panel-heading">
                         <h4 class="panel-title">
-                          <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Biography</a>
-                        </h4>
-                      </div>
-                      <div id="collapse1" class="panel-collapse collapse in">
-                        <div class="panel-body" id ="bio" runat="server">
-                            <asp:TextBox ID="BioTextBox" runat="server" width ="75%" Height="300px" ReadOnly="true" BorderStyle="None" TextMode="MultiLine"></asp:TextBox>
-                            <!-- Trigger the modal with a button -->
-                          <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal" style="float:right;">Edit Biography</button>
-                            <asp:Label ID="BioFailLbl" runat="server" Text="Label" Visible="False"></asp:Label>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="panel panel-default">
-                      <div class="panel-heading">
-                        <h4 class="panel-title">
-                          <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Training Types</a>
+                          <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Fitness Goals</a>
                         </h4>
                       </div>
                       <div id="collapse2" class="panel-collapse collapse">
@@ -197,7 +182,7 @@
                     <div class="panel panel-default">
                       <div class="panel-heading">
                         <h4 class="panel-title">
-                          <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">Rates</a>
+                          <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">Available Equipment</a>
                         </h4>
                       </div>
                       <div id="collapse3" class="panel-collapse collapse">
@@ -215,50 +200,11 @@
                       </div>
                     </div>
                 </div>
-
                 <div class="ReviewsContainer col-xs-12 col-sm-12">
-                    <p class="ReviewLabel">Reviews:</p>
-                    <hr>
-			        <br>
-			
+                    <br>
                     <div class="row">
-                        <div class="ReviewHeaderContainer col-xs-12 col-sm-12 form-group">
-                            <p class="ReviewHeader text-center">
-                                Bob
-                            </p>
-                            <p class="ReviewRatingGivenLabel text-center">
-                                    Rating Given: 
-                                <span class="ReviewRatingGiven">
-                                    5/5
-                                </span>
-                            </p>
-                        </div>
-                        <div class="ReviewBodyContainer col-xs-12 col-sm-12 form-group">
-                            <p class="ReviewBody text-center">
-                                This is a test review! This is a test review!  This is a test review!  This is a test review!  This is a test review!  This is a test review!  This is a test review!  This is a test review!  This is a test review!  This is a test review!  This is a test review!  
-                            </p>
-                            <hr>
-                        </div>
                     </div>
-                    <div class="row">
-                        <div class="ReviewHeaderContainer col-xs-12 col-sm-12 form-group">
-                            <p class="ReviewHeader text-center">
-                                Emily
-                            </p>
-                            <p class="ReviewRatingGivenLabel text-center">
-                                    Rating Given: 
-                                <span class="ReviewRatingGiven">
-                                    5/5
-                                </span>
-                            </p>
-                        </div>
-                        <div class="ReviewBodyContainer col-xs-12 col-sm-12 form-group">
-                            <p class="ReviewBody text-center">
-                                This is a test review! This is a test review!  This is a test review!  This is a test review!  This is a test review!  This is a test review!  This is a test review!  This is a test review!  This is a test review!  This is a test review!  This is a test review!  
-                            </p>
-                            <hr>
-                        </div>
-                    </div>
+                    </br>
 			
                 </div>
             </div>
@@ -280,7 +226,7 @@
                       <asp:TextBox ID="TempTextBox2" runat="server" Width="100%" Height="500px"  BorderStyle="Solid" TextMode="MultiLine"></asp:TextBox>
                   </div>
                   <div class="modal-footer">
-                    <asp:LinkButton ID="TempUpdate" cssclass="btn btn-default" runat ="server" onclick="ComfirmUpdateBioButton2_Click">Update</asp:LinkButton>
+                   
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                   </div>
                 </div>
@@ -293,7 +239,3 @@
           </form>
         </body>
 </html>
-
-
-
-
