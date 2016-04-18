@@ -93,5 +93,9 @@ namespace WebApplication1
 
         }
 
+        protected void BioTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

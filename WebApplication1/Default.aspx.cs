@@ -344,7 +344,7 @@ namespace WebApplication1
                         Tobj.TrainerId = trainerID;
                         Session["TrainerInfo"] = Tobj;
 
-                        SendActivationEmail((int)Session["trainerID"]);
+                        SendActivationEmail((int)Session["trainerID"], email, firstName);
                         message = "Activation email sent, please click the link in the email from us to finish registration.";
 
                         ClientScript.RegisterStartupScript(GetType(), "alert", "alert('" + message + "');", true);
@@ -386,10 +386,10 @@ namespace WebApplication1
 
         // From http://www.aspsnippets.com/Articles/Send-user-Confirmation-email-after-Registration-with-Activation-Link-in-ASPNET.aspx
 
-        private void SendActivationEmail(int userId)
+        private void SendActivationEmail(int userId, string email, string name)
         {
             String firstName = Request.Form["FName"];
-            String email = Request.Form["email"];
+           // String email = Request.Form["email"];
             string activationCode = Guid.NewGuid().ToString();
             SqlCommand cmd2 = new SqlCommand();
             cmd2.CommandType = System.Data.CommandType.Text;
@@ -420,6 +420,10 @@ namespace WebApplication1
                 mm.Subject = "Account Activation";
                 string body = "Hello " + firstName + ",";
                 body += "<br /><br />Please click the following link to activate your account";
+                // for live website, uncomment this and comment the local host
+                // body += "<br /><a href = '" + Request.Url.AbsoluteUri.Replace("http://mobilefitnessnetwork.azurewebsites.net/default.aspx", "http://mobilefitnessnetwork.azurewebsites.net/ConfirmationPage?ActivationCode=" + activationCode) + "'>Click here to activate your account.</a>";
+
+                // for local host comment this and uncomment link generator above
                 body += "<br /><a href = '" + Request.Url.AbsoluteUri.Replace("Default.aspx", "ConfirmationPage.aspx?ActivationCode=" + activationCode) + "'>Click here to activate your account.</a>";
                 body += "<br /><br />Thanks";
                 mm.Body = body;
@@ -529,7 +533,8 @@ namespace WebApplication1
 
                 clientDB.Open();
                 // Check to see if email exists in the database
-                using (SqlCommand checkCmd = new SqlCommand("select count(*) from MFNUserTable where Trainer_Email = @email", clientDB))
+                
+                using (SqlCommand checkCmd = new SqlCommand("select count(*) from MFNUserTable where User_Email = @email", clientDB))
                 {
                     checkCmd.Parameters.AddWithValue("@email", email);
                     clientNameExists = (int)checkCmd.ExecuteScalar() > 0;
@@ -537,9 +542,9 @@ namespace WebApplication1
                 // if it exists, display error message
                 if (clientNameExists)
                 {
-                    ErrorLabel.ForeColor = System.Drawing.Color.Red;
-                    ErrorLabel.Text = "Email address taken";
-                    ErrorLabel.Visible = true;
+                    ErrorLabel2.ForeColor = System.Drawing.Color.Red;
+                    ErrorLabel2.Text = "Email address taken";
+                    ErrorLabel2.Visible = true;
                     clientDB.Close();
                 }
                 else
@@ -575,7 +580,7 @@ namespace WebApplication1
                         Uobj.UserId = userID;
                         Session["UserInfo"] = Uobj;
 
-                        SendActivationEmail((int)Session["userID"]);
+                        SendActivationEmail((int)Session["userID"], email, firstName);
                         message = "Activation email sent, please click the link in the email from us to finish registration.";
 
                         ClientScript.RegisterStartupScript(GetType(), "alert", "alert('" + message + "');", true);

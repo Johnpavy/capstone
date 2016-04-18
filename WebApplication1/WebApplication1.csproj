@@ -82,6 +82,8 @@
     <Content Include="AdminLogin.aspx" />
     <Content Include="AdminControl.aspx" />
     <Content Include="CheckOut.aspx" />
+    <Content Include="ClientConfirmationPage.aspx" />
+    <Content Include="ClientSignup.aspx" />
     <Content Include="ConfirmationPage.aspx" />
     <Content Include="CSS\TrainerSignup.css" />
     <Content Include="JS\JavaScript.js" />
@@ -141,6 +143,20 @@
     </Compile>
     <Compile Include="CheckOut.aspx.designer.cs">
       <DependentUpon>CheckOut.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ClientConfirmationPage.aspx.cs">
+      <DependentUpon>ClientConfirmationPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClientConfirmationPage.aspx.designer.cs">
+      <DependentUpon>ClientConfirmationPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ClientSignup.aspx.cs">
+      <DependentUpon>ClientSignup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClientSignup.aspx.designer.cs">
+      <DependentUpon>ClientSignup.aspx</DependentUpon>
     </Compile>
     <Compile Include="ConfirmationPage.aspx.cs">
       <DependentUpon>ConfirmationPage.aspx</DependentUpon>
