@@ -144,12 +144,46 @@ namespace WebApplication1
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd.Connection = db;
-                cmd.CommandText = "Select COUNT(*) FROM [MFNUserTable] WHERE User_Email = '" + UserName + "'COLLATE SQL_Latin1_General_CP1_CS_AS AND User_PasswordHash = '" + Password + "' COLLATE SQL_Latin1_General_CP1_CS_AS";
+
+                //hash entered password
 
                 try
                 {
+                    cmd.CommandText = "Select * FROM [MFNUserTable] WHERE User_Email = '" + UserName + "'";
                     db.Open();
-                    count = (int)cmd.ExecuteScalar();
+                    SqlDataReader sdr = cmd.ExecuteReader();
+                    while (sdr.Read())
+                    {
+                        salt = sdr["User_PasswordSalt"].ToString();
+                    }
+
+                }
+                catch
+                {
+                    ErrorLbl.Visible = true;
+                    ErrorLbl.Text = "Error while reading from Database";
+                }
+                finally
+                {
+                    db.Close();
+                }
+
+
+
+                string hashedPassword = CreatePasswordHash(Password, salt);
+
+                SqlConnection db2 = new SqlConnection(SqlDataSource3.ConnectionString);
+                SqlCommand cmd2 = new SqlCommand();
+                cmd2.CommandType = System.Data.CommandType.Text;
+                cmd2.Connection = db2;
+
+
+                cmd2.CommandText = "Select COUNT(*) FROM [MFNUserTable] WHERE User_Email = '" + UserName + "'COLLATE SQL_Latin1_General_CP1_CS_AS AND User_PasswordHash = '" + hashedPassword + "' COLLATE SQL_Latin1_General_CP1_CS_AS";
+
+                try
+                {
+                    db2.Open();
+                    count = (int)cmd2.ExecuteScalar();
                 }
                 catch
                 {
@@ -157,7 +191,7 @@ namespace WebApplication1
                 }
                 finally
                 {
-                    db.Close();
+                    db2.Close();
                 }
                 /*
                 If the the trainer is verified and the database has succesfully placed data
@@ -189,7 +223,7 @@ namespace WebApplication1
                         }
 
                         Session["UserInfo"] = Uobj;
-                        Response.Redirect("UserProfile.aspx");
+                        Response.Redirect("ClientProfile.aspx");
 
                     }
                     catch
