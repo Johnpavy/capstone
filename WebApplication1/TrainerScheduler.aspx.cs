@@ -53,6 +53,15 @@ namespace WebApplication1
                 DateTextBox.Text = (string) Session["SelectedDate"];
             }
 
+            if(Session["SummaryTextBox"] == null)
+            {
+                SummaryTextBox.Text = "";
+            }
+            else
+            {
+                SummaryTextBox.Text = Session["SummaryTextBox"].ToString();
+            }
+
             //Begin Loading Calendar with Blocked Dates Data
 
             SqlConnection db = new SqlConnection(SqlDataSource5.ConnectionString);
@@ -136,6 +145,63 @@ namespace WebApplication1
             Response.Redirect("WebForm2.aspx");
         }
 
+
+        protected void SelectThisClientBtn_Click(object sender, EventArgs e)
+        {
+            
+            SqlConnection db = new SqlConnection(SqlDataSource3.ConnectionString);
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = System.Data.CommandType.Text;
+            cmd.Connection = db;
+
+            cmd.CommandText = "SELECT * FROM [MFNCalendarTable] WHERE Calendar_Id = @id";
+            cmd.Parameters.AddWithValue("@id", AppointmentsDropbx.SelectedValue);
+
+
+
+            try
+            {
+                db.Open();
+                SqlDataReader sdr = cmd.ExecuteReader();
+
+                SummaryTextBox.Text = "";
+
+                while (sdr.Read())
+                {
+                    SummaryTextBox.Text += "Event Date: ";
+
+                    DateTime dt = Convert.ToDateTime(sdr["Calendar_Date"].ToString());
+
+                    SummaryTextBox.Text += dt.ToShortDateString() + "\n";
+                    SummaryTextBox.Text += "Summary: ";
+                    SummaryTextBox.Text += sdr["Calendar_EventSummary"].ToString() + "\n";
+                    SummaryTextBox.Text += "Start: ";
+                    SummaryTextBox.Text += sdr["Calendar_StartTime"].ToString() + "\n";
+                    SummaryTextBox.Text += "End: ";
+                    SummaryTextBox.Text += sdr["Calendar_EndTime"].ToString() + "\n";
+                    SummaryTextBox.Text += "\n";
+                }
+
+
+                if (SummaryTextBox.Text == "")
+                {
+                    SummaryTextBox.Text = "No Appointmetns Selected";
+                }
+
+            }
+            catch
+            {
+                SummaryTextBox.Text = "An error occured displaying!";
+            }
+            finally
+            {
+                db.Close();
+            }
+            
+
+        }
+
+
         //Currently Broken :(
 
         protected void PopulateSummaryTextBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -187,6 +253,8 @@ namespace WebApplication1
             {
                 db.Close();
             }
+
+            Response.Redirect("TrainerScheduler.aspx");
         }
 
         //Time Range Validator
@@ -1007,5 +1075,6 @@ namespace WebApplication1
             OptionsDiv.Visible = true;
             ManageBlackedOutTimes.Visible = false;
         }
+
     }
 }

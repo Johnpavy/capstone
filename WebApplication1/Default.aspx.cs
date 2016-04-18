@@ -207,7 +207,8 @@ namespace WebApplication1
         // deprecated, not used in newest iteration can probably be deleted
         protected void signup_Click(object sender, EventArgs e)
         {
-            Response.Redirect("TrainerSignup.aspx");
+            TrainerSignupPanel.Visible = true;
+            //Response.Redirect("TrainerSignup.aspx");
         }
 
         protected void about_Click(object sender, EventArgs e)
@@ -217,7 +218,7 @@ namespace WebApplication1
         // deprecated, not used in newest iteration can probably be deleted
         protected void ClientSignup_Click(object sender, EventArgs e)
         {
-
+            ClientSignupPanel.Visible = true;
         }
 
         protected void getStarted_Click(object sender, EventArgs e)
@@ -350,7 +351,7 @@ namespace WebApplication1
                         message = "Activation email sent, please click the link in the email from us to finish registration.";
 
                         ClientScript.RegisterStartupScript(GetType(), "alert", "alert('" + message + "');", true);
-
+                        TrainerSignupPanel.Visible = false;
                         // Response.Redirect("TrainerSignup.aspx");
 
                     }
@@ -596,7 +597,7 @@ namespace WebApplication1
                         message = "Activation email sent, please click the link in the email from us to finish registration.";
 
                         ClientScript.RegisterStartupScript(GetType(), "alert", "alert('" + message + "');", true);
-
+                        ClientSignupPanel.Visible = false;
 
                     }
                     catch

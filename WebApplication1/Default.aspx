@@ -206,7 +206,7 @@
             
           <div class="container">
         <div class="row centered-form">
-        <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+        <div id="TrainerSignupPanel" runat="server" class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4" visible ="false">
         	<div class="panel panel-default">
         		<div class="panel-heading">
 			    		<h3 class="panel-title">Register as a Trainer</h3>
@@ -251,7 +251,8 @@
 	    		</div>
             <!Register as client below>
     		</div>
-            <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+
+            <div id="ClientSignupPanel" runat="server" class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4" visible ="false">
         	<div class="panel panel-default">
         		<div class="panel-heading">
 			    		<h3 class="panel-title">Register as a Client</h3>
