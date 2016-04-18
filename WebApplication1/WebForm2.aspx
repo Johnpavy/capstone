@@ -216,7 +216,7 @@
                         </h4>
                       </div>
                       <div id="collapse4" class="panel-collapse collapse">
-                        <div class="panel-body">Test Text.</div>
+                        <div class="panel-body" id="FavLoc" runat="server">Test Text.</div>
                       </div>
                     </div>
                 </div>

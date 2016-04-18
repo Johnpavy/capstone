@@ -44,14 +44,16 @@ namespace WebApplication1
             String bio = Request.Form["bio"];
             String gender = DropDownList3.SelectedValue;
             String pnumber = Request.Form["pnumber"];
-
+            String height = DropDownList1.SelectedValue + "'" + DropDownList2.SelectedValue + "\"";
+            String weight = Request.Form["weight"];
+            String specialty = DropDownList5.SelectedValue;
             adrs.Address = trainerAddress;
             adrs.GeoCode();
             int trainerID = (int)Session["trainerID"];
             String dBLat = adrs.Latitude;
             String dBLng = adrs.Longitude;
             // Check to make sure all fields are filled out
-            if(trainerAddress.Equals("") || bio.Equals("") || gender.Equals("0") || pnumber.Equals(""))
+            if(trainerAddress.Equals("") || bio.Equals("") || gender.Equals("0") || pnumber.Equals("") || height.Equals("0'0\"") || specialty.Equals("0"))
             {
                 Label1.ForeColor = System.Drawing.Color.Red;
                 Label1.Text = "All fields required";

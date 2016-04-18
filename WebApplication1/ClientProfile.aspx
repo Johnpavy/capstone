@@ -119,7 +119,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                           </button>
-                          <a class="NavBrand navbar-brand glyphicon glyphicon-home white" href="WebForm2.aspx">
+                          <a class="NavBrand navbar-brand glyphicon glyphicon-home white" href="ClientProfile.aspx">
                             </a>
                         </div>
 
@@ -172,11 +172,11 @@
                     <div class="panel panel-default">
                       <div class="panel-heading">
                         <h4 class="panel-title">
-                          <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Fitness Goals</a>
+                          <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Training Preferences</a>
                         </h4>
                       </div>
                       <div id="collapse2" class="panel-collapse collapse">
-                        <div class="panel-body" id ="specialty" runat="server">Test Text.</div>
+                        <div class="panel-body" id ="preferences" runat="server">Test Text.</div>
                       </div>
                     </div>
                     <div class="panel panel-default">
@@ -186,7 +186,7 @@
                         </h4>
                       </div>
                       <div id="collapse3" class="panel-collapse collapse">
-                        <div class="panel-body">Test Text.</div>
+                        <div class="panel-body" id="equipment" runat="server">Test Text.</div>
                       </div>
                     </div>
                     <div class="panel panel-default">
@@ -204,6 +204,16 @@
                     <br>
                     <div class="row">
                     </div>
+                    <br>
+                    <br>
+                    <br></br>
+                    <br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    </br>
+                    </br>
+                    </br>
                     </br>
 			
                 </div>

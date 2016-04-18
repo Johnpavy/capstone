@@ -17,6 +17,7 @@ namespace WebApplication1
         private string middleName;
         private string lastName;
         private string homeAddress;
+        private string favLoc;
         private string bio;
         private string speciality;
         private string individualRate;
@@ -39,6 +40,7 @@ namespace WebApplication1
             speciality = "";
             individualRate = "0.00";
             additionalPersonRate = "0.00";
+            favLoc = "";
 
     }
 
@@ -126,6 +128,12 @@ namespace WebApplication1
             set { additionalPersonRate = value; }
         }
 
+        public string FavLoc
+        {
+            get { return favLoc; }
+            set { favLoc = value; }
+        }
+
         public void CopyTrainerObject(TrainerObject objToCopy)
         {
             this.TrainerId = objToCopy.TrainerId;
@@ -142,6 +150,7 @@ namespace WebApplication1
             this.Speciality = objToCopy.Speciality;
             this.AdditionalPersonRate = objToCopy.AdditionalPersonRate;
             this.IndividualRate = objToCopy.IndividualRate;
+            this.FavLoc = objToCopy.FavLoc;
         }
     }
 }

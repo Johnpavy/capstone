@@ -7,11 +7,25 @@ using System.Web.UI.WebControls;
 
 namespace WebApplication1
 {
+    
     public partial class WebForm1 : System.Web.UI.Page
     {
+        UserObject Uobj = new UserObject();
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["TrainerInfo"] == null)
+            {
+                //Forces a redirect to splash page if this page is loaded without a session state.
+                Response.Redirect("Default.aspx");
+            }
+            else
+            {
+                Uobj.CopyUserObject((UserObject)Session["UserInfo"]);
 
+                preferences.InnerHtml = Uobj.TrainingPref;
+                equipment.InnerHtml = Uobj.Equipment;
+
+            }
         }
     }
 }
