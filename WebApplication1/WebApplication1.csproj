@@ -101,6 +101,7 @@
     <Content Include="Default.aspx" />
     <Content Include="UploadProfilePic.aspx" />
     <Content Include="UserProfile.aspx" />
+    <Content Include="ClientProfile.aspx" />
     <Content Include="WebForm2.aspx" />
     <Content Include="packages.config" />
     <Content Include="WebForm3.aspx" />
@@ -251,6 +252,13 @@
     <Compile Include="Utilities\RequestFlowItem.cs" />
     <Compile Include="Utilities\SampleCategory.cs" />
     <Compile Include="Utilities\SampleItem.cs" />
+    <Compile Include="ClientProfile.aspx.cs">
+      <DependentUpon>ClientProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClientProfile.aspx.designer.cs">
+      <DependentUpon>ClientProfile.aspx</DependentUpon>
+    </Compile>
     <Compile Include="WebForm2.aspx.cs">
       <DependentUpon>WebForm2.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
