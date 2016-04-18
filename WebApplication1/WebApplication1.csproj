@@ -52,6 +52,14 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PayPal, Version=1.7.3.0, Culture=neutral, PublicKeyToken=5b4afc1ccaef40fb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PayPal.1.7.3\lib\net451\PayPal.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -73,11 +81,16 @@
     <Content Include="AccountSettings.aspx" />
     <Content Include="AdminLogin.aspx" />
     <Content Include="AdminControl.aspx" />
+    <Content Include="CheckOut.aspx" />
+    <Content Include="ClientConfirmationPage.aspx" />
+    <Content Include="ClientSignup.aspx" />
     <Content Include="ConfirmationPage.aspx" />
     <Content Include="CSS\TrainerSignup.css" />
     <Content Include="JS\JavaScript.js" />
     <Content Include="LogOut.aspx" />
     <Content Include="MFNRoot\Trainers\test%40email\ProfilePic.jpg" />
+    <Content Include="PasswordResetComfirm.aspx" />
+    <Content Include="PaymentConfirmation.aspx" />
     <Content Include="Pictures\trainerPic.jpg" />
     <Content Include="ResetPassword.aspx" />
     <Content Include="ThankYou.aspx" />
@@ -124,6 +137,27 @@
       <DependentUpon>AdminControl.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminObject.cs" />
+    <Compile Include="CheckOut.aspx.cs">
+      <DependentUpon>CheckOut.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CheckOut.aspx.designer.cs">
+      <DependentUpon>CheckOut.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ClientConfirmationPage.aspx.cs">
+      <DependentUpon>ClientConfirmationPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClientConfirmationPage.aspx.designer.cs">
+      <DependentUpon>ClientConfirmationPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ClientSignup.aspx.cs">
+      <DependentUpon>ClientSignup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClientSignup.aspx.designer.cs">
+      <DependentUpon>ClientSignup.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ConfirmationPage.aspx.cs">
       <DependentUpon>ConfirmationPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -137,6 +171,20 @@
     </Compile>
     <Compile Include="LogOut.aspx.designer.cs">
       <DependentUpon>LogOut.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PasswordResetComfirm.aspx.cs">
+      <DependentUpon>PasswordResetComfirm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PasswordResetComfirm.aspx.designer.cs">
+      <DependentUpon>PasswordResetComfirm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PaymentConfirmation.aspx.cs">
+      <DependentUpon>PaymentConfirmation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PaymentConfirmation.aspx.designer.cs">
+      <DependentUpon>PaymentConfirmation.aspx</DependentUpon>
     </Compile>
     <Compile Include="ResetPassword.aspx.cs">
       <DependentUpon>ResetPassword.aspx</DependentUpon>
@@ -197,6 +245,12 @@
     <Compile Include="UserProfile.aspx.designer.cs">
       <DependentUpon>UserProfile.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Utilities\Common.cs" />
+    <Compile Include="Utilities\Configuration.cs" />
+    <Compile Include="Utilities\RequestFlow.cs" />
+    <Compile Include="Utilities\RequestFlowItem.cs" />
+    <Compile Include="Utilities\SampleCategory.cs" />
+    <Compile Include="Utilities\SampleItem.cs" />
     <Compile Include="WebForm2.aspx.cs">
       <DependentUpon>WebForm2.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

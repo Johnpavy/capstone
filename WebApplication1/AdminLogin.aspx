@@ -86,7 +86,7 @@
         <p class="LoginLabel text-center">ADMIN LOGIN</p>
         
 		<div class="Username input-group">
-          <span class="input-group-addon primary" id="sizing-addon2">
+          <span class="input-group-addon primary" id="sizing-addon1">
             <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
             </span>
           <input type="text" class="UsernameInput form-control" placeholder="Email" name="Name"  aria-describedby="sizing-addon2">

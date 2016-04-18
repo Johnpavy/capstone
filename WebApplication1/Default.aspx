@@ -6,7 +6,7 @@
 <head runat="server">
   <title>Welcome to MFN</title>
   <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1/">
+  <meta name="viewport" content="width=device-width, initial-scale=1/"/>
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -93,7 +93,8 @@
 
     .AboutButton
     {
-        background-color: rgb(255,255,255);
+        /*background-color: rgb(255,255,255);*/
+        background-color: rgb(0, 141, 183);
         padding-bottom: 5px;
         width: 50%;
         max-width: 960px;
@@ -142,31 +143,65 @@
         float: right;
     }
 
+    .Username
+    {
+        padding-bottom: 5px;
+        width: 70%;
+        max-width: 960px;
+        margin-left: auto;
+    }
+        
+    .Password
+    {
+        padding-bottom: 5px;
+        width: 70%;
+        max-width: 960px;
+        margin-left: auto;
+    }
+
+    .newclass
+    {
+        padding-bottom: 5px;
+        width: 70%;
+        max-width: 960px;
+        margin-left: auto;
+    }
+
 
   </style>
 </head>
 <body>
     <form id="form1" runat="server">
         <div class ="LoginInformationPannel">
-            <input type="password" class="PasswordInput form-control" placeholder="Password" name="Password2" aria-describedby="sizing-addon2"/>
-            <input type="text" class="UsernameInput form-control" placeholder="Email" name="UserEmail"  aria-describedby="sizing-addon2"/>
-            <br />
-            <br />
-            <asp:LinkButton ID="LinkButton2" Class="LoginButton2 btn btn-primary btn-lg btn-block" runat="server" OnClick="login_Click">Login</asp:LinkButton>
-            <asp:CheckBox ID="CheckBox1" Class="TrainerToggle" runat="server"  CssClass="TrainerToggle form-control" Text="Login as Trainer"/>
-            <br />
-            <br />
-            <br /> <a style="float:right; padding-right:5px" href ="ResetPassword.aspx">Reset Password</a>
-            <asp:Label ID="ErrorLbl" runat="server" Text="*Error" ForeColor="#FF3300" Visible="False"></asp:Label>
+                  <div class="Username input-group">
+                  <span class="input-group-addon primary" id="sizing-addon1">
+                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                    </span>
+                  <input type="text" class="UsernameInput form-control" placeholder="Email" name="UserEmail" aria-describedby="sizing-addon2"/>
+            </div>
+        
+                <div class="Password input-group">
+                  <span class="input-group-addon primary" id="sizing-addon2">
+                    <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
+                    </span>
+                  <input type="password" class="PasswordInput form-control" placeholder="Password" name="Password2"  aria-describedby="sizing-addon2"/>
+                </div>
+            <div class="newclass">
+                  <asp:Label ID="ErrorLbl" runat="server" Text="*Error" ForeColor="#FF3300" Visible="False"></asp:Label>
+                  <asp:LinkButton ID="LinkButton2" Class="LoginButton2 btn btn-primary btn-lg btn-block" runat="server" OnClick="login_Click">Login</asp:LinkButton>
+                  <asp:CheckBox ID="CheckBox1" Class="TrainerToggle" runat="server"  CssClass="TrainerToggle form-control" Text="Login as Trainer"/>
+             </div>
+
+             <br /><br /><a style="float:right; padding-right:5px" href ="ResetPassword.aspx">Reset Password</a>
         </div>
         <div class="FitnessNetworkImageContainer">
             <img class="FitnessNetworkImage" src="Pictures/MobileFitnessNetworkPic.jpg" alt="Mountain View"/>
         </div>
         <div class="LoginButtonContainer text-center">
-            <asp:LinkButton ID="login" Class="LoginButton btn btn-primary btn-lg btn-block" runat="server">Login</asp:LinkButton>
+           <!-- <asp:LinkButton ID="login" Class="LoginButton btn btn-primary btn-lg btn-block" runat="server">Login</asp:LinkButton> -->
+            <asp:LinkButton ID="ClientSignup" Class="ClientSignupButton btn btn-primary btn-lg btn-block" runat="server" OnClick="ClientSignup_Click" >Client Sign Up</asp:LinkButton>
             <asp:LinkButton ID="TrainerSignup" Class="TrainerSignupButton btn btn-secondary btn-lg btn-block" runat="server" OnClick="signup_Click" >Trainer Sign Up</asp:LinkButton> 
-             <asp:LinkButton ID="ClientSignup" Class="ClientSignupButton btn btn-primary btn-lg btn-block" runat="server" OnClick="ClientSignup_Click" >Client Sign Up</asp:LinkButton>
-             <asp:LinkButton ID="about" Class="AboutButton btn btn-secondary btn-lg btn-block" runat="server" OnClick="about_Click">How It Works</asp:LinkButton>
+            <asp:LinkButton ID="about" Class="AboutButton btn btn-primary btn-lg btn-block" runat="server" OnClick="about_Click">How It Works</asp:LinkButton>
             </div>
             
           <div class="container">
@@ -174,7 +209,7 @@
         <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
         	<div class="panel panel-default">
         		<div class="panel-heading">
-			    		<h3 class="panel-title">Register as a trainer</h3>
+			    		<h3 class="panel-title">Register as a Trainer</h3>
 			 			</div>
 			 			<div class="panel-body">
 
@@ -237,13 +272,13 @@
 			    			</div>
 
 			    			<div class="form-group">
-			    				<input type="email" name="cemail" id="cemail" class="form-control input-sm" placeholder="Email Address"/>
+			    				<input type="email" name="cEmail" id="cemail" class="form-control input-sm" placeholder="Email Address"/>
 			    			</div>
 
 			    			<div class="row">
 			    				<div class="col-xs-6 col-sm-6 col-md-6">
 			    					<div class="form-group">
-			    						<input type="password" name="clpassword" id="clpassword" class="form-control input-sm" placeholder="Password"/>
+			    						<input type="password" name="CLpassword" id="clpassword" class="form-control input-sm" placeholder="Password"/>
 			    					</div>
 			    				</div>
 			    				<div class="col-xs-6 col-sm-6 col-md-6">
@@ -257,13 +292,13 @@
 			    		
 
 			    	</div>
-                  <asp:Label ID="Label1" runat="server" Text="Label" Visible="False"></asp:Label>
+                  <asp:Label ID="ErrorLabel2" runat="server" Text="Label" Visible="False"></asp:Label>
 	    		</div>
     		</div>
     	</div>
     </div>
 
-                <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" SelectCommand="SELECT * FROM [MFNTrainerTable]"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" SelectCommand="SELECT * FROM [MFNTrainerTable]"></asp:SqlDataSource>
         <br />
         <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" SelectCommand="SELECT * FROM [MFNTrainerTable]"></asp:SqlDataSource>
         <br />

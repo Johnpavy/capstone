@@ -22,6 +22,15 @@ namespace WebApplication1 {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
+        /// ErrorLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label ErrorLbl;
+        
+        /// <summary>
         /// LinkButton2 control.
         /// </summary>
         /// <remarks>
@@ -40,15 +49,6 @@ namespace WebApplication1 {
         protected global::System.Web.UI.WebControls.CheckBox CheckBox1;
         
         /// <summary>
-        /// ErrorLbl control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label ErrorLbl;
-        
-        /// <summary>
         /// login control.
         /// </summary>
         /// <remarks>
@@ -58,15 +58,6 @@ namespace WebApplication1 {
         protected global::System.Web.UI.WebControls.LinkButton login;
         
         /// <summary>
-        /// TrainerSignup control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton TrainerSignup;
-        
-        /// <summary>
         /// ClientSignup control.
         /// </summary>
         /// <remarks>
@@ -74,6 +65,15 @@ namespace WebApplication1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton ClientSignup;
+        
+        /// <summary>
+        /// TrainerSignup control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton TrainerSignup;
         
         /// <summary>
         /// about control.
@@ -112,13 +112,13 @@ namespace WebApplication1 {
         protected global::System.Web.UI.WebControls.LinkButton LinkButton3;
         
         /// <summary>
-        /// Label1 control.
+        /// ErrorLabel2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.Label ErrorLabel2;
         
         /// <summary>
         /// SqlDataSource1 control.
