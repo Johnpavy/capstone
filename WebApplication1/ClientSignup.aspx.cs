@@ -63,6 +63,12 @@ namespace WebApplication1
             else
             {
 
+                // add info to session object
+                Uobj.CopyUserObject((UserObject)Session["UserInfo"]);
+                Uobj.TrainingPref = interests;
+                Uobj.Equipment = equipment;
+                Session["UserInfo"] = Uobj;
+
                 SqlConnection userLocDB = new SqlConnection(SqlDataSource2.ConnectionString);
                 SqlConnection userDB = new SqlConnection(SqlDataSource1.ConnectionString);
                 // sql command to insert address lat and long into the location table

@@ -24,6 +24,7 @@ namespace WebApplication1
 
                 preferences.InnerHtml = Uobj.TrainingPref;
                 equipment.InnerHtml = Uobj.Equipment;
+                UserNameLbl.Text = Uobj.FirstName + " " + Uobj.LastName + " ";
 
             }
         }

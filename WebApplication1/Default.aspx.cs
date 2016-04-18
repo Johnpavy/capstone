@@ -160,6 +160,7 @@ namespace WebApplication1
                 }
                 catch
                 {
+                    ErrorLbl.ForeColor = System.Drawing.Color.Red;
                     ErrorLbl.Visible = true;
                     ErrorLbl.Text = "Error while reading from Database";
                 }
@@ -200,6 +201,7 @@ namespace WebApplication1
                 if (count == -1)
                 {
                     //Login fail
+                    ErrorLbl.ForeColor = System.Drawing.Color.Red;
                     ErrorLbl.Visible = true;
                     ErrorLbl.Text = "Database is not connected!";
                 }
@@ -229,6 +231,7 @@ namespace WebApplication1
                     catch
                     {
                         ErrorLbl.Visible = true;
+                        ErrorLbl.ForeColor = System.Drawing.Color.Red;
                         ErrorLbl.Text = "Error while reading from Database";
                     }
 
@@ -237,25 +240,29 @@ namespace WebApplication1
                 {
                     //Login fail
                     ErrorLbl.Visible = true;
+                    ErrorLbl.ForeColor = System.Drawing.Color.Red;
                     ErrorLbl.Text = "Invalid Email or Password";
                 }
             }
         }
-        // deprecated, not used in newest iteration can probably be deleted
+
         protected void signup_Click(object sender, EventArgs e)
         {
+            ClientSignupPanel.Visible = false;
             TrainerSignupPanel.Visible = true;
-            //Response.Redirect("TrainerSignup.aspx");
+
         }
 
         protected void about_Click(object sender, EventArgs e)
         {
 
         }
-        // deprecated, not used in newest iteration can probably be deleted
+        
         protected void ClientSignup_Click(object sender, EventArgs e)
         {
+            TrainerSignupPanel.Visible = false;
             ClientSignupPanel.Visible = true;
+
         }
 
         protected void getStarted_Click(object sender, EventArgs e)
