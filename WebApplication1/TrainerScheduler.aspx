@@ -426,8 +426,8 @@
                                             <td><asp:LinkButton ID = "BlockOutEntireDayBtn" Class="btn btn-info btn-block" runat="server" OnClick="BlockOutEntireDayBtn_Click">Block Out Entire Day</asp:LinkButton></td>
                                         </tr>
                                         <tr>
-                                            <td><asp:LinkButton ID = "LinkButton4" Class="btn btn-info btn-block" runat="server">Reopen Selected Times</asp:LinkButton></td>
-                                            <td> <asp:LinkButton ID = "LinkButton5" Class="btn btn-info btn-block" runat="server">Reopen Entire Day</asp:LinkButton></td>
+                                            <td><asp:LinkButton ID = "ReopenSelectedTimesBtn" Class="btn btn-info btn-block" runat="server" OnClick="ReopenSelectedTimesBtn_Click">Reopen Selected Times</asp:LinkButton></td>
+                                            <td> <asp:LinkButton ID = "ReopenEntireDayBtn" Class="btn btn-info btn-block" runat="server" OnClick="ReopenEntireDayBtn_Click">Reopen Entire Day</asp:LinkButton></td>
                                         </tr>
                                     </table>
 			    			    </div>

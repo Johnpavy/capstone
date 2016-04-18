@@ -220,22 +220,22 @@ namespace WebApplication1 {
         protected global::System.Web.UI.WebControls.LinkButton BlockOutEntireDayBtn;
         
         /// <summary>
-        /// LinkButton4 control.
+        /// ReopenSelectedTimesBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton4;
+        protected global::System.Web.UI.WebControls.LinkButton ReopenSelectedTimesBtn;
         
         /// <summary>
-        /// LinkButton5 control.
+        /// ReopenEntireDayBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton5;
+        protected global::System.Web.UI.WebControls.LinkButton ReopenEntireDayBtn;
         
         /// <summary>
         /// Label1 control.
