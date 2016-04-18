@@ -168,22 +168,22 @@
             </div>
         </div>
 
-        <div id ="Panel1" class="row centered-form">
+        <div id ="OptionsDiv" class="row centered-form" runat="server">
              <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
         	        <div class="panel panel-default">
                            <div class="panel-heading">
 			    		        <h3 class="panel-title">Select</h3>
 			 			        </div>
 			 			        <div class="panel-body">
-			    		            <asp:LinkButton ID = "ManageSession" Class="btn btn-info btn-block" runat="server">Manage Session</asp:LinkButton>
-                                    <asp:LinkButton ID = "ManageBlackedOutTimes" Class="btn btn-info btn-block" runat="server">Manage Blacked Out Times</asp:LinkButton>
+			    		            <asp:LinkButton ID = "ManageSession" Class="btn btn-info btn-block" runat="server" OnClick="ManageSession_Click">Manage Session</asp:LinkButton>
+                                    <asp:LinkButton ID = "ManageBlackedOutTimes" Class="btn btn-info btn-block" runat="server" OnClick="ManageBlackedOutTimes_Click">Manage Blacked Out Times</asp:LinkButton>
 			    	            </div>
                           <asp:Label ID="Label2" runat="server" Text="Label" Visible="False"></asp:Label>
 	    		        </div>
                     </div>
                      </div>
 
-        <div id ="Panel2" class="row centered-form">
+        <div id ="ManageAppointmentDiv" class="row centered-form" runat="server" Visible = "false">
         <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
         	<div class="panel panel-default">
                     <div class="panel-heading">
@@ -207,7 +207,7 @@
                                  </tr>
                                  <tr>
                                      <td><asp:LinkButton ID = "RescheduleAppointment" Class="btn btn-info btn-block" runat="server">Reschedule Appointment</asp:LinkButton></td>
-                                     <td> <asp:LinkButton ID = "CancelAppointmentManagement" Class="btn btn-info btn-block" runat="server">Cancel Appointment Management</asp:LinkButton></td>
+                                     <td> <asp:LinkButton ID = "CancelAppointmentManagement" Class="btn btn-info btn-block" runat="server" OnClick="CancelAppointmentManagement_Click">Cancel Appointment Management</asp:LinkButton></td>
                                  </tr>
                              </table>
 			    		
@@ -218,7 +218,7 @@
             </div>
             </div>
 
-             <div id ="Panel3" class="row centered-form">
+             <div id ="ManageBlockedTimeDiv" class="row centered-form" runat="server" Visible = "false">
              <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
         	        <div class="panel panel-default">
                            <div class="panel-heading">
@@ -428,6 +428,9 @@
                                         <tr>
                                             <td><asp:LinkButton ID = "ReopenSelectedTimesBtn" Class="btn btn-info btn-block" runat="server" OnClick="ReopenSelectedTimesBtn_Click">Reopen Selected Times</asp:LinkButton></td>
                                             <td> <asp:LinkButton ID = "ReopenEntireDayBtn" Class="btn btn-info btn-block" runat="server" OnClick="ReopenEntireDayBtn_Click">Reopen Entire Day</asp:LinkButton></td>
+                                        </tr>
+                                        <tr>
+                                            <td> <asp:LinkButton ID = "CancelManageBlockedOutDate" Class="btn btn-info btn-block" runat="server" OnClick="CancelManageBlockedOutDate_Click" >Cancel Manage Blocked Out Date</asp:LinkButton></td>
                                         </tr>
                                     </table>
 			    			    </div>

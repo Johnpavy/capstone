@@ -983,5 +983,29 @@ namespace WebApplication1
             }
 
         }
+
+        protected void ManageSession_Click(object sender, EventArgs e)
+        {
+            OptionsDiv.Visible = false;
+            ManageAppointmentDiv.Visible = true;
+        }
+
+        protected void ManageBlackedOutTimes_Click(object sender, EventArgs e)
+        {
+            OptionsDiv.Visible = false;
+            ManageAppointmentDiv.Visible = true;
+        }
+
+        protected void CancelAppointmentManagement_Click(object sender, EventArgs e)
+        {
+            OptionsDiv.Visible = true;
+            ManageAppointmentDiv.Visible = false;
+        }
+
+        protected void CancelManageBlockedOutDate_Click(object sender, EventArgs e)
+        {
+            OptionsDiv.Visible = true;
+            ManageAppointmentDiv.Visible = false;
+        }
     }
 }
