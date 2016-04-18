@@ -22,8 +22,9 @@ namespace WebApplication1
                 string activationCode = !string.IsNullOrEmpty(Request.QueryString["ActivationCode"]) ? Request.QueryString["ActivationCode"] : Guid.Empty.ToString();
                 using (SqlConnection con = new SqlConnection(SqlDataSource1.ConnectionString))
                 {
-                    using (SqlCommand cmd = new SqlCommand("SELECT COUNT (*) FROM UserActivation WHERE User_ActivationCode = @ActivationCode"))
+                    //using (SqlCommand cmd = new SqlCommand("SELECT COUNT (*) FROM UserActivation WHERE User_ActivationCode = @ActivationCode"))
                     //using (SqlCommand cmd = new SqlCommand("UPDATE MFNTrainerTable SET Trainer_ActivationCode = NULL WHERE Trainer_ActivationCode = @ActivationCode"))
+                    using (SqlCommand cmd = new SqlCommand("DELETE FROM UserActivation WHERE User_ActivationCode = @ActivationCode"))
                     {
                         using (SqlDataAdapter sda = new SqlDataAdapter())
                         {
@@ -33,7 +34,7 @@ namespace WebApplication1
                             con.Open();
                             int rowsAffected = cmd.ExecuteNonQuery();
                            // cmd.CommandText = "DELETE FROM UserActivation WHERE User_ActivationCode = @ActivationCode";
-                           // cmd.ExecuteNonQuery();
+                            // cmd.ExecuteNonQuery();
                             con.Close();
                             if (rowsAffected == 1)
                             {
