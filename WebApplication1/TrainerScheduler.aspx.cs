@@ -115,7 +115,7 @@ namespace WebApplication1
             {
                 if (e.Day.Date == Convert.ToDateTime(blockedPartialDays[x]))
                 {
-                    e.Cell.BackColor = System.Drawing.Color.DimGray;
+                    e.Cell.BackColor = System.Drawing.Color.Silver;
                 }
             }
 
@@ -124,7 +124,7 @@ namespace WebApplication1
             {
                 if (e.Day.Date == Convert.ToDateTime(blockedFullDays[x]))
                 {
-                    e.Cell.BackColor = System.Drawing.Color.Silver;
+                    e.Cell.BackColor = System.Drawing.Color.DimGray;
                 }
             }
 
@@ -136,7 +136,7 @@ namespace WebApplication1
             Response.Redirect("WebForm2.aspx");
         }
 
-        //Currently Brokem :(
+        //Currently Broken :(
 
         protected void PopulateSummaryTextBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -188,6 +188,8 @@ namespace WebApplication1
                 db.Close();
             }
         }
+
+        //Time Range Validator
         protected bool GetValidTime(string startTime, string endTime)
         {
             int startValue, endValue;
@@ -822,7 +824,7 @@ namespace WebApplication1
             }
             else
             {
-
+                Response.Write(@"<script language='javascript'>alert('Invalid Time Range!\n" + StartTimeDrpList.Text + "to" + EndTimeDrpList.Text + "');</script>");
             }
 
         }
@@ -905,7 +907,105 @@ namespace WebApplication1
                 {
                     db2.Close();
                 }
+              }
             }
+
+        //Reopen Entire Day
+        protected void ReopenEntireDayBtn_Click(object sender, EventArgs e)
+        {
+
+            SqlConnection db2 = new SqlConnection(SqlDataSource5.ConnectionString);
+            SqlCommand cmd2 = new SqlCommand();
+            cmd2.CommandType = System.Data.CommandType.Text;
+            cmd2.Connection = db2;
+
+            cmd2.CommandText = "DELETE FROM [MFNBlockedDatesTable] WHERE Trainer_Id = @id AND BlockedDate_Date = @date AND BlockedDate_IsFullDay = @fullDay";
+            cmd2.Parameters.AddWithValue("@date", BlockedOutSelctedDateTxtBox.Text);
+            cmd2.Parameters.AddWithValue("@id", Tobj.TrainerId);
+            cmd2.Parameters.AddWithValue("@startTime", "12:00 AM");
+            cmd2.Parameters.AddWithValue("@endTime", "11:45 PM");
+            cmd2.Parameters.AddWithValue("@fullDay", true);
+
+            try
+            {
+                db2.Open();
+                cmd2.ExecuteNonQuery();
+                Response.Write(@"<script language='javascript'>alert('" + BlockedOutSelctedDateTxtBox.Text + " has been reopened.');</script>");
             }
+            catch
+            {
+                Response.Write(@"<script language='javascript'>alert('Error Removing from Database!');</script>");
+            }
+            finally
+            {
+                db2.Close();
+            }
+
+        }
+
+        //Reopen Selected Time
+        protected void ReopenSelectedTimesBtn_Click(object sender, EventArgs e)
+        {
+            if (GetValidTime(StartTimeDrpList.Text, EndTimeDrpList.Text))
+            {
+                SqlConnection db2 = new SqlConnection(SqlDataSource5.ConnectionString);
+                SqlCommand cmd2 = new SqlCommand();
+                cmd2.CommandType = System.Data.CommandType.Text;
+                cmd2.Connection = db2;
+
+                cmd2.CommandText = "DELETE FROM [MFNBlockedDatesTable] WHERE Trainer_Id = @id AND BlockedDate_Date = @date AND BlockedDate_IsFullDay = @fullDay AND BlockedDate_StartTime = @startTime AND BlockedDate_EndTime = @endTime";
+                cmd2.Parameters.AddWithValue("@date", BlockedOutSelctedDateTxtBox.Text);
+                cmd2.Parameters.AddWithValue("@id", Tobj.TrainerId);
+                cmd2.Parameters.AddWithValue("@startTime", StartTimeDrpList.Text);
+                cmd2.Parameters.AddWithValue("@endTime", EndTimeDrpList.Text);
+                cmd2.Parameters.AddWithValue("@fullDay", false);
+
+
+
+                try
+                {
+                    db2.Open();
+                    cmd2.ExecuteNonQuery();
+                    Response.Write(@"<script language='javascript'>alert('" + BlockedOutSelctedDateTxtBox.Text + " from " + StartTimeDrpList.Text + "to" + EndTimeDrpList.Text + "has been selected as unavaliable.');</script>");
+                }
+                catch
+                {
+                    Response.Write(@"<script language='javascript'>alert('Error Removing from Database!');</script>");
+                }
+                finally
+                {
+                    db2.Close();
+                }
+            }
+            else
+            {
+                Response.Write(@"<script language='javascript'>alert('Invalid Time Range!\n" + StartTimeDrpList.Text + " to " + EndTimeDrpList.Text + "');</script>");
+            }
+
+        }
+
+        protected void ManageSession_Click(object sender, EventArgs e)
+        {
+            OptionsDiv.Visible = false;
+            ManageAppointmentDiv.Visible = true;
+        }
+
+        protected void ManageBlackedOutTimes_Click(object sender, EventArgs e)
+        {
+            OptionsDiv.Visible = false;
+            ManageAppointmentDiv.Visible = true;
+        }
+
+        protected void CancelAppointmentManagement_Click(object sender, EventArgs e)
+        {
+            OptionsDiv.Visible = true;
+            ManageAppointmentDiv.Visible = false;
+        }
+
+        protected void CancelManageBlockedOutDate_Click(object sender, EventArgs e)
+        {
+            OptionsDiv.Visible = true;
+            ManageAppointmentDiv.Visible = false;
+        }
     }
 }

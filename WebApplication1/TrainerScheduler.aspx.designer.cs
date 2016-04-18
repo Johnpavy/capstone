@@ -67,6 +67,15 @@ namespace WebApplication1 {
         protected global::DayPilot.Web.Ui.DayPilotScheduler DayPilotScheduler1;
         
         /// <summary>
+        /// OptionsDiv control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl OptionsDiv;
+        
+        /// <summary>
         /// ManageSession control.
         /// </summary>
         /// <remarks>
@@ -92,6 +101,15 @@ namespace WebApplication1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label2;
+        
+        /// <summary>
+        /// ManageAppointmentDiv control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ManageAppointmentDiv;
         
         /// <summary>
         /// DateTextBox control.
@@ -175,6 +193,15 @@ namespace WebApplication1 {
         protected global::System.Web.UI.WebControls.Label ErrorLabel;
         
         /// <summary>
+        /// ManageBlockedTimeDiv control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ManageBlockedTimeDiv;
+        
+        /// <summary>
         /// BlockedOutSelctedDateTxtBox control.
         /// </summary>
         /// <remarks>
@@ -220,22 +247,31 @@ namespace WebApplication1 {
         protected global::System.Web.UI.WebControls.LinkButton BlockOutEntireDayBtn;
         
         /// <summary>
-        /// LinkButton4 control.
+        /// ReopenSelectedTimesBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton4;
+        protected global::System.Web.UI.WebControls.LinkButton ReopenSelectedTimesBtn;
         
         /// <summary>
-        /// LinkButton5 control.
+        /// ReopenEntireDayBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton5;
+        protected global::System.Web.UI.WebControls.LinkButton ReopenEntireDayBtn;
+        
+        /// <summary>
+        /// CancelManageBlockedOutDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton CancelManageBlockedOutDate;
         
         /// <summary>
         /// Label1 control.
