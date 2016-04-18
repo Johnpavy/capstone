@@ -859,8 +859,45 @@ namespace WebApplication1
         //BlockOutSelectedTimes
         protected void BlockOutSelectedTimesBtn_Click(object sender, EventArgs e)
         {
+            bool SelectedFullDate = false;
+            int count = 0;
 
-            if(GetValidTime(StartTimeDrpList.Text, EndTimeDrpList.Text))
+            if (GetValidTime(StartTimeDrpList.Text, EndTimeDrpList.Text))
+            {
+                SqlConnection db = new SqlConnection(SqlDataSource5.ConnectionString);
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.Connection = db;
+
+                cmd.CommandText = "SELECT COUNT(*) FROM [MFNBlockedDatesTable] WHERE Trainer_Id = @id AND BlockedDate_Date = @date AND BlockedDate_IsFullDay = @fullDay AND BlockedDate_StartTime = @startTime AND BlockedDate_EndTime";
+                cmd.Parameters.AddWithValue("@id", Tobj.TrainerId);
+                cmd.Parameters.AddWithValue("@date", BlockedOutSelctedDateTxtBox.Text);
+                cmd.Parameters.AddWithValue("@startTime", StartTimeDrpList.Text);
+                cmd.Parameters.AddWithValue("@endTime", EndTimeDrpList.Text);
+                cmd.Parameters.AddWithValue("@fullDay", false);
+
+                try
+                {
+                    db.Open();
+                    count = (int)cmd.ExecuteScalar();
+                }
+                catch
+                {
+                    count = -1;
+                }
+                finally
+                {
+                    db.Close();
+                }
+
+            }
+
+            if(count < 0)
+            {
+
+            }
+
+            if (GetValidTime(StartTimeDrpList.Text, EndTimeDrpList.Text))
             {
                 SqlConnection db2 = new SqlConnection(SqlDataSource5.ConnectionString);
                 SqlCommand cmd2 = new SqlCommand();
@@ -1056,12 +1093,13 @@ namespace WebApplication1
         {
             OptionsDiv.Visible = false;
             ManageAppointmentDiv.Visible = true;
+
         }
 
         protected void ManageBlackedOutTimes_Click(object sender, EventArgs e)
         {
             OptionsDiv.Visible = false;
-            ManageBlackedOutTimes.Visible = true;
+            ManageBlockedTimeDiv.Visible = true;
         }
 
         protected void CancelAppointmentManagement_Click(object sender, EventArgs e)
@@ -1073,7 +1111,7 @@ namespace WebApplication1
         protected void CancelManageBlockedOutDate_Click(object sender, EventArgs e)
         {
             OptionsDiv.Visible = true;
-            ManageBlackedOutTimes.Visible = false;
+            ManageBlockedTimeDiv.Visible = false;
         }
 
     }
