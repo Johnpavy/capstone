@@ -38,7 +38,7 @@ namespace WebApplication1
 
         protected void button_Click(object sender, EventArgs e)
         {
-            Response.Redirect("ClientProfile.aspx")
+            Response.Redirect("ClientProfile.aspx");
         }
     }
     public class ClientAdress
