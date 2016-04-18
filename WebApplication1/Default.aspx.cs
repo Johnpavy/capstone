@@ -466,16 +466,16 @@ namespace WebApplication1
                 body += "<br /><br />Please click the following link to activate your account";
                 if (isTrainer)
                 {
-                    
+
                     // for live website, uncomment this and comment the local host
-                  //   body += "<br /><a href = '" + Request.Url.AbsoluteUri.Replace("http://mobilefitnessnetwork.azurewebsites.net/Default.aspx", "http://mobilefitnessnetwork.azurewebsites.net/ConfirmationPage?ActivationCode=" + activationCode) + "'>Click here to activate your account.</a>";
+                    //   body += "<br /><a href = '" + Request.Url.AbsoluteUri.Replace("http://mobilefitnessnetwork.azurewebsites.net/", "http://mobilefitnessnetwork.azurewebsites.net/ConfirmationPage?ActivationCode=" + activationCode) + "'>Click here to activate your account.</a>";
 
                     // for local host comment this and uncomment link generator above
                     body += "<br /><a href = '" + Request.Url.AbsoluteUri.Replace("Default.aspx", "ConfirmationPage.aspx?ActivationCode=" + activationCode) + "'>Click here to activate your account.</a>";
                 }
                 else
                 {
-                  //  body += "<br /><a href = '" + Request.Url.AbsoluteUri.Replace("http://mobilefitnessnetwork.azurewebsites.net/Default.aspx", "http://mobilefitnessnetwork.azurewebsites.net/ClientConfirmationPage?ActivationCode=" + activationCode) + "'>Click here to activate your account.</a>";
+                    //  body += "<br /><a href = '" + Request.Url.AbsoluteUri.Replace("http://mobilefitnessnetwork.azurewebsites.net/", "http://mobilefitnessnetwork.azurewebsites.net/ClientConfirmationPage?ActivationCode=" + activationCode) + "'>Click here to activate your account.</a>";
                     body += "<br /><a href = '" + Request.Url.AbsoluteUri.Replace("Default.aspx", "ClientConfirmationPage.aspx?ActivationCode=" + activationCode) + "'>Click here to activate your account.</a>";
                 }
                 body += "<br /><br />Thanks";
