@@ -233,6 +233,8 @@ namespace WebApplication1
             String password = Request.Form["password"];
             String CPassword = Request.Form["Cpassword"];
             string message = string.Empty;
+            // If true, trainer confirmation email is sent if false, client email confirmation is sent
+            bool isTrainer = true;
 
             bool userNameExists;
             SqlConnection trainerDb = new SqlConnection(SqlDataSource1.ConnectionString);
@@ -344,7 +346,7 @@ namespace WebApplication1
                         Tobj.TrainerId = trainerID;
                         Session["TrainerInfo"] = Tobj;
 
-                        SendActivationEmail((int)Session["trainerID"], email, firstName);
+                        SendActivationEmail((int)Session["trainerID"], email, firstName, isTrainer);
                         message = "Activation email sent, please click the link in the email from us to finish registration.";
 
                         ClientScript.RegisterStartupScript(GetType(), "alert", "alert('" + message + "');", true);
@@ -386,9 +388,9 @@ namespace WebApplication1
 
         // From http://www.aspsnippets.com/Articles/Send-user-Confirmation-email-after-Registration-with-Activation-Link-in-ASPNET.aspx
 
-        private void SendActivationEmail(int userId, string email, string name)
+        private void SendActivationEmail(int userId, string email, string name, Boolean isTrainer)
         {
-            String firstName = Request.Form["FName"];
+           // String firstName = Request.Form["FName"];
            // String email = Request.Form["email"];
             string activationCode = Guid.NewGuid().ToString();
             SqlCommand cmd2 = new SqlCommand();
@@ -418,13 +420,21 @@ namespace WebApplication1
             using (MailMessage mm = new MailMessage("MobileFitnessNetwork@gmail.com", email))
             {
                 mm.Subject = "Account Activation";
-                string body = "Hello " + firstName + ",";
+                string body = "Hello " + name + ",";
                 body += "<br /><br />Please click the following link to activate your account";
-                // for live website, uncomment this and comment the local host
-                // body += "<br /><a href = '" + Request.Url.AbsoluteUri.Replace("http://mobilefitnessnetwork.azurewebsites.net/default.aspx", "http://mobilefitnessnetwork.azurewebsites.net/ConfirmationPage?ActivationCode=" + activationCode) + "'>Click here to activate your account.</a>";
+                if (isTrainer)
+                {
+                    
+                    // for live website, uncomment this and comment the local host
+                    // body += "<br /><a href = '" + Request.Url.AbsoluteUri.Replace("http://mobilefitnessnetwork.azurewebsites.net/default.aspx", "http://mobilefitnessnetwork.azurewebsites.net/ConfirmationPage?ActivationCode=" + activationCode) + "'>Click here to activate your account.</a>";
 
-                // for local host comment this and uncomment link generator above
-                body += "<br /><a href = '" + Request.Url.AbsoluteUri.Replace("Default.aspx", "ConfirmationPage.aspx?ActivationCode=" + activationCode) + "'>Click here to activate your account.</a>";
+                    // for local host comment this and uncomment link generator above
+                    body += "<br /><a href = '" + Request.Url.AbsoluteUri.Replace("Default.aspx", "ConfirmationPage.aspx?ActivationCode=" + activationCode) + "'>Click here to activate your account.</a>";
+                }
+                else
+                {
+                    body += "<br /><a href = '" + Request.Url.AbsoluteUri.Replace("Default.aspx", "ClientConfirmationPage.aspx?ActivationCode=" + activationCode) + "'>Click here to activate your account.</a>";
+                }
                 body += "<br /><br />Thanks";
                 mm.Body = body;
                 mm.IsBodyHtml = true;
@@ -467,6 +477,8 @@ namespace WebApplication1
             String password = Request.Form["CLpassword"];
             String CPassword = Request.Form["CCpassword"];
             string message = string.Empty;
+            // if false, client email verification is sent
+            bool isTrainer = false;
 
             bool clientNameExists;
 
@@ -580,12 +592,11 @@ namespace WebApplication1
                         Uobj.UserId = userID;
                         Session["UserInfo"] = Uobj;
 
-                        SendActivationEmail((int)Session["userID"], email, firstName);
+                        SendActivationEmail((int)Session["userID"], email, firstName, isTrainer);
                         message = "Activation email sent, please click the link in the email from us to finish registration.";
 
                         ClientScript.RegisterStartupScript(GetType(), "alert", "alert('" + message + "');", true);
 
-                        // Response.Redirect("TrainerSignup.aspx");
 
                     }
                     catch
