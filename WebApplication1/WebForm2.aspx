@@ -308,7 +308,7 @@
                       Additional  Person Rate: <asp:TextBox ID="NewAdditionalPersonRateTxtBox" runat="server"></asp:TextBox> per hour
                   </div>
                   <div class="modal-footer">
-                    <asp:LinkButton ID="UpdateRatesBtn" cssclass="btn btn-default" runat ="server">Update</asp:LinkButton>
+                    <asp:LinkButton ID="UpdateRatesBtn" cssclass="btn btn-default" runat ="server" onclick="ComfirmUpdateRatesButton_Click">Update</asp:LinkButton>
                     <button type="button" class="btn btn-default" data-dismiss="modal" onclick="ComfirmUpdateRatesButton_Click">Close</button>
                   </div>
                 </div>

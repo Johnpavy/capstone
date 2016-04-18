@@ -116,7 +116,7 @@ namespace WebApplication1
             string newIndividualRate = NewIndividualRateTxtBox.Text;
             string newAdditonalRate = NewAdditionalPersonRateTxtBox.Text;
 
-            if(newIndividualRate == "")
+            if (newIndividualRate == "")
             {
                 newIndividualRate = IndividualRatesTxtBox.Text;
 
@@ -126,18 +126,20 @@ namespace WebApplication1
             {
                 newAdditonalRate = AdditionalPersonRateTxtBox.Text;
             }
-
+            Tobj.IndividualRate = newIndividualRate;
+            Tobj.AdditionalPersonRate = newAdditonalRate;
+            Session["TrainerInfo"] = Tobj;
 
             SqlConnection db = new SqlConnection(SqlDataSource1.ConnectionString);
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = System.Data.CommandType.Text;
             cmd.Connection = db;
 
-            cmd.CommandText = "UPDATE [MFNTrainerTable] SET Trainer_IndividualRate = @ind AND Trainer_AdditionalPersonRate = @add WHERE Trainer_Id = @id";
+            cmd.CommandText = "UPDATE [MFNTrainerTable] SET Trainer_IndividualRate = @indRate, Trainer_AdditionalPersonRate = @addPerson WHERE Trainer_Id = @id";
 
             cmd.Parameters.AddWithValue("@id", Tobj.TrainerId);
-            cmd.Parameters.AddWithValue("@ind", newIndividualRate);
-            cmd.Parameters.AddWithValue("@add", newAdditonalRate);
+            cmd.Parameters.AddWithValue("@indRate", newIndividualRate);
+            cmd.Parameters.AddWithValue("@addPerson", newAdditonalRate);
 
 
             try
@@ -147,7 +149,7 @@ namespace WebApplication1
             }
             catch
             {
-               //no change
+                //Response.Write(@"<script language='javascript'>alert('Error Removing from Database!');</script>");
             }
             finally
             {
