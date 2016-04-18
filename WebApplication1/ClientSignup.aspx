@@ -103,7 +103,7 @@
                         </div>
 					</div>	
                      <div class="col-sm-4 form-group">
-						<label>Training Type</label>
+						<label>Training Interest</label>
                         <div class="dropdown">
                             <asp:DropDownList ID="DropDownList5" runat="server" CssClass="form-control">
                                 <asp:ListItem Text="Select one" Value="0"></asp:ListItem>
@@ -116,14 +116,14 @@
 					<div class="form-group">
 
 						<span class="auto-style1">Available Equipment</span>
-						<textarea placeholder="Enter Fitness Goals" rows="3" class="form-control" name ="Goals"></textarea>
+						<textarea placeholder="What equipment do you have?" rows="3" class="form-control" name ="Equipment"></textarea>
                         <div class="CreateAccountContainer text-center">
                             <br />
 					        <asp:LinkButton ID="button" Class="btn btn-lg btn-inf" runat="server" OnClick="button_Click">Create Account</asp:LinkButton>									
 					        <br />
 					        <br />
 					        <asp:Label ID="Label1" runat="server" Text="Label" Visible="False"></asp:Label>
-                            <asp:SqlDataSource ID="SqlDataSource2" runat="server"></asp:SqlDataSource>
+                            <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" SelectCommand="SELECT * FROM [MFNUserLocTable]"></asp:SqlDataSource>
                             <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" SelectCommand="SELECT * FROM [MFNUserTable]"></asp:SqlDataSource>
                         </div>
 				    </div>

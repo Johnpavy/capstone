@@ -57,10 +57,10 @@ namespace WebApplication1
                 Label1.Text = "All fields required";
                 Label1.Visible = true;
             }
-            //else if()
+
             else
             {
-           //     int trainerID = Tobj.TrainerId;
+
                 SqlConnection trainerLocDB = new SqlConnection(SqlDataSource1.ConnectionString);
                 SqlConnection trainerDB = new SqlConnection(SqlDataSource2.ConnectionString);
                 // sql command to insert address lat and long into the location table
