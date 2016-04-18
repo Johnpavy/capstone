@@ -112,6 +112,8 @@
 					        <br />
 					        <br />
 					        <asp:Label ID="Label1" runat="server" Text="Label" Visible="False"></asp:Label>
+                            <asp:SqlDataSource ID="SqlDataSource2" runat="server"></asp:SqlDataSource>
+                            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" SelectCommand="SELECT * FROM [MFNUserTable]"></asp:SqlDataSource>
                         </div>
 				    </div>
 	</div>
