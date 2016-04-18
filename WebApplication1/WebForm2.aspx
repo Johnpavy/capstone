@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm2.aspx.cs" Inherits="WebApplication1.WebForm2" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm2.aspx.cs" Inherits="WebApplication1.WebForm2" EnableEventValidation="false"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -115,7 +115,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                           </button>
-                          <a class="NavBrand navbar-brand glyphicon glyphicon-home white" href="#">
+                          <a class="NavBrand navbar-brand glyphicon glyphicon-home white" href="WebForm2.aspx">
                             </a>
                         </div>
 
@@ -257,6 +257,7 @@
             <footer class="FooterContainer col-xs-12 col-sm-12 text-center">
                 <p class="FooterContent">TEST FOOTER</p>
             </footer>
+
             <!-- Bio Modal -->
             <div id="myModal" class="modal fade" role="dialog" runat="server" >
               <div class="modal-dialog">
