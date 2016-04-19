@@ -171,6 +171,7 @@
 			 			        </div>
 			 			        <div class="panel-body">
 			    						Selected Date: <asp:TextBox ID="SelectedDateTxtBox" runat="server" ReadOnly="true"></asp:TextBox><br />
+                                        Event Summary: <asp:TextBox ID="EventSummaryTxtBox" runat="server" TextMode="MultiLine" Height="84px" Width="186px"></asp:TextBox><br />
                                         Start Time: <asp:DropDownList ID="StartTimeDrpList" runat="server" Width="50%">
                                         <asp:ListItem>12:00 AM</asp:ListItem>
                                         <asp:ListItem>12:15 AM</asp:ListItem>
@@ -379,6 +380,7 @@
             </div>
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" SelectCommand="SELECT * FROM [MFNTrainerTable]"></asp:SqlDataSource>
         <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" SelectCommand="SELECT * FROM [MFNBlockedDatesTable]"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" SelectCommand="SELECT * FROM [MFNCalendarTable]"></asp:SqlDataSource>
     </form>
 </body>
 </html>

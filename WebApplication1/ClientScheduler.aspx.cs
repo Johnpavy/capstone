@@ -89,6 +89,8 @@ namespace WebApplication1
             }
 
             //To populate the number of attendence dropdown list
+            NumberInAttendance.Items.Clear(); //clear out existing stuff.
+
             for (int x= 0; x< 10; x++)
             {
                 string number = (x + 1).ToString();
@@ -176,609 +178,307 @@ namespace WebApplication1
 
         }
 
-        protected string convertAMPMStartTime(string startTime)
+        protected string convertAMPMTime(string time)
         {
-            string startValue;
+            string timeValue;
 
-            switch (startTime)
+            switch (time)
             {
                 case "12:00 AM":
-                    startValue = "00:00:00";
+                    timeValue = "00:00:00";
                     break;
                 case "12:15 AM":
-                    startValue = "00:15:00";
+                    timeValue = "00:15:00";
                     break;
                 case "12: 30 AM":
-                    startValue = "00:30:00";
+                    timeValue = "00:30:00";
                     break;
                 case "12:45 AM":
-                    startValue = "00:45:00";
+                    timeValue = "00:45:00";
                     break;
                 case "1:00 AM":
-                    startValue = "01:00:00";
+                    timeValue = "01:00:00";
                     break;
                 case "1:15 AM":
-                    startValue = "01:15:00";
+                    timeValue = "01:15:00";
                     break;
                 case "1:30 AM":
-                    startValue = "01:30:00";
+                    timeValue = "01:30:00";
                     break;
                 case "1:45 AM":
-                    startValue = "01:45:00";
+                    timeValue = "01:45:00";
                     break;
                 case "2:00 AM":
-                    startValue = "02:00:00";
+                    timeValue = "02:00:00";
                     break;
                 case "2:15 AM":
-                    startValue = "02:15:00";
+                    timeValue = "02:15:00";
                     break;
                 case "2:30 AM":
-                    startValue = "02:30:00";
+                    timeValue = "02:30:00";
                     break;
                 case "2:45 AM":
-                    startValue = "02:45:00";
+                    timeValue = "02:45:00";
                     break;
                 case "3:00 AM":
-                    startValue = "03:00:00";
+                    timeValue = "03:00:00";
                     break;
                 case "3:15 AM":
-                    startValue = "03:15:00";
+                    timeValue = "03:15:00";
                     break;
                 case "3:30 AM":
-                    startValue = "03:30:00";
+                    timeValue = "03:30:00";
                     break;
                 case "3:45 AM":
-                    startValue = "03:45:00";
+                    timeValue = "03:45:00";
                     break;
                 case "4:00 AM":
-                    startValue = "04:00:00";
+                    timeValue = "04:00:00";
                     break;
                 case "4:15 AM":
-                    startValue = "04:15:00";
+                    timeValue = "04:15:00";
                     break;
                 case "4:30 AM":
-                    startValue = "04:30:00";
+                    timeValue = "04:30:00";
                     break;
                 case "4:45 AM":
-                    startValue = "04:45:00";
+                    timeValue = "04:45:00";
                     break;
                 case "5:00 AM":
-                    startValue = "05:00:00";
+                    timeValue = "05:00:00";
                     break;
                 case "5:15 AM":
-                    startValue = "05:15:00";
+                    timeValue = "05:15:00";
                     break;
                 case "5:30 AM":
-                    startValue = "05:30:00";
+                    timeValue = "05:30:00";
                     break;
                 case "5:45 AM":
-                    startValue = "05:45:00";
+                    timeValue = "05:45:00";
                     break;
                 case "6:00 AM":
-                    startValue = "06:00:00";
+                    timeValue = "06:00:00";
                     break;
                 case "6:15 AM":
-                    startValue = "06:15:00";
+                    timeValue = "06:15:00";
                     break;
                 case "6:30 AM":
-                    startValue = "06:30:00";
+                    timeValue = "06:30:00";
                     break;
                 case "6:45 AM":
-                    startValue = "06:45:00";
+                    timeValue = "06:45:00";
                     break;
                 case "7:00 AM":
-                    startValue = "07:00:00";
+                    timeValue = "07:00:00";
                     break;
                 case "7:15 AM":
-                    startValue = "07:15:00";
+                    timeValue = "07:15:00";
                     break;
                 case "7:30 AM":
-                    startValue = "07:30:00";
+                    timeValue = "07:30:00";
                     break;
                 case "7:45 AM":
-                    startValue = "07:45:00";
+                    timeValue = "07:45:00";
                     break;
                 case "8:00 AM":
-                    startValue = "08:00:00";
+                    timeValue = "08:00:00";
                     break;
                 case "8:15 AM":
-                    startValue = "08:15:00";
+                    timeValue = "08:15:00";
                     break;
                 case "8:30 AM":
-                    startValue = "08:30:00";
+                    timeValue = "08:30:00";
                     break;
                 case "8:45 AM":
-                    startValue = "08:45:00";
+                    timeValue = "08:45:00";
                     break;
                 case "9:00 AM":
-                    startValue = "09:00:00";
+                    timeValue = "09:00:00";
                     break;
                 case "9:15 AM":
-                    startValue = "09:15:00";
+                    timeValue = "09:15:00";
                     break;
                 case "9:30 AM":
-                    startValue = "09:30:00";
+                    timeValue = "09:30:00";
                     break;
                 case "9:45 AM":
-                    startValue = "09:45:00";
+                    timeValue = "09:45:00";
                     break;
                 case "10:00 AM":
-                    startValue = "10:00:00";
+                    timeValue = "10:00:00";
                     break;
                 case "10:15 AM":
-                    startValue = "10:15:00";
+                    timeValue = "10:15:00";
                     break;
                 case "10:30 AM":
-                    startValue = "10:30:00";
+                    timeValue = "10:30:00";
                     break;
                 case "10:45 AM":
-                    startValue = "10:45:00";
+                    timeValue = "10:45:00";
                     break;
                 case "11:00 AM":
-                    startValue = "11:00:00";
+                    timeValue = "11:00:00";
                     break;
                 case "11:15 AM":
-                    startValue = "11:15:00";
+                    timeValue = "11:15:00";
                     break;
                 case "11:30 AM":
-                    startValue = "11:30:00";
+                    timeValue = "11:30:00";
                     break;
                 case "11:45 AM":
-                    startValue = "11:45:00";
+                    timeValue = "11:45:00";
                     break;
                 case "12:00 PM":
-                    startValue = "12:00:00";
+                    timeValue = "12:00:00";
                     break;
                 case "12:15 PM":
-                    startValue = "12:15:00";
+                    timeValue = "12:15:00";
                     break;
                 case "12:30 PM":
-                    startValue = "12:30:00";
+                    timeValue = "12:30:00";
                     break;
                 case "12:45 PM":
-                    startValue = "12:45:00";
+                    timeValue = "12:45:00";
                     break;
                 case "1:00 PM":
-                    startValue = "13:00:00";
+                    timeValue = "13:00:00";
                     break;
                 case "1:15 PM":
-                    startValue = "13:15:00";
+                    timeValue = "13:15:00";
                     break;
                 case "1:30 PM":
-                    startValue = "13:30:00";
+                    timeValue = "13:30:00";
                     break;
                 case "1:45 PM":
-                    startValue = "13:45:00";
+                    timeValue = "13:45:00";
                     break;
                 case "2:00 PM":
-                    startValue = "14:00:00";
+                    timeValue = "14:00:00";
                     break;
                 case "2:15 PM":
-                    startValue = "14:15:00";
+                    timeValue = "14:15:00";
                     break;
                 case "2:30 PM":
-                    startValue = "14:30:00";
+                    timeValue = "14:30:00";
                     break;
                 case "2:45 PM":
-                    startValue = "14:45:00";
+                    timeValue = "14:45:00";
                     break;
                 case "3:00 PM":
-                    startValue = "15:00:00";
+                    timeValue = "15:00:00";
                     break;
                 case "3:15 PM":
-                    startValue = "15:15:00";
+                    timeValue = "15:15:00";
                     break;
                 case "3:30 PM":
-                    startValue = "15:30:00";
+                    timeValue = "15:30:00";
                     break;
                 case "3:45 PM":
-                    startValue = "15:45:00";
+                    timeValue = "15:45:00";
                     break;
                 case "4:00 PM":
-                    startValue = "16:00:00";
+                    timeValue = "16:00:00";
                     break;
                 case "4:15 PM":
-                    startValue = "16:15:00";
+                    timeValue = "16:15:00";
                     break;
                 case "4:30 PM":
-                    startValue = "16:30:00";
+                    timeValue = "16:30:00";
                     break;
                 case "4:45 PM":
-                    startValue = "16:45:00";
+                    timeValue = "16:45:00";
                     break;
                 case "5:00 PM":
-                    startValue = "17:00:00";
+                    timeValue = "17:00:00";
                     break;
                 case "5:15 PM":
-                    startValue = "17:15:00";
+                    timeValue = "17:15:00";
                     break;
                 case "5:30 PM":
-                    startValue = "17:30:00";
+                    timeValue = "17:30:00";
                     break;
                 case "5:45 PM":
-                    startValue = "17:45:00";
+                    timeValue = "17:45:00";
                     break;
                 case "6:00 PM":
-                    startValue = "18:00:00";
+                    timeValue = "18:00:00";
                     break;
                 case "6:15 PM":
-                    startValue = "18:15:00";
+                    timeValue = "18:15:00";
                     break;
                 case "6:30 PM":
-                    startValue = "18:30:00";
+                    timeValue = "18:30:00";
                     break;
                 case "6:45 PM":
-                    startValue = "18:45:00";
+                    timeValue = "18:45:00";
                     break;
                 case "7:00 PM":
-                    startValue = "19:00:00";
+                    timeValue = "19:00:00";
                     break;
                 case "7:15 PM":
-                    startValue = "19:15:00";
+                    timeValue = "19:15:00";
                     break;
                 case "7:30 PM":
-                    startValue = "19:30:00";
+                    timeValue = "19:30:00";
                     break;
                 case "7:45 PM":
-                    startValue = "19:45:00";
+                    timeValue = "19:45:00";
                     break;
                 case "8:00 PM":
-                    startValue = "20:00:00";
+                    timeValue = "20:00:00";
                     break;
                 case "8:15 PM":
-                    startValue = "20:15:00";
+                    timeValue = "20:15:00";
                     break;
                 case "8:30 PM":
-                    startValue = "20:30:00";
+                    timeValue = "20:30:00";
                     break;
                 case "8:45 PM":
-                    startValue = "20:45:00";
+                    timeValue = "20:45:00";
                     break;
                 case "9:00 PM":
-                    startValue = "21:00:00";
+                    timeValue = "21:00:00";
                     break;
                 case "9:15 PM":
-                    startValue = "21:15:00";
+                    timeValue = "21:15:00";
                     break;
                 case "9:30 PM":
-                    startValue = "21:30:00";
+                    timeValue = "21:30:00";
                     break;
                 case "9:45 PM":
-                    startValue = "21:45:00";
+                    timeValue = "21:45:00";
                     break;
                 case "10:00 PM":
-                    startValue = "22:00:00";
+                    timeValue = "22:00:00";
                     break;
                 case "10:15 PM":
-                    startValue = "22:15:00";
+                    timeValue = "22:15:00";
                     break;
                 case "10:30 PM":
-                    startValue = "22:30:00";
+                    timeValue = "22:30:00";
                     break;
                 case "10:45 PM":
-                    startValue = "22:45:00";
+                    timeValue = "22:45:00";
                     break;
                 case "11:00 PM":
-                    startValue = "23:00:00";
+                    timeValue = "23:00:00";
                     break;
                 case "11:15 PM":
-                    startValue = "23:15:00";
+                    timeValue = "23:15:00";
                     break;
                 case "11:30 PM":
-                    startValue = "23:30:00";
+                    timeValue = "23:30:00";
                     break;
                 case "11:45 PM":
-                    startValue = "20:45:00";
+                    timeValue = "20:45:00";
                     break;
                 default:
-                    startValue = "00:00:00";
+                    timeValue = "00:00:00";
                     break;
             }
 
 
-            return startValue;
-        }
-
-        protected string convertAMPMEndTime(string endTime)
-        {
-            string  endValue;
-
-            switch (endTime)
-            {
-                case "12:00 AM":
-                    endValue = "00:00:00";
-                    break;
-                case "12:15 AM":
-                    endValue = "00:15:00";
-                    break;
-                case "12: 30 AM":
-                    endValue = "00:30:00";
-                    break;
-                case "12:45 AM":
-                    endValue = "00:45:00";
-                    break;
-                case "1:00 AM":
-                    endValue = "01:00:00";
-                    break;
-                case "1:15 AM":
-                    endValue = "01:15:00";
-                    break;
-                case "1:30 AM":
-                    endValue = "01:30:00";
-                    break;
-                case "1:45 AM":
-                    endValue = "01:45:00";
-                    break;
-                case "2:00 AM":
-                    endValue = "02:00:00";
-                    break;
-                case "2:15 AM":
-                    endValue = "02:15:00";
-                    break;
-                case "2:30 AM":
-                    endValue = "02:30:00";
-                    break;
-                case "2:45 AM":
-                    endValue = "02:45:00";
-                    break;
-                case "3:00 AM":
-                    endValue = "03:00:00";
-                    break;
-                case "3:15 AM":
-                    endValue = "03:15:00";
-                    break;
-                case "3:30 AM":
-                    endValue = "03:30:00";
-                    break;
-                case "3:45 AM":
-                    endValue = "03:45:00";
-                    break;
-                case "4:00 AM":
-                    endValue = "04:00:00";
-                    break;
-                case "4:15 AM":
-                    endValue = "04:15:00";
-                    break;
-                case "4:30 AM":
-                    endValue = "04:30:00";
-                    break;
-                case "4:45 AM":
-                    endValue = "04:45:00";
-                    break;
-                case "5:00 AM":
-                    endValue = "05:00:00";
-                    break;
-                case "5:15 AM":
-                    endValue = "05:15:00";
-                    break;
-                case "5:30 AM":
-                    endValue = "05:30:00";
-                    break;
-                case "5:45 AM":
-                    endValue = "05:45:00";
-                    break;
-                case "6:00 AM":
-                    endValue = "06:00:00";
-                    break;
-                case "6:15 AM":
-                    endValue = "06:15:00";
-                    break;
-                case "6:30 AM":
-                    endValue = "06:30:00";
-                    break;
-                case "6:45 AM":
-                    endValue = "06:45:00";
-                    break;
-                case "7:00 AM":
-                    endValue = "07:00:00";
-                    break;
-                case "7:15 AM":
-                    endValue = "07:15:00";
-                    break;
-                case "7:30 AM":
-                    endValue = "07:30:00";
-                    break;
-                case "7:45 AM":
-                    endValue = "07:45:00";
-                    break;
-                case "8:00 AM":
-                    endValue = "08:00:00";
-                    break;
-                case "8:15 AM":
-                    endValue = "08:15:00";
-                    break;
-                case "8:30 AM":
-                    endValue = "08:30:00";
-                    break;
-                case "8:45 AM":
-                    endValue = "08:45:00";
-                    break;
-                case "9:00 AM":
-                    endValue = "09:00:00";
-                    break;
-                case "9:15 AM":
-                    endValue = "09:15:00";
-                    break;
-                case "9:30 AM":
-                    endValue = "09:30:00";
-                    break;
-                case "9:45 AM":
-                    endValue = "09:45:00";
-                    break;
-                case "10:00 AM":
-                    endValue = "10:00:00";
-                    break;
-                case "10:15 AM":
-                    endValue = "10:15:00";
-                    break;
-                case "10:30 AM":
-                    endValue = "10:30:00";
-                    break;
-                case "10:45 AM":
-                    endValue = "10:45:00";
-                    break;
-                case "11:00 AM":
-                    endValue = "11:00:00";
-                    break;
-                case "11:15 AM":
-                    endValue = "11:15:00";
-                    break;
-                case "11:30 AM":
-                    endValue = "11:30:00";
-                    break;
-                case "11:45 AM":
-                    endValue = "11:45:00";
-                    break;
-                case "12:00 PM":
-                    endValue = "12:00:00";
-                    break;
-                case "12:15 PM":
-                    endValue = "12:15:00";
-                    break;
-                case "12:30 PM":
-                    endValue = "12:30:00";
-                    break;
-                case "12:45 PM":
-                    endValue = "12:45:00";
-                    break;
-                case "1:00 PM":
-                    endValue = "13:00:00";
-                    break;
-                case "1:15 PM":
-                    endValue = "13:15:00";
-                    break;
-                case "1:30 PM":
-                    endValue = "13:30:00";
-                    break;
-                case "1:45 PM":
-                    endValue = "13:45:00";
-                    break;
-                case "2:00 PM":
-                    endValue = "14:00:00";
-                    break;
-                case "2:15 PM":
-                    endValue = "14:15:00";
-                    break;
-                case "2:30 PM":
-                    endValue = "14:30:00";
-                    break;
-                case "2:45 PM":
-                    endValue = "14:45:00";
-                    break;
-                case "3:00 PM":
-                    endValue = "15:00:00";
-                    break;
-                case "3:15 PM":
-                    endValue = "15:15:00";
-                    break;
-                case "3:30 PM":
-                    endValue = "15:30:00";
-                    break;
-                case "3:45 PM":
-                    endValue = "15:45:00";
-                    break;
-                case "4:00 PM":
-                    endValue = "16:00:00";
-                    break;
-                case "4:15 PM":
-                    endValue = "16:15:00";
-                    break;
-                case "4:30 PM":
-                    endValue = "16:30:00";
-                    break;
-                case "4:45 PM":
-                    endValue = "16:45:00";
-                    break;
-                case "5:00 PM":
-                    endValue = "17:00:00";
-                    break;
-                case "5:15 PM":
-                    endValue = "17:15:00";
-                    break;
-                case "5:30 PM":
-                    endValue = "17:30:00";
-                    break;
-                case "5:45 PM":
-                    endValue = "17:45:00";
-                    break;
-                case "6:00 PM":
-                    endValue = "18:00:00";
-                    break;
-                case "6:15 PM":
-                    endValue = "18:15:00";
-                    break;
-                case "6:30 PM":
-                    endValue = "18:30:00";
-                    break;
-                case "6:45 PM":
-                    endValue = "18:45:00";
-                    break;
-                case "7:00 PM":
-                    endValue = "19:00:00";
-                    break;
-                case "7:15 PM":
-                    endValue = "19:15:00";
-                    break;
-                case "7:30 PM":
-                    endValue = "19:30:00";
-                    break;
-                case "7:45 PM":
-                    endValue = "19:45:00";
-                    break;
-                case "8:00 PM":
-                    endValue = "20:00:00";
-                    break;
-                case "8:15 PM":
-                    endValue = "20:15:00";
-                    break;
-                case "8:30 PM":
-                    endValue = "20:30:00";
-                    break;
-                case "8:45 PM":
-                    endValue = "20:45:00";
-                    break;
-                case "9:00 PM":
-                    endValue = "21:00:00";
-                    break;
-                case "9:15 PM":
-                    endValue = "21:15:00";
-                    break;
-                case "9:30 PM":
-                    endValue = "21:30:00";
-                    break;
-                case "9:45 PM":
-                    endValue = "21:45:00";
-                    break;
-                case "10:00 PM":
-                    endValue = "22:00:00";
-                    break;
-                case "10:15 PM":
-                    endValue = "22:15:00";
-                    break;
-                case "10:30 PM":
-                    endValue = "22:30:00";
-                    break;
-                case "10:45 PM":
-                    endValue = "22:45:00";
-                    break;
-                case "11:00 PM":
-                    endValue = "23:00:00";
-                    break;
-                case "11:15 PM":
-                    endValue = "23:15:00";
-                    break;
-                case "11:30 PM":
-                    endValue = "23:30:00";
-                    break;
-                case "11:45 PM":
-                    endValue = "20:45:00";
-                    break;
-                default:
-                    endValue = "00:00:00";
-                    break;
-            }
-
-            return endValue;
+            return timeValue;
         }
 
         protected bool GetValidTime(string startTime, string endTime)
@@ -1387,9 +1087,71 @@ namespace WebApplication1
 
         protected void RequestAppointmentBtn_Click(object sender, EventArgs e)
         {
+            string startTime;
+            string endTime;
+
             //This needs to validate and append information to the db.
-            
-            Response.Write(@"<script language='javascript'>alert('Reqest for a session on "+SelectedDateTxtBox.Text+" from "+ StartTimeDrpList.Text + " to "+ EndTimeDrpList.Text +" for "+ NumberInAttendance.Text +" people to "+ UserNameLbl.Text + " has been sent!');</script>");
+            if (GetValidTime(StartTimeDrpList.Text, EndTimeDrpList.Text))
+            {
+                startTime = convertAMPMTime(StartTimeDrpList.Text);
+                endTime = convertAMPMTime(StartTimeDrpList.Text);
+
+                SqlConnection db = new SqlConnection(SqlDataSource3.ConnectionString);
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.Connection = db;
+
+                // cmd.CommandText = "INSERT INTO [MFNCalendarTable] (Trainer_Id, User_Id, Calendar_Date, Calendar_EventSummary, Calendar_Location, Calendar_ApprovedByTrainer, Calendar_PaidByClient, Calendar_CompletedSession, Calendar_NumberOfClients) VALUES (@Tid, @Uid, @date, @event,  @loc, @approved, @paid, @completed, @number)";
+                cmd.CommandText = "INSERT INTO [MFNCalendarTable] (Trainer_Id, User_Id, ) VALUES (@Tid, @Uid)";
+                cmd.Parameters.AddWithValue("@Tid", Tobj.TrainerId);
+                cmd.Parameters.AddWithValue("@Uid", Uobj.UserId);
+               // cmd.Parameters.AddWithValue("@date", SelectedDateTxtBox.Text);
+                //cmd.Parameters.AddWithValue("@event", EventSummaryTxtBox.Text);
+                /*
+               // cmd.Parameters.Add(new SqlParameter("@startTime", startTime));
+                //cmd.Parameters.AddWithValue("@startTime", startTime);
+               // cmd.Parameters.Add(new SqlParameter("@endTime", endTime));
+               // cmd.Parameters.AddWithValue("@endTime", endTime);
+                cmd.Parameters.AddWithValue("@loc", LocationTxtBox.Text);
+                cmd.Parameters.AddWithValue("@approved", false);
+                cmd.Parameters.AddWithValue("@paid", false);
+                cmd.Parameters.AddWithValue("@completed", false);
+                cmd.Parameters.AddWithValue("@number", NumberInAttendance.Text);
+                */
+
+                try
+                {
+                    db.Open();
+                    cmd.ExecuteNonQuery();
+
+                    //success message
+                    if (NumberInAttendance.Text == "1")
+                    {
+                        Response.Write(@"<script language='javascript'>alert('Reqest for a session on " + SelectedDateTxtBox.Text + " from " + StartTimeDrpList.Text + " to " + EndTimeDrpList.Text + " for " + NumberInAttendance.Text + " person has been sent to " + UserNameLbl.Text + "!');</script>");
+                    }
+                    else
+                    {
+                        Response.Write(@"<script language='javascript'>alert('Reqest for a session on " + SelectedDateTxtBox.Text + " from " + StartTimeDrpList.Text + " to " + EndTimeDrpList.Text + " for " + NumberInAttendance.Text + " people has been sent to " + UserNameLbl.Text + "!');</script>");
+                    }
+                }
+                catch
+                {
+                    Response.Write(@"<script language='javascript'>alert('Error Writing into Database!');</script>");
+                }
+                finally
+                {
+                    db.Close();
+                }
+
+            }
+            else
+            {
+                Response.Write(@"<script language='javascript'>alert('Invalid Time Range!');</script>");
+            }
+
+           // Response.Redirect("ClientScheduler.aspx");
         }
+
+
     }
 }
