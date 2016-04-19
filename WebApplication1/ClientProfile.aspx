@@ -145,6 +145,8 @@
                                 <li><a href="AccountSettings.aspx">Settings</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="LogOut.aspx">Log Out</a></li>
+                                  <!--Remove Next Line after testing! -->
+                                <li><a href="ClientScheduler.aspx">For Testing</a></li>
                                 <li role="separator" class="divider"></li>
                               </ul>
                             </li>
@@ -157,7 +159,7 @@
                 <div class="HeaderContainer container-fluid">
                     <div class="row">
                         <div class="PictureColumn col-xs-12 col-sm-12 text-center">
-                            <asp:Image id="ProfilePic" runat="server" src="Pictures/trainerPic.jpg" class="TrainerPicture img-circle img-responsive" alt="Trainer Picture" />
+                            <asp:Image id="ProfilePic" runat="server" src="Pictures/UserPicture.jpg" class="TrainerPicture img-circle img-responsive" alt="Trainer Picture" />
                             <br />
                         </div>
                     </div>
@@ -206,11 +208,95 @@
                     </div>
                     <br>
                     <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br></br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br></br>
+                    <br>
+                    <br>
+                    <br>
+                    <br></br>
+                    <br>
+                    <br>
+                    <br>
+                    <br></br>
+                    <br>
+                    <br>
+                    <br></br>
+                    <br>
+                    <br>
+                    <br></br>
+                    <br>
+                    <br>
+                    <br></br>
+                    <br>
+                    <br>
+                    <br></br>
+                    <br>
+                    <br></br>
+                    <br>
+                    <br></br>
+                    <br>
+                    <br></br>
+                    <br>
+                    <br></br>
+                    <br>
+                    <br></br>
+                    <br>
+                    <br></br>
+                    <br>
                     <br></br>
                     <br>
                     <br></br>
                     <br></br>
                     <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    </br>
+                    </br>
+                    </br>
+                    </br>
+                    </br>
+                    </br>
+                    </br>
+                    </br>
+                    </br>
+                    </br>
+                    </br>
+                    </br>
+                    </br>
+                    </br>
+                    </br>
+                    </br>
+                    </br>
+                    </br>
+                    </br>
+                    </br>
+                    </br>
+                    </br>
+                    </br>
+                    </br>
+                    </br>
+                    </br>
+                    </br>
+                    </br>
                     </br>
                     </br>
                     </br>
