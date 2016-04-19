@@ -11,7 +11,13 @@
     <div>
     New Password:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:TextBox ID="TextBox1" runat="server" TextMode="Password"></asp:TextBox><br />
     Confirm Password:   <asp:TextBox ID="TextBox2" runat="server" TextMode="Password"></asp:TextBox><br />
-        <asp:Button ID="Button1" runat="server" Text="Reset Password" />
+        <asp:Button ID="Button1" runat="server" Text="Reset Password" OnClick="Button1_Click" />
+        <h1><asp:Literal ID="ltMessage" runat="server" />
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" SelectCommand="SELECT [Trainer_PasswordSalt], [Trainer_PasswordHash], [Trainer_Id], [Trainer_Email] FROM [MFNTrainerTable]"></asp:SqlDataSource>
+        </h1>
+        <p>
+            <asp:Label ID="ErrorLabel2" runat="server" Text="Label" Visible="False"></asp:Label>
+        </p>
     </div>
     </form>
 </body>
