@@ -6,6 +6,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.Sql;
 using System.Data.SqlClient;
+using System.Net.Mail;
+using System.Net;
 
 namespace WebApplication1
 {
@@ -33,7 +35,7 @@ namespace WebApplication1
 
                 try
                 {
-                    cmd.CommandText = "Select COUNT(*) FROM [MFNTrainerTable] WHERE Trainer_Email = '" + Email + "'";
+                    cmd.CommandText = "Select COUNT(1) FROM [MFNTrainerTable] WHERE Trainer_Email = '" + Email + "'";
                     db.Open();
 
                     count = (int)cmd.ExecuteScalar();
@@ -56,9 +58,16 @@ namespace WebApplication1
                 }
                 else if (count > 0)
                 {
-                    string message = "Reset Password email sent. Please click the link in the email from us to finish password reset (NO EMAIL SENT).";
+                    cmd.CommandText = "Select Trainer_Id FROM [MFNTrainerTable] WHERE Trainer_Email = '" + Email + "'";
+                    db.Open();
+                    int trainerID = (int)cmd.ExecuteScalar();
+                    Session["trainerID"] = trainerID;
+
+                    SendResetEmail((int)Session["trainerID"]);
+                    string message = "Reset Password email sent. Please click the link in the email from us to finish password reset.";
 
                     ScriptManager.RegisterStartupScript(page, page.GetType(), "err_msg", "alert('" + message + "');window.location='Default.aspx';", true);
+                    db.Close();
                 }
                 else
                 {
@@ -100,7 +109,7 @@ namespace WebApplication1
                 }
                 else if (count > 0)
                 {
-                    string message = "Reset Password email sent. Please click the link in the email from us to finish password reset (NO EMAIL SENT).";
+                    string message = "Reset Password email sent. Please click the link in the email from us to finish password reset.";
 
                     ScriptManager.RegisterStartupScript(page, page.GetType(), "err_msg", "alert('" + message + "');window.location='pagename.aspx';", true);
                 }
@@ -117,6 +126,57 @@ namespace WebApplication1
         protected void Button2_Click(object sender, EventArgs e)
         {
             Response.Redirect("Default.aspx");
+        }
+
+        private void SendResetEmail(int userId)
+        { 
+            String email = TextBox1.Text;
+            string activationCode = Guid.NewGuid().ToString();
+            SqlCommand cmd2 = new SqlCommand();
+            cmd2.CommandType = System.Data.CommandType.Text;
+            //cmd2.CommandText= "UPDATE MFNTrainerTable SET Trainer_ActivationCode = @code WHERE Trainer_Id = @id";
+            cmd2.CommandText = "Select Trainer_ActivationCode FROM [MFNTrainerTable] WHERE Trainer_Email = '" + email + "'";
+            cmd2.Parameters.AddWithValue("@ActivationCode", activationCode);
+            cmd2.Parameters.AddWithValue("@trainerID", userId);
+            SqlConnection trainerDb2 = new SqlConnection(SqlDataSource1.ConnectionString);
+            cmd2.Connection = trainerDb2;
+
+            try
+            {
+                trainerDb2.Open();
+                cmd2.ExecuteNonQuery();
+                trainerDb2.Close();
+
+                using (MailMessage mm = new MailMessage("MobileFitnessNetwork@gmail.com", email))
+                {
+                    mm.Subject = "Password Reset";
+                    string body = "Hello, ";
+                    body += "<br /><br />You may reset your password through this link: ";
+                    body += "<br /><a href = '" + Request.Url.AbsoluteUri.Replace("ResetPassword.aspx", "PasswordResetComfirm.aspx?ActivationCode=" + email) + "'>Click here to reset your password.</a>";
+                    body += "<br /><br />Thanks";
+                    mm.Body = body;
+                    mm.IsBodyHtml = true;
+                    SmtpClient smtp = new SmtpClient();
+                    smtp.Host = "smtp.gmail.com";
+                    smtp.EnableSsl = true;
+                    NetworkCredential NetworkCred = new NetworkCredential("MobileFitnessNetwork@gmail.com", "6tfc^TFC");
+                    smtp.UseDefaultCredentials = true;
+                    smtp.Credentials = NetworkCred;
+                    smtp.Port = 587;
+                    smtp.Send(mm);
+                }
+
+            }
+
+            catch
+            {
+                //ErrorLabel.ForeColor = System.Drawing.Color.Red;
+                ErrorLabel.Text = "Error sending email to user";
+                ErrorLabel.Visible = true;
+            }
+
+
+            
         }
     }
 }
