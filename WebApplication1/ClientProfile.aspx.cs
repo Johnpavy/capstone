@@ -13,7 +13,7 @@ namespace WebApplication1
         UserObject Uobj = new UserObject();
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["TrainerInfo"] == null)
+            if (Session["UserInfo"] == null)
             {
                 //Forces a redirect to splash page if this page is loaded without a session state.
                 Response.Redirect("Default.aspx");
@@ -24,6 +24,7 @@ namespace WebApplication1
 
                 preferences.InnerHtml = Uobj.TrainingPref;
                 equipment.InnerHtml = Uobj.Equipment;
+                UserNameLbl.Text = Uobj.FirstName + " " + Uobj.LastName + " ";
 
             }
         }

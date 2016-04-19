@@ -41,9 +41,9 @@ namespace WebApplication1
                 {
                     IndividualRatesTxtBox.Text = "0.00";
                     AdditionalPersonRateTxtBox.Text = "0.00";
-                }
-                else
-                {
+               }
+                  else
+               {
                     IndividualRatesTxtBox.Text = Tobj.IndividualRate;
                     AdditionalPersonRateTxtBox.Text = Tobj.AdditionalPersonRate;
                 }

@@ -390,164 +390,167 @@ namespace WebApplication1
                 case "10:15 AM":
                     startValue = 43;
                     break;
-                case "10:45 AM":
+                case "10:30 AM":
                     startValue = 44;
                     break;
-                case "11:00 AM":
+                case "10:45 AM":
                     startValue = 45;
                     break;
-                case "11:15 AM":
+                case "11:00 AM":
                     startValue = 46;
                     break;
-                case "11:30 AM":
+                case "11:15 AM":
                     startValue = 47;
                     break;
-                case "11:45 AM":
+                case "11:30 AM":
                     startValue = 48;
                     break;
-                case "12:00 PM":
+                case "11:45 AM":
                     startValue = 49;
                     break;
-                case "12:15 PM":
+                case "12:00 PM":
                     startValue = 50;
                     break;
-                case "12:30 PM":
+                case "12:15 PM":
                     startValue = 51;
                     break;
-                case "12:45 PM":
+                case "12:30 PM":
                     startValue = 52;
                     break;
-                case "1:00 PM":
+                case "12:45 PM":
                     startValue = 53;
                     break;
-                case "1:15 PM":
+                case "1:00 PM":
                     startValue = 54;
                     break;
-                case "1:30 PM":
+                case "1:15 PM":
                     startValue = 55;
                     break;
-                case "1:45 PM":
+                case "1:30 PM":
                     startValue = 56;
                     break;
-                case "2:00 PM":
+                case "1:45 PM":
                     startValue = 57;
                     break;
-                case "2:15 PM":
+                case "2:00 PM":
                     startValue = 58;
                     break;
-                case "2:30 PM":
+                case "2:15 PM":
                     startValue = 59;
                     break;
-                case "2:45 PM":
+                case "2:30 PM":
                     startValue = 60;
                     break;
-                case "3:00 PM":
+                case "2:45 PM":
                     startValue = 61;
                     break;
-                case "3:15 PM":
+                case "3:00 PM":
                     startValue = 62;
                     break;
-                case "3:30 PM":
+                case "3:15 PM":
                     startValue = 63;
                     break;
-                case "3:45 PM":
+                case "3:30 PM":
                     startValue = 64;
                     break;
-                case "4:00 PM":
+                case "3:45 PM":
                     startValue = 65;
                     break;
-                case "4:15 PM":
+                case "4:00 PM":
                     startValue = 66;
                     break;
-                case "4:30 PM":
+                case "4:15 PM":
                     startValue = 67;
                     break;
-                case "4:45 PM":
+                case "4:30 PM":
                     startValue = 68;
                     break;
-                case "5:00 PM":
+                case "4:45 PM":
                     startValue = 69;
                     break;
-                case "5:15 PM":
+                case "5:00 PM":
                     startValue = 70;
                     break;
-                case "5:30 PM":
+                case "5:15 PM":
                     startValue = 71;
                     break;
-                case "5:45 PM":
+                case "5:30 PM":
                     startValue = 72;
                     break;
-                case "6:00 PM":
+                case "5:45 PM":
                     startValue = 73;
                     break;
-                case "6:15 PM":
+                case "6:00 PM":
                     startValue = 74;
                     break;
-                case "6:30 PM":
+                case "6:15 PM":
                     startValue = 75;
                     break;
-                case "6:45 PM":
+                case "6:30 PM":
                     startValue = 76;
                     break;
-                case "7:00 PM":
+                case "6:45 PM":
                     startValue = 77;
                     break;
-                case "7:15 PM":
+                case "7:00 PM":
                     startValue = 78;
                     break;
-                case "7:30 PM":
+                case "7:15 PM":
                     startValue = 79;
                     break;
-                case "7:45 PM":
+                case "7:30 PM":
                     startValue = 80;
                     break;
-                case "8:00 PM":
+                case "7:45 PM":
                     startValue = 81;
                     break;
-                case "8:15 PM":
+                case "8:00 PM":
                     startValue = 82;
                     break;
-                case "8:30 PM":
+                case "8:15 PM":
                     startValue = 83;
                     break;
-                case "8:45 PM":
+                case "8:30 PM":
                     startValue = 84;
                     break;
-                case "9:00 PM":
+                case "8:45 PM":
                     startValue = 85;
                     break;
-                case "9:15 PM":
+                case "9:00 PM":
                     startValue = 86;
                     break;
-                case "9:30 PM":
+                case "9:15 PM":
                     startValue = 87;
                     break;
-                case "9:45 PM":
+                case "9:30 PM":
                     startValue = 88;
                     break;
-                case "10:00 PM":
+                case "9:45 PM":
                     startValue = 89;
                     break;
-                case "10:15 PM":
+                case "10:00 PM":
                     startValue = 90;
                     break;
-                case "10:30 PM":
+                case "10:15 PM":
                     startValue = 91;
                     break;
-                case "10:45 PM":
+                case "10:30 PM":
                     startValue = 92;
                     break;
-                case "11:00 PM":
+                case "10:45 PM":
                     startValue = 93;
                     break;
-                case "11:15 PM":
+                case "11:00 PM":
                     startValue = 94;
                     break;
-                case "11:30 PM":
+                case "11:15 PM":
                     startValue = 95;
                     break;
-                case "11:45 PM":
+                case "11:30 PM":
                     startValue = 96;
+                    break;
+                case "11:45 PM":
+                    startValue = 97;
                     break;
                 default:
                     startValue = 9999;
@@ -682,171 +685,174 @@ namespace WebApplication1
                 case "10:15 AM":
                     endValue = 43;
                     break;
-                case "10:45 AM":
+                case "10:30 AM":
                     endValue = 44;
                     break;
-                case "11:00 AM":
+                case "10:45 AM":
                     endValue = 45;
                     break;
-                case "11:15 AM":
+                case "11:00 AM":
                     endValue = 46;
                     break;
-                case "11:30 AM":
+                case "11:15 AM":
                     endValue = 47;
                     break;
-                case "11:45 AM":
+                case "11:30 AM":
                     endValue = 48;
                     break;
-                case "12:00 PM":
+                case "11:45 AM":
                     endValue = 49;
                     break;
-                case "12:15 PM":
+                case "12:00 PM":
                     endValue = 50;
                     break;
-                case "12:30 PM":
+                case "12:15 PM":
                     endValue = 51;
                     break;
-                case "12:45 PM":
+                case "12:30 PM":
                     endValue = 52;
                     break;
-                case "1:00 PM":
+                case "12:45 PM":
                     endValue = 53;
                     break;
-                case "1:15 PM":
+                case "1:00 PM":
                     endValue = 54;
                     break;
-                case "1:30 PM":
+                case "1:15 PM":
                     endValue = 55;
                     break;
-                case "1:45 PM":
+                case "1:30 PM":
                     endValue = 56;
                     break;
-                case "2:00 PM":
+                case "1:45 PM":
                     endValue = 57;
                     break;
-                case "2:15 PM":
+                case "2:00 PM":
                     endValue = 58;
                     break;
-                case "2:30 PM":
+                case "2:15 PM":
                     endValue = 59;
                     break;
-                case "2:45 PM":
+                case "2:30 PM":
                     endValue = 60;
                     break;
-                case "3:00 PM":
+                case "2:45 PM":
                     endValue = 61;
                     break;
-                case "3:15 PM":
+                case "3:00 PM":
                     endValue = 62;
                     break;
-                case "3:30 PM":
+                case "3:15 PM":
                     endValue = 63;
                     break;
-                case "3:45 PM":
+                case "3:30 PM":
                     endValue = 64;
                     break;
-                case "4:00 PM":
+                case "3:45 PM":
                     endValue = 65;
                     break;
-                case "4:15 PM":
+                case "4:00 PM":
                     endValue = 66;
                     break;
-                case "4:30 PM":
+                case "4:15 PM":
                     endValue = 67;
                     break;
-                case "4:45 PM":
+                case "4:30 PM":
                     endValue = 68;
                     break;
-                case "5:00 PM":
+                case "4:45 PM":
                     endValue = 69;
                     break;
-                case "5:15 PM":
+                case "5:00 PM":
                     endValue = 70;
                     break;
-                case "5:30 PM":
+                case "5:15 PM":
                     endValue = 71;
                     break;
-                case "5:45 PM":
+                case "5:30 PM":
                     endValue = 72;
                     break;
-                case "6:00 PM":
+                case "5:45 PM":
                     endValue = 73;
                     break;
-                case "6:15 PM":
+                case "6:00 PM":
                     endValue = 74;
                     break;
-                case "6:30 PM":
+                case "6:15 PM":
                     endValue = 75;
                     break;
-                case "6:45 PM":
+                case "6:30 PM":
                     endValue = 76;
                     break;
-                case "7:00 PM":
+                case "6:45 PM":
                     endValue = 77;
                     break;
-                case "7:15 PM":
+                case "7:00 PM":
                     endValue = 78;
                     break;
-                case "7:30 PM":
+                case "7:15 PM":
                     endValue = 79;
                     break;
-                case "7:45 PM":
+                case "7:30 PM":
                     endValue = 80;
                     break;
-                case "8:00 PM":
+                case "7:45 PM":
                     endValue = 81;
                     break;
-                case "8:15 PM":
+                case "8:00 PM":
                     endValue = 82;
                     break;
-                case "8:30 PM":
+                case "8:15 PM":
                     endValue = 83;
                     break;
-                case "8:45 PM":
+                case "8:30 PM":
                     endValue = 84;
                     break;
-                case "9:00 PM":
+                case "8:45 PM":
                     endValue = 85;
                     break;
-                case "9:15 PM":
+                case "9:00 PM":
                     endValue = 86;
                     break;
-                case "9:30 PM":
+                case "9:15 PM":
                     endValue = 87;
                     break;
-                case "9:45 PM":
+                case "9:30 PM":
                     endValue = 88;
                     break;
-                case "10:00 PM":
+                case "9:45 PM":
                     endValue = 89;
                     break;
-                case "10:15 PM":
+                case "10:00 PM":
                     endValue = 90;
                     break;
-                case "10:30 PM":
+                case "10:15 PM":
                     endValue = 91;
                     break;
-                case "10:45 PM":
+                case "10:30 PM":
                     endValue = 92;
                     break;
-                case "11:00 PM":
+                case "10:45 PM":
                     endValue = 93;
                     break;
-                case "11:15 PM":
+                case "11:00 PM":
                     endValue = 94;
                     break;
-                case "11:30 PM":
+                case "11:15 PM":
                     endValue = 95;
                     break;
-                case "11:45 PM":
+                case "11:30 PM":
                     endValue = 96;
+                    break;
+                case "11:45 PM":
+                    endValue = 97;
                     break;
                 default:
                     endValue = 9999;
                     break;
             }
 
-            if (startValue < endValue)
+            if (startValue < endValue && (endValue - startValue == 4))
             {
                 return true;
             }

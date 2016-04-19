@@ -115,7 +115,9 @@ namespace WebApplication1
                             Tobj.FirstName = sdr["Trainer_FirstName"].ToString();
                             Tobj.LastName = sdr["Trainer_LastName"].ToString();
                             Tobj.Bio = sdr["Trainer_Bio"].ToString();
-                            Tobj.Speciality = sdr["Trainer_Specialty"].ToString();
+                            Tobj.IndividualRate = sdr["Trainer_IndividualRate"].ToString();
+                            Tobj.AdditionalPersonRate = sdr["Trainer_AdditionalPersonRate"].ToString();
+
                         }
 
                         Session["TrainerInfo"] = Tobj;
@@ -218,8 +220,6 @@ namespace WebApplication1
                             Uobj.UserId = Int32.Parse(sdr["User_Id"].ToString());
                             Uobj.FirstName = sdr["User_FirstName"].ToString();
                             Uobj.LastName = sdr["User_LastName"].ToString();
-                            Uobj.TrainingPref = sdr["User_TrainingPref"].ToString();
-                            Uobj.Equipment = sdr["User_Equipment"].ToString();
                         }
 
                         Session["UserInfo"] = Uobj;
