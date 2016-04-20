@@ -26,6 +26,7 @@ namespace WebApplication1
 
         protected void Page_Load(object sender, EventArgs e)
         {
+
             //This segment of code is to simulate entering this page with a particular trainer info
             //For now, this is a query to MFNTrainerTable to emulate this.
             //This will pull the stuff under trainer 86
@@ -75,6 +76,10 @@ namespace WebApplication1
                 if (Tobj.ImagePath != "")
                 {
                     ProfilePic.Attributes["src"] = Tobj.ImagePath;
+                }
+                else
+                {
+                    Tobj.ImagePath = "Pictures/TrainerPic.jpg";
                 }
             }
 
@@ -1163,9 +1168,16 @@ namespace WebApplication1
         {
             HtmlGenericControl div = new HtmlGenericControl("div");
             div.Attributes.Add("id", divId);
+            div.Attributes.Add("runat", "server");
             div.Attributes.Add("class", "row centered-form");
-            div.InnerHtml = "<div class=\"row centered-form\" runat=\"server\"><div class=\"col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4\"><div class=\"panel panel-default\"><div class=\"panel-heading\"><h3 class=\"panel-title\">Testing Dynamic Div Allocation</h3></div><div class=\"panel-body\"></div></div></div></div>";
+            //this line is an absolute nightmare,but it should work!
+            div.InnerHtml = "<div class=\"row centered-form\" runat=\"server\"><div class=\"col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4\"><div class=\"panel panel-default\"><div class=\"panel-heading\"><h3 class=\"panel-title\">Approved Session</h3></div><div class=\"panel-body\"><img src=\""+ Tobj.ImagePath+ "\" class=\"UserPicture img-circle img - responsive\" style=\"width: 50px; height: 50px; \">" + Tobj.FirstName + " " + Tobj.LastName + " has accepted your session! <a href=\"CheckOut.aspx\">Click Here to Pay!</a></div></div></div></div>"; //not completed need button event to launch session!
             YourComfirmedSessions.Controls.Add(div); 
+        }
+
+        protected void FinalizeAppointmentBtn_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("ClientProfile.aspx");
         }
 
 
