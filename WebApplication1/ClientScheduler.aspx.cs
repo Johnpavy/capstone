@@ -10,6 +10,7 @@ using System.Configuration;
 using System.Data;
 using System.Net.Mail;
 using System.Net;
+using System.Web.UI.HtmlControls; //for dynamic divs
 
 namespace WebApplication1
 {
@@ -96,7 +97,13 @@ namespace WebApplication1
                 string number = (x + 1).ToString();
                 ListItem l = new ListItem(number, number, true);
                 NumberInAttendance.Items.Add(l);
+
             }
+
+            //for dynamic div testing
+            CreateDiv("div1");
+
+
 
             SqlConnection db2 = new SqlConnection(SqlDataSource2.ConnectionString);
             SqlCommand cmd2 = new SqlCommand();
@@ -1150,6 +1157,15 @@ namespace WebApplication1
             }
 
            // Response.Redirect("ClientScheduler.aspx");
+        }
+
+        private void CreateDiv(string divId)
+        {
+            HtmlGenericControl div = new HtmlGenericControl("div");
+            div.Attributes.Add("id", divId);
+            div.Attributes.Add("class", "row centered-form");
+            div.InnerHtml = "<div class=\"row centered-form\" runat=\"server\"><div class=\"col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4\"><div class=\"panel panel-default\"><div class=\"panel-heading\"><h3 class=\"panel-title\">Testing Dynamic Div Allocation</h3></div><div class=\"panel-body\"></div></div></div></div>";
+            YourComfirmedSessions.Controls.Add(div); 
         }
 
 

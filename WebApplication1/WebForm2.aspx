@@ -177,7 +177,7 @@
                       </div>
                       <div id="collapse1" class="panel-collapse collapse in">
                         <div class="panel-body" id ="bio" runat="server">
-                            <asp:TextBox ID="BioTextBox" runat="server" width ="75%" Height="300px" ReadOnly="true" BorderStyle="None" TextMode="MultiLine"></asp:TextBox>
+                            <asp:TextBox ID="BioTextBox" runat="server" width ="75%" Height="300px" ReadOnly="true" BorderStyle="None" TextMode="MultiLine" MaxLength="4000"></asp:TextBox>
                             <!-- Trigger the modal with a button -->
                           <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal" style="float:right;">Edit Biography</button>
                             <asp:Label ID="BioFailLbl" runat="server" Text="Label" Visible="False"></asp:Label>
@@ -281,8 +281,12 @@
                     <h4 class="modal-title">Edit Bio </h4>
                   </div>
                   <div class="modal-body">
-                    <p>Enter your Biography:</p>
-                      <asp:TextBox ID="TempTextBox2" runat="server" Width="100%" Height="500px"  BorderStyle="Solid" TextMode="MultiLine"></asp:TextBox>
+                    <p>Enter your Biography:
+                         (4000 character limit)</p>
+                      <asp:TextBox ID="TempTextBox2" runat="server" Width="100%" Height="500px"  BorderStyle="Solid" TextMode="MultiLine" MaxLength="4000"></asp:TextBox>
+                      <asp:RegularExpressionValidator ID="rgConclusionValidator2" 
+                                ControlToValidate="TempTextBox2" ErrorMessage="Special instruction can't exceed 4000 characters"
+                                ValidationExpression="^[\s\S]{0,4000}$" runat="server" Display="Dynamic"  SetFocusOnError="true" />
                   </div>
                   <div class="modal-footer">
                     <asp:LinkButton ID="TempUpdate" cssclass="btn btn-default" runat ="server" onclick="ComfirmUpdateBioButton2_Click">Update</asp:LinkButton>

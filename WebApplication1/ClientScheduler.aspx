@@ -375,6 +375,10 @@
 	    		        </div>
                     </div>
                      </div>
+
+                        <div id ="YourComfirmedSessions" class="row centered-form" runat="server">
+
+                     </div>
                 </div>
                 </div>
             </div>
