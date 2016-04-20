@@ -16,7 +16,7 @@
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" SelectCommand="SELECT [Trainer_PasswordSalt], [Trainer_PasswordHash], [Trainer_Id], [Trainer_Email] FROM [MFNTrainerTable]"></asp:SqlDataSource>
         </h1>
         <p>
-            <asp:Label ID="ErrorLabel2" runat="server" Text="Label" Visible="False"></asp:Label>
+            <asp:Label ID="ErrorLabel2" runat="server" Text="" Visible="False"></asp:Label>
         </p>
     </div>
     </form>

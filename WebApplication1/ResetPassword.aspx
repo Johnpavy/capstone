@@ -23,7 +23,7 @@
         <asp:Label ID="ErrorLbl" runat="server" ForeColor="#FF3300" Text="Label" Visible="False"></asp:Label>
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" SelectCommand="SELECT * FROM [MFNTrainerTable]"></asp:SqlDataSource>
         <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" SelectCommand="SELECT * FROM [MFNUserTable]"></asp:SqlDataSource>
-        <asp:Label ID="ErrorLabel" runat="server" Text="Label"></asp:Label>
+        <asp:Label ID="ErrorLabel" runat="server" Text=""></asp:Label>
     
     </div>
     </form>
