@@ -281,12 +281,9 @@
                     <h4 class="modal-title">Edit Bio </h4>
                   </div>
                   <div class="modal-body">
-                    <p>Enter your Biography:
-                         (4000 character limit)</p>
+                    <p>Enter your Biography:<br />
+                         (2000 character limit)</p>
                       <asp:TextBox ID="TempTextBox2" runat="server" Width="100%" Height="500px"  BorderStyle="Solid" TextMode="MultiLine" MaxLength="4000"></asp:TextBox>
-                      <asp:RegularExpressionValidator ID="rgConclusionValidator2" 
-                                ControlToValidate="TempTextBox2" ErrorMessage="Special instruction can't exceed 4000 characters"
-                                ValidationExpression="^[\s\S]{0,4000}$" runat="server" Display="Dynamic"  SetFocusOnError="true" />
                   </div>
                   <div class="modal-footer">
                     <asp:LinkButton ID="TempUpdate" cssclass="btn btn-default" runat ="server" onclick="ComfirmUpdateBioButton2_Click">Update</asp:LinkButton>

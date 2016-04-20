@@ -157,15 +157,6 @@ namespace WebApplication1 {
         protected global::System.Web.UI.WebControls.TextBox TempTextBox2;
         
         /// <summary>
-        /// rgConclusionValidator2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator rgConclusionValidator2;
-        
-        /// <summary>
         /// TempUpdate control.
         /// </summary>
         /// <remarks>
