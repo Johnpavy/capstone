@@ -88,10 +88,12 @@
     <Content Include="CSS\TrainerSignup.css" />
     <Content Include="JS\JavaScript.js" />
     <Content Include="LogOut.aspx" />
+    <Content Include="MFNRoot\Trainers\aspoonamore93%40gmail\ProfilePic.jpg" />
     <Content Include="MFNRoot\Trainers\test%40email\ProfilePic.jpg" />
     <Content Include="PasswordResetComfirm.aspx" />
     <Content Include="PaymentConfirmation.aspx" />
     <Content Include="Pictures\trainerPic.jpg" />
+    <Content Include="Pictures\UserPicture.jpg" />
     <Content Include="ResetPassword.aspx" />
     <Content Include="ThankYou.aspx" />
     <Content Include="TrainerScheduler.aspx" />
@@ -105,6 +107,7 @@
     <Content Include="WebForm2.aspx" />
     <Content Include="packages.config" />
     <Content Include="WebForm3.aspx" />
+    <Content Include="ClientScheduler.aspx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -272,6 +275,13 @@
     </Compile>
     <Compile Include="WebForm3.aspx.designer.cs">
       <DependentUpon>WebForm3.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ClientScheduler.aspx.cs">
+      <DependentUpon>ClientScheduler.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClientScheduler.aspx.designer.cs">
+      <DependentUpon>ClientScheduler.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

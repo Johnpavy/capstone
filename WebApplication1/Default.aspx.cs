@@ -115,9 +115,9 @@ namespace WebApplication1
                             Tobj.FirstName = sdr["Trainer_FirstName"].ToString();
                             Tobj.LastName = sdr["Trainer_LastName"].ToString();
                             Tobj.Bio = sdr["Trainer_Bio"].ToString();
-                            Tobj.Speciality = sdr["Trainer_Specialty"].ToString();
                             Tobj.IndividualRate = sdr["Trainer_IndividualRate"].ToString();
                             Tobj.AdditionalPersonRate = sdr["Trainer_AdditionalPersonRate"].ToString();
+
                         }
 
                         Session["TrainerInfo"] = Tobj;
@@ -137,7 +137,7 @@ namespace WebApplication1
                     ErrorLbl.Visible = true;
                     ErrorLbl.Text = "Invalid Email or Password";
                 }
-                
+                //Response.Redirect("Login.aspx");
             }
             //login as user
             else
@@ -196,8 +196,8 @@ namespace WebApplication1
                     db2.Close();
                 }
                 /*
-                If the the user is verified and the database has succesfully placed data
-                into user object.
+                If the the trainer is verified and the database has succesfully placed data
+                into trainer object.
                 */
                 if (count == -1)
                 {
@@ -220,8 +220,6 @@ namespace WebApplication1
                             Uobj.UserId = Int32.Parse(sdr["User_Id"].ToString());
                             Uobj.FirstName = sdr["User_FirstName"].ToString();
                             Uobj.LastName = sdr["User_LastName"].ToString();
-                            Uobj.TrainingPref = sdr["User_TrainingPref"].ToString();
-                            Uobj.Equipment = sdr["User_Equipment"].ToString();
                         }
 
                         Session["UserInfo"] = Uobj;
@@ -239,29 +237,25 @@ namespace WebApplication1
                 {
                     //Login fail
                     ErrorLbl.Visible = true;
-                    ErrorLbl.ForeColor = System.Drawing.Color.Red;
                     ErrorLbl.Text = "Invalid Email or Password";
                 }
             }
         }
-
+        // deprecated, not used in newest iteration can probably be deleted
         protected void signup_Click(object sender, EventArgs e)
         {
-            ClientSignupPanel.Visible = false;
             TrainerSignupPanel.Visible = true;
-
+            //Response.Redirect("TrainerSignup.aspx");
         }
 
         protected void about_Click(object sender, EventArgs e)
         {
 
         }
-        
+        // deprecated, not used in newest iteration can probably be deleted
         protected void ClientSignup_Click(object sender, EventArgs e)
         {
-            TrainerSignupPanel.Visible = false;
             ClientSignupPanel.Visible = true;
-
         }
 
         protected void getStarted_Click(object sender, EventArgs e)
@@ -468,16 +462,15 @@ namespace WebApplication1
                 body += "<br /><br />Please click the following link to activate your account";
                 if (isTrainer)
                 {
-
+                    
                     // for live website, uncomment this and comment the local host
-                    //   body += "<br /><a href = '" + Request.Url.AbsoluteUri.Replace("http://mobilefitnessnetwork.azurewebsites.net/", "http://mobilefitnessnetwork.azurewebsites.net/ConfirmationPage?ActivationCode=" + activationCode) + "'>Click here to activate your account.</a>";
+                    // body += "<br /><a href = '" + Request.Url.AbsoluteUri.Replace("http://mobilefitnessnetwork.azurewebsites.net/default.aspx", "http://mobilefitnessnetwork.azurewebsites.net/ConfirmationPage?ActivationCode=" + activationCode) + "'>Click here to activate your account.</a>";
 
                     // for local host comment this and uncomment link generator above
                     body += "<br /><a href = '" + Request.Url.AbsoluteUri.Replace("Default.aspx", "ConfirmationPage.aspx?ActivationCode=" + activationCode) + "'>Click here to activate your account.</a>";
                 }
                 else
                 {
-                    //  body += "<br /><a href = '" + Request.Url.AbsoluteUri.Replace("http://mobilefitnessnetwork.azurewebsites.net/", "http://mobilefitnessnetwork.azurewebsites.net/ClientConfirmationPage?ActivationCode=" + activationCode) + "'>Click here to activate your account.</a>";
                     body += "<br /><a href = '" + Request.Url.AbsoluteUri.Replace("Default.aspx", "ClientConfirmationPage.aspx?ActivationCode=" + activationCode) + "'>Click here to activate your account.</a>";
                 }
                 body += "<br /><br />Thanks";

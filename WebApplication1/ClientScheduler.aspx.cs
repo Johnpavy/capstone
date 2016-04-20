@@ -10,11 +10,15 @@ using System.Configuration;
 using System.Data;
 using System.Net.Mail;
 using System.Net;
+using System.Web.UI.HtmlControls; //for dynamic divs
+
 namespace WebApplication1
 {
-    public partial class TrainerScheduler : System.Web.UI.Page
+    public partial class WebForm6 : System.Web.UI.Page
     {
+        UserObject Uobj = new UserObject();
         TrainerObject Tobj = new TrainerObject();
+
         int blockedFullDaysCount = 0;
         string[] blockedFullDays = new string[1000];
         int blockedParitalDaysCount = 0;
@@ -22,15 +26,50 @@ namespace WebApplication1
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["TrainerInfo"] == null)
+
+            //This segment of code is to simulate entering this page with a particular trainer info
+            //For now, this is a query to MFNTrainerTable to emulate this.
+            //This will pull the stuff under trainer 86
+
+            SqlConnection db = new SqlConnection(SqlDataSource1.ConnectionString);
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = System.Data.CommandType.Text;
+            cmd.Connection = db;
+
+            cmd.CommandText = "Select * FROM [MFNTrainerTable] WHERE Trainer_Id = @id";
+            cmd.Parameters.AddWithValue("@id", 86);
+            db.Open();
+
+            SqlDataReader sdr = cmd.ExecuteReader();
+
+            while (sdr.Read())
+            {
+                Tobj.TrainerId = Int32.Parse(sdr["Trainer_Id"].ToString());
+                Tobj.ImagePath = sdr["Trainer_Image"].ToString();
+                Tobj.FirstName = sdr["Trainer_FirstName"].ToString();
+                Tobj.LastName = sdr["Trainer_LastName"].ToString();
+                Tobj.Bio = sdr["Trainer_Bio"].ToString();
+                Tobj.IndividualRate = sdr["Trainer_IndividualRate"].ToString();
+                Tobj.AdditionalPersonRate = sdr["Trainer_AdditionalPersonRate"].ToString();
+
+            }
+
+            Session["SelectedTrainer"] = Tobj;
+            //End of emulation
+
+
+            if (Session["UserInfo"] == null || Session["SelectedTrainer"] == null)
             {
                 //Forces a redirect to splash page if this page is loaded without a session state.
                 Response.Redirect("Default.aspx");
             }
             else
             {
-                Tobj.CopyTrainerObject((TrainerObject)Session["TrainerInfo"]);
-                Session["TrainerId"] = Tobj.TrainerId;
+                Uobj.CopyUserObject((UserObject)Session["UserInfo"]);
+                Session["UserId"] = Uobj.UserId;
+
+                Tobj.CopyTrainerObject((TrainerObject)Session["SelectedTrainer"]);
+
                 UserNameLbl.Text = Tobj.FirstName + " " + Tobj.LastName;
 
                 //changes default profile pic to user uploaded one
@@ -38,52 +77,59 @@ namespace WebApplication1
                 {
                     ProfilePic.Attributes["src"] = Tobj.ImagePath;
                 }
+                else
+                {
+                    Tobj.ImagePath = "Pictures/TrainerPic.jpg";
+                }
             }
 
             string startDate = Calendar1.TodaysDate.ToShortDateString();
 
             if (Session["SelectedDate"] == null)
             {
-                BlockedOutSelctedDateTxtBox.Text = startDate;
-                DateTextBox.Text = startDate;
+                SelectedDateTxtBox.Text = startDate;
             }
             else
             {
-                BlockedOutSelctedDateTxtBox.Text = (string) Session["SelectedDate"];
-                DateTextBox.Text = (string) Session["SelectedDate"];
+                SelectedDateTxtBox.Text = (string)Session["SelectedDate"];
             }
 
-            if(Session["SummaryTextBox"] == null)
+            //To populate the number of attendence dropdown list
+            NumberInAttendance.Items.Clear(); //clear out existing stuff.
+
+            for (int x= 0; x< 10; x++)
             {
-                SummaryTextBox.Text = "";
+                string number = (x + 1).ToString();
+                ListItem l = new ListItem(number, number, true);
+                NumberInAttendance.Items.Add(l);
+
             }
-            else
-            {
-                SummaryTextBox.Text = Session["SummaryTextBox"].ToString();
-            }
 
-            //Begin Loading Calendar with Blocked Dates Data
+            //for dynamic div testing
+            CreateDiv("div1");
 
-            SqlConnection db = new SqlConnection(SqlDataSource5.ConnectionString);
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandType = System.Data.CommandType.Text;
-            cmd.Connection = db;
 
-            cmd.CommandText = "SELECT * FROM [MFNBlockedDatesTable] WHERE Trainer_Id = @id ORDER BY BlockedDate_Date";
-            cmd.Parameters.AddWithValue("@id", Tobj.TrainerId);
+
+            SqlConnection db2 = new SqlConnection(SqlDataSource2.ConnectionString);
+            SqlCommand cmd2 = new SqlCommand();
+            cmd2.CommandType = System.Data.CommandType.Text;
+            cmd2.Connection = db2;
+
+            cmd2.CommandText = "SELECT * FROM [MFNBlockedDatesTable] WHERE Trainer_Id = @id ORDER BY BlockedDate_Date";
+            cmd2.Parameters.AddWithValue("@id", Tobj.TrainerId);
 
             try
             {
-                db.Open();
-                SqlDataReader sdr = cmd.ExecuteReader();
+                db2.Open();
+                SqlDataReader sdr2 = cmd2.ExecuteReader();
 
-                while(sdr.Read())
+                while (sdr2.Read())
                 {
-                    DateTime dt = Convert.ToDateTime(sdr["BlockedDate_Date"].ToString());
+                    DateTime dt = Convert.ToDateTime(sdr2["BlockedDate_Date"].ToString());
                     string temp = dt.ToShortDateString();
 
                     //reads bit type from sql db
-                    bool isDateFullyBlocked = sdr.GetBoolean(sdr.GetOrdinal("BlockedDate_IsFullDay"));
+                    bool isDateFullyBlocked = sdr2.GetBoolean(sdr2.GetOrdinal("BlockedDate_IsFullDay"));
 
                     if (isDateFullyBlocked)
                     {
@@ -108,21 +154,20 @@ namespace WebApplication1
 
         }
 
+        protected void BackToProfile_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("ClientProfile.aspx");
+        }
+
         protected void Calendar1_SelectionChanged(object sender, EventArgs e)
         {
             Session["SelectedDate"] = Calendar1.SelectedDate.ToShortDateString();
-            BlockedOutSelctedDateTxtBox.Text = Calendar1.SelectedDate.ToShortDateString();
-            DateTextBox.Text = Calendar1.SelectedDate.ToShortDateString();
-            AppointmentsDropbx.Items.Clear();
-            ListItem l = new ListItem("---Select---", "", true);
-            AppointmentsDropbx.Items.Add(l);
-
-            //Add the super scary query here... and in the page load.
+            SelectedDateTxtBox.Text = Calendar1.SelectedDate.ToShortDateString();
 
         }
 
         protected void Calendar1_DayRender(object sender, DayRenderEventArgs e)
-        { 
+        {
 
             //PartialDay Color
             for (int x = 0; x < blockedParitalDaysCount; x++)
@@ -145,124 +190,309 @@ namespace WebApplication1
 
         }
 
-        protected void BackToProfile_Click(object sender, EventArgs e)
+        protected string convertAMPMTime(string time)
         {
-            Response.Redirect("WebForm2.aspx");
+            string timeValue;
+
+            switch (time)
+            {
+                case "12:00 AM":
+                    timeValue = "00:00:00";
+                    break;
+                case "12:15 AM":
+                    timeValue = "00:15:00";
+                    break;
+                case "12: 30 AM":
+                    timeValue = "00:30:00";
+                    break;
+                case "12:45 AM":
+                    timeValue = "00:45:00";
+                    break;
+                case "1:00 AM":
+                    timeValue = "01:00:00";
+                    break;
+                case "1:15 AM":
+                    timeValue = "01:15:00";
+                    break;
+                case "1:30 AM":
+                    timeValue = "01:30:00";
+                    break;
+                case "1:45 AM":
+                    timeValue = "01:45:00";
+                    break;
+                case "2:00 AM":
+                    timeValue = "02:00:00";
+                    break;
+                case "2:15 AM":
+                    timeValue = "02:15:00";
+                    break;
+                case "2:30 AM":
+                    timeValue = "02:30:00";
+                    break;
+                case "2:45 AM":
+                    timeValue = "02:45:00";
+                    break;
+                case "3:00 AM":
+                    timeValue = "03:00:00";
+                    break;
+                case "3:15 AM":
+                    timeValue = "03:15:00";
+                    break;
+                case "3:30 AM":
+                    timeValue = "03:30:00";
+                    break;
+                case "3:45 AM":
+                    timeValue = "03:45:00";
+                    break;
+                case "4:00 AM":
+                    timeValue = "04:00:00";
+                    break;
+                case "4:15 AM":
+                    timeValue = "04:15:00";
+                    break;
+                case "4:30 AM":
+                    timeValue = "04:30:00";
+                    break;
+                case "4:45 AM":
+                    timeValue = "04:45:00";
+                    break;
+                case "5:00 AM":
+                    timeValue = "05:00:00";
+                    break;
+                case "5:15 AM":
+                    timeValue = "05:15:00";
+                    break;
+                case "5:30 AM":
+                    timeValue = "05:30:00";
+                    break;
+                case "5:45 AM":
+                    timeValue = "05:45:00";
+                    break;
+                case "6:00 AM":
+                    timeValue = "06:00:00";
+                    break;
+                case "6:15 AM":
+                    timeValue = "06:15:00";
+                    break;
+                case "6:30 AM":
+                    timeValue = "06:30:00";
+                    break;
+                case "6:45 AM":
+                    timeValue = "06:45:00";
+                    break;
+                case "7:00 AM":
+                    timeValue = "07:00:00";
+                    break;
+                case "7:15 AM":
+                    timeValue = "07:15:00";
+                    break;
+                case "7:30 AM":
+                    timeValue = "07:30:00";
+                    break;
+                case "7:45 AM":
+                    timeValue = "07:45:00";
+                    break;
+                case "8:00 AM":
+                    timeValue = "08:00:00";
+                    break;
+                case "8:15 AM":
+                    timeValue = "08:15:00";
+                    break;
+                case "8:30 AM":
+                    timeValue = "08:30:00";
+                    break;
+                case "8:45 AM":
+                    timeValue = "08:45:00";
+                    break;
+                case "9:00 AM":
+                    timeValue = "09:00:00";
+                    break;
+                case "9:15 AM":
+                    timeValue = "09:15:00";
+                    break;
+                case "9:30 AM":
+                    timeValue = "09:30:00";
+                    break;
+                case "9:45 AM":
+                    timeValue = "09:45:00";
+                    break;
+                case "10:00 AM":
+                    timeValue = "10:00:00";
+                    break;
+                case "10:15 AM":
+                    timeValue = "10:15:00";
+                    break;
+                case "10:30 AM":
+                    timeValue = "10:30:00";
+                    break;
+                case "10:45 AM":
+                    timeValue = "10:45:00";
+                    break;
+                case "11:00 AM":
+                    timeValue = "11:00:00";
+                    break;
+                case "11:15 AM":
+                    timeValue = "11:15:00";
+                    break;
+                case "11:30 AM":
+                    timeValue = "11:30:00";
+                    break;
+                case "11:45 AM":
+                    timeValue = "11:45:00";
+                    break;
+                case "12:00 PM":
+                    timeValue = "12:00:00";
+                    break;
+                case "12:15 PM":
+                    timeValue = "12:15:00";
+                    break;
+                case "12:30 PM":
+                    timeValue = "12:30:00";
+                    break;
+                case "12:45 PM":
+                    timeValue = "12:45:00";
+                    break;
+                case "1:00 PM":
+                    timeValue = "13:00:00";
+                    break;
+                case "1:15 PM":
+                    timeValue = "13:15:00";
+                    break;
+                case "1:30 PM":
+                    timeValue = "13:30:00";
+                    break;
+                case "1:45 PM":
+                    timeValue = "13:45:00";
+                    break;
+                case "2:00 PM":
+                    timeValue = "14:00:00";
+                    break;
+                case "2:15 PM":
+                    timeValue = "14:15:00";
+                    break;
+                case "2:30 PM":
+                    timeValue = "14:30:00";
+                    break;
+                case "2:45 PM":
+                    timeValue = "14:45:00";
+                    break;
+                case "3:00 PM":
+                    timeValue = "15:00:00";
+                    break;
+                case "3:15 PM":
+                    timeValue = "15:15:00";
+                    break;
+                case "3:30 PM":
+                    timeValue = "15:30:00";
+                    break;
+                case "3:45 PM":
+                    timeValue = "15:45:00";
+                    break;
+                case "4:00 PM":
+                    timeValue = "16:00:00";
+                    break;
+                case "4:15 PM":
+                    timeValue = "16:15:00";
+                    break;
+                case "4:30 PM":
+                    timeValue = "16:30:00";
+                    break;
+                case "4:45 PM":
+                    timeValue = "16:45:00";
+                    break;
+                case "5:00 PM":
+                    timeValue = "17:00:00";
+                    break;
+                case "5:15 PM":
+                    timeValue = "17:15:00";
+                    break;
+                case "5:30 PM":
+                    timeValue = "17:30:00";
+                    break;
+                case "5:45 PM":
+                    timeValue = "17:45:00";
+                    break;
+                case "6:00 PM":
+                    timeValue = "18:00:00";
+                    break;
+                case "6:15 PM":
+                    timeValue = "18:15:00";
+                    break;
+                case "6:30 PM":
+                    timeValue = "18:30:00";
+                    break;
+                case "6:45 PM":
+                    timeValue = "18:45:00";
+                    break;
+                case "7:00 PM":
+                    timeValue = "19:00:00";
+                    break;
+                case "7:15 PM":
+                    timeValue = "19:15:00";
+                    break;
+                case "7:30 PM":
+                    timeValue = "19:30:00";
+                    break;
+                case "7:45 PM":
+                    timeValue = "19:45:00";
+                    break;
+                case "8:00 PM":
+                    timeValue = "20:00:00";
+                    break;
+                case "8:15 PM":
+                    timeValue = "20:15:00";
+                    break;
+                case "8:30 PM":
+                    timeValue = "20:30:00";
+                    break;
+                case "8:45 PM":
+                    timeValue = "20:45:00";
+                    break;
+                case "9:00 PM":
+                    timeValue = "21:00:00";
+                    break;
+                case "9:15 PM":
+                    timeValue = "21:15:00";
+                    break;
+                case "9:30 PM":
+                    timeValue = "21:30:00";
+                    break;
+                case "9:45 PM":
+                    timeValue = "21:45:00";
+                    break;
+                case "10:00 PM":
+                    timeValue = "22:00:00";
+                    break;
+                case "10:15 PM":
+                    timeValue = "22:15:00";
+                    break;
+                case "10:30 PM":
+                    timeValue = "22:30:00";
+                    break;
+                case "10:45 PM":
+                    timeValue = "22:45:00";
+                    break;
+                case "11:00 PM":
+                    timeValue = "23:00:00";
+                    break;
+                case "11:15 PM":
+                    timeValue = "23:15:00";
+                    break;
+                case "11:30 PM":
+                    timeValue = "23:30:00";
+                    break;
+                case "11:45 PM":
+                    timeValue = "20:45:00";
+                    break;
+                default:
+                    timeValue = "00:00:00";
+                    break;
+            }
+
+
+            return timeValue;
         }
 
-
-        protected void SelectThisClientBtn_Click(object sender, EventArgs e)
-        {
-            
-            SqlConnection db = new SqlConnection(SqlDataSource3.ConnectionString);
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandType = System.Data.CommandType.Text;
-            cmd.Connection = db;
-
-            cmd.CommandText = "SELECT * FROM [MFNCalendarTable] WHERE Calendar_Id = @id";
-            cmd.Parameters.AddWithValue("@id", AppointmentsDropbx.SelectedValue);
-
-
-
-            try
-            {
-                db.Open();
-                SqlDataReader sdr = cmd.ExecuteReader();
-
-                SummaryTextBox.Text = "";
-
-                while (sdr.Read())
-                {
-                    SummaryTextBox.Text += "Event Date: ";
-
-                    DateTime dt = Convert.ToDateTime(sdr["Calendar_Date"].ToString());
-
-                    SummaryTextBox.Text += dt.ToShortDateString() + "\n";
-                    SummaryTextBox.Text += "Summary: ";
-                    SummaryTextBox.Text += sdr["Calendar_EventSummary"].ToString() + "\n";
-                    SummaryTextBox.Text += "Start: ";
-                    SummaryTextBox.Text += sdr["Calendar_StartTime"].ToString() + "\n";
-                    SummaryTextBox.Text += "End: ";
-                    SummaryTextBox.Text += sdr["Calendar_EndTime"].ToString() + "\n";
-                    SummaryTextBox.Text += "\n";
-                }
-
-
-                if (SummaryTextBox.Text == "")
-                {
-                    SummaryTextBox.Text = "No Appointmetns Selected";
-                }
-
-            }
-            catch
-            {
-                SummaryTextBox.Text = "An error occured displaying!";
-            }
-            finally
-            {
-                db.Close();
-            }
-            
-
-        }
-
-
-        //Currently Broken :(
-
-        protected void PopulateSummaryTextBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            SqlConnection db = new SqlConnection(SqlDataSource3.ConnectionString);
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandType = System.Data.CommandType.Text;
-            cmd.Connection = db;
-
-            cmd.CommandText = "SELECT * FROM [MFNCalendarTable] WHERE Calendar_Id = @id";
-            cmd.Parameters.AddWithValue("@id", AppointmentsDropbx.Text);
-
-            
-            try
-            {
-                db.Open();
-                SqlDataReader sdr = cmd.ExecuteReader();
-
-                SummaryTextBox.Text = "";
-
-                while(sdr.Read())
-                {
-                    SummaryTextBox.Text += "Event Date: ";
-
-                    DateTime dt = Convert.ToDateTime(sdr["Calendar_Date"].ToString());
-
-                    SummaryTextBox.Text += dt.ToShortDateString() + "\n";
-                    SummaryTextBox.Text += "Summary: ";
-                    SummaryTextBox.Text += sdr["Calendar_EventSummary"].ToString() + "\n";
-                    SummaryTextBox.Text += "Start: ";
-                    SummaryTextBox.Text += sdr["Calendar_StartTime"].ToString() + "\n";
-                    SummaryTextBox.Text += "End: ";
-                    SummaryTextBox.Text += sdr["Calendar_EndTime"].ToString() + "\n";
-                    SummaryTextBox.Text += "\n";
-                }
-
-
-                if (SummaryTextBox.Text == "")
-                {
-                    SummaryTextBox.Text = "No Appointmetns Selected";
-                }
-
-            }
-            catch
-            {
-                SummaryTextBox.Text = "An error occured displaying!";
-            }
-            finally
-            {
-                db.Close();
-            }
-
-            Response.Redirect("TrainerScheduler.aspx");
-        }
-
-        //Time Range Validator
         protected bool GetValidTime(string startTime, string endTime)
         {
             int startValue, endValue;
@@ -867,269 +1097,89 @@ namespace WebApplication1
             }
         }
 
-        //BlockOutSelectedTimes
-        protected void BlockOutSelectedTimesBtn_Click(object sender, EventArgs e)
+        protected void RequestAppointmentBtn_Click(object sender, EventArgs e)
         {
-            int count = 0;
+            string startTime;
+            string endTime;
 
-
+            //This needs to validate and append information to the db.
             if (GetValidTime(StartTimeDrpList.Text, EndTimeDrpList.Text))
             {
+                startTime = convertAMPMTime(StartTimeDrpList.Text);
+                endTime = convertAMPMTime(StartTimeDrpList.Text);
 
-                SqlConnection db = new SqlConnection(SqlDataSource5.ConnectionString);
+                SqlConnection db = new SqlConnection(SqlDataSource3.ConnectionString);
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd.Connection = db;
 
-                cmd.CommandText = "SELECT COUNT(*) FROM [MFNBlockedDatesTable] WHERE Trainer_Id = @id AND BlockedDate_Date = @date AND BlockedDate_IsFullDay = @fullDay AND BlockedDate_StartTime = @startTime AND BlockedDate_EndTime = @endTime";
-                cmd.Parameters.AddWithValue("@id", Tobj.TrainerId);
-                cmd.Parameters.AddWithValue("@date", BlockedOutSelctedDateTxtBox.Text);
-                cmd.Parameters.AddWithValue("@startTime", StartTimeDrpList.Text);
-                cmd.Parameters.AddWithValue("@endTime", EndTimeDrpList.Text);
-                cmd.Parameters.AddWithValue("@fullDay", false);
+                // cmd.CommandText = "INSERT INTO [MFNCalendarTable] (Trainer_Id, User_Id, Calendar_Date, Calendar_EventSummary, Calendar_Location, Calendar_ApprovedByTrainer, Calendar_PaidByClient, Calendar_CompletedSession, Calendar_NumberOfClients) VALUES (@Tid, @Uid, @date, @event,  @loc, @approved, @paid, @completed, @number)";
+                cmd.CommandText = "INSERT INTO [MFNCalendarTable] (Trainer_Id, User_Id, ) VALUES (@Tid, @Uid)";
+                cmd.Parameters.AddWithValue("@Tid", Tobj.TrainerId);
+                cmd.Parameters.AddWithValue("@Uid", Uobj.UserId);
+               // cmd.Parameters.AddWithValue("@date", SelectedDateTxtBox.Text);
+                //cmd.Parameters.AddWithValue("@event", EventSummaryTxtBox.Text);
+                /*
+               // cmd.Parameters.Add(new SqlParameter("@startTime", startTime));
+                //cmd.Parameters.AddWithValue("@startTime", startTime);
+               // cmd.Parameters.Add(new SqlParameter("@endTime", endTime));
+               // cmd.Parameters.AddWithValue("@endTime", endTime);
+                cmd.Parameters.AddWithValue("@loc", LocationTxtBox.Text);
+                cmd.Parameters.AddWithValue("@approved", false);
+                cmd.Parameters.AddWithValue("@paid", false);
+                cmd.Parameters.AddWithValue("@completed", false);
+                cmd.Parameters.AddWithValue("@number", NumberInAttendance.Text);
+                */
 
                 try
                 {
                     db.Open();
-                    count = (int)cmd.ExecuteScalar();
+                    cmd.ExecuteNonQuery();
+
+                    //success message
+                    if (NumberInAttendance.Text == "1")
+                    {
+                        Response.Write(@"<script language='javascript'>alert('Reqest for a session on " + SelectedDateTxtBox.Text + " from " + StartTimeDrpList.Text + " to " + EndTimeDrpList.Text + " for " + NumberInAttendance.Text + " person has been sent to " + UserNameLbl.Text + "!');</script>");
+                    }
+                    else
+                    {
+                        Response.Write(@"<script language='javascript'>alert('Reqest for a session on " + SelectedDateTxtBox.Text + " from " + StartTimeDrpList.Text + " to " + EndTimeDrpList.Text + " for " + NumberInAttendance.Text + " people has been sent to " + UserNameLbl.Text + "!');</script>");
+                    }
                 }
                 catch
                 {
-                    count = -1;
+                    Response.Write(@"<script language='javascript'>alert('Error Writing into Database!');</script>");
                 }
                 finally
                 {
                     db.Close();
                 }
 
-                if(count < 0)
-                {
-                    Response.Write(@"<script language='javascript'>alert('Error Writing to Database!');</script>");
-                }
-                else if(count > 0)
-                {
-                    Response.Write(@"<script language='javascript'>alert('This entry already exists!');</script>");
-                }
-                else
-                {
-                    SqlConnection db2 = new SqlConnection(SqlDataSource5.ConnectionString);
-                    SqlCommand cmd2 = new SqlCommand();
-                    cmd2.CommandType = System.Data.CommandType.Text;
-                    cmd2.Connection = db2;
-
-                    cmd2.CommandText = "INSERT INTO [MFNBlockedDatesTable] (BlockedDate_Date, Trainer_Id, BlockedDate_StartTime, BlockedDate_EndTime, BlockedDate_IsFullDay) VALUES (@date, @id, @startTime, @endTime, @fullDay)";
-                    cmd2.Parameters.AddWithValue("@date", BlockedOutSelctedDateTxtBox.Text);
-                    cmd2.Parameters.AddWithValue("@id", Tobj.TrainerId);
-                    cmd2.Parameters.AddWithValue("@startTime", StartTimeDrpList.Text);
-                    cmd2.Parameters.AddWithValue("@endTime", EndTimeDrpList.Text);
-                    cmd2.Parameters.AddWithValue("@fullDay", false);
-
-
-                    try
-                    {
-                        db2.Open();
-                        cmd2.ExecuteNonQuery();
-                        Response.Write(@"<script language='javascript'>alert('" + BlockedOutSelctedDateTxtBox.Text + " from " + StartTimeDrpList.Text + "to" + EndTimeDrpList.Text + "has been selected as unavaliable.');</script>");
-                    }
-                    catch
-                    {
-                        Response.Write(@"<script language='javascript'>alert('Error Writing to Database!');</script>");
-                    }
-                    finally
-                    {
-                        db2.Close();
-                    }
-
-                }
-
-                
             }
             else
             {
-                Response.Write(@"<script language='javascript'>alert('Invalid Time Range!\n" + StartTimeDrpList.Text + "to" + EndTimeDrpList.Text + "');</script>");
+                Response.Write(@"<script language='javascript'>alert('Invalid Time Range!');</script>");
             }
 
+           // Response.Redirect("ClientScheduler.aspx");
         }
 
-        //BlockOutFullDay
-        protected void BlockOutEntireDayBtn_Click(object sender, EventArgs e)
+        private void CreateDiv(string divId)
         {
-            bool SelectedFullDate = false;
-            int count = 0;
-
-            SqlConnection db = new SqlConnection(SqlDataSource5.ConnectionString);
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandType = System.Data.CommandType.Text;
-            cmd.Connection = db;
-
-            cmd.CommandText = "SELECT COUNT(*) FROM [MFNBlockedDatesTable] WHERE Trainer_Id = @id AND BlockedDate_Date = @date AND BlockedDate_IsFullDay = @fullDay";
-            cmd.Parameters.AddWithValue("@id", Tobj.TrainerId);
-            cmd.Parameters.AddWithValue("@date", BlockedOutSelctedDateTxtBox.Text);
-            cmd.Parameters.AddWithValue("@fullDay", true);
-
-            try
-            {
-                db.Open();
-                count = (int)cmd.ExecuteScalar();
-            }
-            catch
-            {
-                count = -1;
-            }
-            finally
-            {
-                db.Close();
-            }
-
-
-
-            if (count < 0)
-            {
-                Response.Write(@"<script language='javascript'>alert('Error Connecting to Database!');</script>");
-                SelectedFullDate = true; //to prevent altering the db.
-            }
-            else if (count > 0)
-            {
-                SelectedFullDate = true;
-            }
-
-
-            if (SelectedFullDate)
-            {
-                if (count != -1)
-                {
-                   Response.Write(@"<script language='javascript'>alert('" + BlockedOutSelctedDateTxtBox.Text + " has already been selected as unavaliable!');</script>");
-                }
-            }   
-            else
-            {
-                SqlConnection db2 = new SqlConnection(SqlDataSource5.ConnectionString);
-                SqlCommand cmd2 = new SqlCommand();
-                cmd2.CommandType = System.Data.CommandType.Text;
-                cmd2.Connection = db2;
-
-                cmd2.CommandText = "INSERT INTO [MFNBlockedDatesTable] (BlockedDate_Date, Trainer_Id, BlockedDate_StartTime, BlockedDate_EndTime, BlockedDate_IsFullDay) VALUES (@date, @id, @startTime, @endTime, @fullDay)";
-                cmd2.Parameters.AddWithValue("@date", BlockedOutSelctedDateTxtBox.Text);
-                cmd2.Parameters.AddWithValue("@id", Tobj.TrainerId);
-                cmd2.Parameters.AddWithValue("@startTime", "12:00 AM");
-                cmd2.Parameters.AddWithValue("@endTime", "11:45 PM");
-                cmd2.Parameters.AddWithValue("@fullDay", true);
-
-                try
-                {
-                    db2.Open();
-                    cmd2.ExecuteNonQuery();
-                    Response.Write(@"<script language='javascript'>alert('" + BlockedOutSelctedDateTxtBox.Text + " has been marked as unavaliable.');</script>");
-                }
-                catch
-                {
-                    Response.Write(@"<script language='javascript'>alert('Error Writing to Database!');</script>");
-                }
-                finally
-                {
-                    db2.Close();
-                }
-              }
-            }
-
-        //Reopen Entire Day
-        protected void ReopenEntireDayBtn_Click(object sender, EventArgs e)
-        {
-
-            SqlConnection db2 = new SqlConnection(SqlDataSource5.ConnectionString);
-            SqlCommand cmd2 = new SqlCommand();
-            cmd2.CommandType = System.Data.CommandType.Text;
-            cmd2.Connection = db2;
-
-            cmd2.CommandText = "DELETE FROM [MFNBlockedDatesTable] WHERE Trainer_Id = @id AND BlockedDate_Date = @date AND BlockedDate_IsFullDay = @fullDay";
-            cmd2.Parameters.AddWithValue("@date", BlockedOutSelctedDateTxtBox.Text);
-            cmd2.Parameters.AddWithValue("@id", Tobj.TrainerId);
-            cmd2.Parameters.AddWithValue("@startTime", "12:00 AM");
-            cmd2.Parameters.AddWithValue("@endTime", "11:45 PM");
-            cmd2.Parameters.AddWithValue("@fullDay", true);
-
-            try
-            {
-                db2.Open();
-                cmd2.ExecuteNonQuery();
-                Response.Write(@"<script language='javascript'>alert('" + BlockedOutSelctedDateTxtBox.Text + " has been reopened.');</script>");
-            }
-            catch
-            {
-                Response.Write(@"<script language='javascript'>alert('Error Removing from Database!');</script>");
-            }
-            finally
-            {
-                db2.Close();
-            }
-
+            HtmlGenericControl div = new HtmlGenericControl("div");
+            div.Attributes.Add("id", divId);
+            div.Attributes.Add("runat", "server");
+            div.Attributes.Add("class", "row centered-form");
+            //this line is an absolute nightmare,but it should work!
+            div.InnerHtml = "<div class=\"row centered-form\" runat=\"server\"><div class=\"col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4\"><div class=\"panel panel-default\"><div class=\"panel-heading\"><h3 class=\"panel-title\">Approved Session</h3></div><div class=\"panel-body\"><img src=\""+ Tobj.ImagePath+ "\" class=\"UserPicture img-circle img - responsive\" style=\"width: 50px; height: 50px; \">" + Tobj.FirstName + " " + Tobj.LastName + " has accepted your session! <a href=\"CheckOut.aspx\">Click Here to Pay!</a></div></div></div></div>"; //not completed need button event to launch session!
+            YourComfirmedSessions.Controls.Add(div); 
         }
 
-        //Reopen Selected Time
-        protected void ReopenSelectedTimesBtn_Click(object sender, EventArgs e)
+        protected void FinalizeAppointmentBtn_Click(object sender, EventArgs e)
         {
-            if (GetValidTime(StartTimeDrpList.Text, EndTimeDrpList.Text))
-            {
-                SqlConnection db2 = new SqlConnection(SqlDataSource5.ConnectionString);
-                SqlCommand cmd2 = new SqlCommand();
-                cmd2.CommandType = System.Data.CommandType.Text;
-                cmd2.Connection = db2;
-
-                cmd2.CommandText = "DELETE FROM [MFNBlockedDatesTable] WHERE Trainer_Id = @id AND BlockedDate_Date = @date AND BlockedDate_IsFullDay = @fullDay AND BlockedDate_StartTime = @startTime AND BlockedDate_EndTime = @endTime";
-                cmd2.Parameters.AddWithValue("@date", BlockedOutSelctedDateTxtBox.Text);
-                cmd2.Parameters.AddWithValue("@id", Tobj.TrainerId);
-                cmd2.Parameters.AddWithValue("@startTime", StartTimeDrpList.Text);
-                cmd2.Parameters.AddWithValue("@endTime", EndTimeDrpList.Text);
-                cmd2.Parameters.AddWithValue("@fullDay", false);
-
-
-
-                try
-                {
-                    db2.Open();
-                    cmd2.ExecuteNonQuery();
-                    Response.Write(@"<script language='javascript'>alert('" + BlockedOutSelctedDateTxtBox.Text + " from " + StartTimeDrpList.Text + "to" + EndTimeDrpList.Text + "has been reopened.');</script>");
-                }
-                catch
-                {
-                    Response.Write(@"<script language='javascript'>alert('Error Removing from Database!');</script>");
-                }
-                finally
-                {
-                    db2.Close();
-                }
-            }
-            else
-            {
-                Response.Write(@"<script language='javascript'>alert('Invalid Time Range!\n" + StartTimeDrpList.Text + " to " + EndTimeDrpList.Text + "');</script>");
-            }
-
+            Response.Redirect("ClientProfile.aspx");
         }
 
-        protected void ManageSession_Click(object sender, EventArgs e)
-        {
-            OptionsDiv.Visible = false;
-            ManageAppointmentDiv.Visible = true;
-
-        }
-
-        protected void ManageBlackedOutTimes_Click(object sender, EventArgs e)
-        {
-            OptionsDiv.Visible = false;
-            ManageBlockedTimeDiv.Visible = true;
-        }
-
-        protected void CancelAppointmentManagement_Click(object sender, EventArgs e)
-        {
-            OptionsDiv.Visible = true;
-            ManageAppointmentDiv.Visible = false;
-        }
-
-        protected void CancelManageBlockedOutDate_Click(object sender, EventArgs e)
-        {
-            OptionsDiv.Visible = true;
-            ManageBlockedTimeDiv.Visible = false;
-        }
 
     }
 }
