@@ -113,6 +113,11 @@ namespace WebApplication1
             Session["SelectedDate"] = Calendar1.SelectedDate.ToShortDateString();
             BlockedOutSelctedDateTxtBox.Text = Calendar1.SelectedDate.ToShortDateString();
             DateTextBox.Text = Calendar1.SelectedDate.ToShortDateString();
+            AppointmentsDropbx.Items.Clear();
+            ListItem l = new ListItem("---Select---", "", true);
+            AppointmentsDropbx.Items.Add(l);
+
+            //Add the super scary query here... and in the page load.
 
         }
 

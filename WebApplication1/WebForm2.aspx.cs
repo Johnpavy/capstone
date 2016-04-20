@@ -10,6 +10,7 @@ using System.Configuration;
 using System.Data;
 using System.Net.Mail;
 using System.Net;
+using System.Text.RegularExpressions;
 
 namespace WebApplication1
 {
@@ -72,36 +73,44 @@ namespace WebApplication1
         protected void ComfirmUpdateBioButton2_Click(object sender, EventArgs e)
         {
             string newBio = TempTextBox2.Text;
-            Tobj.Bio = newBio;
-            Session["TrainerInfo"] = Tobj;
 
-
-            SqlConnection db = new SqlConnection(SqlDataSource1.ConnectionString);
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandType = System.Data.CommandType.Text;
-            cmd.Connection = db;
-
-            cmd.CommandText = "UPDATE [MFNTrainerTable] SET Trainer_Bio = @bio where Trainer_Id = @id";
-
-            cmd.Parameters.AddWithValue("@id", Tobj.TrainerId);
-            cmd.Parameters.AddWithValue("@bio", newBio);
-
-            try
+            if(newBio.Length < 2000)
             {
-                db.Open();
-                cmd.ExecuteNonQuery();
-            }
-            catch
-            {
-                BioFailLbl.Text = "We failed horribly!";
-                BioFailLbl.Visible =true;
-            }
-            finally
-            {
-                db.Close();
-            }
+                Tobj.Bio = newBio;
+                Session["TrainerInfo"] = Tobj;
 
-            Response.Redirect("WebForm2.aspx");
+                SqlConnection db = new SqlConnection(SqlDataSource1.ConnectionString);
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.Connection = db;
+
+                cmd.CommandText = "UPDATE [MFNTrainerTable] SET Trainer_Bio = @bio where Trainer_Id = @id";
+
+                cmd.Parameters.AddWithValue("@id", Tobj.TrainerId);
+                cmd.Parameters.AddWithValue("@bio", newBio);
+
+                try
+                {
+                    db.Open();
+                    cmd.ExecuteNonQuery();
+                }
+                catch
+                {
+                    BioFailLbl.Text = "We failed horribly!";
+                    BioFailLbl.Visible = true;
+                }
+                finally
+                {
+                    db.Close();
+                }
+
+                Response.Redirect("WebForm2.aspx");
+
+            }
+            else
+            {
+                    //do nothing
+            }
 
         }
 
@@ -115,17 +124,19 @@ namespace WebApplication1
         {
             string newIndividualRate = NewIndividualRateTxtBox.Text;
             string newAdditonalRate = NewAdditionalPersonRateTxtBox.Text;
+            Regex rgx = new Regex("[0-9]?[0-9]?(\\.[0-9][0-9]?)?");
 
-            if (newIndividualRate == "")
+            if (newIndividualRate == "" || !rgx.IsMatch(newIndividualRate))
             {
                 newIndividualRate = IndividualRatesTxtBox.Text;
 
             }
            
-            if(newAdditonalRate == "")
+            if(newAdditonalRate == "" || !rgx.IsMatch(newIndividualRate))
             {
                 newAdditonalRate = AdditionalPersonRateTxtBox.Text;
             }
+
             Tobj.IndividualRate = newIndividualRate;
             Tobj.AdditionalPersonRate = newAdditonalRate;
             Session["TrainerInfo"] = Tobj;
