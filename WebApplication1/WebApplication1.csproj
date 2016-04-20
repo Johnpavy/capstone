@@ -95,6 +95,7 @@
     <Content Include="Pictures\trainerPic.jpg" />
     <Content Include="Pictures\UserPicture.jpg" />
     <Content Include="ResetPassword.aspx" />
+    <Content Include="searchTrainersPage.aspx" />
     <Content Include="ThankYou.aspx" />
     <Content Include="TrainerScheduler.aspx" />
     <Content Include="TrainerSignup.aspx" />
@@ -196,6 +197,13 @@
     </Compile>
     <Compile Include="ResetPassword.aspx.designer.cs">
       <DependentUpon>ResetPassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="searchTrainersPage.aspx.cs">
+      <DependentUpon>searchTrainersPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="searchTrainersPage.aspx.designer.cs">
+      <DependentUpon>searchTrainersPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="ThankYou.aspx.cs">
       <DependentUpon>ThankYou.aspx</DependentUpon>

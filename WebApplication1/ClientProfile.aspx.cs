@@ -28,5 +28,11 @@ namespace WebApplication1
 
             }
         }
+        protected void SearchBtn_Click(object sender, EventArgs e)
+        {
+
+            Response.Redirect("searchTrainersPage.aspx");
+        }
+
     }
 }
