@@ -244,6 +244,7 @@ namespace WebApplication1
         // deprecated, not used in newest iteration can probably be deleted
         protected void signup_Click(object sender, EventArgs e)
         {
+            ClientSignupPanel.Visible = false;
             TrainerSignupPanel.Visible = true;
             //Response.Redirect("TrainerSignup.aspx");
         }
@@ -255,6 +256,7 @@ namespace WebApplication1
         // deprecated, not used in newest iteration can probably be deleted
         protected void ClientSignup_Click(object sender, EventArgs e)
         {
+            TrainerSignupPanel.Visible = false;
             ClientSignupPanel.Visible = true;
         }
 
@@ -464,14 +466,15 @@ namespace WebApplication1
                 {
                     
                     // for live website, uncomment this and comment the local host
-                    // body += "<br /><a href = '" + Request.Url.AbsoluteUri.Replace("http://mobilefitnessnetwork.azurewebsites.net/default.aspx", "http://mobilefitnessnetwork.azurewebsites.net/ConfirmationPage?ActivationCode=" + activationCode) + "'>Click here to activate your account.</a>";
+                     body += "<br /><a href = '" + Request.Url.AbsoluteUri.Replace("http://mobilefitnessnetwork.azurewebsites.net", "http://mobilefitnessnetwork.azurewebsites.net/ConfirmationPage.aspx?ActivationCode=" + activationCode) + "'>Click here to activate your account.</a>";
 
                     // for local host comment this and uncomment link generator above
-                    body += "<br /><a href = '" + Request.Url.AbsoluteUri.Replace("Default.aspx", "ConfirmationPage.aspx?ActivationCode=" + activationCode) + "'>Click here to activate your account.</a>";
+                   // body += "<br /><a href = '" + Request.Url.AbsoluteUri.Replace("Default.aspx", "ConfirmationPage.aspx?ActivationCode=" + activationCode) + "'>Click here to activate your account.</a>";
                 }
                 else
                 {
-                    body += "<br /><a href = '" + Request.Url.AbsoluteUri.Replace("Default.aspx", "ClientConfirmationPage.aspx?ActivationCode=" + activationCode) + "'>Click here to activate your account.</a>";
+                    body += "<br /><a href = '" + Request.Url.AbsoluteUri.Replace("http://mobilefitnessnetwork.azurewebsites.net", "http://mobilefitnessnetwork.azurewebsites.net/ClientConfirmationPage?ActivationCode=" + activationCode) + "'>Click here to activate your account.</a>";
+                    //body += "<br /><a href = '" + Request.Url.AbsoluteUri.Replace("Default.aspx", "ClientConfirmationPage.aspx?ActivationCode=" + activationCode) + "'>Click here to activate your account.</a>";
                 }
                 body += "<br /><br />Thanks";
                 mm.Body = body;
