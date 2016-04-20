@@ -18,13 +18,7 @@ namespace WebApplication1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!this.IsPostBack)
-            {
-                //SqlConnection trainerDb = new SqlConnection(SqlDataSource1.ConnectionString);
-
-                //  string constr = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
-                
-            }
+           
         }
 
         private static string CreateSalt(int size)
@@ -87,14 +81,6 @@ namespace WebApplication1
                 ErrorLabel2.Visible = true;
                 clientDB.Close();
             }
-
-            /*            else if(!password.Any(c => char.IsSymbol(c)))
-                        {
-                            ErrorLabel.ForeColor = System.Drawing.Color.Red;
-                            ErrorLabel.Text = "Passwords must contain at least one special character.";
-                            ErrorLabel.Visible = true;
-                            trainerDb.Close();
-                        } */
             else if (!password.Equals(CPassword))
             {
                 ErrorLabel2.ForeColor = System.Drawing.Color.Red;
@@ -104,9 +90,7 @@ namespace WebApplication1
             }
             else
             {
-
                 clientDB.Open();
-                
 
                 string salt = CreateSalt(125);
                 string hashedPassword = CreatePasswordHash(password, salt);
@@ -114,8 +98,6 @@ namespace WebApplication1
                 string activationCode = !string.IsNullOrEmpty(Request.QueryString["ActivationCode"]) ? Request.QueryString["ActivationCode"] : Guid.Empty.ToString();
                 using (SqlConnection con = new SqlConnection(SqlDataSource1.ConnectionString))
                 {
-                    //using (SqlCommand cmd = new SqlCommand("SELECT COUNT (*) FROM UserActivation WHERE User_ActivationCode = @ActivationCode"))
-                    //using (SqlCommand cmd = new SqlCommand("UPDATE MFNTrainerTable SET Trainer_ActivationCode = NULL WHERE Trainer_ActivationCode = @ActivationCode"))
                     using (SqlCommand comd = new SqlCommand("UPDATE [MFNTrainerTable] SET Trainer_PasswordHash='@password', Trainer_PasswordSalt='@salt' WHERE Trainer_Email = @Trainer_Email"))
                     {
                         using (SqlDataAdapter sda = new SqlDataAdapter())
@@ -127,46 +109,32 @@ namespace WebApplication1
                             comd.Connection = con;
                             con.Open();
                             comd.CommandText = "UPDATE [MFNTrainerTable] SET Trainer_PasswordHash='" + hashedPassword + "', Trainer_PasswordSalt='" + salt + "' WHERE Trainer_Email = @Trainer_Email";
-                            int rowsAffected = comd.ExecuteNonQuery();
-                            con.Close();
-                            if (rowsAffected == 1)
-                            {
-                                ltMessage.Text = "Reset successful.";
-                                Response.Redirect("Default.aspx");
+
+                            try
+                            { 
+                                int rowsAffected = comd.ExecuteNonQuery();
+                                con.Close();
+                                if (rowsAffected == 1)
+                                {
+                                    ltMessage.Text = "Reset successful.";
+                                    Response.Redirect("Default.aspx");
+                                }
+                                else
+                                {
+                                    ltMessage.Text = "Invalid Input.";
+                                }
                             }
-                            else
+                            catch
                             {
-                                ltMessage.Text = "Invalid Input.";
+
+                                ErrorLabel2.ForeColor = System.Drawing.Color.Red;
+                                ErrorLabel2.Text = "Error writing to the database";
+                                ErrorLabel2.Visible = true;
+
                             }
                         }
                     }
                 }
-
-                SqlCommand cmd = new SqlCommand();
-
-                cmd.CommandType = System.Data.CommandType.Text;
-                // create sql command
-                cmd.CommandText = "UPDATE [MFNTrainerTable] SET Trainer_PasswordHash, Trainer_PasswordSalt FROM  WHERE ActivationCode = @Trainer_Email";
-                // add values to sql table
-                cmd.Parameters.AddWithValue("@password", hashedPassword);
-                cmd.Parameters.AddWithValue("@salt", salt);
-                cmd.Connection = clientDB;
-                // try to execute query and save session object variables
-                try
-                {
-                    int userID = (int)cmd.ExecuteScalar();
-                    clientDB.Close();
-
-                }
-                catch
-                {
-
-                    ErrorLabel2.ForeColor = System.Drawing.Color.Red;
-                    ErrorLabel2.Text = "Error writing to the database";
-                    ErrorLabel2.Visible = true;
-
-                }
-
             }
         }
     }

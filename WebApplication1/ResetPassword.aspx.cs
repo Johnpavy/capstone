@@ -23,6 +23,7 @@ namespace WebApplication1
             Page page = HttpContext.Current.Handler as Page;
             int count = 0;
             string Email = "";
+            //bool isClient = false;
 
             Email = TextBox1.Text;
 
@@ -86,7 +87,7 @@ namespace WebApplication1
 
                 try
                 {
-                    cmd.CommandText = "Select COUNT(*) FROM [MFNUserTable] WHERE User_Email = '" + Email + "'";
+                    cmd.CommandText = "Select COUNT(1) FROM [MFNUserTable] WHERE User_Email = '" + Email + "'";
                     db.Open();
 
                     count = (int)cmd.ExecuteScalar();
@@ -109,9 +110,17 @@ namespace WebApplication1
                 }
                 else if (count > 0)
                 {
+                    //isClient = true;
+                    cmd.CommandText = "Select User_Id FROM [MFNUserTable] WHERE User_Email = '" + Email + "'";
+                    db.Open();
+                    int trainerID = (int)cmd.ExecuteScalar();
+                    Session["userID"] = trainerID;
+
+                    SendResetEmail((int)Session["userID"]);
                     string message = "Reset Password email sent. Please click the link in the email from us to finish password reset.";
 
-                    ScriptManager.RegisterStartupScript(page, page.GetType(), "err_msg", "alert('" + message + "');window.location='pagename.aspx';", true);
+                    ScriptManager.RegisterStartupScript(page, page.GetType(), "err_msg", "alert('" + message + "');window.location='Default.aspx';", true);
+                    db.Close();
                 }
                 else
                 {
@@ -131,12 +140,12 @@ namespace WebApplication1
         private void SendResetEmail(int userId)
         { 
             String email = TextBox1.Text;
-            string activationCode = Guid.NewGuid().ToString();
             SqlCommand cmd2 = new SqlCommand();
             cmd2.CommandType = System.Data.CommandType.Text;
-            //cmd2.CommandText= "UPDATE MFNTrainerTable SET Trainer_ActivationCode = @code WHERE Trainer_Id = @id";
+
+            //if(isClient == true) { cmd2.CommandText = "Select User_ActivationCode FROM [MFNUserTable] WHERE User_Email = '" + email + "'"; } else {
             cmd2.CommandText = "Select Trainer_ActivationCode FROM [MFNTrainerTable] WHERE Trainer_Email = '" + email + "'";
-            cmd2.Parameters.AddWithValue("@ActivationCode", activationCode);
+            //}
             cmd2.Parameters.AddWithValue("@trainerID", userId);
             SqlConnection trainerDb2 = new SqlConnection(SqlDataSource1.ConnectionString);
             cmd2.Connection = trainerDb2;
