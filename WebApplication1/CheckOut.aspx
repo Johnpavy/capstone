@@ -19,13 +19,13 @@
              <p>Please Enter First Name: </p>
              <asp:TextBox ID="first_name" runat="server"></asp:TextBox>
              <asp:RequiredFieldValidator ID="RequiredFieldValidator6" ControlToValidate="first_name" runat="server" ErrorMessage="Required Field"></asp:RequiredFieldValidator>
-             <asp:RegularExpressionValidator ID="RegularExpressionValidator6" ControlToValidate="first_name" runat="server" ErrorMessage="Invalid Input" ValidationExpression="[A-z]{1,20}"></asp:RegularExpressionValidator>
+             <asp:RegularExpressionValidator ID="RegularExpressionValidator6" ControlToValidate="first_name" runat="server" ErrorMessage="Invalid Input" ValidationExpression="[A-z -]{1,20}"></asp:RegularExpressionValidator>
 
              <p>Please Enter Last Name: </p>
              <asp:TextBox ID="last_name" runat="server"></asp:TextBox>
              <asp:RequiredFieldValidator ID="RequiredFieldValidator7" ControlToValidate="last_name" runat="server" ErrorMessage="Required Field"></asp:RequiredFieldValidator>
-             <asp:RegularExpressionValidator ID="RegularExpressionValidator7" ControlToValidate="last_name" runat="server" ErrorMessage="Invalid Input" ValidationExpression="[A-z]{1,20}"></asp:RegularExpressionValidator>
-            <!-- [A-z-'] -->
+             <asp:RegularExpressionValidator ID="RegularExpressionValidator7" ControlToValidate="last_name" runat="server" ErrorMessage="Invalid Input" ValidationExpression="[A-z -]{1,20}"></asp:RegularExpressionValidator>
+            <!-- for some reason it will not except apostrophes, future development calls for a RegEx expression that accepts apostrophes in the first, last, city, and street names-->
              <p>Please Enter Country: </p>
              <asp:DropDownList ID="country_code" runat="server">
                  <asp:ListItem Value="US">United States</asp:ListItem>
@@ -35,12 +35,12 @@
              <p>Please Enter Street Address: </p>
              <asp:TextBox ID="address" runat="server"></asp:TextBox>
              <asp:RequiredFieldValidator ID="RequiredFieldValidator9" ControlToValidate="address" runat="server" ErrorMessage="Required Field"></asp:RequiredFieldValidator>
-             <asp:RegularExpressionValidator ID="RegularExpressionValidator8" ControlToValidate="address" runat="server" ErrorMessage="Invalid Input" ValidationExpression=".{1,30}"></asp:RegularExpressionValidator>
+             <asp:RegularExpressionValidator ID="RegularExpressionValidator8" ControlToValidate="address" runat="server" ErrorMessage="Invalid Input" ValidationExpression="[A-z0-9 .-]{1,30}"></asp:RegularExpressionValidator>
 
              <p>Please Enter City: </p>
              <asp:TextBox ID="city" runat="server"></asp:TextBox>
              <asp:RequiredFieldValidator ID="RequiredFieldValidator10" ControlToValidate="city" runat="server" ErrorMessage="Required Field"></asp:RequiredFieldValidator>
-             <asp:RegularExpressionValidator ID="RegularExpressionValidator9" ControlToValidate="city" runat="server" ErrorMessage="Invalid Input" ValidationExpression="[A-z]{1,30}"></asp:RegularExpressionValidator>
+             <asp:RegularExpressionValidator ID="RegularExpressionValidator9" ControlToValidate="city" runat="server" ErrorMessage="Invalid Input" ValidationExpression="[A-z -]{1,30}"></asp:RegularExpressionValidator>
 
              <p>Please Enter Zip Code: </p>
              <asp:TextBox ID="postal_code" runat="server"></asp:TextBox>

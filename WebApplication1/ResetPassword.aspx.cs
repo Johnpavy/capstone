@@ -22,11 +22,9 @@ namespace WebApplication1
         {
             Page page = HttpContext.Current.Handler as Page;
             int count = 0;
-            string Email = "";
-            //bool isClient = false;
+            string Email = TextBox1.Text;
 
-            Email = TextBox1.Text;
-
+            //Trainer checkbox is checked, user is trainer, else client
             if(CheckBox1.Checked)
             {
                 SqlConnection db = new SqlConnection(SqlDataSource1.ConnectionString);
@@ -36,11 +34,11 @@ namespace WebApplication1
 
                 try
                 {
+                    //See if trainer email is in the trainer database
                     cmd.CommandText = "Select COUNT(1) FROM [MFNTrainerTable] WHERE Trainer_Email = '" + Email + "'";
                     db.Open();
 
                     count = (int)cmd.ExecuteScalar();
-
                 }
                 catch
                 {
@@ -53,22 +51,31 @@ namespace WebApplication1
 
                 if (count == -1)
                 {
-                    //Login fail
                     ErrorLbl.Visible = true;
                     ErrorLbl.Text = "Database is not connected!";
                 }
                 else if (count > 0)
                 {
-                    cmd.CommandText = "Select Trainer_Id FROM [MFNTrainerTable] WHERE Trainer_Email = '" + Email + "'";
-                    db.Open();
-                    int trainerID = (int)cmd.ExecuteScalar();
-                    Session["trainerID"] = trainerID;
+                    try
+                    {
+                        //locate id, based on email
+                        cmd.CommandText = "Select Trainer_Id FROM [MFNTrainerTable] WHERE Trainer_Email = '" + Email + "'";
+                        db.Open();
+                        int trainerID = (int)cmd.ExecuteScalar();
+                        Session["trainerID"] = trainerID;
+                        cmd.Parameters.AddWithValue("@trainerID", trainerID);
+                        //send email
+                        SendResetEmail((int)Session["trainerID"], Email);
+                        string message = "Reset Password email sent. Please click the link in the email from us to finish password reset.";
 
-                    SendResetEmail((int)Session["trainerID"]);
-                    string message = "Reset Password email sent. Please click the link in the email from us to finish password reset.";
-
-                    ScriptManager.RegisterStartupScript(page, page.GetType(), "err_msg", "alert('" + message + "');window.location='Default.aspx';", true);
-                    db.Close();
+                        ScriptManager.RegisterStartupScript(page, page.GetType(), "err_msg", "alert('" + message + "');window.location='Default.aspx';", true);
+                        db.Close();
+                    }
+                    catch
+                    {
+                        ErrorLbl.Visible = true;
+                        ErrorLbl.Text = "Error writing to database";
+                    }
                 }
                 else
                 {
@@ -87,11 +94,11 @@ namespace WebApplication1
 
                 try
                 {
+                    //see if client email is in client database
                     cmd.CommandText = "Select COUNT(1) FROM [MFNUserTable] WHERE User_Email = '" + Email + "'";
                     db.Open();
 
                     count = (int)cmd.ExecuteScalar();
-
                 }
                 catch
                 {
@@ -104,23 +111,32 @@ namespace WebApplication1
 
                 if (count == -1)
                 {
-                    //Login fail
                     ErrorLbl.Visible = true;
                     ErrorLbl.Text = "Database is not connected!";
                 }
                 else if (count > 0)
                 {
-                    //isClient = true;
-                    cmd.CommandText = "Select User_Id FROM [MFNUserTable] WHERE User_Email = '" + Email + "'";
-                    db.Open();
-                    int trainerID = (int)cmd.ExecuteScalar();
-                    Session["userID"] = trainerID;
+                    try
+                    {
+                        //Locate client id, based on email
+                        cmd.CommandText = "Select User_Id FROM [MFNUserTable] WHERE User_Email = '" + Email + "'";
+                        db.Open();
+                        int userId = (int)cmd.ExecuteScalar();
+                        Session["userID"] = userId;
+                        cmd.Parameters.AddWithValue("@userID", userId);
+                        //Send email
+                        SendResetEmail((int)Session["userID"], Email);
+                        //display message that email was sent
+                        string message = "Reset Password email sent. Please click the link in the email from us to finish password reset.";
 
-                    SendResetEmail((int)Session["userID"]);
-                    string message = "Reset Password email sent. Please click the link in the email from us to finish password reset.";
-
-                    ScriptManager.RegisterStartupScript(page, page.GetType(), "err_msg", "alert('" + message + "');window.location='Default.aspx';", true);
-                    db.Close();
+                        ScriptManager.RegisterStartupScript(page, page.GetType(), "err_msg", "alert('" + message + "');window.location='Default.aspx';", true);
+                        db.Close();
+                    }
+                    catch
+                    {
+                        ErrorLbl.Visible = true;
+                        ErrorLbl.Text = "Error writing to database";
+                    }
                 }
                 else
                 {
@@ -137,31 +153,17 @@ namespace WebApplication1
             Response.Redirect("Default.aspx");
         }
 
-        private void SendResetEmail(int userId)
+        private void SendResetEmail(int userId, string Email)
         { 
-            String email = TextBox1.Text;
-            SqlCommand cmd2 = new SqlCommand();
-            cmd2.CommandType = System.Data.CommandType.Text;
-
-            //if(isClient == true) { cmd2.CommandText = "Select User_ActivationCode FROM [MFNUserTable] WHERE User_Email = '" + email + "'"; } else {
-            cmd2.CommandText = "Select Trainer_ActivationCode FROM [MFNTrainerTable] WHERE Trainer_Email = '" + email + "'";
-            //}
-            cmd2.Parameters.AddWithValue("@trainerID", userId);
-            SqlConnection trainerDb2 = new SqlConnection(SqlDataSource1.ConnectionString);
-            cmd2.Connection = trainerDb2;
-
+            //send email
             try
             {
-                trainerDb2.Open();
-                cmd2.ExecuteNonQuery();
-                trainerDb2.Close();
-
-                using (MailMessage mm = new MailMessage("MobileFitnessNetwork@gmail.com", email))
+                using (MailMessage mm = new MailMessage("MobileFitnessNetwork@gmail.com", Email))
                 {
                     mm.Subject = "Password Reset";
                     string body = "Hello, ";
                     body += "<br /><br />You may reset your password through this link: ";
-                    body += "<br /><a href = '" + Request.Url.AbsoluteUri.Replace("ResetPassword.aspx", "PasswordResetComfirm.aspx?ActivationCode=" + email) + "'>Click here to reset your password.</a>";
+                    body += "<br /><a href = '" + Request.Url.AbsoluteUri.Replace("ResetPassword.aspx", "PasswordResetComfirm.aspx?ActivationCode=" + Email) + "'>Click here to reset your password.</a>";
                     body += "<br /><br />Thanks";
                     mm.Body = body;
                     mm.IsBodyHtml = true;
@@ -174,18 +176,14 @@ namespace WebApplication1
                     smtp.Port = 587;
                     smtp.Send(mm);
                 }
-
             }
 
             catch
             {
-                //ErrorLabel.ForeColor = System.Drawing.Color.Red;
+                ErrorLabel.ForeColor = System.Drawing.Color.Red;
                 ErrorLabel.Text = "Error sending email to user";
                 ErrorLabel.Visible = true;
             }
-
-
-            
         }
     }
 }
