@@ -217,19 +217,21 @@
 			    			<div class="row">
 			    				<div class="col-xs-6 col-sm-6 col-md-6">
 			    					<div class="form-group">
-			                <input type="text" name="FName" id="first_name" class="form-control input-sm" placeholder="First Name"/>
-			    					</div>
+			                
+			    					 <asp:TextBox  name="FName" id="first_name" class="form-control input-sm" placeholder="First Name" runat="server"/>
+                                    </div>
 			    				</div>
 			    				<div class="col-xs-6 col-sm-6 col-md-6">
 			    					<div class="form-group">
-			    						<input type="text" name="LName" id="last_name" class="form-control input-sm" placeholder="Last Name"/>
+                                        <asp:TextBox  name="LName" id="last_name" class="form-control input-sm" placeholder="Last Name" runat="server"/>
 			    					</div>
 			    				</div>
 			    			</div>
 
 			    			<div class="form-group">
 			    				<input type="email" name="email" id="email" class="form-control input-sm" placeholder="Email Address"/>
-			    			</div>
+			    			
+                            </div>
 
 			    			<div class="row">
 			    				<div class="col-xs-6 col-sm-6 col-md-6">

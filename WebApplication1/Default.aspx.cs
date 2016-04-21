@@ -267,7 +267,8 @@ namespace WebApplication1
 
         protected void startup_Click(object sender, EventArgs e)
         {
-            String firstName = Request.Form["FName"];
+            //String firstName = Request.Form["FName"];
+            String firstName = first_name.Text;
             String lastName = Request.Form["LName"];
             String email = Request.Form["email"];
             String password = Request.Form["password"];
@@ -279,7 +280,7 @@ namespace WebApplication1
             bool userNameExists;
             SqlConnection trainerDb = new SqlConnection(SqlDataSource1.ConnectionString);
 
-            if (firstName.Equals("") || lastName.Equals("") || email.Equals("") || password.Equals("") || CPassword.Equals(""))
+            if (firstName.Equals(null) || lastName.Equals("") || email.Equals("") || password.Equals("") || CPassword.Equals(""))
             {
                 ErrorLabel.ForeColor = System.Drawing.Color.Red;
                 ErrorLabel.Text = "All fields required.";
@@ -465,23 +466,27 @@ namespace WebApplication1
                 if (isTrainer)
                 {
                     
-                    // for live website, uncomment this and comment the local host
-                     body += "<br /><a href = '" + Request.Url.AbsoluteUri.Replace("http://mobilefitnessnetwork.azurewebsites.net", "http://mobilefitnessnetwork.azurewebsites.net/ConfirmationPage.aspx?ActivationCode=" + activationCode) + "'>Click here to activate your account.</a>";
+                    // for live web app hosted on azure, uncomment this and comment the local host line 
+                    // body += "<br /><a href = '" + Request.Url.AbsoluteUri.Replace("http://mobilefitnessnetwork.azurewebsites.net", "http://mobilefitnessnetwork.azurewebsites.net/ConfirmationPage.aspx?ActivationCode=" + activationCode) + "'>Click here to activate your account.</a>";
 
                     // for local host comment this and uncomment link generator above
-                   // body += "<br /><a href = '" + Request.Url.AbsoluteUri.Replace("Default.aspx", "ConfirmationPage.aspx?ActivationCode=" + activationCode) + "'>Click here to activate your account.</a>";
+                    body += "<br /><a href = '" + Request.Url.AbsoluteUri.Replace("Default.aspx", "ConfirmationPage.aspx?ActivationCode=" + activationCode) + "'>Click here to activate your account.</a>";
                 }
                 else
                 {
-                    body += "<br /><a href = '" + Request.Url.AbsoluteUri.Replace("http://mobilefitnessnetwork.azurewebsites.net", "http://mobilefitnessnetwork.azurewebsites.net/ClientConfirmationPage?ActivationCode=" + activationCode) + "'>Click here to activate your account.</a>";
-                    //body += "<br /><a href = '" + Request.Url.AbsoluteUri.Replace("Default.aspx", "ClientConfirmationPage.aspx?ActivationCode=" + activationCode) + "'>Click here to activate your account.</a>";
+                    // for live web app hosted on azure, uncomment this and comment the local host line
+                    // body += "<br /><a href = '" + Request.Url.AbsoluteUri.Replace("http://mobilefitnessnetwork.azurewebsites.net", "http://mobilefitnessnetwork.azurewebsites.net/ClientConfirmationPage?ActivationCode=" + activationCode) + "'>Click here to activate your account.</a>";
+                    // uncomment line below for local host testing and comment line above
+                    body += "<br /><a href = '" + Request.Url.AbsoluteUri.Replace("Default.aspx", "ClientConfirmationPage.aspx?ActivationCode=" + activationCode) + "'>Click here to activate your account.</a>";
                 }
                 body += "<br /><br />Thanks";
                 mm.Body = body;
                 mm.IsBodyHtml = true;
                 SmtpClient smtp = new SmtpClient();
+                // the smtp host below will only work for gmail. 
                 smtp.Host = "smtp.gmail.com";
                 smtp.EnableSsl = true;
+                // The function below takes in the email address account that will be used and the associated password
                 NetworkCredential NetworkCred = new NetworkCredential("MobileFitnessNetwork@gmail.com", "6tfc^TFC");
                 smtp.UseDefaultCredentials = true;
                 smtp.Credentials = NetworkCred;

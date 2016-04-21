@@ -94,6 +94,24 @@ namespace WebApplication1 {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl TrainerSignupPanel;
         
         /// <summary>
+        /// first_name control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox first_name;
+        
+        /// <summary>
+        /// last_name control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox last_name;
+        
+        /// <summary>
         /// LinkButton1 control.
         /// </summary>
         /// <remarks>
