@@ -135,11 +135,8 @@
                                         </asp:DropDownList>
                                     </div>
                                 </li>
-                                
-                                      <asp:LinkButton ID="searchBtn" runat="server" CssClass="btn btn-primary" OnClick ="SearchBtn_Click"> <span aria-hidden="true" class="glyphicon glyphicon-search"></span></asp:LinkButton>				
-                                
-                              
-                                			
+                                <asp:LinkButton ID="searchBtn" runat="server" CssClass="btn btn-primary" OnClick ="SearchBtn_Click"> <span aria-hidden="true" class="glyphicon glyphicon-search"></span></asp:LinkButton>				
+                                <asp:Label ID="ErrorLbl" runat="server" Text="*Error" ForeColor="#FF3300" Visible="False"></asp:Label>
                             </ul>
                           <ul class="nav navbar-nav navbar-right">
 

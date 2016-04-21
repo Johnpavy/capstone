@@ -10,7 +10,9 @@
     <form id="form1" runat="server">
     <div>
     
-        Trainer search placeholder</div>
+        Trainer search placeholder<asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" SelectCommand="SELECT * FROM [MFNTrainerTable]"></asp:SqlDataSource>
+        <asp:Label ID="ErrorLbl" runat="server" ForeColor="Red" Text="Label" Visible="False"></asp:Label>
+        </div>
     </form>
 </body>
 </html>

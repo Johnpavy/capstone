@@ -269,8 +269,10 @@ namespace WebApplication1
         {
             //String firstName = Request.Form["FName"];
             String firstName = first_name.Text;
-            String lastName = Request.Form["LName"];
-            String email = Request.Form["email"];
+            //String lastName = Request.Form["LName"];
+            String lastName = last_name.Text;
+            //String email = Request.Form["email"];
+            String email = Email.Text;
             String password = Request.Form["password"];
             String CPassword = Request.Form["Cpassword"];
             string message = string.Empty;
@@ -280,7 +282,7 @@ namespace WebApplication1
             bool userNameExists;
             SqlConnection trainerDb = new SqlConnection(SqlDataSource1.ConnectionString);
 
-            if (firstName.Equals(null) || lastName.Equals("") || email.Equals("") || password.Equals("") || CPassword.Equals(""))
+            if (firstName.Equals("") || lastName.Equals("") || email.Equals("") || password.Equals("") || CPassword.Equals(""))
             {
                 ErrorLabel.ForeColor = System.Drawing.Color.Red;
                 ErrorLabel.Text = "All fields required.";
@@ -515,11 +517,9 @@ namespace WebApplication1
         // If the client/user clicks startup
         protected void cstartup_Click(object sender, EventArgs e)
         {
-            //something something dark side
-
-            String firstName = Request.Form["cFName"];
-            String lastName = Request.Form["cLName"];
-            String email = Request.Form["cEmail"];
+            String firstName = cfirst_name.Text;
+            String lastName = clast_name.Text;
+            String email = cemail.Text;
             String password = Request.Form["CLpassword"];
             String CPassword = Request.Form["CCpassword"];
             string message = string.Empty;

@@ -30,8 +30,17 @@ namespace WebApplication1
         }
         protected void SearchBtn_Click(object sender, EventArgs e)
         {
+            if(DropDownList1.SelectedValue == "")
+            {
+                ErrorLbl.Visible = true;
+                ErrorLbl.Text = "You must select a type of training";
+            }
+            else
+            {
+                Session["Selection"] = DropDownList1.SelectedValue;
+                Response.Redirect("searchTrainersPage.aspx");
+            }
 
-            Response.Redirect("searchTrainersPage.aspx");
         }
 
     }

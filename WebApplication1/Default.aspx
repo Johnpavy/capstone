@@ -229,7 +229,7 @@
 			    			</div>
 
 			    			<div class="form-group">
-			    				<input type="email" name="email" id="email" class="form-control input-sm" placeholder="Email Address"/>
+                                <asp:TextBox  name="Email" id="Email" class="form-control input-sm" placeholder="Email Address" runat="server"/>
 			    			
                             </div>
 
@@ -265,18 +265,18 @@
 			    			<div class="row">
 			    				<div class="col-xs-6 col-sm-6 col-md-6">
 			    					<div class="form-group">
-			                <input type="text" name="cFName" id="cfirst_name" class="form-control input-sm" placeholder="First Name"/>
+                                        <asp:TextBox  name="cFName" id="cfirst_name" class="form-control input-sm" placeholder="First Name" runat="server"/>
 			    					</div>
 			    				</div>
 			    				<div class="col-xs-6 col-sm-6 col-md-6">
 			    					<div class="form-group">
-			    						<input type="text" name="cLName" id="clast_name" class="form-control input-sm" placeholder="Last Name"/>
+                                        <asp:TextBox  name="cLName" id="clast_name" class="form-control input-sm" placeholder="Last Name" runat="server"/>
 			    					</div>
 			    				</div>
 			    			</div>
 
 			    			<div class="form-group">
-			    				<input type="email" name="cEmail" id="cemail" class="form-control input-sm" placeholder="Email Address"/>
+                                <asp:TextBox  name="CEmail" id="cemail" class="form-control input-sm" placeholder="Email Address" runat="server"/>
 			    			</div>
 
 			    			<div class="row">
