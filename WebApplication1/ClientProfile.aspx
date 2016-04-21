@@ -5,9 +5,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
   <title>Client Profile</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     
@@ -127,14 +127,17 @@
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="SearchList nav navbar-nav navbar-left">
                                 <li>
-                                  <form class="navbar-form navbar-left" role="search">
                                     <div class="form-group">
-                                      <input type="text" class="SearchBar form-control" placeholder="Search">
+                                        <asp:DropDownList ID="DropDownList1" runat="server" CssClass="form-control">
+                                            <asp:ListItem Text="---Trainer Type---" Value=""></asp:ListItem>
+                                            <asp:ListItem Text="Personal Training" Value="Personal Training"></asp:ListItem>
+                                            <asp:ListItem Text="Yoga" Value="Yoga"></asp:ListItem>
+                                        </asp:DropDownList>
                                     </div>
-                                  </form>
                                 </li>
-                                <li><button type="submit" class="SearchButton btn btn-default glyphicon glyphicon-search"></button></li>
-                                </ul>
+                                <asp:LinkButton ID="searchBtn" runat="server" CssClass="btn btn-primary" OnClick ="SearchBtn_Click"> <span aria-hidden="true" class="glyphicon glyphicon-search"></span></asp:LinkButton>				
+                                <asp:Label ID="ErrorLbl" runat="server" Text="*Error" ForeColor="#FF3300" Visible="False"></asp:Label>
+                            </ul>
                           <ul class="nav navbar-nav navbar-right">
 
 
@@ -206,101 +209,6 @@
                     <br>
                     <div class="row">
                     </div>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br></br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br></br>
-                    <br>
-                    <br>
-                    <br>
-                    <br></br>
-                    <br>
-                    <br>
-                    <br>
-                    <br></br>
-                    <br>
-                    <br>
-                    <br></br>
-                    <br>
-                    <br>
-                    <br></br>
-                    <br>
-                    <br>
-                    <br></br>
-                    <br>
-                    <br>
-                    <br></br>
-                    <br>
-                    <br></br>
-                    <br>
-                    <br></br>
-                    <br>
-                    <br></br>
-                    <br>
-                    <br></br>
-                    <br>
-                    <br></br>
-                    <br>
-                    <br></br>
-                    <br>
-                    <br></br>
-                    <br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    </br>
-                    </br>
-                    </br>
-                    </br>
-                    </br>
-                    </br>
-                    </br>
-                    </br>
-                    </br>
-                    </br>
-                    </br>
-                    </br>
-                    </br>
-                    </br>
-                    </br>
-                    </br>
-                    </br>
-                    </br>
-                    </br>
-                    </br>
-                    </br>
-                    </br>
-                    </br>
-                    </br>
-                    </br>
-                    </br>
-                    </br>
-                    </br>
-                    </br>
-                    </br>
-                    </br>
-                    </br>
 			
                 </div>
             </div>

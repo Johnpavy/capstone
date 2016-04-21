@@ -103,10 +103,11 @@ namespace WebApplication1
                 ListItem l = new ListItem(number, number, true);
                 NumberInAttendance.Items.Add(l);
 
+                //for dynamic div testing
+                CreateDiv("div"+x);
+
             }
 
-            //for dynamic div testing
-            CreateDiv("div1");
 
 
 
