@@ -9,7 +9,26 @@
 <body>
     <form id="form1" runat="server">
     <div>
-    Upload Test Default
+        <h4>Select a file to upload:</h4>
+
+        <asp:FileUpload id="FileUpload1"                 
+            runat="server">
+        </asp:FileUpload>
+
+        <br/><br/>
+
+        <asp:Button id="UploadBtn" 
+            Text="Upload file"
+            OnClick="UploadBtn_Click"
+            runat="server">
+        </asp:Button>    
+
+        <hr />
+
+        <asp:Label id="UploadStatusLabel"
+            runat="server">
+        </asp:Label>     
+        <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
     </div>
     </form>
 </body>

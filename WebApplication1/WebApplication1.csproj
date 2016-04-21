@@ -294,6 +294,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="MFNRoot\Clients\" />
+    <Folder Include="MFNRoot\ProfilePic\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
