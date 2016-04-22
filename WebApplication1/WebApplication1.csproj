@@ -102,6 +102,7 @@
     <Content Include="Login.aspx" />
     <Content Include="Pictures\MobileFitnessNetworkPic.jpg" />
     <Content Include="Default.aspx" />
+    <Content Include="TrainerViewOnly.aspx" />
     <Content Include="UploadProfilePic.aspx" />
     <Content Include="UserProfile.aspx" />
     <Content Include="ClientProfile.aspx" />
@@ -241,6 +242,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TrainerViewOnly.aspx.cs">
+      <DependentUpon>TrainerViewOnly.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TrainerViewOnly.aspx.designer.cs">
+      <DependentUpon>TrainerViewOnly.aspx</DependentUpon>
     </Compile>
     <Compile Include="UploadProfilePic.aspx.cs">
       <DependentUpon>UploadProfilePic.aspx</DependentUpon>
