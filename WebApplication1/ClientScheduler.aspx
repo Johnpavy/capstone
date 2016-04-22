@@ -6,6 +6,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
+  <link rel="shortcut icon" type="image/x-icon" href="/Pictures/favicon.ico"/>
   <title>Welcome to MFN</title>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>

@@ -18,7 +18,7 @@ namespace WebApplication1
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            string SampleTotal = "1.50";
+            string SampleTotal = "50.00";
             // ### Api Context
             // Pass in a `APIContext` object to authenticate 
             // the call and to send a unique request id 
@@ -37,7 +37,7 @@ namespace WebApplication1
                     details = new Details()
                     {
                         shipping = "0.00",
-                        subtotal = "1.50",
+                        subtotal = SampleTotal,
                         tax = "0.00"
                     }
                 },
@@ -51,7 +51,7 @@ namespace WebApplication1
                         {
                             name = "Session",
                             currency = "USD",
-                            price = "1.50",
+                            price = SampleTotal,
                             quantity = "1",
                             sku = "sku"
                         }

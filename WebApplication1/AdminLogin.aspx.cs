@@ -54,7 +54,7 @@ namespace WebApplication1
             {
                 //Login fail
                 ErrorLbl.Visible = true;
-                ErrorLbl.Text = "Dtabase is not connected!";
+                ErrorLbl.Text = "Database is not connected!";
             }
             else if (count > 0)
             {

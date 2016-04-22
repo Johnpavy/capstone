@@ -92,6 +92,8 @@
     <Content Include="MFNRoot\Trainers\test%40email\ProfilePic.jpg" />
     <Content Include="PasswordResetComfirm.aspx" />
     <Content Include="PaymentConfirmation.aspx" />
+    <Content Include="Pictures\AdminPic.jpg" />
+    <Content Include="Pictures\favicon.ico" />
     <Content Include="Pictures\trainerPic.jpg" />
     <Content Include="Pictures\UserPicture.jpg" />
     <Content Include="ResetPassword.aspx" />

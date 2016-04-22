@@ -13,8 +13,18 @@ namespace WebApplication1
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Aobj = (AdminObject)Session["AdminInfo"];
-            Label1.Text = Aobj.FirstName + " " + Aobj.LastName;
+
+            if(Session["AdminInfo"] == null)
+            {
+                Response.Redirect("AdminLogin.Aspx");
+            }
+            else
+            {
+                Aobj = (AdminObject)Session["AdminInfo"];
+                UserNameLbl.Text = Aobj.FirstName + " " + Aobj.LastName;
+
+            }
+
         }
     }
 }
