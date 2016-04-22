@@ -4,6 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
+  <link rel="shortcut icon" type="image/x-icon" href="/Pictures/favicon.ico"/>
   <title>Welcome to MFN</title>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1/"/>
@@ -301,6 +302,7 @@
     		</div>
     	</div>
     </div>
+        <a href="AdminLogin.aspx"><u>Login as Admin</u></a>
 
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" SelectCommand="SELECT * FROM [MFNTrainerTable]"></asp:SqlDataSource>
         <br />
