@@ -10,7 +10,7 @@
 namespace WebApplication1 {
     
     
-    public partial class AdminControl {
+    public partial class TrainerViewOnly {
         
         /// <summary>
         /// form1 control.
@@ -31,31 +31,31 @@ namespace WebApplication1 {
         protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource1;
         
         /// <summary>
-        /// DropDownList1 control.
+        /// ScriptManager1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
+        protected global::System.Web.UI.ScriptManager ScriptManager1;
         
         /// <summary>
-        /// searchBtn control.
+        /// UpdatePanel1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton searchBtn;
+        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
         
         /// <summary>
-        /// ErrorLbl control.
+        /// ManageSession control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label ErrorLbl;
+        protected global::System.Web.UI.WebControls.LinkButton ManageSession;
         
         /// <summary>
         /// ProfilePic control.
@@ -76,111 +76,111 @@ namespace WebApplication1 {
         protected global::System.Web.UI.WebControls.Label UserNameLbl;
         
         /// <summary>
-        /// AdminControlOptions control.
+        /// bio control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl AdminControlOptions;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl bio;
         
         /// <summary>
-        /// AdminTableBtn control.
+        /// BioTextBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton AdminTableBtn;
+        protected global::System.Web.UI.WebControls.TextBox BioTextBox;
         
         /// <summary>
-        /// AdminRequestBtn control.
+        /// BioFailLbl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton AdminRequestBtn;
+        protected global::System.Web.UI.WebControls.Label BioFailLbl;
         
         /// <summary>
-        /// ViewAllTablesBtn control.
+        /// specialty control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton ViewAllTablesBtn;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl specialty;
         
         /// <summary>
-        /// AdminTableView control.
+        /// IndividualRatesTxtBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl AdminTableView;
+        protected global::System.Web.UI.WebControls.TextBox IndividualRatesTxtBox;
         
         /// <summary>
-        /// GridView1 control.
+        /// AdditionalPersonRateTxtBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView1;
+        protected global::System.Web.UI.WebControls.TextBox AdditionalPersonRateTxtBox;
         
         /// <summary>
-        /// AdminSignupPanel control.
+        /// FavLoc control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl AdminSignupPanel;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl FavLoc;
         
         /// <summary>
-        /// cfirst_name control.
+        /// myModal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox cfirst_name;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl myModal;
         
         /// <summary>
-        /// clast_name control.
+        /// TempTextBox2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox clast_name;
+        protected global::System.Web.UI.WebControls.TextBox TempTextBox2;
         
         /// <summary>
-        /// cemail control.
+        /// myModal2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox cemail;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl myModal2;
         
         /// <summary>
-        /// LinkButton3 control.
+        /// NewIndividualRateTxtBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton3;
+        protected global::System.Web.UI.WebControls.TextBox NewIndividualRateTxtBox;
         
         /// <summary>
-        /// ErrorLabel2 control.
+        /// NewAdditionalPersonRateTxtBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label ErrorLabel2;
+        protected global::System.Web.UI.WebControls.TextBox NewAdditionalPersonRateTxtBox;
     }
 }

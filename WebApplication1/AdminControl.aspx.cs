@@ -20,9 +20,10 @@ namespace WebApplication1
             }
             else
             {
+                
                 Aobj = (AdminObject)Session["AdminInfo"];
                 UserNameLbl.Text = Aobj.FirstName + " " + Aobj.LastName;
-
+                Session["AdminId"] = Aobj.AdminId;
             }
 
         }
