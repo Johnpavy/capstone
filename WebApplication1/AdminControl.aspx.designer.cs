@@ -112,6 +112,15 @@ namespace WebApplication1 {
         protected global::System.Web.UI.WebControls.LinkButton ViewAllTablesBtn;
         
         /// <summary>
+        /// PasswordChangeBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton PasswordChangeBtn;
+        
+        /// <summary>
         /// AdminTableView control.
         /// </summary>
         /// <remarks>
@@ -139,31 +148,31 @@ namespace WebApplication1 {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl AdminSignupPanel;
         
         /// <summary>
-        /// cfirst_name control.
+        /// first_name control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox cfirst_name;
+        protected global::System.Web.UI.WebControls.TextBox first_name;
         
         /// <summary>
-        /// clast_name control.
+        /// last_name control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox clast_name;
+        protected global::System.Web.UI.WebControls.TextBox last_name;
         
         /// <summary>
-        /// cemail control.
+        /// Email control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox cemail;
+        protected global::System.Web.UI.WebControls.TextBox Email;
         
         /// <summary>
         /// LinkButton3 control.
@@ -175,6 +184,15 @@ namespace WebApplication1 {
         protected global::System.Web.UI.WebControls.LinkButton LinkButton3;
         
         /// <summary>
+        /// CancelInvite control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton CancelInvite;
+        
+        /// <summary>
         /// ErrorLabel2 control.
         /// </summary>
         /// <remarks>
@@ -182,5 +200,68 @@ namespace WebApplication1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label ErrorLabel2;
+        
+        /// <summary>
+        /// ChangeYourPassword control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ChangeYourPassword;
+        
+        /// <summary>
+        /// Password control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Password;
+        
+        /// <summary>
+        /// Cpassword control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Cpassword;
+        
+        /// <summary>
+        /// ResetPassword control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton ResetPassword;
+        
+        /// <summary>
+        /// CancelUpdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton CancelUpdate;
+        
+        /// <summary>
+        /// ErrorLbl3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label ErrorLbl3;
+        
+        /// <summary>
+        /// SqlDataSource2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource2;
     }
 }

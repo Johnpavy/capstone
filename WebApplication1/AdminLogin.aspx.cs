@@ -7,6 +7,10 @@ using System.Web.UI.WebControls;
 using System.Data.Sql;
 using System.Data.SqlClient;
 
+//For Hasing Passwords
+using System.Security.Cryptography;
+using System.Web.Security;
+
 
 namespace WebApplication1
 {
@@ -22,6 +26,7 @@ namespace WebApplication1
         protected void Login(object sender, EventArgs e)
         {
             int count = 0;
+            string salt ="";
 
             string UserName = Request.Form["Name"];
             string Password = Request.Form["Password"].ToString();
@@ -29,7 +34,33 @@ namespace WebApplication1
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = System.Data.CommandType.Text;
             cmd.Connection = db;
-            cmd.CommandText = "Select COUNT(*) FROM [MFNAdminTable] WHERE Admin_Email = '" + UserName + "'COLLATE SQL_Latin1_General_CP1_CS_AS AND Admin_PasswordHash = '" + Password + "' COLLATE SQL_Latin1_General_CP1_CS_AS";
+
+
+            try
+            {
+                cmd.CommandText = "Select * FROM [MFNAdminTable] WHERE Admin_Email = '" + UserName + "'";
+                db.Open();
+                SqlDataReader sdr = cmd.ExecuteReader();
+                while (sdr.Read())
+                {
+                    salt = sdr["Admin_Salt"].ToString();
+                }
+
+            }
+            catch
+            {
+                ErrorLbl.Visible = true;
+                ErrorLbl.Text = "Error while reading from Database";
+            }
+            finally
+            {
+                db.Close();
+            }
+
+            string hashedPassword = CreatePasswordHash(Password, salt);
+
+
+            cmd.CommandText = "Select COUNT(*) FROM [MFNAdminTable] WHERE Admin_Email = '" + UserName + "'COLLATE SQL_Latin1_General_CP1_CS_AS AND Admin_PasswordHash = '" + hashedPassword + "' COLLATE SQL_Latin1_General_CP1_CS_AS";
 
 
 
@@ -90,6 +121,13 @@ namespace WebApplication1
                 ErrorLbl.Visible = true;
                 ErrorLbl.Text = "Invalid Email or Password";
             }
+        }
+
+        private static string CreatePasswordHash(string pwd, string salt)
+        {
+            string saltAndPwd = String.Concat(pwd, salt);
+            string hashedPwd = FormsAuthentication.HashPasswordForStoringInConfigFile(saltAndPwd, "sha1");
+            return hashedPwd;
         }
     }
 }
