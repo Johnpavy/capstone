@@ -113,6 +113,7 @@
     <Content Include="packages.config" />
     <Content Include="WebForm3.aspx" />
     <Content Include="ClientScheduler.aspx" />
+    <Content Include="AdminRegistration.aspx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -301,6 +302,13 @@
     </Compile>
     <Compile Include="ClientScheduler.aspx.designer.cs">
       <DependentUpon>ClientScheduler.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminRegistration.aspx.cs">
+      <DependentUpon>AdminRegistration.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminRegistration.aspx.designer.cs">
+      <DependentUpon>AdminRegistration.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
