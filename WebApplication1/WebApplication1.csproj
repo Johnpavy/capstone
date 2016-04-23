@@ -155,6 +155,7 @@
     <Compile Include="CheckOut.aspx.designer.cs">
       <DependentUpon>CheckOut.aspx</DependentUpon>
     </Compile>
+    <Compile Include="TransactionObject.cs" />
     <Compile Include="ClientConfirmationPage.aspx.cs">
       <DependentUpon>ClientConfirmationPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
