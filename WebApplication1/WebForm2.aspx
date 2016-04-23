@@ -157,7 +157,7 @@
                 <div class="HeaderContainer container-fluid">
                     <div class="row">
                         <div class="PictureColumn col-xs-12 col-sm-12 text-center">
-                            <asp:Image id="ProfilePic" runat="server" src="Pictures/trainerPic.jpg" class="TrainerPicture img-circle img-responsive" alt="Trainer Picture" />
+                            <asp:Image id="ProfilePic" runat="server" src="Pictures/trainerPic.jpg" class="TrainerPicture img-circle img-responsive" alt="Trainer Picture" data-toggle="modal" data-target="#PicUploadModal" />
                             <br />
                         </div>
                     </div>
@@ -311,6 +311,29 @@
                   </div>
                   <div class="modal-footer">
                     <asp:LinkButton ID="UpdateRatesBtn" cssclass="btn btn-default" runat ="server" onclick="ComfirmUpdateRatesButton_Click">Update</asp:LinkButton>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="ComfirmUpdateRatesButton_Click">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <!--UploadPicture Modal -->
+            <div id="PicUploadModal" class="modal fade" role="dialog" runat="server" >
+              <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Edit Rates </h4>
+                  </div>
+                  <div class="modal-body">
+                    <p>Enter your New Rates:</p>
+                      Individual Rate: <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox> per hour <br />
+                      Additional  Person Rate: <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox> per hour
+                  </div>
+                  <div class="modal-footer">
+                    <asp:LinkButton ID="LinkButton1" cssclass="btn btn-default" runat ="server" onclick="ComfirmUpdateRatesButton_Click">Update</asp:LinkButton>
                     <button type="button" class="btn btn-default" data-dismiss="modal" onclick="ComfirmUpdateRatesButton_Click">Close</button>
                   </div>
                 </div>

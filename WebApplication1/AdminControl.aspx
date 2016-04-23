@@ -102,7 +102,14 @@
 </head>
         <body>
         <form id="form1" runat="server">
-              <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" SelectCommand="SELECT * FROM [MFNTrainerTable]"></asp:SqlDataSource>
+            <!--An Admin cannot delete themselves or another super admin from this section!-->
+              <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" 
+                  SelectCommand="SELECT [Admin_Id], [Admin_Email], [Admin_FirstName], [Admin_MiddleName], [Admin_LastName], [Admin_Picture] FROM [MFNAdminTable] WHERE (([Admin_Id] &lt;&gt; @Admin_Id) AND ([Admin_isSuperAdmin] = @Admin_isSuperAdmin))" OldValuesParameterFormatString="original_{0}">
+                  <SelectParameters>
+                      <asp:SessionParameter Name="Admin_Id" SessionField="AdminId" Type="Int32" />
+                      <asp:Parameter DefaultValue="False" Name="Admin_isSuperAdmin" Type="Boolean" />
+                  </SelectParameters>
+              </asp:SqlDataSource>
 
             <div class="content">  
                 <div class="TopNavContainer col-xs-12 col-sm-12">
@@ -116,7 +123,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                           </button>
-                          <a class="NavBrand navbar-brand glyphicon glyphicon-home white" href="ClientProfile.aspx">
+                          <a class="NavBrand navbar-brand glyphicon glyphicon-home white" href="AdminControl.aspx">
                             </a>
                         </div>
 
@@ -168,41 +175,90 @@
                     </div>
                 </div>
 
-                 <div class="InformationPanels panel-group" id="accordion">
-                    <div class="panel panel-default">
-                      <div class="panel-heading">
-                        <h4 class="panel-title">
-                          <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Training Preferences</a>
-                        </h4>
-                      </div>
-                      <div id="collapse2" class="panel-collapse collapse">
-                        <div class="panel-body" id ="preferences" runat="server">Test Text.</div>
-                      </div>
-                    </div>
-                    <div class="panel panel-default">
-                      <div class="panel-heading">
-                        <h4 class="panel-title">
-                          <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">Available Equipment</a>
-                        </h4>
-                      </div>
-                      <div id="collapse3" class="panel-collapse collapse">
-                        <div class="panel-body" id="equipment" runat="server">Test Text.</div>
-                      </div>
-                    </div>
-                    <div class="panel panel-default">
-                      <div class="panel-heading">
-                        <h4 class="panel-title">
-                          <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">Favorite Locations</a>
-                        </h4>
-                      </div>
-                      <div id="collapse4" class="panel-collapse collapse">
-                        <div class="panel-body">Test Text.</div>
-                      </div>
-                    </div>
-                </div>
+           <div id="AdminControlOptions" runat="server" class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4" >
+        	<div class="panel panel-default">
+        		<div class="panel-heading">
+			    		<h3 class="panel-title">Admin Options</h3>
+			 			</div>
+			 			<div class="panel-body">
+                            <ul id="OptionsBar">
+                                <li><asp:LinkButton ID="AdminTableBtn" Class="btn btn-primary btn-lg btn-block" runat="server">View Admin Table</asp:LinkButton></li>
+                                <li><asp:LinkButton ID="AdminRequestBtn" Class="btn btn-primary btn-lg btn-block" runat="server">Send Out Admin Invitation</asp:LinkButton></li>
+                                <li><asp:LinkButton ID="ViewAllTablesBtn" Class="btn btn-primary btn-lg btn-block" runat="server">View Admin Table</asp:LinkButton></li>
+                            </ul>
+			    	    </div>
+	    		</div>
+               </div>
 
+
+                
+           <div id="AdminTableView" runat="server" class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+        	<div class="panel panel-default">
+        		<div class="panel-heading">
+			    		<h3 class="panel-title">Admin Options</h3>
+			 			</div>
+			 			<div class="panel-body">
+                             <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" AutoGenerateDeleteButton="True" DataKeyNames="Admin_Id" DataSourceID="SqlDataSource1">
+                                 <Columns>
+                                     <asp:BoundField DataField="Admin_Id" HeaderText="Admin_Id" InsertVisible="False" ReadOnly="True" SortExpression="Admin_Id" />
+                                     <asp:BoundField DataField="Admin_Email" HeaderText="Admin_Email" SortExpression="Admin_Email" />
+                                     <asp:BoundField DataField="Admin_FirstName" HeaderText="Admin_FirstName" SortExpression="Admin_FirstName" />
+                                     <asp:BoundField DataField="Admin_MiddleName" HeaderText="Admin_MiddleName" SortExpression="Admin_MiddleName" />
+                                     <asp:BoundField DataField="Admin_LastName" HeaderText="Admin_LastName" SortExpression="Admin_LastName" />
+                                     <asp:BoundField DataField="Admin_Picture" HeaderText="Admin_Picture" SortExpression="Admin_Picture" />
+                                 </Columns>
+                             </asp:GridView>
+			    	    </div>
+	    		</div>
+               </div>
+
+            <div id="AdminSignupPanel" runat="server" class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+        	<div class="panel panel-default">
+        		<div class="panel-heading">
+			    		<h3 class="panel-title">Send Out Registration For Admin</h3>
+			 			</div>
+			 			<div class="panel-body">
+
+			    			<div class="row">
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+                                        <asp:TextBox  name="cFName" id="cfirst_name" class="form-control input-sm" placeholder="First Name" runat="server"/>
+			    					</div>
+			    				</div>
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+                                        <asp:TextBox  name="cLName" id="clast_name" class="form-control input-sm" placeholder="Last Name" runat="server"/>
+			    					</div>
+			    				</div>
+			    			</div>
+
+			    			<div class="form-group">
+                                <asp:TextBox  name="CEmail" id="cemail" class="form-control input-sm" placeholder="Email Address" runat="server"/>
+			    			</div>
+
+			    			<div class="row">
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+			    						<input type="password" name="CLpassword" id="clpassword" class="form-control input-sm" placeholder="Password"/>
+			    					</div>
+			    				</div>
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+			    						<input type="password" name="CCpassword" id="cpassword_confirmation" class="form-control input-sm" placeholder="Confirm Password"/>
+			    					</div>
+			    				</div>
+			    			</div>
+			    			
+			    			<asp:LinkButton ID = "LinkButton3" Class="btn btn-info btn-block" runat="server" >Send Invite</asp:LinkButton>
+			    		
+
+			    	</div>
+                  <asp:Label ID="ErrorLabel2" runat="server" Text="Label" Visible="False"></asp:Label>
+	    		</div>
+    		</div>
 
             </div>
+
           </form>
         </body>
 </html>
