@@ -251,7 +251,7 @@
 			    		
 
 			    	</div>
-                  <asp:Label ID="ErrorLabel" runat="server" Text="Label" Visible="False"></asp:Label>
+                  <asp:Label ID="ErrorLabel" runat="server" Text="Password:  length &gt;8, 1 upper, 1 lower, 1 number"></asp:Label>
 	    		</div>
             <!Register as client below>
     		</div>
@@ -297,7 +297,7 @@
 			    		
 
 			    	</div>
-                  <asp:Label ID="ErrorLabel2" runat="server" Text="Label" Visible="False"></asp:Label>
+                  <asp:Label ID="ErrorLabel2" runat="server" Text="Password:  length &gt;8, 1 upper, 1 lower, 1 number"></asp:Label>
 	    		</div>
     		</div>
     	</div>

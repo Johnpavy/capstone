@@ -267,11 +267,8 @@ namespace WebApplication1
 
         protected void startup_Click(object sender, EventArgs e)
         {
-            //String firstName = Request.Form["FName"];
             String firstName = first_name.Text;
-            //String lastName = Request.Form["LName"];
             String lastName = last_name.Text;
-            //String email = Request.Form["email"];
             String email = Email.Text;
             String password = Request.Form["password"];
             String CPassword = Request.Form["Cpassword"];
@@ -472,14 +469,14 @@ namespace WebApplication1
                     // body += "<br /><a href = '" + Request.Url.AbsoluteUri.Replace("http://mobilefitnessnetwork.azurewebsites.net", "http://mobilefitnessnetwork.azurewebsites.net/ConfirmationPage.aspx?ActivationCode=" + activationCode) + "'>Click here to activate your account.</a>";
 
                     // for local host comment this and uncomment link generator above
-                    body += "<br /><a href = '" + Request.Url.AbsoluteUri.Replace("Default.aspx", "ConfirmationPage.aspx?ActivationCode=" + activationCode) + "'>Click here to activate your account.</a>";
+                    body += "<br /><a href = '" + Request.Url.AbsoluteUri.Replace("Default.aspx", "ConfirmationPage.aspx?ActivationCode=" + activationCode + "&UserID=" + userId) + "'>Click here to activate your account.</a>";
                 }
                 else
                 {
                     // for live web app hosted on azure, uncomment this and comment the local host line
                     // body += "<br /><a href = '" + Request.Url.AbsoluteUri.Replace("http://mobilefitnessnetwork.azurewebsites.net", "http://mobilefitnessnetwork.azurewebsites.net/ClientConfirmationPage?ActivationCode=" + activationCode) + "'>Click here to activate your account.</a>";
                     // uncomment line below for local host testing and comment line above
-                    body += "<br /><a href = '" + Request.Url.AbsoluteUri.Replace("Default.aspx", "ClientConfirmationPage.aspx?ActivationCode=" + activationCode) + "'>Click here to activate your account.</a>";
+                    body += "<br /><a href = '" + Request.Url.AbsoluteUri.Replace("Default.aspx", "ClientConfirmationPage.aspx?ActivationCode=" + activationCode + "&UserID=" + userId) + "'>Click here to activate your account.</a>";
                 }
                 body += "<br /><br />Thanks";
                 mm.Body = body;

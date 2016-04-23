@@ -18,6 +18,7 @@ namespace WebApplication1
             {
                
                 string activationCode = !string.IsNullOrEmpty(Request.QueryString["ActivationCode"]) ? Request.QueryString["ActivationCode"] : Guid.Empty.ToString();
+                String UserID = Request.QueryString["UserID"];
                 using (SqlConnection con = new SqlConnection(SqlDataSource1.ConnectionString))
                 {
 
