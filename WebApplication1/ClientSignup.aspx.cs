@@ -57,16 +57,24 @@ namespace WebApplication1
             String gender = DropDownList3.SelectedValue;
             String pnumber = Phone.Text;
             String interests = DropDownList5.SelectedValue;
+            String zip = Zip.Text;
+            int zipInt;
+            bool isInt = Int32.TryParse(zip, out zipInt);
 
-            
+
             // Check to make sure all fields are filled out
-            if (interests.Equals("0") || Street.Text.Equals("") || City.Text.Equals("") || State.Text.Equals("") || equipment.Equals("") || gender.Equals("0") || pnumber.Equals(""))
+            if (interests.Equals("0") || Street.Text.Equals("") || City.Text.Equals("") || Zip.Text.Equals("") || State.Text.Equals("") || equipment.Equals("") || gender.Equals("0") || pnumber.Equals(""))
             {
                 Label1.ForeColor = System.Drawing.Color.Red;
                 Label1.Text = "All fields required";
                 Label1.Visible = true;
             }
-
+            else if(!isInt || zip.Length !=5)
+            {
+                Label1.ForeColor = System.Drawing.Color.Red;
+                Label1.Text = "Zip code must be a 5 digit number";
+                Label1.Visible = true;
+            }
             else
             {
                 adrs.Address = clientAddress;

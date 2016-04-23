@@ -47,12 +47,21 @@ namespace WebApplication1
             String height = DropDownList1.SelectedValue + "'" + DropDownList2.SelectedValue + "\"";
             String weight = Weight.Text;
             String specialty = DropDownList5.SelectedValue;
+            String zip = Zip.Text;
+            int zipInt;
+            bool isInt = Int32.TryParse(zip, out zipInt);
 
             // Check to make sure all fields are filled out
-            if(Street.Text.Equals("") || State.Text.Equals("") || City.Text.Equals("") || gender.Equals("0") || pnumber.Equals("") || height.Equals("0'\"") || specialty.Equals("0") || weight.Equals(""))
+            if(Street.Text.Equals("") || State.Text.Equals("") || Zip.Text.Equals("")|| City.Text.Equals("") || gender.Equals("0") || pnumber.Equals("") || height.Equals("0'\"") || specialty.Equals("0") || weight.Equals(""))
             {
                 Label1.ForeColor = System.Drawing.Color.Red;
                 Label1.Text = "All fields required";
+                Label1.Visible = true;
+            }
+            else if(!isInt || zip.Length != 5)
+            {
+                Label1.ForeColor = System.Drawing.Color.Red;
+                Label1.Text = "Zip code must be a 5 digit number";
                 Label1.Visible = true;
             }
 

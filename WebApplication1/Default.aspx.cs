@@ -19,6 +19,9 @@ namespace WebApplication1
 {
     public partial class WebForm4 : System.Web.UI.Page
     {
+        // These values store true or false strings from the database that indicate if the user has clicked on the verification email sent to them
+        String tVerified, cVerified;
+
         TrainerObject Tobj = new TrainerObject();
         UserObject Uobj = new UserObject();
 
@@ -45,24 +48,29 @@ namespace WebApplication1
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd.Connection = db;
+                
 
                 //hash entered password
 
                 try
                 {
-                    cmd.CommandText = "Select * FROM [MFNTrainerTable] WHERE Trainer_Email = '" + UserName + "'";
+                    cmd.CommandText = "Select * FROM [MFNTrainerTable] WHERE Trainer_Email = @email";
+                    cmd.Parameters.AddWithValue("@email", UserName);
+
                     db.Open();
                     SqlDataReader sdr = cmd.ExecuteReader();
                     while (sdr.Read())
                     {
                         salt = sdr["Trainer_PasswordSalt"].ToString();
+                        tVerified = sdr["Trainer_EmailVerified"].ToString();
+
                     }
 
                 }
                 catch
                 {
                     ErrorLbl.Visible = true;
-                    ErrorLbl.Text = "Error while reading from Database";
+                    ErrorLbl.Text = "Invalid email or password";
                 }
                 finally
                 {
@@ -92,11 +100,20 @@ namespace WebApplication1
                 If the the trainer is verified and the database has succesfully placed data
                 into trainer object.
                 */
-                if (count == -1)
+                if (count == -1 || tVerified.Equals("False"))
                 {
-                    //Login fail
-                    ErrorLbl.Visible = true;
-                    ErrorLbl.Text = "Database is not connected!";
+                    //login fail
+                    if(count == -1)
+                    {
+                        ErrorLbl.Visible = true;
+                        ErrorLbl.Text = "Database is not connected!";
+                    }
+                    else
+                    {
+                        ErrorLbl.Visible = true;
+                        ErrorLbl.Text = "Email address not verified";
+                    }
+
                 }
                 else if (count > 0)
                 {
@@ -151,12 +168,14 @@ namespace WebApplication1
 
                 try
                 {
-                    cmd.CommandText = "Select * FROM [MFNUserTable] WHERE User_Email = '" + UserName + "'";
+                    cmd.CommandText = "Select * FROM [MFNUserTable] WHERE User_Email = @email";
+                    cmd.Parameters.AddWithValue("@email", UserName);
                     db.Open();
                     SqlDataReader sdr = cmd.ExecuteReader();
                     while (sdr.Read())
                     {
                         salt = sdr["User_PasswordSalt"].ToString();
+                        cVerified = sdr["User_EmailVarified"].ToString();
                     }
 
                 }
@@ -199,11 +218,19 @@ namespace WebApplication1
                 If the the trainer is verified and the database has succesfully placed data
                 into trainer object.
                 */
-                if (count == -1)
+                if (count == -1 || cVerified.Equals("False"))
                 {
-                    //Login fail
-                    ErrorLbl.Visible = true;
-                    ErrorLbl.Text = "Database is not connected!";
+                    //login fail
+                    if (count == -1)
+                    {
+                        ErrorLbl.Visible = true;
+                        ErrorLbl.Text = "Database is not connected!";
+                    }
+                    else
+                    {
+                        ErrorLbl.Visible = true;
+                        ErrorLbl.Text = "Email address not verified";
+                    }
                 }
                 else if (count > 0)
                 {
