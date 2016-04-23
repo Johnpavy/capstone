@@ -25,21 +25,21 @@
 					<div class="col-sm-12">
 			
 						<div class="form-group">
-							<label>Street Address</label>
-							<textarea placeholder="Enter Street Address" rows="3" class="form-control" name ="Street"></textarea>
+							<label>Street Address</label>&nbsp;
+                            <asp:TextBox ID="Street" runat="server" Height="35px" TextMode="MultiLine" Width="100%" CssClass ="form-control"></asp:TextBox>
 						</div>	
 						<div class="row">
 							<div class="col-sm-4 form-group">
-								<label>City</label>
-								<input type="text" placeholder="Enter City Name" class="form-control" name="City"/>
+								<label>City</label>&nbsp;
+                                <asp:TextBox ID="City" runat="server" Width="100%" CssClass ="form-control"></asp:TextBox>
 							</div>	
 							<div class="col-sm-4 form-group">
-								<label>State</label>
-								<input type="text" placeholder="Enter State Name" class="form-control" name="State"/>
+								<label>State</label>&nbsp;
+                                <asp:TextBox ID="State" runat="server" Width="100%" CssClass ="form-control"></asp:TextBox>
 							</div>	
 							<div class="col-sm-4 form-group">
-								<label>Zip</label>
-								<input type="text" placeholder="Enter Zip Code" class="form-control"/>
+								<label>Zip</label>&nbsp;
+                                <asp:TextBox ID="Zip" CssClass ="form-control" runat="server"></asp:TextBox>
 							</div>		
 						</div>
 						<div class="row">
@@ -61,7 +61,8 @@
                                 <div class="dropdown">
 
                                     <asp:DropDownList ID="DropDownList2" runat="server" CssClass="form-control" OnSelectedIndexChanged="DropDownList2_SelectedIndexChanged">
-                                       <asp:ListItem Text="Select Inches" Value="0"></asp:ListItem>
+                                       <asp:ListItem Text="Select Inches" Value=""></asp:ListItem>
+                                       <asp:ListItem Text="0" Value="0"></asp:ListItem>
                                        <asp:ListItem Text="1" Value="1"></asp:ListItem>
                                        <asp:ListItem Text="2" Value="2"></asp:ListItem>
                                        <asp:ListItem Text="3" Value="3"></asp:ListItem>
@@ -77,14 +78,14 @@
                                  </div>	
                                </div>	
 							<div class="col-sm-4 form-group">
-								<label>Weight Pounds</label>
-								<input type="text" placeholder="Enter Weight in pounds" class="form-control" name="weight"/>
+								<label>Weight Pounds</label>&nbsp;
+                                <asp:TextBox ID="Weight" runat="server" Width="100%" CssClass ="form-control"></asp:TextBox>
 							</div>	
 						</div>	
                        </div>					
 					<div class="col-sm-4 form-group">
-						<label>Phone Number</label>
-						<input type="text" placeholder="Enter Phone Number" class="form-control" name="pnumber"/>
+						<label>Phone Number</label>&nbsp;
+                        <asp:TextBox ID="Phone" runat="server" Width="100%" CssClass ="form-control"></asp:TextBox>
 					</div>		
                     <div class="col-sm-4 form-group">
 						<label>Gender</label>
@@ -111,8 +112,8 @@
 					<div class="form-group">
 
 						<label>Biography</label>
-						<textarea placeholder="Enter Bio" rows="3" class="form-control" name ="Bio"></textarea>
-                        <div class="CreateAccountContainer text-center">
+						<asp:TextBox ID="Bio" runat="server" TextMode="MultiLine" Width="100%" CssClass ="form-control"></asp:TextBox>
+&nbsp;<div class="CreateAccountContainer text-center">
                             <br />
 					        <asp:LinkButton ID="button" Class="btn btn-lg btn-inf" runat="server" OnClick="button_Click">Create Account</asp:LinkButton>									
 					        <br />
@@ -123,7 +124,7 @@
       <br />
 
         &nbsp&nbsp
-</div>
+        </div>
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" DeleteCommand="DELETE FROM [MFNTrainerLocTable] WHERE [TrainerLoc_Id] = @original_TrainerLoc_Id AND (([Trainer_Id] = @original_Trainer_Id) OR ([Trainer_Id] IS NULL AND @original_Trainer_Id IS NULL)) AND (([TrainerLoc_Lat] = @original_TrainerLoc_Lat) OR ([TrainerLoc_Lat] IS NULL AND @original_TrainerLoc_Lat IS NULL)) AND (([TrainerLoc_Long] = @original_TrainerLoc_Long) OR ([TrainerLoc_Long] IS NULL AND @original_TrainerLoc_Long IS NULL)) AND (([TrainerLoc_StreetAddress] = @original_TrainerLoc_StreetAddress) OR ([TrainerLoc_StreetAddress] IS NULL AND @original_TrainerLoc_StreetAddress IS NULL)) AND (([TrainerLoc_Description] = @original_TrainerLoc_Description) OR ([TrainerLoc_Description] IS NULL AND @original_TrainerLoc_Description IS NULL)) AND (([TrainerLoc_Prefered] = @original_TrainerLoc_Prefered) OR ([TrainerLoc_Prefered] IS NULL AND @original_TrainerLoc_Prefered IS NULL))" InsertCommand="INSERT INTO [MFNTrainerLocTable] ([TrainerLoc_Id], [Trainer_Id], [TrainerLoc_Lat], [TrainerLoc_Long], [TrainerLoc_StreetAddress], [TrainerLoc_Description], [TrainerLoc_Prefered]) VALUES (@TrainerLoc_Id, @Trainer_Id, @TrainerLoc_Lat, @TrainerLoc_Long, @TrainerLoc_StreetAddress, @TrainerLoc_Description, @TrainerLoc_Prefered)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT * FROM [MFNTrainerLocTable]" UpdateCommand="UPDATE [MFNTrainerLocTable] SET [Trainer_Id] = @Trainer_Id, [TrainerLoc_Lat] = @TrainerLoc_Lat, [TrainerLoc_Long] = @TrainerLoc_Long, [TrainerLoc_StreetAddress] = @TrainerLoc_StreetAddress, [TrainerLoc_Description] = @TrainerLoc_Description, [TrainerLoc_Prefered] = @TrainerLoc_Prefered WHERE [TrainerLoc_Id] = @original_TrainerLoc_Id AND (([Trainer_Id] = @original_Trainer_Id) OR ([Trainer_Id] IS NULL AND @original_Trainer_Id IS NULL)) AND (([TrainerLoc_Lat] = @original_TrainerLoc_Lat) OR ([TrainerLoc_Lat] IS NULL AND @original_TrainerLoc_Lat IS NULL)) AND (([TrainerLoc_Long] = @original_TrainerLoc_Long) OR ([TrainerLoc_Long] IS NULL AND @original_TrainerLoc_Long IS NULL)) AND (([TrainerLoc_StreetAddress] = @original_TrainerLoc_StreetAddress) OR ([TrainerLoc_StreetAddress] IS NULL AND @original_TrainerLoc_StreetAddress IS NULL)) AND (([TrainerLoc_Description] = @original_TrainerLoc_Description) OR ([TrainerLoc_Description] IS NULL AND @original_TrainerLoc_Description IS NULL)) AND (([TrainerLoc_Prefered] = @original_TrainerLoc_Prefered) OR ([TrainerLoc_Prefered] IS NULL AND @original_TrainerLoc_Prefered IS NULL))">
             <DeleteParameters>
                 <asp:Parameter Name="original_TrainerLoc_Id" Type="Int32" />

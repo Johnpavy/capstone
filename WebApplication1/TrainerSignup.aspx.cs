@@ -19,7 +19,7 @@ namespace WebApplication1
         TrainerObject Tobj = new TrainerObject();
         protected void Page_Load(object sender, EventArgs e)
         {
-           /* if(!IsPostBack)
+            if(!IsPostBack)
             {
                 if (Session["TrainerInfo"] == null)
                 {
@@ -32,7 +32,7 @@ namespace WebApplication1
                
                 }
             }
-        */
+        
 
         }
 
@@ -40,28 +40,38 @@ namespace WebApplication1
         {
             
             Adress adrs = new Adress();
-            String trainerAddress = Request.Form["Street"] + " " + Request.Form["City"] + " " + Request.Form["State"];
-            String bio = Request.Form["bio"];
+            String trainerAddress = Street.Text + " " + City.Text + " " + State.Text;
+            String bio = Bio.Text;
             String gender = DropDownList3.SelectedValue;
-            String pnumber = Request.Form["pnumber"];
+            String pnumber = Phone.Text;
             String height = DropDownList1.SelectedValue + "'" + DropDownList2.SelectedValue + "\"";
-            String weight = Request.Form["weight"];
+            String weight = Weight.Text;
             String specialty = DropDownList5.SelectedValue;
-            adrs.Address = trainerAddress;
-            adrs.GeoCode();
-            int trainerID = (int)Session["trainerID"];
-            String dBLat = adrs.Latitude;
-            String dBLng = adrs.Longitude;
+            String zip = Zip.Text;
+            int zipInt;
+            bool isInt = Int32.TryParse(zip, out zipInt);
+
             // Check to make sure all fields are filled out
-            if(trainerAddress.Equals("") || bio.Equals("") || gender.Equals("0") || pnumber.Equals("") || height.Equals("0'0\"") || specialty.Equals("0"))
+            if(Street.Text.Equals("") || State.Text.Equals("") || Zip.Text.Equals("")|| City.Text.Equals("") || gender.Equals("0") || pnumber.Equals("") || height.Equals("0'\"") || specialty.Equals("0") || weight.Equals(""))
             {
                 Label1.ForeColor = System.Drawing.Color.Red;
                 Label1.Text = "All fields required";
                 Label1.Visible = true;
             }
+            else if(!isInt || zip.Length != 5)
+            {
+                Label1.ForeColor = System.Drawing.Color.Red;
+                Label1.Text = "Zip code must be a 5 digit number";
+                Label1.Visible = true;
+            }
 
             else
             {
+                adrs.Address = trainerAddress;
+                adrs.GeoCode();
+                int trainerID = (int)Session["trainerID"];
+                String dBLat = adrs.Latitude;
+                String dBLng = adrs.Longitude;
                 // add info to session object
                 Tobj.CopyTrainerObject((TrainerObject)Session["TrainerInfo"]);
                 Tobj.Speciality = specialty;
@@ -118,8 +128,8 @@ namespace WebApplication1
                 // write to the trainer table
                 try
                 {
-                    trainerDB.Open()
-;                   cmd2.ExecuteNonQuery();
+                    trainerDB.Open();
+                    cmd2.ExecuteNonQuery();
                     Response.Redirect("Webform2.aspx");
 
                 }
