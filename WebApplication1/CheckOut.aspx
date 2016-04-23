@@ -16,14 +16,11 @@
 </head>
 <body>
     
-    <div class="jumbotron">
-        <h1 class="well">CHECKOUT PAGE</h1>
-    </div>
     <div class="container">
-
-        <div class="row">
+        <h1 class="well">Checkout Page</h1>
+ 
             <div class="col-lg-12 well">
-                <h2 class="well">Pay With PayPal</h2>
+                <h3 class="well">Pay With PayPal</h3>
                     <form class="text-center" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
                     <input type="hidden" name="cmd" value="_s-xclick"/>
                     <input type="hidden" name="hosted_button_id" value="ERL3AWGSFGP32"/>
@@ -31,13 +28,12 @@
                     <img alt="" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1"/>
                     </form>
             </div>
-        </div>
+ 
     
         <form id="form1" runat="server">
 
-         <div class="row">
             <div class="col-lg-12 well">
-                <h2 class="well">Pay With Credit Card</h2>
+                <h3 class="well">Pay With Credit Card</h3>
                 
                 <div class="form-group">
                 <label>First Name: </label>
@@ -45,17 +41,17 @@
                  <asp:TextBox ID="first_name" class="form-control" runat="server" placeholder="Enter First Name"></asp:TextBox>
                  <asp:RequiredFieldValidator ID="RequiredFieldValidator6" ControlToValidate="first_name" runat="server" ErrorMessage="Required Field"></asp:RequiredFieldValidator>
                  <asp:RegularExpressionValidator ID="RegularExpressionValidator6" ControlToValidate="first_name" runat="server" ErrorMessage="Invalid Input" ValidationExpression="[A-z -]{1,20}"></asp:RegularExpressionValidator>
-                </div>
-
-                <div class="form-group">
+                
+                    <br />
+                
                 <label>Last Name: </label>
                 <br />
                  <asp:TextBox ID="last_name" class="form-control" runat="server" placeholder="Enter Last Name"></asp:TextBox>
                  <asp:RequiredFieldValidator ID="RequiredFieldValidator7" ControlToValidate="last_name" runat="server" ErrorMessage="Required Field"></asp:RequiredFieldValidator>
                  <asp:RegularExpressionValidator ID="RegularExpressionValidator7" ControlToValidate="last_name" runat="server" ErrorMessage="Invalid Input" ValidationExpression="[A-z -]{1,20}"></asp:RegularExpressionValidator>
-                </div>
 
-                <div class="form-group">
+                    <br />
+
                 <!-- for some reason it will not except apostrophes, future development calls for a RegEx expression that accepts apostrophes in the first, last, city, and street names-->
                 <label>Country: </label>
                 <br />
@@ -63,42 +59,42 @@
                      <asp:ListItem Value="US">United States</asp:ListItem>
                  </asp:DropDownList>
                  <asp:RequiredFieldValidator ID="RequiredFieldValidator8" ControlToValidate="country_code" runat="server" ErrorMessage="Required Field"></asp:RequiredFieldValidator>
-                 </div>
 
-                <div class="form-group">
+                    <br />
+
                 <label>Street Address: </label>
                 <br />
                  <asp:TextBox ID="address" class="form-control" runat="server" placeholder="Enter Street Address"></asp:TextBox>
                  <asp:RequiredFieldValidator ID="RequiredFieldValidator9" ControlToValidate="address" runat="server" ErrorMessage="Required Field"></asp:RequiredFieldValidator>
                  <asp:RegularExpressionValidator ID="RegularExpressionValidator8" ControlToValidate="address" runat="server" ErrorMessage="Invalid Input" ValidationExpression="[A-z0-9 .-]{1,30}"></asp:RegularExpressionValidator>
-                </div>
 
-                <div class="form-group">
+                    <br />
+
                 <label>City: </label>
                 <br />
                  <asp:TextBox ID="city" class="form-control" runat="server" placeholder="Enter City Name"></asp:TextBox>
                  <asp:RequiredFieldValidator ID="RequiredFieldValidator10" ControlToValidate="city" runat="server" ErrorMessage="Required Field"></asp:RequiredFieldValidator>
                  <asp:RegularExpressionValidator ID="RegularExpressionValidator9" ControlToValidate="city" runat="server" ErrorMessage="Invalid Input" ValidationExpression="[A-z -]{1,30}"></asp:RegularExpressionValidator>
-                 </div>
 
-                <div class="form-group">
+                    <br />
+
                  <label>Zip Code: </label>
                 <br />
                  <asp:TextBox ID="postal_code" class="form-control" runat="server" placeholder="Enter Zip Code"></asp:TextBox>
                  <asp:RequiredFieldValidator ID="RequiredFieldValidator11" ControlToValidate="postal_code" runat="server" ErrorMessage="Required Field"></asp:RequiredFieldValidator>
                  <asp:RegularExpressionValidator ID="RegularExpressionValidator5" ControlToValidate="postal_code" runat="server" ErrorMessage="Invalid Input" ValidationExpression="\d{5}"></asp:RegularExpressionValidator>
-                </div>
 
-                <div class="form-group">
+                    <br />
+
                  <label>State: </label>
                 <br />
                  <asp:DropDownList ID="state" class="form-control" runat="server">
                      <asp:ListItem Value="TX">Texas</asp:ListItem>
                  </asp:DropDownList>
                  <asp:RequiredFieldValidator ID="RequiredFieldValidator12" ControlToValidate="state" runat="server" ErrorMessage="Required Field"></asp:RequiredFieldValidator>
-                </div>
 
-                <div class="form-group">
+                    <br />
+
                 <label>Card Type: </label>
                 <br />
                  <asp:DropDownList ID="card_type" class="form-control" runat="server">
@@ -106,25 +102,25 @@
                      <asp:ListItem Value="mastercard">Master Card</asp:ListItem>
                  </asp:DropDownList>
                  <asp:RequiredFieldValidator ID="RequiredFieldValidator5" ControlToValidate="card_type" runat="server" ErrorMessage="Required Field"></asp:RequiredFieldValidator> 
-                 </div>
 
-                <div class="form-group">
-                <label>Creadit Card Number: </label>
+                    <br />
+
+                <label>Credit Card Number: </label>
                 <br />
                  <asp:TextBox ID="card_number" class="form-control" runat="server" placeholder="Enter Credit Card Number" Text="4877274905927862"></asp:TextBox>
                  <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ControlToValidate="card_number" runat="server" ErrorMessage="Required Field"></asp:RequiredFieldValidator> 
                  <asp:RegularExpressionValidator ID="RegularExpressionValidator1" ControlToValidate="card_number" runat="server" ErrorMessage="Invalid Input" ValidationExpression="\d{16}"></asp:RegularExpressionValidator>
-                </div>
 
-                <div class="form-group">
+                    <br />
+
                 <label>CVV: </label>
                 <br />
                  <asp:TextBox ID="cvv2" class="form-control" runat="server" placeholder="Enter Security Code" Text="874"></asp:TextBox>
                  <asp:RequiredFieldValidator ID="RequiredFieldValidator2" ControlToValidate="cvv2" runat="server" ErrorMessage="Required Field"></asp:RequiredFieldValidator>  
                  <asp:RegularExpressionValidator ID="RegularExpressionValidator2" ControlToValidate="cvv2" runat="server" ErrorMessage="Invalid Input" ValidationExpression="\d{3}"></asp:RegularExpressionValidator>
-                </div>
 
-                <div class="form-group">
+                    <br />
+
                 <label>Expiration Month (mm): </label>
                 <br />
                  <asp:TextBox ID="ex_month" class="form-control" runat="server" placeholder="Enter Expiration Month" Text="11"></asp:TextBox>
@@ -146,8 +142,6 @@
             <div class="CreateAccountContainer text-center">
                 <asp:Button ID="Button1" Class="btn btn-lg btn-inf" runat="server" Text="Confirm Payment" OnClick="Button1_Click" />
             </div>
-
-        </div>
        </div>
    </form>
   </div>
