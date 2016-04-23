@@ -52,12 +52,7 @@ namespace WebApplication1
                     // to be uploaded.
                     if ((extension == ".jpg") || (extension == ".png") && fileSize < maxFileSize)
                     {
-                        // Get the files name
-                        //string fn = System.IO.Path.GetFileName(FileUpload1.FileName);
-                        // Change file name
-                        //fileName = "profilePic" + extension;
-
-                        // Append the name of the file to upload to the path.
+                        // Append the name of the file to upload to the path. You can change the default file name here, change "priflePic".
                         string savePath = appPath + saveDir + "profilePic" + extension;
                         Label1.Text = savePath;
                         // Call the SaveAs method to save the 
