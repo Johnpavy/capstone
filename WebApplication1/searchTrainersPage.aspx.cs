@@ -42,6 +42,7 @@ namespace WebApplication1
                    lName = sdr["Trainer_LastName"].ToString();
                    rate = sdr["Trainer_IndividualRate"].ToString();
                    CreateDiv("div" + x);
+                   
                 }
 
             }
@@ -59,7 +60,7 @@ namespace WebApplication1
             div.Attributes.Add("runat", "server");
             div.Attributes.Add("class", "row centered-form");
             //this line is an absolute nightmare,but it should work!
-            div.InnerHtml = "<div class=\"row centered-form\" runat=\"server\"><div class=\"col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4\"><div class=\"panel panel-default\"><div class=\"panel-heading\"><h3 class=\"panel-title\">Local Trainer</h3></div><div class=\"panel-body\"><img src=\"" + imagePath + "\" class=\"UserPicture img-circle img - responsive\" style=\"width: 50px; height: 50px; \">" + fName + " " + lName + " is in your area <a href=\"WebForm2.aspx\">Check out their profile</a></div></div></div></div>"; //not completed need button event to launch session!
+            div.InnerHtml = "<div class=\"row centered-form\" runat=\"server\"><div class=\"col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4\"><div class=\"panel panel-default\"><div class=\"panel-heading\"><h3 class=\"panel-title\">Local Trainer</h3></div><div class=\"panel-body\"><img src=\"" + imagePath + "\" class=\"UserPicture img-circle img - responsive\" style=\"width: 50px; height: 50px; \">" + fName + " " + lName + " is in your area <a href='" + Request.Url.AbsoluteUri.Replace("searchTrainersPage.aspx", "TrainerViewOnly.aspx?TrainerID=" + trainerID) + "' >Check out their profile</a></div></div></div></div>"; //not completed need button event to launch session!
             TrainerResults.Controls.Add(div);
         }
     }
