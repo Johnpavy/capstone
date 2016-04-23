@@ -163,6 +163,10 @@ namespace WebApplication1
                     mm.Subject = "Password Reset";
                     string body = "Hello, ";
                     body += "<br /><br />You may reset your password through this link: ";
+
+                    // for live web app hosted on azure, uncomment this and comment the local host line 
+                    // body += "<br /><a href = '" + Request.Url.AbsoluteUri.Replace("http://mobilefitnessnetwork.azurewebsites.net/ResetPassword.aspx", "http://mobilefitnessnetwork.azurewebsites.net/PasswordResetComfirm.aspx?ActivationCode=" + Email) + "'>Click here to reset your password.</a>";
+
                     body += "<br /><a href = '" + Request.Url.AbsoluteUri.Replace("ResetPassword.aspx", "PasswordResetComfirm.aspx?ActivationCode=" + Email) + "'>Click here to reset your password.</a>";
                     body += "<br /><br />Thanks";
                     mm.Body = body;

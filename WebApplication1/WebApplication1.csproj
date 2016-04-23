@@ -85,6 +85,7 @@
     <Content Include="ClientConfirmationPage.aspx" />
     <Content Include="ClientSignup.aspx" />
     <Content Include="ConfirmationPage.aspx" />
+    <Content Include="CSS\Checkout.css" />
     <Content Include="CSS\TrainerSignup.css" />
     <Content Include="JS\JavaScript.js" />
     <Content Include="LogOut.aspx" />
