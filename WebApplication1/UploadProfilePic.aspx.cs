@@ -52,10 +52,8 @@ namespace WebApplication1
                     // to be uploaded.
                     if ((extension == ".jpg") || (extension == ".png") && fileSize < maxFileSize)
                     {
-
-                        // Append the name of the file to upload to the path.
-                        string savePath = appPath + saveDir +
-                        Server.HtmlEncode(FileUpload1.FileName);
+                        // Append the name of the file to upload to the path. You can change the default file name here, change "priflePic".
+                        string savePath = appPath + saveDir + "profilePic" + extension;
                         Label1.Text = savePath;
                         // Call the SaveAs method to save the 
                         // uploaded file to the specified path.
@@ -84,7 +82,7 @@ namespace WebApplication1
             }
             catch
             {
-                UploadStatusLabel.Text = "Invalid upload.";
+                UploadStatusLabel.Text = "Invalid Upload.";
             }
         }
     }
