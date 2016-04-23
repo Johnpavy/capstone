@@ -19,7 +19,19 @@ namespace WebApplication1
         UserObject Uobj = new UserObject();
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                if (Session["UserInfo"] == null)
+                {
+                    //Forces a redirect to splash page if this page is loaded without a session state.
+                    Response.Redirect("Default.aspx");
+                }
+                else
+                {
+                    Uobj = (UserObject)Session["UserInfo"];
 
+                }
+            }
         }
 
         protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
@@ -40,20 +52,15 @@ namespace WebApplication1
         protected void button_Click(object sender, EventArgs e)
         {
             Adress adrs = new Adress();
-            String clientAddress = Request.Form["Street"] + " " + Request.Form["City"] + " " + Request.Form["State"];
-            String equipment = Request.Form["Equipment"];
+            String clientAddress = Street.Text + " " + City.Text + " " + State.Text;
+            String equipment = Equipment.Text;
             String gender = DropDownList3.SelectedValue;
-            String pnumber = Request.Form["pnumber"];
+            String pnumber = Phone.Text;
             String interests = DropDownList5.SelectedValue;
 
-            adrs.Address = clientAddress;
-            adrs.GeoCode();
-            // retrieve session id variable
-            int userID = (int)Session["userID"];
-            String dBLat = adrs.Latitude;
-            String dBLng = adrs.Longitude;
+            
             // Check to make sure all fields are filled out
-            if (clientAddress.Equals("") || equipment.Equals("") || gender.Equals("0") || pnumber.Equals(""))
+            if (interests.Equals("0") || Street.Text.Equals("") || City.Text.Equals("") || State.Text.Equals("") || equipment.Equals("") || gender.Equals("0") || pnumber.Equals(""))
             {
                 Label1.ForeColor = System.Drawing.Color.Red;
                 Label1.Text = "All fields required";
@@ -62,7 +69,12 @@ namespace WebApplication1
 
             else
             {
-
+                adrs.Address = clientAddress;
+                adrs.GeoCode();
+                // retrieve session id variable
+                int userID = (int)Session["userID"];
+                String dBLat = adrs.Latitude;
+                String dBLng = adrs.Longitude;
                 // add info to session object
                 Uobj.CopyUserObject((UserObject)Session["UserInfo"]);
                 Uobj.TrainingPref = interests;
