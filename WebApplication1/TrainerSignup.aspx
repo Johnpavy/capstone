@@ -31,15 +31,15 @@
 						<div class="row">
 							<div class="col-sm-4 form-group">
 								<label>City</label>
-								<input type="text" placeholder="Enter City Name" class="form-control" name="City">
+								<input type="text" placeholder="Enter City Name" class="form-control" name="City"/>
 							</div>	
 							<div class="col-sm-4 form-group">
 								<label>State</label>
-								<input type="text" placeholder="Enter State Name" class="form-control" name="State">
+								<input type="text" placeholder="Enter State Name" class="form-control" name="State"/>
 							</div>	
 							<div class="col-sm-4 form-group">
 								<label>Zip</label>
-								<input type="text" placeholder="Enter Zip Code" class="form-control">
+								<input type="text" placeholder="Enter Zip Code" class="form-control"/>
 							</div>		
 						</div>
 						<div class="row">
@@ -123,7 +123,7 @@
       <br />
 
         &nbsp&nbsp
-        </div>
+</div>
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" DeleteCommand="DELETE FROM [MFNTrainerLocTable] WHERE [TrainerLoc_Id] = @original_TrainerLoc_Id AND (([Trainer_Id] = @original_Trainer_Id) OR ([Trainer_Id] IS NULL AND @original_Trainer_Id IS NULL)) AND (([TrainerLoc_Lat] = @original_TrainerLoc_Lat) OR ([TrainerLoc_Lat] IS NULL AND @original_TrainerLoc_Lat IS NULL)) AND (([TrainerLoc_Long] = @original_TrainerLoc_Long) OR ([TrainerLoc_Long] IS NULL AND @original_TrainerLoc_Long IS NULL)) AND (([TrainerLoc_StreetAddress] = @original_TrainerLoc_StreetAddress) OR ([TrainerLoc_StreetAddress] IS NULL AND @original_TrainerLoc_StreetAddress IS NULL)) AND (([TrainerLoc_Description] = @original_TrainerLoc_Description) OR ([TrainerLoc_Description] IS NULL AND @original_TrainerLoc_Description IS NULL)) AND (([TrainerLoc_Prefered] = @original_TrainerLoc_Prefered) OR ([TrainerLoc_Prefered] IS NULL AND @original_TrainerLoc_Prefered IS NULL))" InsertCommand="INSERT INTO [MFNTrainerLocTable] ([TrainerLoc_Id], [Trainer_Id], [TrainerLoc_Lat], [TrainerLoc_Long], [TrainerLoc_StreetAddress], [TrainerLoc_Description], [TrainerLoc_Prefered]) VALUES (@TrainerLoc_Id, @Trainer_Id, @TrainerLoc_Lat, @TrainerLoc_Long, @TrainerLoc_StreetAddress, @TrainerLoc_Description, @TrainerLoc_Prefered)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT * FROM [MFNTrainerLocTable]" UpdateCommand="UPDATE [MFNTrainerLocTable] SET [Trainer_Id] = @Trainer_Id, [TrainerLoc_Lat] = @TrainerLoc_Lat, [TrainerLoc_Long] = @TrainerLoc_Long, [TrainerLoc_StreetAddress] = @TrainerLoc_StreetAddress, [TrainerLoc_Description] = @TrainerLoc_Description, [TrainerLoc_Prefered] = @TrainerLoc_Prefered WHERE [TrainerLoc_Id] = @original_TrainerLoc_Id AND (([Trainer_Id] = @original_Trainer_Id) OR ([Trainer_Id] IS NULL AND @original_Trainer_Id IS NULL)) AND (([TrainerLoc_Lat] = @original_TrainerLoc_Lat) OR ([TrainerLoc_Lat] IS NULL AND @original_TrainerLoc_Lat IS NULL)) AND (([TrainerLoc_Long] = @original_TrainerLoc_Long) OR ([TrainerLoc_Long] IS NULL AND @original_TrainerLoc_Long IS NULL)) AND (([TrainerLoc_StreetAddress] = @original_TrainerLoc_StreetAddress) OR ([TrainerLoc_StreetAddress] IS NULL AND @original_TrainerLoc_StreetAddress IS NULL)) AND (([TrainerLoc_Description] = @original_TrainerLoc_Description) OR ([TrainerLoc_Description] IS NULL AND @original_TrainerLoc_Description IS NULL)) AND (([TrainerLoc_Prefered] = @original_TrainerLoc_Prefered) OR ([TrainerLoc_Prefered] IS NULL AND @original_TrainerLoc_Prefered IS NULL))">
             <DeleteParameters>
                 <asp:Parameter Name="original_TrainerLoc_Id" Type="Int32" />

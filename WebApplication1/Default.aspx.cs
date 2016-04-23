@@ -10,6 +10,7 @@ using System.Configuration;
 using System.Data;
 using System.Net.Mail;
 using System.Net;
+using System.IO;
 
 //For Hasing Passwords
 using System.Security.Cryptography;
@@ -362,19 +363,29 @@ namespace WebApplication1
                     string salt = CreateSalt(125);
                     string hashedPassword = CreatePasswordHash(password, salt);
 
-
+                    string newTrainerPath = @"/MFNRoot/Trainers/" + email + @"/ProfilePic/";
+                    // Get the physical file system path for the currently
+                    // executing application.
+                    string appPath = Request.PhysicalApplicationPath;
+                    string defaultPic = appPath + @"/Pictures/ProfilePic.jpg";
+                    // Create new Directory with email as name
+                    Directory.CreateDirectory(appPath + newTrainerPath);
+                    string newPath = appPath + newTrainerPath + @"ProfilePic.jpg";
+                    File.Copy(defaultPic, newPath);
 
                     SqlCommand cmd = new SqlCommand();
 
                     cmd.CommandType = System.Data.CommandType.Text;
                     // create sql command
-                    cmd.CommandText = "INSERT INTO MFNTrainerTable (Trainer_Email, Trainer_FirstName, Trainer_LastName, Trainer_PasswordHash, Trainer_PasswordSalt) OUTPUT INSERTED.Trainer_Id values (@email, @fName, @lName, @password, @salt)";
+                    cmd.CommandText = "INSERT INTO MFNTrainerTable (Trainer_Image, Trainer_Email, Trainer_FirstName, Trainer_LastName, Trainer_PasswordHash, Trainer_PasswordSalt) OUTPUT INSERTED.Trainer_Id values (@image, @email, @fName, @lName, @password, @salt)";
                     // add values to sql table
                     cmd.Parameters.AddWithValue("@email", email);
                     cmd.Parameters.AddWithValue("@fName", firstName);
                     cmd.Parameters.AddWithValue("@lName", lastName);
                     cmd.Parameters.AddWithValue("@password", hashedPassword);
                     cmd.Parameters.AddWithValue("@salt", salt);
+                    cmd.Parameters.AddWithValue("@image", newTrainerPath);
+
                     cmd.Connection = trainerDb;
                     // try to execute query and save session object variables
                     try
@@ -387,6 +398,7 @@ namespace WebApplication1
                         Tobj.LastName = lastName;
                         Tobj.Email = email;
                         Tobj.TrainerId = trainerID;
+                        Tobj.ImagePath = newTrainerPath;
                         Session["TrainerInfo"] = Tobj;
 
                         SendActivationEmail((int)Session["trainerID"], email, firstName, isTrainer);

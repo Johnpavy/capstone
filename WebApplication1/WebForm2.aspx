@@ -106,6 +106,9 @@
                  <asp:ScriptManager ID="ScriptManager1" runat="server">
                 </asp:ScriptManager>
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                    <Triggers>
+                      <asp:PostBackTrigger ControlID="UploadPic" />
+                    </Triggers>
                   <ContentTemplate>
             <div class="content">  
                 <div class="TopNavContainer col-xs-12 col-sm-12">
@@ -127,11 +130,8 @@
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="SearchList nav navbar-nav navbar-left">
                                 <li>
-                                  <form class="navbar-form navbar-left" role="search">
                                     <div class="form-group">
-                                      <input type="text" class="SearchBar form-control" placeholder="Search">
-                                    </div>
-                                  </form>
+                                        <input class="SearchBar form-control" placeholder="Search" type="text"> </input></div>
                                 </li>
                                 <li><button type="submit" class="SearchButton btn btn-default glyphicon glyphicon-search"></button></li>
                                 </ul>
@@ -325,15 +325,15 @@
                 <div class="modal-content">
                   <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Edit Rates </h4>
+                    <h4 class="modal-title">Upload Profile Picture</h4>
                   </div>
                   <div class="modal-body">
-                    <p>Enter your New Rates:</p>
-                      Individual Rate: <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox> per hour <br />
-                      Additional  Person Rate: <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox> per hour
+                        <p>Choose a Picture to Upload: </p>
+                        <asp:FileUpload id="FileUpload1" cssclass="btn btn-default" runat="server" />
                   </div>
                   <div class="modal-footer">
-                    <asp:LinkButton ID="LinkButton1" cssclass="btn btn-default" runat ="server" onclick="ComfirmUpdateRatesButton_Click">Update</asp:LinkButton>
+                      <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
+                      <asp:Button id="UploadPic" cssclass="btn btn-default" Text="Upload file" OnClick="UploadPic_Click" runat="server"></asp:Button> 
                     <button type="button" class="btn btn-default" data-dismiss="modal" onclick="ComfirmUpdateRatesButton_Click">Close</button>
                   </div>
                 </div>
@@ -343,6 +343,7 @@
             </div>
 
             </ContentTemplate>
+
             </asp:UpdatePanel>
           </form>
         </body>
