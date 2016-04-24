@@ -36,7 +36,7 @@ namespace WebApplication1
                 //changes default profile pic to user uploaded one
                 if (Tobj.ImagePath != "")
                 {
-                    ProfilePic.Attributes["src"] = Tobj.ImagePath;
+                    ProfilePic.Attributes["src"] = Tobj.ImagePath + "ProfilePic.jpg";
                 }
             }
 

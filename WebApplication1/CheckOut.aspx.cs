@@ -11,13 +11,42 @@ namespace WebApplication1
 {
     public partial class CheckOut : System.Web.UI.Page
     {
+        Transaction TranObj = new Transaction();
+        TrainerObject Tobj = new TrainerObject();
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            HttpContext.Current.Response.AddHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+            HttpContext.Current.Response.AddHeader("Pragma", "no-cache");
+            HttpContext.Current.Response.AddHeader("Expires", "0");
+            
+            if (Session["TrainerInfo"] == null)
+            {
+                //Forces a redirect to splash page if this page is loaded without a session state.
+                Response.Redirect("Default.aspx");
+            }
+            else
+            {
+                Tobj.CopyTrainerObject((TrainerObject)Session["TrainerInfo"]);
 
+                //section to add client rates
+                if (Tobj.AdditionalPersonRate == null || Tobj.IndividualRate == null)
+                {
+                    //  IndividualRatesTxtBox.Text = "0.00";
+                    // AdditionalPersonRateTxtBox.Text = "0.00";
+                }
+                else
+                {
+                    // IndividualRatesTxtBox.Text = Tobj.IndividualRate;
+                    // AdditionalPersonRateTxtBox.Text = Tobj.AdditionalPersonRate;
+                }
+            }
         }
 
         protected void Button1_Click(object sender, EventArgs e)
         {
+            //TranObj.IndividaulPersonCost;
+            
             string SampleTotal = "50.00";
             // ### Api Context
             // Pass in a `APIContext` object to authenticate 

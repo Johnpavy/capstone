@@ -115,6 +115,7 @@
     <Content Include="WebForm3.aspx" />
     <Content Include="ClientScheduler.aspx" />
     <Content Include="AdminRegistration.aspx" />
+    <Content Include="Oops.aspx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -311,6 +312,13 @@
     </Compile>
     <Compile Include="AdminRegistration.aspx.designer.cs">
       <DependentUpon>AdminRegistration.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Oops.aspx.cs">
+      <DependentUpon>Oops.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Oops.aspx.designer.cs">
+      <DependentUpon>Oops.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

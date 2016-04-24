@@ -226,7 +226,7 @@ namespace WebApplication1
                         // Notify the user that their file was successfully uploaded.
                         // myStringVariable = "Your file was uploaded successfully to: " + savePath;
                         // ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + myStringVariable + "');", true);
-                        // Response.Redirect(Request.RawUrl);
+                         Response.Redirect(Request.RawUrl);
                     }
                     else
                     {
