@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ClientScheduler.aspx.cs" Inherits="WebApplication1.WebForm6" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ClientScheduler.aspx.cs" Inherits="WebApplication1.WebForm6" EnableViewState="true"%>
 
 <%@ Register Assembly="DayPilot" Namespace="DayPilot.Web.Ui" TagPrefix="DayPilot" %>
 
@@ -369,8 +369,8 @@
                                         <asp:ListItem>11:30 PM</asp:ListItem>
                                         <asp:ListItem>11:45 PM</asp:ListItem>
                                     </asp:DropDownList><br />
-                                        Location:   <asp:TextBox ID="LocationTxtBox" runat="server"></asp:TextBox><!-- How to get address stuff? --><br />
-                                        Number of People Attending (Including yourself) <asp:DropDownList ID="NumberInAttendance" runat="server" OnClick="AppendInfo_Click"></asp:DropDownList><br />
+                                        Location:  <asp:DropDownList ID="LocationDrpDown" runat="server"></asp:DropDownList><!-- How to get address stuff? --><br />
+                                        Number of People Attending (Including yourself) <asp:DropDownList ID="NumberInAttendance" runat="server"></asp:DropDownList><br />
                                         <asp:LinkButton ID = "RequestAppointmentBtn" Class="btn btn-info btn-block" runat="server" OnClick="RequestAppointmentBtn_Click">Request Appointment</asp:LinkButton>
 			    	            </div>
 	    		        </div>
@@ -386,6 +386,8 @@
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" SelectCommand="SELECT * FROM [MFNTrainerTable]"></asp:SqlDataSource>
         <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" SelectCommand="SELECT * FROM [MFNBlockedDatesTable]"></asp:SqlDataSource>
         <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" SelectCommand="SELECT * FROM [MFNCalendarTable]"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" SelectCommand="SELECT * FROM [MFNUserLocTable]"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource5" runat="server" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" SelectCommand="SELECT * FROM [MFNTrainerLocTable]"></asp:SqlDataSource>
     </form>
 </body>
 </html>

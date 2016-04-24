@@ -51,10 +51,12 @@ namespace WebApplication1
                 Tobj.Bio = sdr["Trainer_Bio"].ToString();
                 Tobj.IndividualRate = sdr["Trainer_IndividualRate"].ToString();
                 Tobj.AdditionalPersonRate = sdr["Trainer_AdditionalPersonRate"].ToString();
+                Tobj.MaxNumPeople = sdr["Trainer_MaxPeople"].ToString();
 
             }
 
             Session["SelectedTrainer"] = Tobj;
+            Session["TrainerId"] = Tobj.TrainerId;
             //End of emulation
 
 
@@ -94,19 +96,29 @@ namespace WebApplication1
                 SelectedDateTxtBox.Text = (string)Session["SelectedDate"];
             }
 
-            //To populate the number of attendence dropdown list
-            NumberInAttendance.Items.Clear(); //clear out existing stuff.
-
-            for (int x= 0; x< 10; x++)
+            if (!IsPostBack)
             {
-                string number = (x + 1).ToString();
-                ListItem l = new ListItem(number, number, true);
-                NumberInAttendance.Items.Add(l);
+                //To populate the number of attendence dropdown list
+                NumberInAttendance.Items.Clear(); //clear out existing stuff.
 
-                //for dynamic div testing
-                CreateDiv("div"+x);
+                for (int x = 0; x < Int32.Parse(Tobj.MaxNumPeople); x++)
+                {
+                    string number = (x + 1).ToString();
+                    ListItem l = new ListItem(number, number, true);
+                    NumberInAttendance.Items.Add(l);
+
+                    //for dynamic div testing
+                    // CreateDiv("div"+x);
+
+                }
+
+                LocationDrpDown.Items.Clear();
+
+                //Add Trainer and User Loctions
+                AddTrainerAndUserLocations();
 
             }
+
 
 
 
@@ -1102,12 +1114,15 @@ namespace WebApplication1
         {
             string startTime;
             string endTime;
+            string SlectedNumberOfPeople = NumberInAttendance.Text;
+            string address = LocationDrpDown.SelectedValue;
 
             //This needs to validate and append information to the db.
-            if (GetValidTime(StartTimeDrpList.Text, EndTimeDrpList.Text))
+            if (GetValidTime(StartTimeDrpList.Text, EndTimeDrpList.Text) && address != "")
             {
                 startTime = convertAMPMTime(StartTimeDrpList.Text);
-                endTime = convertAMPMTime(StartTimeDrpList.Text);
+                endTime = convertAMPMTime(EndTimeDrpList.Text);
+                
 
                 SqlConnection db = new SqlConnection(SqlDataSource3.ConnectionString);
                 SqlCommand cmd = new SqlCommand();
@@ -1115,22 +1130,15 @@ namespace WebApplication1
                 cmd.Connection = db;
 
                 // cmd.CommandText = "INSERT INTO [MFNCalendarTable] (Trainer_Id, User_Id, Calendar_Date, Calendar_EventSummary, Calendar_Location, Calendar_ApprovedByTrainer, Calendar_PaidByClient, Calendar_CompletedSession, Calendar_NumberOfClients) VALUES (@Tid, @Uid, @date, @event,  @loc, @approved, @paid, @completed, @number)";
-                cmd.CommandText = "INSERT INTO [MFNCalendarTable] (Trainer_Id, User_Id, ) VALUES (@Tid, @Uid)";
+                cmd.CommandText = "INSERT INTO [MFNCalendarTable] (Trainer_Id, User_Id, Calendar_Date, Calendar_EventName, Calendar_StartTime, Calendar_EndTime, Calendar_NumberOfClients, Calendar_Location) VALUES (@Tid, @Uid, @date, @event, @startTime, @endTime, @number, @loc)";
                 cmd.Parameters.AddWithValue("@Tid", Tobj.TrainerId);
                 cmd.Parameters.AddWithValue("@Uid", Uobj.UserId);
-               // cmd.Parameters.AddWithValue("@date", SelectedDateTxtBox.Text);
-                //cmd.Parameters.AddWithValue("@event", EventSummaryTxtBox.Text);
-                /*
-               // cmd.Parameters.Add(new SqlParameter("@startTime", startTime));
-                //cmd.Parameters.AddWithValue("@startTime", startTime);
-               // cmd.Parameters.Add(new SqlParameter("@endTime", endTime));
-               // cmd.Parameters.AddWithValue("@endTime", endTime);
-                cmd.Parameters.AddWithValue("@loc", LocationTxtBox.Text);
-                cmd.Parameters.AddWithValue("@approved", false);
-                cmd.Parameters.AddWithValue("@paid", false);
-                cmd.Parameters.AddWithValue("@completed", false);
-                cmd.Parameters.AddWithValue("@number", NumberInAttendance.Text);
-                */
+                cmd.Parameters.AddWithValue("@date", SelectedDateTxtBox.Text);
+                cmd.Parameters.AddWithValue("@event", EventSummaryTxtBox.Text);
+                cmd.Parameters.AddWithValue("@startTime", startTime);
+                cmd.Parameters.AddWithValue("@endTime", endTime);
+                cmd.Parameters.AddWithValue("@number", SlectedNumberOfPeople);
+                cmd.Parameters.AddWithValue("@loc", address);
 
                 try
                 {
@@ -1138,13 +1146,13 @@ namespace WebApplication1
                     cmd.ExecuteNonQuery();
 
                     //success message
-                    if (NumberInAttendance.Text == "1")
+                    if (SlectedNumberOfPeople == "1")
                     {
-                        Response.Write(@"<script language='javascript'>alert('Reqest for a session on " + SelectedDateTxtBox.Text + " from " + StartTimeDrpList.Text + " to " + EndTimeDrpList.Text + " for " + NumberInAttendance.Text + " person has been sent to " + UserNameLbl.Text + "!');</script>");
+                        Response.Write(@"<script language='javascript'>alert('Reqest for a session on " + SelectedDateTxtBox.Text + " from " + StartTimeDrpList.Text + " to " + EndTimeDrpList.Text + " for " + SlectedNumberOfPeople + " person has been sent to " + UserNameLbl.Text + "!');</script>");
                     }
                     else
                     {
-                        Response.Write(@"<script language='javascript'>alert('Reqest for a session on " + SelectedDateTxtBox.Text + " from " + StartTimeDrpList.Text + " to " + EndTimeDrpList.Text + " for " + NumberInAttendance.Text + " people has been sent to " + UserNameLbl.Text + "!');</script>");
+                        Response.Write(@"<script language='javascript'>alert('Reqest for a session on " + SelectedDateTxtBox.Text + " from " + StartTimeDrpList.Text + " to " + EndTimeDrpList.Text + " for " + SlectedNumberOfPeople + " people has been sent to " + UserNameLbl.Text + "!');</script>");
                     }
                 }
                 catch
@@ -1159,10 +1167,17 @@ namespace WebApplication1
             }
             else
             {
-                Response.Write(@"<script language='javascript'>alert('Invalid Time Range!');</script>");
+                if(address == "")
+                {
+                    Response.Write(@"<script language='javascript'>alert('Please Select A Location.');</script>");
+                }
+                else
+                {
+                    Response.Write(@"<script language='javascript'>alert('Invalid Time Range.');</script>");
+                }
             }
 
-           // Response.Redirect("ClientScheduler.aspx");
+           //Response.Redirect("ClientScheduler.aspx");
         }
 
         private void CreateDiv(string divId)
@@ -1176,11 +1191,58 @@ namespace WebApplication1
             YourComfirmedSessions.Controls.Add(div); 
         }
 
-        protected void FinalizeAppointmentBtn_Click(object sender, EventArgs e)
+        private void AddTrainerAndUserLocations()
         {
-            Response.Redirect("ClientProfile.aspx");
-        }
+            ListItem l = new ListItem("---User Addresses---", "", true);
+            LocationDrpDown.Items.Add(l);
 
+            SqlConnection db = new SqlConnection(SqlDataSource4.ConnectionString);
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = System.Data.CommandType.Text;
+            cmd.Connection = db;
+
+            cmd.CommandText = "Select * FROM [MFNUserLocTable] WHERE User_Id = @id";
+            cmd.Parameters.AddWithValue("@id", ((int)Session["UserId"]).ToString());
+            db.Open();
+
+            SqlDataReader sdr = cmd.ExecuteReader();
+
+            while (sdr.Read())
+            {
+                string address = sdr["UserLoc_StreetAddress"].ToString();
+
+                l = new ListItem(address, address, true);
+                LocationDrpDown.Items.Add(l);
+            }
+            db.Close();
+
+
+            SqlConnection db2 = new SqlConnection(SqlDataSource5.ConnectionString);
+            SqlCommand cmd2 = new SqlCommand();
+            cmd2.CommandType = System.Data.CommandType.Text;
+            cmd2.Connection = db2;
+
+            l = new ListItem("---Trainer Addresses---", "", true);
+            LocationDrpDown.Items.Add(l);
+
+
+            cmd2.CommandText = "Select * FROM [MFNTrainerLocTable] WHERE Trainer_Id = @id";
+            cmd2.Parameters.AddWithValue("@id", (int)Session["TrainerId"]);
+            db2.Open();
+
+            SqlDataReader sdr2 = cmd2.ExecuteReader();
+
+            while (sdr2.Read())
+            {
+                string address = sdr2["TrainerLoc_StreetAddress"].ToString();
+
+                l = new ListItem(address, address, true);
+                LocationDrpDown.Items.Add(l);
+            }
+
+            db2.Close();
+
+        }
 
     }
 }

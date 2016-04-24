@@ -22,6 +22,7 @@ namespace WebApplication1
         private string speciality;
         private string individualRate;
         private string additionalPersonRate;
+        private string maxNumPeople;
 
 
         public TrainerObject()
@@ -134,6 +135,12 @@ namespace WebApplication1
             set { favLoc = value; }
         }
 
+        public string MaxNumPeople
+        {
+            get { return maxNumPeople; }
+            set { maxNumPeople = value; }
+        }
+
         public void CopyTrainerObject(TrainerObject objToCopy)
         {
             this.TrainerId = objToCopy.TrainerId;
@@ -151,6 +158,7 @@ namespace WebApplication1
             this.AdditionalPersonRate = objToCopy.AdditionalPersonRate;
             this.IndividualRate = objToCopy.IndividualRate;
             this.FavLoc = objToCopy.FavLoc;
+            this.MaxNumPeople = objToCopy.MaxNumPeople;
         }
     }
 }

@@ -11,8 +11,11 @@ namespace WebApplication1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            Session.Clear();
             Session.Abandon();
             Session["TrainerInfo"] = null;
+            Session["AdminInfo"] = null;
+            Session["UserInfo"] = null;
             Response.Redirect("Default.aspx");
         }
     }
