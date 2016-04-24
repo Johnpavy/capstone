@@ -175,17 +175,18 @@
                     </div>
                 </div>
 
-           <div id="AdminControlOptions" runat="server" class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4" >
+           <div id="AdminControlOptions" runat="server" class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4" visible="true">
         	<div class="panel panel-default">
         		<div class="panel-heading">
 			    		<h3 class="panel-title">Admin Options</h3>
 			 			</div>
 			 			<div class="panel-body">
                             <ul id="OptionsBar">
-                                <li><asp:LinkButton ID="AdminTableBtn" Class="btn btn-primary btn-lg btn-block" runat="server">View Admin Table</asp:LinkButton></li>
-                                <li><asp:LinkButton ID="AdminRequestBtn" Class="btn btn-primary btn-lg btn-block" runat="server">Send Out Admin Invitation</asp:LinkButton></li>
-                                <li><asp:LinkButton ID="ViewAllTablesBtn" Class="btn btn-primary btn-lg btn-block" runat="server">View Admin Table</asp:LinkButton></li>
-                                <li><asp:LinkButton ID="PasswordChangeBtn" Class="btn btn-primary btn-lg btn-block" runat="server">Change Your Password</asp:LinkButton></li>
+                                <li><asp:LinkButton ID="AdminTableBtn" Class="btn btn-primary btn-lg btn-block" runat="server" OnClick="AdminTableBtn_Click">View Admin Table</asp:LinkButton></li>
+                                <li><asp:LinkButton ID="AdminRequestBtn" Class="btn btn-primary btn-lg btn-block" runat="server" OnClick="AdminRequestBtn_Click">Send Out Admin Invitation</asp:LinkButton></li>
+                                <li><asp:LinkButton ID="ViewAllTablesBtn" Class="btn btn-primary btn-lg btn-block" runat="server">View All Tables</asp:LinkButton></li>
+                                <li><asp:LinkButton ID="PasswordChangeBtn" Class="btn btn-primary btn-lg btn-block" runat="server" OnClick="PasswordChangeBtn_Click">Change Your Password</asp:LinkButton></li>
+                                <li><asp:LinkButton ID="AproveTrainerBtn" Class="btn btn-primary btn-lg btn-block" runat="server" OnClick="AproveTrainerBtn_Click">Approve Trainers</asp:LinkButton></li>
                             </ul>
 			    	    </div>
 	    		</div>
@@ -193,7 +194,7 @@
 
 
                 
-           <div id="AdminTableView" runat="server" class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+           <div id="AdminTableView" runat="server"  class="col-xs-12 col-sm-8 col-md-12 col-sm-offset-2 col-md-offset-4" style="float:right" visible="false">
         	<div class="panel panel-default">
         		<div class="panel-heading">
 			    		<h3 class="panel-title">Admin Table</h3>
@@ -209,11 +210,12 @@
                                      <asp:BoundField DataField="Admin_Picture" HeaderText="Admin_Picture" SortExpression="Admin_Picture" />
                                  </Columns>
                              </asp:GridView>
+                             <asp:LinkButton ID="CloseAdminTableView" runat="server" OnClick="CloseAdminTableView_Click">Close</asp:LinkButton>
 			    	    </div>
 	    		</div>
                </div>
 
-            <div id="AdminSignupPanel" runat="server" class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+            <div id="AdminSignupPanel" runat="server" class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4" visible ="false">
         	<div class="panel panel-default">
         		<div class="panel-heading">
 			    		<h3 class="panel-title">Send Out Registration For Admin</h3>
@@ -239,7 +241,7 @@
 
 			    			
 			    			<asp:LinkButton ID = "LinkButton3" Class="btn btn-info btn-block" runat="server" OnClick="LinkButton3_Click" >Send Invite</asp:LinkButton><br />
-                             <asp:LinkButton ID="CancelInvite" runat="server">Cancel</asp:LinkButton>
+                             <asp:LinkButton ID="CancelInvite" runat="server" OnClick="CancelInvite_Click">Cancel</asp:LinkButton>
 			    		
 
 			    	</div>
@@ -247,7 +249,7 @@
 	    		</div>
     		</div>
 
-            <div id="ChangeYourPassword" runat="server" class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+            <div id="ChangeYourPassword" runat="server" class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4" visible ="false">
         	<div class="panel panel-default">
         		<div class="panel-heading">
 			    		<h3 class="panel-title">Change Your Password</h3>
@@ -256,8 +258,71 @@
                              <label>New Password</label><asp:TextBox ID="Password" runat="server" TextMode="Password"></asp:TextBox> <br />
                              <label>Comfirm Password</label><asp:TextBox ID="Cpassword" runat="server" TextMode="Password"></asp:TextBox><br />
                              <asp:LinkButton ID="ResetPassword" runat="server" OnClick="ResetPassword_Click">Change Password</asp:LinkButton><br />
-                             <asp:LinkButton ID="CancelUpdate" runat="server">Cancel</asp:LinkButton>
+                             <asp:LinkButton ID="CancelUpdate" runat="server" OnClick="CancelUpdate_Click">Cancel</asp:LinkButton>
                              <asp:Label ID="ErrorLbl3" runat="server" Text="Label" Visible ="false" ForeColor="Red"></asp:Label>
+			    	    </div>
+	    		</div>
+               </div>
+
+            <div id="ApproveTrainerDiv" runat="server" class="col-xs-12 col-sm-8 col-md-12 col-sm-offset-2 col-md-offset-4" style="float:right" visible ="false">
+        	<div class="panel panel-default">
+        		<div class="panel-heading">
+			    		<h3 class="panel-title">Approve Trainers</h3>
+			 			</div>
+			 			<div class="panel-body">
+                             <asp:GridView ID="GridView2" runat="server" AllowPaging="True" AutoGenerateColumns="False" DataKeyNames="Trainer_Id" DataSourceID="SqlDataSource3">
+                                 <Columns>
+                                     <asp:CommandField ShowEditButton="True" />
+                                     <asp:BoundField DataField="Trainer_Id" HeaderText="Trainer_Id" InsertVisible="False" ReadOnly="True" SortExpression="Trainer_Id" />
+                                     <asp:BoundField DataField="Trainer_Email" HeaderText="Trainer_Email" SortExpression="Trainer_Email" />
+                                     <asp:BoundField DataField="Trainer_DateofBirth" HeaderText="Trainer_DateofBirth" SortExpression="Trainer_DateofBirth" />
+                                     <asp:BoundField DataField="Trainer_FirstName" HeaderText="Trainer_FirstName" SortExpression="Trainer_FirstName" />
+                                     <asp:BoundField DataField="Trainer_MiddleName" HeaderText="Trainer_MiddleName" SortExpression="Trainer_MiddleName" />
+                                     <asp:BoundField DataField="Trainer_LastName" HeaderText="Trainer_LastName" SortExpression="Trainer_LastName" />
+                                     <asp:CheckBoxField DataField="Trainer_VerifiedCert" HeaderText="Trainer_VerifiedCert" SortExpression="Trainer_VerifiedCert" />
+                                     <asp:BoundField DataField="Trainer_Specialty" HeaderText="Trainer_Specialty" SortExpression="Trainer_Specialty" />
+                                 </Columns>
+                             </asp:GridView>
+			    	         <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" DeleteCommand="DELETE FROM [MFNTrainerTable] WHERE [Trainer_Id] = @original_Trainer_Id AND (([Trainer_Email] = @original_Trainer_Email) OR ([Trainer_Email] IS NULL AND @original_Trainer_Email IS NULL)) AND (([Trainer_DateofBirth] = @original_Trainer_DateofBirth) OR ([Trainer_DateofBirth] IS NULL AND @original_Trainer_DateofBirth IS NULL)) AND (([Trainer_FirstName] = @original_Trainer_FirstName) OR ([Trainer_FirstName] IS NULL AND @original_Trainer_FirstName IS NULL)) AND (([Trainer_MiddleName] = @original_Trainer_MiddleName) OR ([Trainer_MiddleName] IS NULL AND @original_Trainer_MiddleName IS NULL)) AND (([Trainer_LastName] = @original_Trainer_LastName) OR ([Trainer_LastName] IS NULL AND @original_Trainer_LastName IS NULL)) AND [Trainer_VerifiedCert] = @original_Trainer_VerifiedCert AND (([Trainer_Specialty] = @original_Trainer_Specialty) OR ([Trainer_Specialty] IS NULL AND @original_Trainer_Specialty IS NULL))" InsertCommand="INSERT INTO [MFNTrainerTable] ([Trainer_Email], [Trainer_DateofBirth], [Trainer_FirstName], [Trainer_MiddleName], [Trainer_LastName], [Trainer_VerifiedCert], [Trainer_Specialty]) VALUES (@Trainer_Email, @Trainer_DateofBirth, @Trainer_FirstName, @Trainer_MiddleName, @Trainer_LastName, @Trainer_VerifiedCert, @Trainer_Specialty)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT [Trainer_Id], [Trainer_Email], [Trainer_DateofBirth], [Trainer_FirstName], [Trainer_MiddleName], [Trainer_LastName], [Trainer_VerifiedCert], [Trainer_Specialty] FROM [MFNTrainerTable]" UpdateCommand="UPDATE [MFNTrainerTable] SET [Trainer_Email] = @Trainer_Email, [Trainer_DateofBirth] = @Trainer_DateofBirth, [Trainer_FirstName] = @Trainer_FirstName, [Trainer_MiddleName] = @Trainer_MiddleName, [Trainer_LastName] = @Trainer_LastName, [Trainer_VerifiedCert] = @Trainer_VerifiedCert, [Trainer_Specialty] = @Trainer_Specialty WHERE [Trainer_Id] = @original_Trainer_Id AND (([Trainer_Email] = @original_Trainer_Email) OR ([Trainer_Email] IS NULL AND @original_Trainer_Email IS NULL)) AND (([Trainer_DateofBirth] = @original_Trainer_DateofBirth) OR ([Trainer_DateofBirth] IS NULL AND @original_Trainer_DateofBirth IS NULL)) AND (([Trainer_FirstName] = @original_Trainer_FirstName) OR ([Trainer_FirstName] IS NULL AND @original_Trainer_FirstName IS NULL)) AND (([Trainer_MiddleName] = @original_Trainer_MiddleName) OR ([Trainer_MiddleName] IS NULL AND @original_Trainer_MiddleName IS NULL)) AND (([Trainer_LastName] = @original_Trainer_LastName) OR ([Trainer_LastName] IS NULL AND @original_Trainer_LastName IS NULL)) AND [Trainer_VerifiedCert] = @original_Trainer_VerifiedCert AND (([Trainer_Specialty] = @original_Trainer_Specialty) OR ([Trainer_Specialty] IS NULL AND @original_Trainer_Specialty IS NULL))">
+                                 <DeleteParameters>
+                                     <asp:Parameter Name="original_Trainer_Id" Type="Int32" />
+                                     <asp:Parameter Name="original_Trainer_Email" Type="String" />
+                                     <asp:Parameter DbType="Date" Name="original_Trainer_DateofBirth" />
+                                     <asp:Parameter Name="original_Trainer_FirstName" Type="String" />
+                                     <asp:Parameter Name="original_Trainer_MiddleName" Type="String" />
+                                     <asp:Parameter Name="original_Trainer_LastName" Type="String" />
+                                     <asp:Parameter Name="original_Trainer_VerifiedCert" Type="Boolean" />
+                                     <asp:Parameter Name="original_Trainer_Specialty" Type="String" />
+                                 </DeleteParameters>
+                                 <InsertParameters>
+                                     <asp:Parameter Name="Trainer_Email" Type="String" />
+                                     <asp:Parameter DbType="Date" Name="Trainer_DateofBirth" />
+                                     <asp:Parameter Name="Trainer_FirstName" Type="String" />
+                                     <asp:Parameter Name="Trainer_MiddleName" Type="String" />
+                                     <asp:Parameter Name="Trainer_LastName" Type="String" />
+                                     <asp:Parameter Name="Trainer_VerifiedCert" Type="Boolean" />
+                                     <asp:Parameter Name="Trainer_Specialty" Type="String" />
+                                 </InsertParameters>
+                                 <UpdateParameters>
+                                     <asp:Parameter Name="Trainer_Email" Type="String" />
+                                     <asp:Parameter DbType="Date" Name="Trainer_DateofBirth" />
+                                     <asp:Parameter Name="Trainer_FirstName" Type="String" />
+                                     <asp:Parameter Name="Trainer_MiddleName" Type="String" />
+                                     <asp:Parameter Name="Trainer_LastName" Type="String" />
+                                     <asp:Parameter Name="Trainer_VerifiedCert" Type="Boolean" />
+                                     <asp:Parameter Name="Trainer_Specialty" Type="String" />
+                                     <asp:Parameter Name="original_Trainer_Id" Type="Int32" />
+                                     <asp:Parameter Name="original_Trainer_Email" Type="String" />
+                                     <asp:Parameter DbType="Date" Name="original_Trainer_DateofBirth" />
+                                     <asp:Parameter Name="original_Trainer_FirstName" Type="String" />
+                                     <asp:Parameter Name="original_Trainer_MiddleName" Type="String" />
+                                     <asp:Parameter Name="original_Trainer_LastName" Type="String" />
+                                     <asp:Parameter Name="original_Trainer_VerifiedCert" Type="Boolean" />
+                                     <asp:Parameter Name="original_Trainer_Specialty" Type="String" />
+                                 </UpdateParameters>
+                             </asp:SqlDataSource>
+			    	         <br />
+                             <asp:LinkButton ID="CloseApproveTrainerDiv" runat="server" OnClick="CloseApproveTrainerDiv_Click">Close</asp:LinkButton>
 			    	    </div>
 	    		</div>
                </div>

@@ -194,5 +194,53 @@ namespace WebApplication1
 
 
         }
+
+        protected void AdminTableBtn_Click(object sender, EventArgs e)
+        {
+            AdminControlOptions.Visible = false;
+            AdminTableView.Visible = true;
+        }
+
+        protected void AdminRequestBtn_Click(object sender, EventArgs e)
+        {
+            AdminControlOptions.Visible = false;
+            AdminSignupPanel.Visible = true;
+        }
+
+        protected void PasswordChangeBtn_Click(object sender, EventArgs e)
+        {
+            AdminControlOptions.Visible = false;
+            ChangeYourPassword.Visible = true;
+        }
+
+        protected void AproveTrainerBtn_Click(object sender, EventArgs e)
+        {
+            AdminControlOptions.Visible = false;
+            ApproveTrainerDiv.Visible = true;
+        }
+
+        protected void CloseAdminTableView_Click(object sender, EventArgs e)
+        {
+            AdminControlOptions.Visible = true;
+            AdminTableView.Visible = false;
+        }
+
+        protected void CancelInvite_Click(object sender, EventArgs e)
+        {
+            AdminControlOptions.Visible = true;
+            AdminSignupPanel.Visible = false;
+        }
+
+        protected void CancelUpdate_Click(object sender, EventArgs e)
+        {
+            AdminControlOptions.Visible = true;
+            ChangeYourPassword.Visible = false;
+        }
+
+        protected void CloseApproveTrainerDiv_Click(object sender, EventArgs e)
+        {
+            AdminControlOptions.Visible = true;
+            ApproveTrainerDiv.Visible = false;
+        }
     }
 }

@@ -89,7 +89,7 @@
     <Content Include="CSS\TrainerSignup.css" />
     <Content Include="JS\JavaScript.js" />
     <Content Include="LogOut.aspx" />
-    <Content Include="MFNRoot\Trainers\aspoonamore93%40gmail\ProfilePic\ProfilePic.jpg" />
+    <Content Include="MFNRoot\Trainers\aspoonamore93%40gmail.com\ProfilePic\ProfilePic.jpg" />
     <Content Include="MFNRoot\Trainers\test%40email\ProfilePic\ProfilePic.jpg" />
     <Content Include="PasswordResetComfirm.aspx" />
     <Content Include="PaymentConfirmation.aspx" />
