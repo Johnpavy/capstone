@@ -24,7 +24,13 @@ namespace WebApplication1
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            if(Session["AdminInfo"] == null)
+            //needs to be added to every page in the page load to prevent back on logout.
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            Response.Cache.SetExpires(DateTime.UtcNow.AddHours(-1));
+            Response.Cache.SetNoStore();
+
+
+            if (Session["AdminInfo"] == null)
             {
                 Response.Redirect("AdminLogin.Aspx");
             }

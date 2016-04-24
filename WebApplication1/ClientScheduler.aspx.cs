@@ -26,6 +26,10 @@ namespace WebApplication1
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            //needs to be added to every page in the page load to prevent back on logout.
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            Response.Cache.SetExpires(DateTime.UtcNow.AddHours(-1));
+            Response.Cache.SetNoStore();
 
             //This segment of code is to simulate entering this page with a particular trainer info
             //For now, this is a query to MFNTrainerTable to emulate this.
@@ -1116,52 +1120,140 @@ namespace WebApplication1
             string endTime;
             string SlectedNumberOfPeople = NumberInAttendance.Text;
             string address = LocationDrpDown.SelectedValue;
+            int count = 0;
 
             //This needs to validate and append information to the db.
             if (GetValidTime(StartTimeDrpList.Text, EndTimeDrpList.Text) && address != "")
             {
                 startTime = convertAMPMTime(StartTimeDrpList.Text);
                 endTime = convertAMPMTime(EndTimeDrpList.Text);
-                
 
-                SqlConnection db = new SqlConnection(SqlDataSource3.ConnectionString);
-                SqlCommand cmd = new SqlCommand();
-                cmd.CommandType = System.Data.CommandType.Text;
-                cmd.Connection = db;
-
-                // cmd.CommandText = "INSERT INTO [MFNCalendarTable] (Trainer_Id, User_Id, Calendar_Date, Calendar_EventSummary, Calendar_Location, Calendar_ApprovedByTrainer, Calendar_PaidByClient, Calendar_CompletedSession, Calendar_NumberOfClients) VALUES (@Tid, @Uid, @date, @event,  @loc, @approved, @paid, @completed, @number)";
-                cmd.CommandText = "INSERT INTO [MFNCalendarTable] (Trainer_Id, User_Id, Calendar_Date, Calendar_EventName, Calendar_StartTime, Calendar_EndTime, Calendar_NumberOfClients, Calendar_Location) VALUES (@Tid, @Uid, @date, @event, @startTime, @endTime, @number, @loc)";
-                cmd.Parameters.AddWithValue("@Tid", Tobj.TrainerId);
-                cmd.Parameters.AddWithValue("@Uid", Uobj.UserId);
-                cmd.Parameters.AddWithValue("@date", SelectedDateTxtBox.Text);
-                cmd.Parameters.AddWithValue("@event", EventSummaryTxtBox.Text);
-                cmd.Parameters.AddWithValue("@startTime", startTime);
-                cmd.Parameters.AddWithValue("@endTime", endTime);
-                cmd.Parameters.AddWithValue("@number", SlectedNumberOfPeople);
-                cmd.Parameters.AddWithValue("@loc", address);
+                //This section checks to see if the Client attempts to add a session on a date that is fully  Blocked.
+                //
+                SqlConnection db3 = new SqlConnection(SqlDataSource5.ConnectionString);
+                SqlCommand cmd3 = new SqlCommand();
+                cmd3.CommandType = System.Data.CommandType.Text;
+                cmd3.Connection = db3;
+                cmd3.CommandText = "Select COUNT(*) FROM [MFNBlockedDatesTable] WHERE Trainer_Id = @Tid AND BlockedDate_Date = @date AND BlockedDate_IsFullDay = @fullDay";
+                cmd3.Parameters.AddWithValue("@Tid", Tobj.TrainerId);
+                cmd3.Parameters.AddWithValue("@date", SelectedDateTxtBox.Text);
+                cmd3.Parameters.AddWithValue("@fullDay", true);
 
                 try
                 {
-                    db.Open();
-                    cmd.ExecuteNonQuery();
-
-                    //success message
-                    if (SlectedNumberOfPeople == "1")
-                    {
-                        Response.Write(@"<script language='javascript'>alert('Reqest for a session on " + SelectedDateTxtBox.Text + " from " + StartTimeDrpList.Text + " to " + EndTimeDrpList.Text + " for " + SlectedNumberOfPeople + " person has been sent to " + UserNameLbl.Text + "!');</script>");
-                    }
-                    else
-                    {
-                        Response.Write(@"<script language='javascript'>alert('Reqest for a session on " + SelectedDateTxtBox.Text + " from " + StartTimeDrpList.Text + " to " + EndTimeDrpList.Text + " for " + SlectedNumberOfPeople + " people has been sent to " + UserNameLbl.Text + "!');</script>");
-                    }
+                    db3.Open();
+                    count = (int)cmd3.ExecuteScalar();
                 }
                 catch
                 {
-                    Response.Write(@"<script language='javascript'>alert('Error Writing into Database!');</script>");
+                    count = -1;
                 }
                 finally
                 {
-                    db.Close();
+                    db3.Close();
+                }
+
+                if(count > 0)
+                {
+                    Response.Write(@"<script language='javascript'>alert('" + UserNameLbl.Text + " has marked "+ SelectedDateTxtBox.Text + " as unavaliable!');</script>");
+                }
+                else if(count == -1)
+                {
+                    Response.Write(@"<script language='javascript'>alert('Error connecting to Database!');</script>");
+                }
+                else
+                {
+
+                    if(isTimeFreeOnPartiallyBlockedDate(startTime, endTime))
+                    {
+                        //This section checks to see if the Client has already subimmted a request for a session
+                        //on the same date at the same time.
+
+                        SqlConnection db = new SqlConnection(SqlDataSource3.ConnectionString);
+                        SqlCommand cmd = new SqlCommand();
+                        cmd.CommandType = System.Data.CommandType.Text;
+                        cmd.Connection = db;
+
+                        cmd.CommandText = "Select COUNT(*) FROM [MFNCalendarTable] WHERE Trainer_Id = @Tid AND User_Id = @Uid AND Calendar_Date = @date AND Calendar_StartTime = @startTime AND Calendar_EndTime = @endTime";
+                        cmd.Parameters.AddWithValue("@Tid", Tobj.TrainerId);
+                        cmd.Parameters.AddWithValue("@Uid", Uobj.UserId);
+                        cmd.Parameters.AddWithValue("@date", SelectedDateTxtBox.Text);
+                        cmd.Parameters.AddWithValue("@startTime", startTime);
+                        cmd.Parameters.AddWithValue("@endTime", endTime);
+
+                        try
+                        {
+                            db.Open();
+                            count = (int)cmd.ExecuteScalar();
+                        }
+                        catch
+                        {
+                            count = -1;
+                        }
+                        finally
+                        {
+                            db.Close();
+                        }
+
+
+
+                        if (count > 0)
+                        {
+                            Response.Write(@"<script language='javascript'>alert(' You have already made a reqest for a session on " + SelectedDateTxtBox.Text + " from " + StartTimeDrpList.Text + " to " + EndTimeDrpList.Text + " with" + UserNameLbl.Text + "!');</script>");
+                        }
+                        else if (count == -1)
+                        {
+                            Response.Write(@"<script language='javascript'>alert('Error connecting to Database!');</script>");
+                        }
+                        else
+                        {
+
+                            SqlConnection db2 = new SqlConnection(SqlDataSource3.ConnectionString);
+                            SqlCommand cmd2 = new SqlCommand();
+                            cmd2.CommandType = System.Data.CommandType.Text;
+                            cmd2.Connection = db2;
+
+                            cmd2.CommandText = "INSERT INTO [MFNCalendarTable] (Trainer_Id, User_Id, Calendar_Date, Calendar_EventName, Calendar_StartTime, Calendar_EndTime, Calendar_NumberOfClients, Calendar_Location) VALUES (@Tid, @Uid, @date, @event, @startTime, @endTime, @number, @loc)";
+                            cmd2.Parameters.AddWithValue("@Tid", Tobj.TrainerId);
+                            cmd2.Parameters.AddWithValue("@Uid", Uobj.UserId);
+                            cmd2.Parameters.AddWithValue("@date", SelectedDateTxtBox.Text);
+                            cmd2.Parameters.AddWithValue("@event", EventSummaryTxtBox.Text);
+                            cmd2.Parameters.AddWithValue("@startTime", startTime);
+                            cmd2.Parameters.AddWithValue("@endTime", endTime);
+                            cmd2.Parameters.AddWithValue("@number", SlectedNumberOfPeople);
+                            cmd2.Parameters.AddWithValue("@loc", address);
+
+                            try
+                            {
+                                db2.Open();
+                                cmd2.ExecuteNonQuery();
+
+                                //success message
+                                if (SlectedNumberOfPeople == "1")
+                                {
+                                    Response.Write(@"<script language='javascript'>alert('Reqest for a session on " + SelectedDateTxtBox.Text + " from " + StartTimeDrpList.Text + " to " + EndTimeDrpList.Text + " for " + SlectedNumberOfPeople + " person has been sent to " + UserNameLbl.Text + "!');</script>");
+                                }
+                                else
+                                {
+                                    Response.Write(@"<script language='javascript'>alert('Reqest for a session on " + SelectedDateTxtBox.Text + " from " + StartTimeDrpList.Text + " to " + EndTimeDrpList.Text + " for " + SlectedNumberOfPeople + " people has been sent to " + UserNameLbl.Text + "!');</script>");
+                                }
+                            }
+                            catch
+                            {
+                                Response.Write(@"<script language='javascript'>alert('Error Writing into Database!');</script>");
+                            }
+                            finally
+                            {
+                                db2.Close();
+                            }
+                        }
+
+                    }
+                    else
+                    {
+                        Response.Write(@"<script language='javascript'>alert('" + UserNameLbl.Text + " has marked this time slot as unavaliable!');</script>");
+                    }
+
                 }
 
             }
@@ -1169,7 +1261,7 @@ namespace WebApplication1
             {
                 if(address == "")
                 {
-                    Response.Write(@"<script language='javascript'>alert('Please Select A Location.');</script>");
+                    Response.Write(@"<script language='javascript'>alert('Please Select a Location.');</script>");
                 }
                 else
                 {
@@ -1177,8 +1269,11 @@ namespace WebApplication1
                 }
             }
 
-           //Response.Redirect("ClientScheduler.aspx");
+          //Response.Redirect("ClientScheduler.aspx");
         }
+
+
+
 
         private void CreateDiv(string divId)
         {
@@ -1242,6 +1337,404 @@ namespace WebApplication1
 
             db2.Close();
 
+        }
+
+        
+        private bool isTimeFreeOnPartiallyBlockedDate(string ClientStrartTime, string ClientEndTime)
+        {
+            //returns false is time is blocked, true if time is avaliable
+
+            //This section checks to see if the Client attempts to add a session on a date that is partially blocked.
+            /*
+
+            read from db for times.
+
+            Four broad cases that need to be blocked
+            case 1: starts before blocked time, but ends within blocked time ClientStart < TrainerStart < ClientEnd < TrainerEnd
+            case 2: starts during blocked time, but ends outside blocked time TrainerStart < ClientStart < TrainerEnd < ClientEnd
+            case 3: Within blocked time TrainerStart < ClientStart < ClientEnd < TrainerEnd
+            case 4: Overlaps blocked time Client Start < TrainerStart < TrainerEnd < Client End
+
+            simplified
+            case 1: ClientEnd > TrainerStart and ClientEnd < Trainer End
+            case 2: ClientStart > TrainerStart and ClientStart < TrainerEnd
+            case 3: can be caught with case1 and case2 test
+            case 4: ClientStart < TrainerStart and ClientEnd > TrainerEnd
+
+            These cases are okay
+            Client Starts and Ends before blocked time ClientStart < ClientEnd < TrainerStop < TrainerEnd
+            Client Starts and Ends after blocked time TrainerStop < TrainerEnd < ClientStart < ClientEnd
+            */
+
+            int count = 0;
+            string TrainerStartTime = "";
+            string TrainerEndTime = "";
+
+            SqlConnection db = new SqlConnection(SqlDataSource3.ConnectionString);
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = System.Data.CommandType.Text;
+            cmd.Connection = db;
+
+            cmd.CommandText = "Select * FROM [MFNBlockedDateTable] WHERE Trainer_Id = @id AND BlockedDate_Date = @date";
+            cmd.Parameters.AddWithValue("@id", Tobj.TrainerId);
+            cmd.Parameters.AddWithValue("@date", SelectedDateTxtBox.Text);
+
+            try
+            {
+                db.Open();
+                SqlDataReader sdr = cmd.ExecuteReader();
+
+                while (sdr.Read())
+                {
+                    TrainerStartTime = sdr["BlockedDate_StartTime"].ToString();
+                    TrainerEndTime = sdr["BlockedDate_EndTime"].ToString();
+                }
+
+            }
+            catch
+            {
+                count = -1;
+            }
+            finally
+            {
+                db.Close();
+            }
+
+            if(count == -1)
+            {
+                return false;
+            }
+            else 
+            {
+                int clientStart = getTimeValue(ClientStrartTime);
+                int clientEnd = getTimeValue(ClientEndTime);
+                int trainerStart = getTimeValue(TrainerStartTime);
+                int trainerEnd = getTimeValue(TrainerEndTime);
+
+                if(clientEnd > trainerStart && clientEnd < trainerEnd)
+                {
+                    return false;
+                }
+                else if(clientStart > trainerStart && clientStart < trainerEnd)
+                {
+                    return false;
+                }
+                else if(clientStart < trainerStart && clientEnd > trainerEnd)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+
+
+            }
+
+
+
+        }
+
+        int getTimeValue(string time)
+        {
+            int value;
+
+            switch (time)
+            {
+                case "12:00 AM":
+                    value = 1;
+                    break;
+                case "12:15 AM":
+                    value = 2;
+                    break;
+                case "12: 30 AM":
+                    value = 3;
+                    break;
+                case "12:45 AM":
+                    value = 4;
+                    break;
+                case "1:00 AM":
+                    value = 5;
+                    break;
+                case "1:15 AM":
+                    value = 6;
+                    break;
+                case "1:30 AM":
+                    value = 7;
+                    break;
+                case "1:45 AM":
+                    value = 8;
+                    break;
+                case "2:00 AM":
+                    value = 9;
+                    break;
+                case "2:15 AM":
+                    value = 10;
+                    break;
+                case "2:30 AM":
+                    value = 11;
+                    break;
+                case "2:45 AM":
+                    value = 12;
+                    break;
+                case "3:00 AM":
+                    value = 13;
+                    break;
+                case "3:15 AM":
+                    value = 14;
+                    break;
+                case "3:30 AM":
+                    value = 15;
+                    break;
+                case "3:45 AM":
+                    value = 16;
+                    break;
+                case "4:00 AM":
+                    value = 17;
+                    break;
+                case "4:15 AM":
+                    value = 18;
+                    break;
+                case "4:30 AM":
+                    value = 19;
+                    break;
+                case "4:45 AM":
+                    value = 20;
+                    break;
+                case "5:00 AM":
+                    value = 21;
+                    break;
+                case "5:15 AM":
+                    value = 22;
+                    break;
+                case "5:30 AM":
+                    value = 23;
+                    break;
+                case "5:45 AM":
+                    value = 24;
+                    break;
+                case "6:00 AM":
+                    value = 26;
+                    break;
+                case "6:15 AM":
+                    value = 27;
+                    break;
+                case "6:30 AM":
+                    value = 28;
+                    break;
+                case "6:45 AM":
+                    value = 29;
+                    break;
+                case "7:00 AM":
+                    value = 30;
+                    break;
+                case "7:15 AM":
+                    value = 31;
+                    break;
+                case "7:30 AM":
+                    value = 32;
+                    break;
+                case "7:45 AM":
+                    value = 33;
+                    break;
+                case "8:00 AM":
+                    value = 34;
+                    break;
+                case "8:15 AM":
+                    value = 35;
+                    break;
+                case "8:30 AM":
+                    value = 36;
+                    break;
+                case "8:45 AM":
+                    value = 37;
+                    break;
+                case "9:00 AM":
+                    value = 38;
+                    break;
+                case "9:15 AM":
+                    value = 39;
+                    break;
+                case "9:30 AM":
+                    value = 40;
+                    break;
+                case "9:45 AM":
+                    value = 41;
+                    break;
+                case "10:00 AM":
+                    value = 42;
+                    break;
+                case "10:15 AM":
+                    value = 43;
+                    break;
+                case "10:30 AM":
+                    value = 44;
+                    break;
+                case "10:45 AM":
+                    value = 45;
+                    break;
+                case "11:00 AM":
+                    value = 46;
+                    break;
+                case "11:15 AM":
+                    value = 47;
+                    break;
+                case "11:30 AM":
+                    value = 48;
+                    break;
+                case "11:45 AM":
+                    value = 49;
+                    break;
+                case "12:00 PM":
+                    value = 50;
+                    break;
+                case "12:15 PM":
+                    value = 51;
+                    break;
+                case "12:30 PM":
+                    value = 52;
+                    break;
+                case "12:45 PM":
+                    value = 53;
+                    break;
+                case "1:00 PM":
+                    value = 54;
+                    break;
+                case "1:15 PM":
+                    value = 55;
+                    break;
+                case "1:30 PM":
+                    value = 56;
+                    break;
+                case "1:45 PM":
+                    value = 57;
+                    break;
+                case "2:00 PM":
+                    value = 58;
+                    break;
+                case "2:15 PM":
+                    value = 59;
+                    break;
+                case "2:30 PM":
+                    value = 60;
+                    break;
+                case "2:45 PM":
+                    value = 61;
+                    break;
+                case "3:00 PM":
+                    value = 62;
+                    break;
+                case "3:15 PM":
+                    value = 63;
+                    break;
+                case "3:30 PM":
+                    value = 64;
+                    break;
+                case "3:45 PM":
+                    value = 65;
+                    break;
+                case "4:00 PM":
+                    value = 66;
+                    break;
+                case "4:15 PM":
+                    value = 67;
+                    break;
+                case "4:30 PM":
+                    value = 68;
+                    break;
+                case "4:45 PM":
+                    value = 69;
+                    break;
+                case "5:00 PM":
+                    value = 70;
+                    break;
+                case "5:15 PM":
+                    value = 71;
+                    break;
+                case "5:30 PM":
+                    value = 72;
+                    break;
+                case "5:45 PM":
+                    value = 73;
+                    break;
+                case "6:00 PM":
+                    value = 74;
+                    break;
+                case "6:15 PM":
+                    value = 75;
+                    break;
+                case "6:30 PM":
+                    value = 76;
+                    break;
+                case "6:45 PM":
+                    value = 77;
+                    break;
+                case "7:00 PM":
+                    value = 78;
+                    break;
+                case "7:15 PM":
+                    value = 79;
+                    break;
+                case "7:30 PM":
+                    value = 80;
+                    break;
+                case "7:45 PM":
+                    value = 81;
+                    break;
+                case "8:00 PM":
+                    value = 82;
+                    break;
+                case "8:15 PM":
+                    value = 83;
+                    break;
+                case "8:30 PM":
+                    value = 84;
+                    break;
+                case "8:45 PM":
+                    value = 85;
+                    break;
+                case "9:00 PM":
+                    value = 86;
+                    break;
+                case "9:15 PM":
+                    value = 87;
+                    break;
+                case "9:30 PM":
+                    value = 88;
+                    break;
+                case "9:45 PM":
+                    value = 89;
+                    break;
+                case "10:00 PM":
+                    value = 90;
+                    break;
+                case "10:15 PM":
+                    value = 91;
+                    break;
+                case "10:30 PM":
+                    value = 92;
+                    break;
+                case "10:45 PM":
+                    value = 93;
+                    break;
+                case "11:00 PM":
+                    value = 94;
+                    break;
+                case "11:15 PM":
+                    value = 95;
+                    break;
+                case "11:30 PM":
+                    value = 96;
+                    break;
+                case "11:45 PM":
+                    value = 97;
+                    break;
+                default:
+                    value = 9999;
+                    break;
+            }
+
+            return value;
         }
 
     }

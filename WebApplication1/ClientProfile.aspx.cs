@@ -11,8 +11,14 @@ namespace WebApplication1
     public partial class WebForm1 : System.Web.UI.Page
     {
         UserObject Uobj = new UserObject();
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            //needs to be added to every page in the page load to prevent back on logout.
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            Response.Cache.SetExpires(DateTime.UtcNow.AddHours(-1));
+            Response.Cache.SetNoStore();
+
             if (Session["UserInfo"] == null)
             {
                 //Forces a redirect to splash page if this page is loaded without a session state.
