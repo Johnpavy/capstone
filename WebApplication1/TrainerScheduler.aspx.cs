@@ -107,39 +107,44 @@ namespace WebApplication1
                 db.Close();
             }
 
-            SqlConnection db3= new SqlConnection(SqlDataSource3.ConnectionString);
-            SqlCommand cmd3 = new SqlCommand();
-            cmd3.CommandType = System.Data.CommandType.Text;
-            cmd3.Connection = db3;
-
-            ClientsDrpDown.Items.Clear();
-            ListItem l = new ListItem("---Select---", "", true);
-            ClientsDrpDown.Items.Add(l);
-
-            cmd3.CommandText = "SELECT * FROM [MFNCalendarTable] WHERE Trainer_Id = @Tid";
-            cmd3.Parameters.AddWithValue("@Tid", Tobj.TrainerId);
-
-            try
+            if(!IsPostBack)
             {
-                db3.Open();
-                SqlDataReader sdr = cmd3.ExecuteReader();
+                SqlConnection db3 = new SqlConnection(SqlDataSource3.ConnectionString);
+                SqlCommand cmd3 = new SqlCommand();
+                cmd3.CommandType = System.Data.CommandType.Text;
+                cmd3.Connection = db3;
 
-                while (sdr.Read())
+                ClientsDrpDown.Items.Clear();
+                ListItem l = new ListItem("---Select---", "", true);
+                ClientsDrpDown.Items.Add(l);
+
+                cmd3.CommandText = "SELECT * FROM [MFNCalendarTable] WHERE Trainer_Id = @Tid AND Calendar_ApprovedByTrainer = @app";
+                cmd3.Parameters.AddWithValue("@Tid", Tobj.TrainerId);
+                cmd3.Parameters.AddWithValue("@app", false);
+
+                try
                 {
-                    string name = sdr["Calendar_EventName"].ToString();
-                    string calendarId = sdr["Calendar_Id"].ToString();
-                    l = new ListItem(name, calendarId, true);
-                    ClientsDrpDown.Items.Add(l);
+                    db3.Open();
+                    SqlDataReader sdr = cmd3.ExecuteReader();
+
+                    while (sdr.Read())
+                    {
+                        string name = sdr["Calendar_EventName"].ToString();
+                        string calendarId = sdr["Calendar_Id"].ToString();
+                        l = new ListItem(name, calendarId, true);
+                        ClientsDrpDown.Items.Add(l);
+                    }
+                }
+                catch
+                {
+                    Response.Write(@"<script language='javascript'>alert('Error Loading Events');</script>");
+                }
+                finally
+                {
+                    db3.Close();
                 }
             }
-            catch
-            {
-                Response.Write(@"<script language='javascript'>alert('Error Loading Events');</script>");
-            }
-            finally
-            {
-                db3.Close();
-            }
+
 
         }
 
@@ -182,7 +187,37 @@ namespace WebApplication1
 
         protected void SelectThisClientBtn_Click(object sender, EventArgs e)
         {
-            
+            ConfirmAppointment.Enabled = true;
+            SqlConnection db3 = new SqlConnection(SqlDataSource3.ConnectionString);
+            SqlCommand cmd3 = new SqlCommand();
+            cmd3.CommandType = System.Data.CommandType.Text;
+            cmd3.Connection = db3;
+            cmd3.CommandText = "SELECT * FROM [MFNCalendarTable] WHERE Calendar_Id = @id";
+            cmd3.Parameters.AddWithValue("@id", ClientsDrpDown.SelectedValue);
+            try
+            {
+                db3.Open();
+                SqlDataReader sdr = cmd3.ExecuteReader();
+                SummaryTextBox.Text = "";
+                while (sdr.Read())
+                {
+                    SummaryTextBox.Text = "Time is in units of Military Time.\n";
+                    SummaryTextBox.Text += "Start Time: " + sdr["Calendar_StartTime"].ToString() + "\n";
+                    SummaryTextBox.Text += "End Time: " + sdr["Calendar_EndTime"].ToString() + "\n";
+                    SummaryTextBox.Text += "Total Number of People: " + sdr["Calendar_NumberOfClients"].ToString() + "\n";
+                    SummaryTextBox.Text += "Address: " + sdr["Calendar_Location"].ToString() + "\n";
+                }
+            }
+            catch
+            {
+                SummaryTextBox.Text = ClientsDrpDown.SelectedValue + "errpr reading from database";
+            }
+            finally
+            {
+                db3.Close();
+            }
+
+
 
         }
 
@@ -1058,5 +1093,71 @@ namespace WebApplication1
             ManageBlockedTimeDiv.Visible = false;
         }
 
+        protected void ConfirmAppointment_Click(object sender, EventArgs e)
+        {
+            ConfirmAppointment.Enabled = false;
+            SqlConnection db3 = new SqlConnection(SqlDataSource3.ConnectionString);
+            SqlCommand cmd3 = new SqlCommand();
+            cmd3.CommandType = System.Data.CommandType.Text;
+            cmd3.Connection = db3;
+            cmd3.CommandText = "UPDATE [MFNCalendarTable] SET Calendar_ApprovedByTrainer = @app WHERE Calendar_Id = @id";
+            cmd3.Parameters.AddWithValue("@id", ClientsDrpDown.SelectedValue);
+            cmd3.Parameters.AddWithValue("@app", true);
+
+            try
+            {
+                db3.Open();
+                cmd3.ExecuteNonQuery();
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                db3.Close();
+            }
+
+            Response.Write(@"<script language='javascript'>alert('Successfuly Approved Client.');</script>");
+
+            SqlConnection db = new SqlConnection(SqlDataSource3.ConnectionString);
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = System.Data.CommandType.Text;
+            cmd.Connection = db;
+
+            ClientsDrpDown.Items.Clear();
+            ListItem l = new ListItem("---Select---", "", true);
+            ClientsDrpDown.Items.Add(l);
+
+            cmd.CommandText = "SELECT * FROM [MFNCalendarTable] WHERE Trainer_Id = @Tid AND Calendar_ApprovedByTrainer = @app";
+            cmd.Parameters.AddWithValue("@Tid", Tobj.TrainerId);
+            cmd.Parameters.AddWithValue("@app", false);
+
+            try
+            {
+                db.Open();
+                SqlDataReader sdr = cmd.ExecuteReader();
+
+                while (sdr.Read())
+                {
+                    string name = sdr["Calendar_EventName"].ToString();
+                    string calendarId = sdr["Calendar_Id"].ToString();
+                    l = new ListItem(name, calendarId, true);
+                    ClientsDrpDown.Items.Add(l);
+                }
+            }
+            catch
+            {
+                Response.Write(@"<script language='javascript'>alert('Error Loading Events');</script>");
+            }
+            finally
+            {
+                db.Close();
+            }
+
+
+
+
+        }
     }
 }

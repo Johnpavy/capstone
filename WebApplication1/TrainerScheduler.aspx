@@ -193,12 +193,12 @@
 			 			<div class="panel-body">
                             <!-- Selected Date: <asp:TextBox ID="DateTextBox" runat="server" width = "50%" ReadOnly="True"></asp:TextBox><br /> -->
                              Selected Client:<asp:DropDownList ID="ClientsDrpDown" runat="server"></asp:DropDownList>
-&nbsp;<asp:LinkButton ID="SelectThisClientBtn"  Class="btn btn-info btn-block" runat="server" OnClick="SelectThisClientBtn_Click">Select Client</asp:LinkButton>
+                            <asp:LinkButton ID="SelectThisClientBtn"  Class="btn btn-info btn-block" runat="server" width="25%" OnClick="SelectThisClientBtn_Click">Select Client</asp:LinkButton>
                              <br />
                              <asp:TextBox ID="SummaryTextBox" runat="server" TextMode="MultiLine" width = "100%" height="150px" ReadOnly="True" ></asp:TextBox><br />
                              <table style="width: 100%;">
                                  <tr>
-                                     <td><asp:LinkButton ID = "ConfirmAppointment" Class="btn btn-info btn-block" runat="server">Confirm Appointment</asp:LinkButton></td>
+                                     <td><asp:LinkButton ID = "ConfirmAppointment" Class="btn btn-info btn-block" runat="server" OnClick="ConfirmAppointment_Click" Enabled="false">Confirm Appointment</asp:LinkButton></td>
                                      <td><asp:LinkButton ID = "LinkButton1" Class="btn btn-info btn-block" runat="server">Decline Appointment</asp:LinkButton></td>
                                  </tr>
                                  <tr>
