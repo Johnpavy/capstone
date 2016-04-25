@@ -21,7 +21,7 @@ namespace WebApplication1
     public partial class WebForm4 : System.Web.UI.Page
     {
         // These values store true or false strings from the database that indicate if the user has clicked on the verification email sent to them
-        String tVerified, cVerified;
+        Boolean tVerified, cVerified;
 
         TrainerObject Tobj = new TrainerObject();
         UserObject Uobj = new UserObject();
@@ -63,7 +63,7 @@ namespace WebApplication1
                     while (sdr.Read())
                     {
                         salt = sdr["Trainer_PasswordSalt"].ToString();
-                        tVerified = sdr["Trainer_EmailVerified"].ToString();
+                        tVerified = (bool)sdr["Trainer_EmailVerified"];
 
                     }
 
@@ -101,7 +101,7 @@ namespace WebApplication1
                 If the the trainer is verified and the database has succesfully placed data
                 into trainer object.
                 */
-                if (count == -1 || tVerified.Equals("False"))
+                if (count == -1 || !tVerified)
                 {
                     //login fail
                     if(count == -1)
@@ -176,7 +176,7 @@ namespace WebApplication1
                     while (sdr.Read())
                     {
                         salt = sdr["User_PasswordSalt"].ToString();
-                        cVerified = sdr["User_EmailVarified"].ToString();
+                        cVerified = (bool)sdr["User_EmailVarified"];
                     }
 
                 }
@@ -219,7 +219,7 @@ namespace WebApplication1
                 If the the trainer is verified and the database has succesfully placed data
                 into trainer object.
                 */
-                if (count == -1 || cVerified.Equals("False"))
+                if (count == -1 || !cVerified)
                 {
                     //login fail
                     if (count == -1)
