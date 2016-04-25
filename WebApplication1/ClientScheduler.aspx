@@ -172,7 +172,7 @@
 			 			        </div>
 			 			        <div class="panel-body">
 			    						Selected Date: <asp:TextBox ID="SelectedDateTxtBox" runat="server" ReadOnly="true"></asp:TextBox><br />
-                                        Event Summary: <asp:TextBox ID="EventSummaryTxtBox" runat="server" TextMode="MultiLine" Height="84px" Width="186px"></asp:TextBox><br />
+                                       <!-- Event Summary: <asp:TextBox ID="EventSummaryTxtBox" runat="server" TextMode="MultiLine" Height="84px" Width="186px"></asp:TextBox><br /> -->
                                         Start Time: <asp:DropDownList ID="StartTimeDrpList" runat="server" Width="50%">
                                         <asp:ListItem>12:00 AM</asp:ListItem>
                                         <asp:ListItem>12:15 AM</asp:ListItem>

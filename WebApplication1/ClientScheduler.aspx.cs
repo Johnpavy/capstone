@@ -1164,7 +1164,7 @@ namespace WebApplication1
                 else
                 {
 
-                    if(isTimeFreeOnPartiallyBlockedDate(startTime, endTime))
+                    if(isTimeFreeOnPartiallyBlockedDate(StartTimeDrpList.Text, EndTimeDrpList.Text))
                     {
                         //This section checks to see if the Client has already subimmted a request for a session
                         //on the same date at the same time.
@@ -1217,7 +1217,7 @@ namespace WebApplication1
                             cmd2.Parameters.AddWithValue("@Tid", Tobj.TrainerId);
                             cmd2.Parameters.AddWithValue("@Uid", Uobj.UserId);
                             cmd2.Parameters.AddWithValue("@date", SelectedDateTxtBox.Text);
-                            cmd2.Parameters.AddWithValue("@event", EventSummaryTxtBox.Text);
+                            cmd2.Parameters.AddWithValue("@event", Uobj.FirstName + " " +Uobj.LastName + " " + SelectedDateTxtBox.Text);
                             cmd2.Parameters.AddWithValue("@startTime", startTime);
                             cmd2.Parameters.AddWithValue("@endTime", endTime);
                             cmd2.Parameters.AddWithValue("@number", SlectedNumberOfPeople);
@@ -1370,14 +1370,15 @@ namespace WebApplication1
             string TrainerStartTime = "";
             string TrainerEndTime = "";
 
-            SqlConnection db = new SqlConnection(SqlDataSource3.ConnectionString);
+            SqlConnection db = new SqlConnection(SqlDataSource6.ConnectionString);
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = System.Data.CommandType.Text;
             cmd.Connection = db;
 
-            cmd.CommandText = "Select * FROM [MFNBlockedDateTable] WHERE Trainer_Id = @id AND BlockedDate_Date = @date";
+            cmd.CommandText = "Select * FROM [MFNBlockedDatesTable] WHERE Trainer_Id = @id AND BlockedDate_Date = @date AND BlockedDate_IsFullDay = @day";
             cmd.Parameters.AddWithValue("@id", Tobj.TrainerId);
             cmd.Parameters.AddWithValue("@date", SelectedDateTxtBox.Text);
+            cmd.Parameters.AddWithValue("@day", false);
 
             try
             {
@@ -1388,6 +1389,28 @@ namespace WebApplication1
                 {
                     TrainerStartTime = sdr["BlockedDate_StartTime"].ToString();
                     TrainerEndTime = sdr["BlockedDate_EndTime"].ToString();
+
+                    int clientStart = getTimeValue(ClientStrartTime);
+                    int clientEnd = getTimeValue(ClientEndTime);
+                    int trainerStart = getTimeValue(TrainerStartTime);
+                    int trainerEnd = getTimeValue(TrainerEndTime);
+
+                    if (clientEnd > trainerStart && clientEnd < trainerEnd)
+                    {
+                        count++;
+                    }
+                    else if (clientStart > trainerStart && clientStart < trainerEnd)
+                    {
+                        count++;
+                    }
+                    else if (clientStart < trainerStart && clientEnd > trainerEnd)
+                    {
+                        count++;
+                    }
+                    else
+                    {
+                        //NextRound
+                    }
                 }
 
             }
@@ -1402,10 +1425,17 @@ namespace WebApplication1
 
             if(count == -1)
             {
+                Response.Write(@"<script language='javascript'>alert('Error connecting to Database!');</script>");
                 return false;
             }
-            else 
+            else if(count > 0)
             {
+                return false;
+            }
+            /*
+            else if(count > 0)
+            {
+
                 int clientStart = getTimeValue(ClientStrartTime);
                 int clientEnd = getTimeValue(ClientEndTime);
                 int trainerStart = getTimeValue(TrainerStartTime);
@@ -1429,6 +1459,11 @@ namespace WebApplication1
                 }
 
 
+            }
+                */
+            else
+            {
+                return true;
             }
 
 

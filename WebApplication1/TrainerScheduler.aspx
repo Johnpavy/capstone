@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="TrainerScheduler.aspx.cs" Inherits="WebApplication1.TrainerScheduler" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="TrainerScheduler.aspx.cs" Inherits="WebApplication1.TrainerScheduler"  EnableViewState="true" %>
 
 <%@ Register Assembly="DayPilot" Namespace="DayPilot.Web.Ui" TagPrefix="DayPilot" %>
 
@@ -191,15 +191,9 @@
 			    		<h3 class="panel-title">Confirm Client Session</h3>
 			 			</div>
 			 			<div class="panel-body">
-                             Selected Date: <asp:TextBox ID="DateTextBox" runat="server" width = "50%" ReadOnly="True"></asp:TextBox><br />
-                             Selected Client: <asp:DropDownList ID="AppointmentsDropbx" runat="server" DataSourceID="SqlDataSource4" DataTextField="User_FirstName" DataValueField="Calendar_Id" Width="50%" AppendDataBoundItems="true"><asp:ListItem Text="--Select One--" Value=""/></asp:DropDownList>
-                             <asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" SelectCommand="SELECT MFNCalendarTable.Calendar_Id, MFNCalendarTable.Trainer_Id, MFNCalendarTable.User_Id, MFNCalendarTable.Calendar_Date, MFNCalendarTable.Calendar_EventName, MFNCalendarTable.Calendar_StartTime, MFNCalendarTable.Calendar_EndTime, MFNCalendarTable.Calendar_Location, MFNCalendarTable.Calendar_ApprovedByTrainer, MFNUserTable.User_FirstName, MFNUserTable.User_MiddleName, MFNUserTable.User_LastName FROM MFNCalendarTable INNER JOIN MFNUserTable ON MFNCalendarTable.User_Id = MFNUserTable.User_Id WHERE (MFNCalendarTable.Calendar_ApprovedByTrainer = 0) AND (MFNCalendarTable.Calendar_Date = @Date) AND (MFNCalendarTable.Trainer_Id= @id)">
-                                 <SelectParameters>
-                                     <asp:ControlParameter ControlID="Calendar1" Name="Date" PropertyName="SelectedDate" />
-                                     <asp:SessionParameter Name="id" SessionField="TrainerID" />
-                                 </SelectParameters>
-                             </asp:SqlDataSource>
-                             <asp:LinkButton ID="SelectThisClientBtn"  Class="btn btn-info btn-block" runat="server" OnClick="SelectThisClientBtn_Click">Select Client</asp:LinkButton>
+                            <!-- Selected Date: <asp:TextBox ID="DateTextBox" runat="server" width = "50%" ReadOnly="True"></asp:TextBox><br /> -->
+                             Selected Client:<asp:DropDownList ID="ClientsDrpDown" runat="server"></asp:DropDownList>
+&nbsp;<asp:LinkButton ID="SelectThisClientBtn"  Class="btn btn-info btn-block" runat="server" OnClick="SelectThisClientBtn_Click">Select Client</asp:LinkButton>
                              <br />
                              <asp:TextBox ID="SummaryTextBox" runat="server" TextMode="MultiLine" width = "100%" height="150px" ReadOnly="True" ></asp:TextBox><br />
                              <table style="width: 100%;">
@@ -444,6 +438,12 @@
                     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" SelectCommand="SELECT * FROM [MFNTrainerTable]"></asp:SqlDataSource>
                     <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" SelectCommand="SELECT * FROM [MFNUserTable]"></asp:SqlDataSource>
                     <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" SelectCommand="SELECT * FROM [MFNCalendarTable]"></asp:SqlDataSource>
+	    		    <asp:SqlDataSource ID="SqlDataSource6" runat="server" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" SelectCommand="SELECT MFNCalendarTable.Calendar_Id, MFNCalendarTable.Trainer_Id, MFNCalendarTable.User_Id, MFNCalendarTable.Calendar_Date, MFNCalendarTable.Calendar_EventName, MFNCalendarTable.Calendar_StartTime, MFNCalendarTable.Calendar_EndTime, MFNCalendarTable.Calendar_Location, MFNCalendarTable.Calendar_ApprovedByTrainer, MFNCalendarTable.Calendar_PaidByClient, MFNCalendarTable.Calendar_CompletedSession, MFNCalendarTable.Calendar_NumberOfClients, MFNUserTable.User_FirstName, MFNUserTable.User_MiddleName, MFNUserTable.User_LastName FROM MFNCalendarTable INNER JOIN MFNUserTable ON MFNCalendarTable.User_Id = MFNUserTable.User_Id WHERE (MFNCalendarTable.Calendar_Date = @date) AND (MFNCalendarTable.Trainer_Id = @Tid)">
+                        <SelectParameters>
+                            <asp:ControlParameter ControlID="DateTextBox" Name="date" PropertyName="Text" />
+                            <asp:SessionParameter Name="Tid" SessionField="TrainerID" />
+                        </SelectParameters>
+                    </asp:SqlDataSource>
 	    		    <asp:SqlDataSource ID="SqlDataSource5" runat="server" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" SelectCommand="SELECT * FROM [MFNBlockedDatesTable]"></asp:SqlDataSource>
                     <br />
 	    		    </div>

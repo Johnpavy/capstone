@@ -20,6 +20,7 @@ namespace WebApplication1
         int blockedParitalDaysCount = 0;
         string[] blockedPartialDays = new string[1000];
 
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["TrainerInfo"] == null)
@@ -106,6 +107,40 @@ namespace WebApplication1
                 db.Close();
             }
 
+            SqlConnection db3= new SqlConnection(SqlDataSource3.ConnectionString);
+            SqlCommand cmd3 = new SqlCommand();
+            cmd3.CommandType = System.Data.CommandType.Text;
+            cmd3.Connection = db3;
+
+            ClientsDrpDown.Items.Clear();
+            ListItem l = new ListItem("---Select---", "", true);
+            ClientsDrpDown.Items.Add(l);
+
+            cmd3.CommandText = "SELECT * FROM [MFNCalendarTable] WHERE Trainer_Id = @Tid";
+            cmd3.Parameters.AddWithValue("@Tid", Tobj.TrainerId);
+
+            try
+            {
+                db3.Open();
+                SqlDataReader sdr = cmd3.ExecuteReader();
+
+                while (sdr.Read())
+                {
+                    string name = sdr["Calendar_EventName"].ToString();
+                    string calendarId = sdr["Calendar_Id"].ToString();
+                    l = new ListItem(name, calendarId, true);
+                    ClientsDrpDown.Items.Add(l);
+                }
+            }
+            catch
+            {
+                Response.Write(@"<script language='javascript'>alert('Error Loading Events');</script>");
+            }
+            finally
+            {
+                db3.Close();
+            }
+
         }
 
         protected void Calendar1_SelectionChanged(object sender, EventArgs e)
@@ -113,12 +148,6 @@ namespace WebApplication1
             Session["SelectedDate"] = Calendar1.SelectedDate.ToShortDateString();
             BlockedOutSelctedDateTxtBox.Text = Calendar1.SelectedDate.ToShortDateString();
             DateTextBox.Text = Calendar1.SelectedDate.ToShortDateString();
-            AppointmentsDropbx.Items.Clear();
-            ListItem l = new ListItem("---Select---", "", true);
-            AppointmentsDropbx.Items.Add(l);
-
-            //Add the super scary query here... and in the page load.
-
         }
 
         protected void Calendar1_DayRender(object sender, DayRenderEventArgs e)
@@ -154,113 +183,11 @@ namespace WebApplication1
         protected void SelectThisClientBtn_Click(object sender, EventArgs e)
         {
             
-            SqlConnection db = new SqlConnection(SqlDataSource3.ConnectionString);
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandType = System.Data.CommandType.Text;
-            cmd.Connection = db;
-
-            cmd.CommandText = "SELECT * FROM [MFNCalendarTable] WHERE Calendar_Id = @id";
-            cmd.Parameters.AddWithValue("@id", AppointmentsDropbx.SelectedValue);
-
-
-
-            try
-            {
-                db.Open();
-                SqlDataReader sdr = cmd.ExecuteReader();
-
-                SummaryTextBox.Text = "";
-
-                while (sdr.Read())
-                {
-                    SummaryTextBox.Text += "Event Date: ";
-
-                    DateTime dt = Convert.ToDateTime(sdr["Calendar_Date"].ToString());
-
-                    SummaryTextBox.Text += dt.ToShortDateString() + "\n";
-                    SummaryTextBox.Text += "Summary: ";
-                    SummaryTextBox.Text += sdr["Calendar_EventSummary"].ToString() + "\n";
-                    SummaryTextBox.Text += "Start: ";
-                    SummaryTextBox.Text += sdr["Calendar_StartTime"].ToString() + "\n";
-                    SummaryTextBox.Text += "End: ";
-                    SummaryTextBox.Text += sdr["Calendar_EndTime"].ToString() + "\n";
-                    SummaryTextBox.Text += "\n";
-                }
-
-
-                if (SummaryTextBox.Text == "")
-                {
-                    SummaryTextBox.Text = "No Appointmetns Selected";
-                }
-
-            }
-            catch
-            {
-                SummaryTextBox.Text = "An error occured displaying!";
-            }
-            finally
-            {
-                db.Close();
-            }
-            
 
         }
 
 
-        //Currently Broken :(
 
-        protected void PopulateSummaryTextBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            SqlConnection db = new SqlConnection(SqlDataSource3.ConnectionString);
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandType = System.Data.CommandType.Text;
-            cmd.Connection = db;
-
-            cmd.CommandText = "SELECT * FROM [MFNCalendarTable] WHERE Calendar_Id = @id";
-            cmd.Parameters.AddWithValue("@id", AppointmentsDropbx.Text);
-
-            
-            try
-            {
-                db.Open();
-                SqlDataReader sdr = cmd.ExecuteReader();
-
-                SummaryTextBox.Text = "";
-
-                while(sdr.Read())
-                {
-                    SummaryTextBox.Text += "Event Date: ";
-
-                    DateTime dt = Convert.ToDateTime(sdr["Calendar_Date"].ToString());
-
-                    SummaryTextBox.Text += dt.ToShortDateString() + "\n";
-                    SummaryTextBox.Text += "Summary: ";
-                    SummaryTextBox.Text += sdr["Calendar_EventSummary"].ToString() + "\n";
-                    SummaryTextBox.Text += "Start: ";
-                    SummaryTextBox.Text += sdr["Calendar_StartTime"].ToString() + "\n";
-                    SummaryTextBox.Text += "End: ";
-                    SummaryTextBox.Text += sdr["Calendar_EndTime"].ToString() + "\n";
-                    SummaryTextBox.Text += "\n";
-                }
-
-
-                if (SummaryTextBox.Text == "")
-                {
-                    SummaryTextBox.Text = "No Appointmetns Selected";
-                }
-
-            }
-            catch
-            {
-                SummaryTextBox.Text = "An error occured displaying!";
-            }
-            finally
-            {
-                db.Close();
-            }
-
-            Response.Redirect("TrainerScheduler.aspx");
-        }
 
         //Time Range Validator
         protected bool GetValidTime(string startTime, string endTime)
