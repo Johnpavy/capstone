@@ -248,6 +248,7 @@ namespace WebApplication1
                             Uobj.UserId = Int32.Parse(sdr["User_Id"].ToString());
                             Uobj.FirstName = sdr["User_FirstName"].ToString();
                             Uobj.LastName = sdr["User_LastName"].ToString();
+                            Uobj.ImagePath = sdr["User_Image"].ToString();
                         }
 
                         Session["UserInfo"] = Uobj;
@@ -647,19 +648,28 @@ namespace WebApplication1
                     string salt = CreateSalt(125);
                     string hashedPassword = CreatePasswordHash(password, salt);
 
-
+                    string newUserPath = @"/MFNRoot/Clients/" + email + @"/ProfilePic/";
+                    // Get the physical file system path for the currently
+                    // executing application.
+                    string appPath = Request.PhysicalApplicationPath;
+                    string defaultPic = appPath + @"/Pictures/UserPicture.jpg";
+                    // Create new Directory with email as name
+                    Directory.CreateDirectory(appPath + newUserPath);
+                    string newPath = appPath + newUserPath + @"ProfilePic.jpg";
+                    File.Copy(defaultPic, newPath);
 
                     SqlCommand cmd = new SqlCommand();
 
                     cmd.CommandType = System.Data.CommandType.Text;
                     // create sql command
-                    cmd.CommandText = "INSERT INTO MFNUserTable (User_Email, User_FirstName, User_LastName, User_PasswordHash, User_PasswordSalt) OUTPUT INSERTED.User_Id values (@email, @fName, @lName, @password, @salt)";
+                    cmd.CommandText = "INSERT INTO MFNUserTable (User_Image, User_Email, User_FirstName, User_LastName, User_PasswordHash, User_PasswordSalt) OUTPUT INSERTED.User_Id values (@image, @email, @fName, @lName, @password, @salt)";
                     // add values to sql table
                     cmd.Parameters.AddWithValue("@email", email);
                     cmd.Parameters.AddWithValue("@fName", firstName);
                     cmd.Parameters.AddWithValue("@lName", lastName);
                     cmd.Parameters.AddWithValue("@password", hashedPassword);
                     cmd.Parameters.AddWithValue("@salt", salt);
+                    cmd.Parameters.AddWithValue("@image", newUserPath);
                     cmd.Connection = clientDB;
                     // try to execute query and save session object variables
                     try
@@ -672,6 +682,7 @@ namespace WebApplication1
                         Uobj.LastName = lastName;
                         Uobj.Email = email;
                         Uobj.UserId = userID;
+                        Uobj.ImagePath = newUserPath;
                         Session["UserInfo"] = Uobj;
 
                         SendActivationEmail((int)Session["userID"], email, firstName, isTrainer);

@@ -107,6 +107,9 @@
                  <asp:ScriptManager ID="ScriptManager1" runat="server">
                 </asp:ScriptManager>
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                    <Triggers>
+                      <asp:PostBackTrigger ControlID="UploadPic" />
+                    </Triggers>
                   <ContentTemplate>
             <div class="content">  
                 <div class="TopNavContainer col-xs-12 col-sm-12">
@@ -163,7 +166,7 @@
                 <div class="HeaderContainer container-fluid">
                     <div class="row">
                         <div class="PictureColumn col-xs-12 col-sm-12 text-center">
-                            <asp:Image id="ProfilePic" runat="server" src="Pictures/UserPicture.jpg" class="TrainerPicture img-circle img-responsive" alt="Trainer Picture" />
+                            <asp:Image id="ProfilePic" runat="server" src="Pictures/UserPicture.jpg" class="TrainerPicture img-circle img-responsive" alt="User Picture" data-toggle="modal" data-target="#PicUploadModal" />
                             <br />
                         </div>
                     </div>
@@ -237,6 +240,28 @@
                 </div>
               </div>
             </div>
+            </div>
+
+            <!--UploadPicture Modal -->
+            <div id="PicUploadModal" class="modal fade" role="dialog" runat="server" >
+              <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Upload Profile Picture</h4>
+                  </div>
+                  <div class="modal-body">
+                        <p>Choose a Picture to Upload: </p>
+                        <asp:FileUpload id="FileUpload1" cssclass="btn btn-default" runat="server" />
+                  </div>
+                  <div class="modal-footer">
+                      <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
+                      <asp:Button id="UploadPic" cssclass="btn btn-default" Text="Upload file" OnClick="UploadPic_Click" runat="server"></asp:Button> 
+                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="ComfirmUpdateRatesButton_Click">Close</button>
+                  </div>
+                </div>
+              </div>
             </div>
 
             </ContentTemplate>
