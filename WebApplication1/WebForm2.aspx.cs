@@ -43,11 +43,13 @@ namespace WebApplication1
                 {
                     IndividualRatesTxtBox.Text = "0.00";
                     AdditionalPersonRateTxtBox.Text = "0.00";
-               }
+                    //MaxNumberPeopleTxt.Text = "0";
+                }
                   else
-               {
+                {
                     IndividualRatesTxtBox.Text = Tobj.IndividualRate;
                     AdditionalPersonRateTxtBox.Text = Tobj.AdditionalPersonRate;
+                    MaxNumberPeopleTxt.Text = Tobj.MaxNumPeople;
                 }
 
                 //changes default profile pic to user uploaded one
@@ -125,6 +127,8 @@ namespace WebApplication1
         {
             string newIndividualRate = NewIndividualRateTxtBox.Text;
             string newAdditonalRate = NewAdditionalPersonRateTxtBox.Text;
+            string newMaxPeople = MaxNumberPeopleDrop.Text;
+           
             Regex rgx = new Regex("[0-9]?[0-9]?(\\.[0-9][0-9]?)?");
 
             if (newIndividualRate == "" || !rgx.IsMatch(newIndividualRate))
@@ -138,8 +142,14 @@ namespace WebApplication1
                 newAdditonalRate = AdditionalPersonRateTxtBox.Text;
             }
 
+            if (newAdditonalRate == "")
+            {
+                newMaxPeople = MaxNumberPeopleTxt.Text;
+            }
+            
             Tobj.IndividualRate = newIndividualRate;
             Tobj.AdditionalPersonRate = newAdditonalRate;
+            Tobj.MaxNumPeople = newMaxPeople;
             Session["TrainerInfo"] = Tobj;
 
             SqlConnection db = new SqlConnection(SqlDataSource1.ConnectionString);
@@ -147,12 +157,12 @@ namespace WebApplication1
             cmd.CommandType = System.Data.CommandType.Text;
             cmd.Connection = db;
 
-            cmd.CommandText = "UPDATE [MFNTrainerTable] SET Trainer_IndividualRate = @indRate, Trainer_AdditionalPersonRate = @addPerson WHERE Trainer_Id = @id";
+            cmd.CommandText = "UPDATE [MFNTrainerTable] SET Trainer_MaxPeople = @maxPeople, Trainer_IndividualRate = @indRate, Trainer_AdditionalPersonRate = @addPerson WHERE Trainer_Id = @id";
 
             cmd.Parameters.AddWithValue("@id", Tobj.TrainerId);
             cmd.Parameters.AddWithValue("@indRate", newIndividualRate);
             cmd.Parameters.AddWithValue("@addPerson", newAdditonalRate);
-
+            cmd.Parameters.AddWithValue("@maxPeople", newMaxPeople);
 
             try
             {

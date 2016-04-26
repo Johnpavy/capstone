@@ -203,10 +203,11 @@
                       </div>
                       <div id="collapse3" class="panel-collapse collapse">
                         <div class="panel-body">
-                            For an idividual session <asp:TextBox ID="IndividualRatesTxtBox" runat="server" ReadOnly="true" Width="15%"></asp:TextBox> per hour.
+                            For an idividual session <asp:TextBox ID="IndividualRatesTxtBox" runat="server" ReadOnly="true" Width="10%"></asp:TextBox> per hour.
                                                         <!--Trigger Modal with a button -->
                             <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal2" style="float:right;">Edit Rates</button><br />
-                            For each additional person <asp:TextBox ID="AdditionalPersonRateTxtBox" runat="server" ReadOnly="true" Width="15%"></asp:TextBox> per hour.<br />
+                            For each additional person <asp:TextBox ID="AdditionalPersonRateTxtBox" runat="server" ReadOnly="true" Width="10%"></asp:TextBox> per hour.<br />
+                            Max additional number of people <asp:TextBox ID="MaxNumberPeopleTxt" runat="server" ReadOnly="true" Width="10%"></asp:TextBox><br />
                         </div>
                       </div>
                     </div>
@@ -307,7 +308,20 @@
                   <div class="modal-body">
                     <p>Enter your New Rates:</p>
                       Individual Rate: <asp:TextBox ID="NewIndividualRateTxtBox" runat="server"></asp:TextBox> per hour <br />
-                      Additional  Person Rate: <asp:TextBox ID="NewAdditionalPersonRateTxtBox" runat="server"></asp:TextBox> per hour
+                      Additional  Person Rate: <asp:TextBox ID="NewAdditionalPersonRateTxtBox" runat="server"></asp:TextBox> per hour <br />
+                      Max Number of Additional People: <asp:DropDownList ID="MaxNumberPeopleDrop" runat="server">
+                          <asp:ListItem Value="0">0</asp:ListItem>
+                          <asp:ListItem Value="1">1</asp:ListItem>
+                          <asp:ListItem Value="2">2</asp:ListItem>
+                          <asp:ListItem Value="3">3</asp:ListItem>
+                          <asp:ListItem Value="4">4</asp:ListItem>
+                          <asp:ListItem Value="5">5</asp:ListItem>
+                          <asp:ListItem Value="6">6</asp:ListItem>
+                          <asp:ListItem Value="7">7</asp:ListItem>
+                          <asp:ListItem Value="8">8</asp:ListItem>
+                          <asp:ListItem Value="9">9</asp:ListItem>
+                          <asp:ListItem Value="10">10</asp:ListItem>
+                      </asp:DropDownList>
                   </div>
                   <div class="modal-footer">
                     <asp:LinkButton ID="UpdateRatesBtn" cssclass="btn btn-default" runat ="server" onclick="ComfirmUpdateRatesButton_Click">Update</asp:LinkButton>

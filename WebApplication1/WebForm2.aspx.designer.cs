@@ -130,6 +130,15 @@ namespace WebApplication1 {
         protected global::System.Web.UI.WebControls.TextBox AdditionalPersonRateTxtBox;
         
         /// <summary>
+        /// MaxNumberPeopleTxt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox MaxNumberPeopleTxt;
+        
+        /// <summary>
         /// FavLoc control.
         /// </summary>
         /// <remarks>
@@ -191,6 +200,15 @@ namespace WebApplication1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox NewAdditionalPersonRateTxtBox;
+        
+        /// <summary>
+        /// MaxNumberPeopleDrop control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList MaxNumberPeopleDrop;
         
         /// <summary>
         /// UpdateRatesBtn control.
