@@ -189,13 +189,14 @@
                       <div class="panel-heading">
                         <h4 class="panel-title">
                           <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Training Types</a>
-                            <asp:Label ID="TrainerTypesLbl" runat="server" Text="Type"></asp:Label>
-                            <!--Trigger Modal with a button -->
-                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal3" style="float:right;">Edit Types</button><br />
                         </h4>
                       </div>
                       <div id="collapse2" class="panel-collapse collapse">
-                        <div class="panel-body" id ="specialty" runat="server">Test Text.</div>
+                        <div class="panel-body" id ="specialty" runat="server">
+                            <asp:Label ID="TrainerTypesLbl" runat="server" Text="Type"></asp:Label>
+                            <!--Trigger Modal with a button -->
+                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal3" style="float:right;">Edit Types</button><br />
+                        </div>
                       </div>
                     </div>
                     <div class="panel panel-default">
@@ -206,11 +207,11 @@
                       </div>
                       <div id="collapse3" class="panel-collapse collapse">
                         <div class="panel-body">
-                            For an idividual session $<asp:TextBox ID="IndividualRatesTxtBox" runat="server" ReadOnly="true" Width="5%"></asp:TextBox> per hour.
+                            For an idividual session $<asp:Label ID="IndividualRatesLbl" runat="server" Text=""></asp:Label> per hour.
                                                         <!--Trigger Modal with a button -->
                             <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal2" style="float:right;">Edit Rates</button><br />
-                            For each additional person $<asp:TextBox ID="AdditionalPersonRateTxtBox" runat="server" ReadOnly="true" Width="5%"></asp:TextBox> per hour.<br />
-                            Max additional number of people <asp:TextBox ID="MaxNumberPeopleTxt" runat="server" ReadOnly="true" Width="5%"></asp:TextBox><br />
+                            For each additional person $<asp:Label ID="AdditionalPersonRateLbl" runat="server" Text=""></asp:Label> per hour.<br />
+                            Max additional number of people: <asp:Label ID="MaxNumberPeopleLbl" runat="server" Text=""></asp:Label><br />
                         </div>
                       </div>
                     </div>
@@ -308,14 +309,14 @@
                     <h4 class="modal-title">Edit Training Types</h4>
                   </div>
                   <div class="modal-body">
-                    <asp:DropDownList ID="DropDownList1" runat="server">
+                    <asp:DropDownList ID="TrainerSpecialtyDrop" runat="server">
+                          <asp:ListItem Value="Select">Select</asp:ListItem>
                           <asp:ListItem Value="Yoga">Yoga</asp:ListItem>
-                          <asp:ListItem Value="Physical Trainer">Physical Trainer</asp:ListItem>
+                          <asp:ListItem Value="Personal Training">Personal Training</asp:ListItem>
                         </asp:DropDownList>
-                      <asp:TextBox ID="TextBox1" runat="server" Width="100%" Height="500px"  BorderStyle="Solid" TextMode="MultiLine" MaxLength="4000"></asp:TextBox>
                   </div>
                   <div class="modal-footer">
-                    <asp:LinkButton ID="LinkButton1" cssclass="btn btn-default" runat ="server" onclick="ComfirmUpdateBioButton2_Click">Update</asp:LinkButton>
+                    <asp:LinkButton ID="LinkButton1" cssclass="btn btn-default" runat ="server" onclick="ComfirmUpdateTrainType_Click">Update</asp:LinkButton>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                   </div>
                 </div>

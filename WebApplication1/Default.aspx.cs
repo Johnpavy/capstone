@@ -134,6 +134,7 @@ namespace WebApplication1
                             Tobj.FirstName = sdr["Trainer_FirstName"].ToString();
                             Tobj.LastName = sdr["Trainer_LastName"].ToString();
                             Tobj.Bio = sdr["Trainer_Bio"].ToString();
+                            Tobj.Speciality = sdr["Trainer_Specialty"].ToString();
                             Tobj.IndividualRate = sdr["Trainer_IndividualRate"].ToString();
                             Tobj.AdditionalPersonRate = sdr["Trainer_AdditionalPersonRate"].ToString();
                             Tobj.MaxNumPeople = sdr["Trainer_MaxPeople"].ToString();

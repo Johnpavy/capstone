@@ -103,15 +103,6 @@ namespace WebApplication1 {
         protected global::System.Web.UI.WebControls.Label BioFailLbl;
         
         /// <summary>
-        /// TrainerTypesLbl control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label TrainerTypesLbl;
-        
-        /// <summary>
         /// specialty control.
         /// </summary>
         /// <remarks>
@@ -121,31 +112,40 @@ namespace WebApplication1 {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl specialty;
         
         /// <summary>
-        /// IndividualRatesTxtBox control.
+        /// TrainerTypesLbl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox IndividualRatesTxtBox;
+        protected global::System.Web.UI.WebControls.Label TrainerTypesLbl;
         
         /// <summary>
-        /// AdditionalPersonRateTxtBox control.
+        /// IndividualRatesLbl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox AdditionalPersonRateTxtBox;
+        protected global::System.Web.UI.WebControls.Label IndividualRatesLbl;
         
         /// <summary>
-        /// MaxNumberPeopleTxt control.
+        /// AdditionalPersonRateLbl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox MaxNumberPeopleTxt;
+        protected global::System.Web.UI.WebControls.Label AdditionalPersonRateLbl;
+        
+        /// <summary>
+        /// MaxNumberPeopleLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label MaxNumberPeopleLbl;
         
         /// <summary>
         /// FavLoc control.
@@ -193,22 +193,13 @@ namespace WebApplication1 {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl myModal3;
         
         /// <summary>
-        /// DropDownList1 control.
+        /// TrainerSpecialtyDrop control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
-        
-        /// <summary>
-        /// TextBox1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.DropDownList TrainerSpecialtyDrop;
         
         /// <summary>
         /// LinkButton1 control.

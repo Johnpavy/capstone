@@ -35,21 +35,21 @@ namespace WebApplication1
             {
                 Tobj.CopyTrainerObject((TrainerObject)Session["TrainerInfo"]);
                 BioTextBox.Text = Tobj.Bio;
-                specialty.InnerHtml = Tobj.Speciality;
+                TrainerTypesLbl.Text = Tobj.Speciality;
                 UserNameLbl.Text = Tobj.FirstName + " " + Tobj.LastName + " ";
 
                 //section to add client rates
                 if (Tobj.AdditionalPersonRate == null || Tobj.IndividualRate == null)
                 {
-                    IndividualRatesTxtBox.Text = "0.00";
-                    AdditionalPersonRateTxtBox.Text = "0.00";
-                    //MaxNumberPeopleTxt.Text = "0";
+                    IndividualRatesLbl.Text = "0.00";
+                    AdditionalPersonRateLbl.Text = "0.00";
+                    MaxNumberPeopleLbl.Text = "0";
                 }
                   else
                 {
-                    IndividualRatesTxtBox.Text = Tobj.IndividualRate;
-                    AdditionalPersonRateTxtBox.Text = Tobj.AdditionalPersonRate;
-                    MaxNumberPeopleTxt.Text = Tobj.MaxNumPeople;
+                    IndividualRatesLbl.Text = Tobj.IndividualRate;
+                    AdditionalPersonRateLbl.Text = Tobj.AdditionalPersonRate;
+                    MaxNumberPeopleLbl.Text = Tobj.MaxNumPeople;
                 }
 
                 //changes default profile pic to user uploaded one
@@ -117,6 +117,45 @@ namespace WebApplication1
 
         }
 
+        protected void ComfirmUpdateTrainType_Click(object sender, EventArgs e)
+        {
+            string trainType = TrainerSpecialtyDrop.Text;
+
+            if (trainType == "Select")
+            {
+                trainType = TrainerTypesLbl.Text;
+            }
+
+            Tobj.Speciality = trainType;
+            Session["TrainerInfo"] = Tobj;
+
+            SqlConnection db = new SqlConnection(SqlDataSource1.ConnectionString);
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = System.Data.CommandType.Text;
+            cmd.Connection = db;
+
+            cmd.CommandText = "UPDATE [MFNTrainerTable] SET Trainer_Specialty = @specialty WHERE Trainer_Id = @id";
+
+            cmd.Parameters.AddWithValue("@id", Tobj.TrainerId);
+            cmd.Parameters.AddWithValue("@specialty", trainType);
+
+            try
+            {
+                db.Open();
+                cmd.ExecuteNonQuery();
+            }
+            catch
+            {
+                //Response.Write(@"<script language='javascript'>alert('Error Removing from Database!');</script>");
+            }
+            finally
+            {
+                db.Close();
+            }
+
+            Response.Redirect("WebForm2.aspx");
+        }
+
         //depricated
         protected void BioTextBox_TextChanged(object sender, EventArgs e)
         {
@@ -133,18 +172,17 @@ namespace WebApplication1
 
             if (newIndividualRate == "" || !rgx.IsMatch(newIndividualRate))
             {
-                newIndividualRate = IndividualRatesTxtBox.Text;
-
+                newIndividualRate = IndividualRatesLbl.Text;
             }
            
             if(newAdditonalRate == "" || !rgx.IsMatch(newIndividualRate))
             {
-                newAdditonalRate = AdditionalPersonRateTxtBox.Text;
+                newAdditonalRate = AdditionalPersonRateLbl.Text;
             }
 
-            if (newAdditonalRate == "Select")
+            if (newMaxPeople == "Select")
             {
-                newMaxPeople = MaxNumberPeopleTxt.Text;
+                newMaxPeople = MaxNumberPeopleLbl.Text;
             }
             
             Tobj.IndividualRate = newIndividualRate;
