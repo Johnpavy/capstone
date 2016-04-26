@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="TrainerViewOnly.aspx.cs" Inherits="WebApplication1.TrainerViewOnly" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="TrainerViewOnly.aspx.cs" MaintainScrollPositionOnPostback="true" Inherits="WebApplication1.TrainerViewOnly" %>
 
 
 <!DOCTYPE html>

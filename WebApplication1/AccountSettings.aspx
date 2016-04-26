@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AccountSettings.aspx.cs" Inherits="WebApplication1.AccountSettings" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AccountSettings.aspx.cs" MaintainScrollPositionOnPostback="true" Inherits="WebApplication1.AccountSettings" %>
 
 <!DOCTYPE html>
 

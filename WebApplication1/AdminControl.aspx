@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AdminControl.aspx.cs" Inherits="WebApplication1.AdminControl" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AdminControl.aspx.cs" MaintainScrollPositionOnPostback="true" Inherits="WebApplication1.AdminControl" %>
 
 <!DOCTYPE html>
 
