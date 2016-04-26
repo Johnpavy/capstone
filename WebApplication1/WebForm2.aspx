@@ -189,6 +189,9 @@
                       <div class="panel-heading">
                         <h4 class="panel-title">
                           <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Training Types</a>
+                            <asp:Label ID="TrainerTypesLbl" runat="server" Text="Type"></asp:Label>
+                            <!--Trigger Modal with a button -->
+                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal3" style="float:right;">Edit Types</button><br />
                         </h4>
                       </div>
                       <div id="collapse2" class="panel-collapse collapse">
@@ -295,6 +298,29 @@
               </div>
             </div>
 
+            <!-- Training Types Modal -->
+            <div id="myModal3" class="modal fade" role="dialog" runat="server" >
+              <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Edit Training Types</h4>
+                  </div>
+                  <div class="modal-body">
+                    <asp:DropDownList ID="DropDownList1" runat="server">
+                          <asp:ListItem Value="Yoga">Yoga</asp:ListItem>
+                          <asp:ListItem Value="Physical Trainer">Physical Trainer</asp:ListItem>
+                        </asp:DropDownList>
+                      <asp:TextBox ID="TextBox1" runat="server" Width="100%" Height="500px"  BorderStyle="Solid" TextMode="MultiLine" MaxLength="4000"></asp:TextBox>
+                  </div>
+                  <div class="modal-footer">
+                    <asp:LinkButton ID="LinkButton1" cssclass="btn btn-default" runat ="server" onclick="ComfirmUpdateBioButton2_Click">Update</asp:LinkButton>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
 
             <!--Rates Modal -->
             <div id="myModal2" class="modal fade" role="dialog" runat="server" >
@@ -310,6 +336,7 @@
                       Individual Rate: <asp:TextBox ID="NewIndividualRateTxtBox" runat="server"></asp:TextBox> per hour <br />
                       Additional  Person Rate: <asp:TextBox ID="NewAdditionalPersonRateTxtBox" runat="server"></asp:TextBox> per hour <br />
                       Max Number of Additional People: <asp:DropDownList ID="MaxNumberPeopleDrop" runat="server">
+                          <asp:ListItem Value="Select">Select</asp:ListItem>
                           <asp:ListItem Value="0">0</asp:ListItem>
                           <asp:ListItem Value="1">1</asp:ListItem>
                           <asp:ListItem Value="2">2</asp:ListItem>

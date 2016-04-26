@@ -142,7 +142,7 @@ namespace WebApplication1
                 newAdditonalRate = AdditionalPersonRateTxtBox.Text;
             }
 
-            if (newAdditonalRate == "")
+            if (newAdditonalRate == "Select")
             {
                 newMaxPeople = MaxNumberPeopleTxt.Text;
             }
