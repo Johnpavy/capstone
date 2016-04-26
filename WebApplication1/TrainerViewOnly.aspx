@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="TrainerViewOnly.aspx.cs" Inherits="WebApplication1.TrainerViewOnly" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="TrainerViewOnly.aspx.cs" MaintainScrollPositionOnPostback="true" Inherits="WebApplication1.TrainerViewOnly" %>
 
 
 <!DOCTYPE html>
@@ -119,7 +119,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                           </button>
-                          <a class="NavBrand navbar-brand glyphicon glyphicon-home white" href="WebForm2.aspx">
+                          <a class="NavBrand navbar-brand glyphicon glyphicon-home white" href="ClientProfile.aspx">
                             </a>
                         </div>
 

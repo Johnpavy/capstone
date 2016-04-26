@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CheckOut.aspx.cs" Inherits="WebApplication1.CheckOut" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MaintainScrollPositionOnPostback="true" CodeBehind="CheckOut.aspx.cs" Inherits="WebApplication1.CheckOut" %>
 
 <!DOCTYPE html>
 

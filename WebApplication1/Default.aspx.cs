@@ -18,6 +18,7 @@ using System.Web.Security;
 
 namespace WebApplication1
 {
+
     public partial class WebForm4 : System.Web.UI.Page
     {
         // These values store true or false strings from the database that indicate if the user has clicked on the verification email sent to them
@@ -28,7 +29,7 @@ namespace WebApplication1
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+    
         }
         // trainer login box checked, login clicked
         protected void login_Click(object sender, EventArgs e)
@@ -135,6 +136,7 @@ namespace WebApplication1
                             Tobj.Bio = sdr["Trainer_Bio"].ToString();
                             Tobj.IndividualRate = sdr["Trainer_IndividualRate"].ToString();
                             Tobj.AdditionalPersonRate = sdr["Trainer_AdditionalPersonRate"].ToString();
+                            Tobj.MaxNumPeople = sdr["Trainer_MaxPeople"].ToString();
 
                         }
 

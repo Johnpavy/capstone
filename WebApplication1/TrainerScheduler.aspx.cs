@@ -201,9 +201,8 @@ namespace WebApplication1
                 SummaryTextBox.Text = "";
                 while (sdr.Read())
                 {
-                    SummaryTextBox.Text = "Time is in units of Military Time.\n";
-                    SummaryTextBox.Text += "Start Time: " + sdr["Calendar_StartTime"].ToString() + "\n";
-                    SummaryTextBox.Text += "End Time: " + sdr["Calendar_EndTime"].ToString() + "\n";
+                    SummaryTextBox.Text += "Start Time: " + convertMilitartTimetoAMPM( sdr["Calendar_StartTime"].ToString() )+ "\n";
+                    SummaryTextBox.Text += "End Time: " + convertMilitartTimetoAMPM(sdr["Calendar_EndTime"].ToString() )+ "\n";
                     SummaryTextBox.Text += "Total Number of People: " + sdr["Calendar_NumberOfClients"].ToString() + "\n";
                     SummaryTextBox.Text += "Address: " + sdr["Calendar_Location"].ToString() + "\n";
                 }
@@ -1095,6 +1094,8 @@ namespace WebApplication1
 
         protected void ConfirmAppointment_Click(object sender, EventArgs e)
         {
+            
+
             ConfirmAppointment.Enabled = false;
             SqlConnection db3 = new SqlConnection(SqlDataSource3.ConnectionString);
             SqlCommand cmd3 = new SqlCommand();
@@ -1155,9 +1156,12 @@ namespace WebApplication1
                 db.Close();
             }
 
+        }
 
-
-
+        private string convertMilitartTimetoAMPM(string time)
+        {
+            string newTime = DateTime.Parse(time).ToString(@"hh\:mm\:ss tt");
+            return newTime;
         }
     }
 }
