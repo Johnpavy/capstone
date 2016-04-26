@@ -203,11 +203,11 @@
                       </div>
                       <div id="collapse3" class="panel-collapse collapse">
                         <div class="panel-body">
-                            For an idividual session <asp:TextBox ID="IndividualRatesTxtBox" runat="server" ReadOnly="true" Width="10%"></asp:TextBox> per hour.
+                            For an idividual session $<asp:TextBox ID="IndividualRatesTxtBox" runat="server" ReadOnly="true" Width="5%"></asp:TextBox> per hour.
                                                         <!--Trigger Modal with a button -->
                             <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal2" style="float:right;">Edit Rates</button><br />
-                            For each additional person <asp:TextBox ID="AdditionalPersonRateTxtBox" runat="server" ReadOnly="true" Width="10%"></asp:TextBox> per hour.<br />
-                            Max additional number of people <asp:TextBox ID="MaxNumberPeopleTxt" runat="server" ReadOnly="true" Width="10%"></asp:TextBox><br />
+                            For each additional person $<asp:TextBox ID="AdditionalPersonRateTxtBox" runat="server" ReadOnly="true" Width="5%"></asp:TextBox> per hour.<br />
+                            Max additional number of people <asp:TextBox ID="MaxNumberPeopleTxt" runat="server" ReadOnly="true" Width="5%"></asp:TextBox><br />
                         </div>
                       </div>
                     </div>
