@@ -39,8 +39,10 @@
     .FitnessNetworkImage
     {
         width: 100%;
-        max-height: 584px;
-        max-width: 1181px;
+        /*max-height: 584px; <- Original Size
+        max-width: 1181px; <- Original Size*/
+        max-height: 438px; /*Shrunk by 25%*/
+        max-width: 886px;
         display: block;
         margin-left: auto;
         margin-right: auto;
@@ -148,7 +150,7 @@
     .Username
     {
         padding-bottom: 5px;
-        width: 70%;
+        width: 23%;
         max-width: 960px;
         margin-left: auto;
     }
@@ -156,7 +158,7 @@
     .Password
     {
         padding-bottom: 5px;
-        width: 70%;
+        width: 23%;
         max-width: 960px;
         margin-left: auto;
     }
