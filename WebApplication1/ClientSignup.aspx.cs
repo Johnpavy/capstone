@@ -77,6 +77,13 @@ namespace WebApplication1
             }
             else
             {
+                if(zipInt < 78401 || zipInt > 78480)
+                {
+                    String message;
+                    message = "The Mobile Fitness Network is currently available in Corpus Christi, TX but will be expanding soon! You can still complete signup";
+
+                    ClientScript.RegisterStartupScript(GetType(), "alert", "alert('" + message + "');", true);
+                }
                 adrs.Address = clientAddress;
                 adrs.GeoCode();
                 // retrieve session id variable
