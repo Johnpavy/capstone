@@ -137,7 +137,7 @@
                                 </ul>
                           <ul class="nav navbar-nav navbar-right">
 
-                              <li><asp:LinkButton ID = "ManageSession" Class="LoginButton2 btn-info btn-block" runat="server" onclick="BookTrainer_Click">Book This Trainer</asp:LinkButton></li>
+                              <li><asp:LinkButton ID = "ManageSession" Class="LoginButton2 btn-info btn-block" runat="server" href="ClientScheduler.aspx" >Book This Trainer</asp:LinkButton></li>
                               <!--<li><button type="button" runat="server" class="BookButton btn btn-success" onclick="BookTrainer_Click">Manage Your Schedule</button></li>-->
                               <li class="dropdown">
                               <a href="#" class="NavDropdownMenu dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menu <span class="caret"></span></a>

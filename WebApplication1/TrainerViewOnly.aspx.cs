@@ -90,9 +90,11 @@ namespace WebApplication1
                 ProfilePic.Attributes["src"] = Tobj.ImagePath;
             }
         }
+        /*
         protected void BookTrainer_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("ClientScheduler.aspx");
         }
+        */
     }
 }
