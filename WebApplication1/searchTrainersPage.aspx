@@ -19,12 +19,12 @@
         <form id="form1" runat="server">
             <div class="col-lg-12 well">
                 <div class="form-group">
-                <h1 class="well center-block">Trainers in your Area</h1>
-                <div id="TrainerResults" runat="server" class="row centered-form">
-                    </div>
+                <h1 class="well center-block">Trainers in your area</h1>
+                    <div id="TrainerResults" runat="server" class="centered-form" width="223px">
                     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" SelectCommand="SELECT * FROM [MFNTrainerTable]"></asp:SqlDataSource>
                     <asp:Label ID="ErrorLbl" runat="server" ForeColor="Red" Text="Label" Visible="False"></asp:Label>
                     </div>
+                </div>
             </div>
         </form>
     </div>

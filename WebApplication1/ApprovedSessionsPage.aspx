@@ -19,7 +19,7 @@
     <form id="form1" runat="server">
         <div class="col-lg-12 well">
             <div class="form-group">
-                <h1 class="well center-block">Test Approved Session</h1>
+                <h1 class="well center-block">Approved Sessions</h1>
         
             <div id="SessionResults" runat="server" class="row centered-form">
             </div>

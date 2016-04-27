@@ -58,8 +58,8 @@
                <br />
                <asp:Label ID="Label7" runat="server" class="form-group" Text="Currency"></asp:Label> <asp:Label ID="Label8" runat="server" class="form-group" Text="Total"></asp:Label>
             <br />
+            <asp:Button ID="Button1" Class="btn btn-lg btn-inf center-block" runat="server" OnClick="Button1_Click" Text="Go Home" />
            </div>
-            <asp:LinkButton ID="ReturnToProfile" runat="server" href="ClientProfile.aspx">Back To Your Profile</asp:LinkButton>
             <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" SelectCommand="SELECT * FROM [MFNCalendarTable]"></asp:SqlDataSource>
         </form>
     </div>
