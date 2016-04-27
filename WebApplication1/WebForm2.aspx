@@ -289,7 +289,7 @@
                   <div class="modal-body">
                     <p>Enter your Biography:<br />
                          (2000 character limit)</p>
-                      <asp:TextBox ID="TempTextBox2" runat="server" Width="100%" Height="500px"  BorderStyle="Solid" TextMode="MultiLine" MaxLength="4000"></asp:TextBox>
+                      <asp:TextBox ID="TempTextBox2" runat="server" Width="100%" Height="300px"  BorderStyle="Solid" TextMode="MultiLine" MaxLength="4000"></asp:TextBox>
                   </div>
                   <div class="modal-footer">
                     <asp:LinkButton ID="TempUpdate" cssclass="btn btn-default" runat ="server" onclick="ComfirmUpdateBioButton2_Click">Update</asp:LinkButton>
@@ -313,6 +313,7 @@
                           <asp:ListItem Value="Select">Select</asp:ListItem>
                           <asp:ListItem Value="Yoga">Yoga</asp:ListItem>
                           <asp:ListItem Value="Personal Training">Personal Training</asp:ListItem>
+                          <asp:ListItem Value="Personal Traning and Yoga">Both</asp:ListItem>
                         </asp:DropDownList>
                   </div>
                   <div class="modal-footer">

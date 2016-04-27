@@ -155,7 +155,7 @@ namespace WebApplication1
                 Session["city"] = city.Text;
                 Session["postal_code"] = postal_code.Text;
                 Session["card_type"] = card_type.Text;
-                //Session["card_number"] = card_number.Text;
+                Session["card_number"] = card_number.Text;
                 Session["currency"] = "USD";
                 Session["total"] = SampleTotal;
 
