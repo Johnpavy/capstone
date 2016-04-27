@@ -229,7 +229,6 @@ namespace WebApplication1
                 ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + myStringVariable + "');", true);
             }
 
-            Response.Redirect(Request.RawUrl);
         }
 
     }
