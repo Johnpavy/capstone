@@ -26,6 +26,7 @@ namespace WebApplication1
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            Tobj = (TrainerObject)Session["TrainerInfo"];
             //needs to be added to every page in the page load to prevent back on logout.
             Response.Cache.SetCacheability(HttpCacheability.NoCache);
             Response.Cache.SetExpires(DateTime.UtcNow.AddHours(-1));
@@ -41,7 +42,7 @@ namespace WebApplication1
             cmd.Connection = db;
 
             cmd.CommandText = "Select * FROM [MFNTrainerTable] WHERE Trainer_Id = @id";
-            cmd.Parameters.AddWithValue("@id", 86);
+            cmd.Parameters.AddWithValue("@id", Tobj.TrainerId);
             db.Open();
 
             SqlDataReader sdr = cmd.ExecuteReader();

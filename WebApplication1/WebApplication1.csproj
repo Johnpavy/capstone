@@ -81,6 +81,7 @@
     <Content Include="AccountSettings.aspx" />
     <Content Include="AdminLogin.aspx" />
     <Content Include="AdminControl.aspx" />
+    <Content Include="ApprovedSessionsPage.aspx" />
     <Content Include="CheckOut.aspx" />
     <Content Include="ClientConfirmationPage.aspx" />
     <Content Include="ClientSignup.aspx" />
@@ -149,6 +150,13 @@
       <DependentUpon>AdminControl.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminObject.cs" />
+    <Compile Include="ApprovedSessionsPage.aspx.cs">
+      <DependentUpon>ApprovedSessionsPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ApprovedSessionsPage.aspx.designer.cs">
+      <DependentUpon>ApprovedSessionsPage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CheckOut.aspx.cs">
       <DependentUpon>CheckOut.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

@@ -35,5 +35,10 @@ namespace WebApplication1
             get { return numberAttending; }
             set { numberAttending = value; }
         }
+
+        new public string ToString()
+        {
+            return this.IndividualCost + "|" + this.AdditionalPersonCost + "|" + this.NumberAttending;
+        }
     }
 }
