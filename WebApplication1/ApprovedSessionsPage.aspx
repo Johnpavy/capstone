@@ -12,7 +12,7 @@
         Test Approved Session
         <div id="SessionResults" runat="server" class="row centered-form">
         </div>
-        <asp:Label ID="ErrorLbl" runat="server" Text="Label" Visible ="false"></asp:Label>
+        <asp:Label ID="ErrorLbl" runat="server" Text="Label" Visible ="False"></asp:Label>
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" SelectCommand="SELECT * FROM [MFNCalendarTable]"></asp:SqlDataSource>
         <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" SelectCommand="SELECT * FROM [MFNTrainerTable]"></asp:SqlDataSource>
     </div>

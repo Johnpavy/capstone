@@ -63,7 +63,7 @@ namespace WebApplication1
                 catch
                 {
                     ErrorLbl.Visible = true;
-                    ErrorLbl.Text = "Error while reading from Database";
+                    ErrorLbl.Text = "Error while reading from Database1";
                 }
             }
         }
@@ -95,14 +95,14 @@ namespace WebApplication1
                     fName = sdr["Trainer_FirstName"].ToString();
                     lName = sdr["Trainer_LastName"].ToString();
                     TranObj.IndividualCost = sdr["Trainer_IndividualRate"].ToString();
-                    TranObj.AdditionalPersonCost = sdr["Trainer_AdditionalPersontRate"].ToString();
+                    TranObj.AdditionalPersonCost = sdr["Trainer_AdditionalPersonRate"].ToString();
                 }
 
             }
             catch
             {
                 ErrorLbl.Visible = true;
-                ErrorLbl.Text = "Error while reading from Database";
+                ErrorLbl.Text = "Error while reading from Database2";
             }
 
 
