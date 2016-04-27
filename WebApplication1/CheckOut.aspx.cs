@@ -11,22 +11,35 @@ namespace WebApplication1
 {
     public partial class CheckOut : System.Web.UI.Page
     {
-        Transaction TranObj = new Transaction();
+        TransactionObject TranObj = new TransactionObject();
         TrainerObject Tobj = new TrainerObject();
+        String calendarID;
+        String transactionString;
+        string[] transactionInfo = new string[3];
+        string SampleTotal;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             HttpContext.Current.Response.AddHeader("Cache-Control", "no-cache, no-store, must-revalidate");
             HttpContext.Current.Response.AddHeader("Pragma", "no-cache");
             HttpContext.Current.Response.AddHeader("Expires", "0");
-            
-            if (Session["TrainerInfo"] == null)
+
+            calendarID = !string.IsNullOrEmpty(Request.QueryString["CalendarID"]) ? Request.QueryString["CalendarID"] : Guid.Empty.ToString();
+            transactionString = !string.IsNullOrEmpty(Request.QueryString["SessionTransactionInfo"]) ? Request.QueryString["SessionTransactionInfo"] : Guid.Empty.ToString();
+
+            Session["CalendarID"] = calendarID;
+
+            if (calendarID == null || calendarID == "" || transactionString == null || transactionString == "")
             {
                 //Forces a redirect to splash page if this page is loaded without a session state.
                 Response.Redirect("Default.aspx");
             }
             else
             {
+                transactionInfo = transactionString.Split('|');
+                SampleTotal = calcPriceOfSession(transactionInfo);
+
+                /*
                 Tobj.CopyTrainerObject((TrainerObject)Session["TrainerInfo"]);
 
                 //section to add client rates
@@ -40,14 +53,18 @@ namespace WebApplication1
                     // IndividualRatesTxtBox.Text = Tobj.IndividualRate;
                     // AdditionalPersonRateTxtBox.Text = Tobj.AdditionalPersonRate;
                 }
+                */
             }
         }
 
         protected void Button1_Click(object sender, EventArgs e)
         {
             //TranObj.IndividaulPersonCost;
+
+
+            //Calc Price Method
+
             
-            string SampleTotal = "50.00";
             // ### Api Context
             // Pass in a `APIContext` object to authenticate 
             // the call and to send a unique request id 
@@ -173,6 +190,26 @@ namespace WebApplication1
             #endregion
 
             // For more information, please visit [PayPal Developer REST API Reference](https://developer.paypal.com/docs/api/).
+        }
+
+        string calcPriceOfSession(string[] info)
+        {
+            double standardRate = Double.Parse(info[0]);
+            double additonalPersonRate = Double.Parse(info[1]);
+            int numberOfPeople = Int32.Parse(info[2]);
+
+            baseRateLbl.Text = "Base Rate: $" + standardRate;
+            AdditionalRateLbl.Text = "For Addition Persons: $" + additonalPersonRate;
+            NumberAttendingLbl.Text = "Number of People Attending: "+ numberOfPeople.ToString();
+
+
+
+            double finalTotal = standardRate + (additonalPersonRate * (numberOfPeople - 1));
+
+            TotalLbl.Text = "Final Total: $" + finalTotal;
+
+            return finalTotal.ToString();
+
         }
 
     }

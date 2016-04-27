@@ -17,7 +17,16 @@
 <body>
     
     <div class="container">
+
         <h1 class="well">Checkout Page</h1>
+
+           <div class="col-lg-12 well">
+                <h3 class="well">Transaction Details</h3>
+               <asp:Label ID="baseRateLbl" runat="server" Text=""></asp:Label><br />
+               <asp:Label ID="AdditionalRateLbl" runat="server" Text=""></asp:Label><br />
+               <asp:Label ID="NumberAttendingLbl" runat="server" Text=""></asp:Label><br />
+               <asp:Label ID="TotalLbl" runat="server" Text=""></asp:Label>
+            </div>
  
             <div class="col-lg-12 well">
                 <h3 class="well">Pay With PayPal</h3>

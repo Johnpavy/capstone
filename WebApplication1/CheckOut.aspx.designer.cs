@@ -13,6 +13,42 @@ namespace WebApplication1 {
     public partial class CheckOut {
         
         /// <summary>
+        /// baseRateLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label baseRateLbl;
+        
+        /// <summary>
+        /// AdditionalRateLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label AdditionalRateLbl;
+        
+        /// <summary>
+        /// NumberAttendingLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label NumberAttendingLbl;
+        
+        /// <summary>
+        /// TotalLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label TotalLbl;
+        
+        /// <summary>
         /// form1 control.
         /// </summary>
         /// <remarks>

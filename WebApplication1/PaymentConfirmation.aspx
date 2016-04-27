@@ -59,7 +59,7 @@
                <asp:Label ID="Label7" runat="server" class="form-group" Text="Currency"></asp:Label> <asp:Label ID="Label8" runat="server" class="form-group" Text="Total"></asp:Label>
             <br />
            </div>
-
+            <asp:LinkButton ID="ReturnToProfile" runat="server" href="ClientProfile.aspx">Back To Your Profile</asp:LinkButton>
         </form>
     </div>
 </body>
