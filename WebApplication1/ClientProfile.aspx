@@ -189,7 +189,12 @@
                         </h4>
                       </div>
                       <div id="collapse2" class="panel-collapse collapse">
-                        <div class="panel-body" id ="preferences" runat="server">Test Text.</div>
+                        <div class="panel-body" id ="preferences" runat="server">
+                             <asp:TextBox ID="PrefTextBox" runat="server" width ="75%" Height="250px" ReadOnly="true" BorderStyle="None" TextMode="MultiLine" MaxLength="4000"></asp:TextBox>
+                            <!-- Trigger the modal with a button -->
+                          <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal" style="float:right;">Edit Training Prefrences</button>
+                            <asp:Label ID="PrefFailLbl" runat="server" Text="Label" Visible="False"></asp:Label>
+                        </div>
                       </div>
                     </div>
                     <div class="panel panel-default">
@@ -199,7 +204,12 @@
                         </h4>
                       </div>
                       <div id="collapse3" class="panel-collapse collapse">
-                        <div class="panel-body" id="equipment" runat="server">Test Text.</div>
+                        <div class="panel-body" id="equipment" runat="server">
+                            <asp:TextBox ID="AvaEquipTxt" runat="server" width ="75%" Height="250px" ReadOnly="true" BorderStyle="None" TextMode="MultiLine" MaxLength="4000"></asp:TextBox>
+                            <!-- Trigger the modal with a button -->
+                          <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal2" style="float:right;">Edit Available Equipment</button>
+                            <asp:Label ID="AvEqFailLbl" runat="server" Text="Label" Visible="False"></asp:Label>
+                        </div>
                       </div>
                     </div>
                     <div class="panel panel-default">
@@ -224,26 +234,48 @@
                 <p class="FooterContent">TEST FOOTER</p>
             </footer>
 
-            <!-- Bio Modal -->
+            <!-- Trainer Prefrences Modal -->
             <div id="myModal" class="modal fade" role="dialog" runat="server" >
               <div class="modal-dialog">
                 <!-- Modal content-->
                 <div class="modal-content">
                   <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Edit Bio </h4>
+                    <h4 class="modal-title">Edit Trainer Prefrences </h4>
                   </div>
                   <div class="modal-body">
-                    <p>Enter your Biography:</p>
-                      <asp:TextBox ID="TempTextBox2" runat="server" Width="100%" Height="500px"  BorderStyle="Solid" TextMode="MultiLine"></asp:TextBox>
+                    <p>Enter your Trainer Prefrences:<br />
+                         (2000 character limit)</p>
+                      <asp:TextBox ID="TrainerPrefTxt" runat="server" Width="100%" Height="250px"  BorderStyle="Solid" TextMode="MultiLine" MaxLength="4000"></asp:TextBox>
                   </div>
                   <div class="modal-footer">
-                   
+                    <asp:LinkButton ID="TempUpdate" cssclass="btn btn-default" runat ="server" onclick="ComfirmUpdateTrainerPrefButton2_Click">Update</asp:LinkButton>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                   </div>
                 </div>
               </div>
             </div>
+
+            <!-- Available Equipment Modal -->
+            <div id="myModal2" class="modal fade" role="dialog" runat="server" >
+              <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Edit Available Equipment </h4>
+                  </div>
+                  <div class="modal-body">
+                    <p>Enter your Available Equipment:<br />
+                         (2000 character limit)</p>
+                      <asp:TextBox ID="AvailableEquipTxt" runat="server" Width="100%" Height="250px"  BorderStyle="Solid" TextMode="MultiLine" MaxLength="4000"></asp:TextBox>
+                  </div>
+                  <div class="modal-footer">
+                    <asp:LinkButton ID="LinkButton1" cssclass="btn btn-default" runat ="server" onclick="ComfirmUpdateAvaEquipButton2_Click">Update</asp:LinkButton>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <!--UploadPicture Modal -->

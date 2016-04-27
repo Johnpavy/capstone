@@ -4,6 +4,14 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data.Sql;
+using System.Data.SqlClient;
+using System.Configuration;
+using System.Data;
+using System.Net.Mail;
+using System.Net;
+using System.Text.RegularExpressions;
+using System.IO;
 
 namespace WebApplication1
 {
@@ -27,9 +35,8 @@ namespace WebApplication1
             else
             {
                 Uobj.CopyUserObject((UserObject)Session["UserInfo"]);
-
-                preferences.InnerHtml = Uobj.TrainingPref;
-                equipment.InnerHtml = Uobj.Equipment;
+                PrefTextBox.Text = Uobj.TrainingPref;
+                AvaEquipTxt.Text = Uobj.Equipment;
                 UserNameLbl.Text = Uobj.FirstName + " " + Uobj.LastName + " ";
 
                 //changes default profile pic to user uploaded one
@@ -52,6 +59,94 @@ namespace WebApplication1
             {
                 Session["Selection"] = DropDownList1.SelectedValue;
                 Response.Redirect("searchTrainersPage.aspx");
+            }
+
+        }
+
+        protected void ComfirmUpdateTrainerPrefButton2_Click(object sender, EventArgs e)
+        {
+            string newTrainPref = TrainerPrefTxt.Text;
+
+            if (newTrainPref.Length < 2000)
+            {
+                Uobj.TrainingPref = newTrainPref;
+                Session["UserInfo"] = Uobj;
+
+                SqlConnection db = new SqlConnection(SqlDataSource1.ConnectionString);
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.Connection = db;
+
+                cmd.CommandText = "UPDATE [MFNUserTable] SET User_TrainingPref = @trainPref where User_Id = @id";
+
+                cmd.Parameters.AddWithValue("@id", Uobj.UserId);
+                cmd.Parameters.AddWithValue("@trainPref", newTrainPref);
+
+                try
+                {
+                    db.Open();
+                    cmd.ExecuteNonQuery();
+                }
+                catch
+                {
+                    PrefFailLbl.Text = "We failed horribly!";
+                    PrefFailLbl.Visible = true;
+                }
+                finally
+                {
+                    db.Close();
+                }
+
+                Response.Redirect(Request.RawUrl);
+
+            }
+            else
+            {
+                //do nothing
+            }
+
+        }
+
+        protected void ComfirmUpdateAvaEquipButton2_Click(object sender, EventArgs e)
+        {
+            string newAvaEquip = AvailableEquipTxt.Text;
+
+            if (newAvaEquip.Length < 2000)
+            {
+                Uobj.Equipment = newAvaEquip;
+                Session["UserInfo"] = Uobj;
+
+                SqlConnection db = new SqlConnection(SqlDataSource1.ConnectionString);
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.Connection = db;
+
+                cmd.CommandText = "UPDATE [MFNUserTable] SET User_Equipment = @equipment where User_Id = @id";
+
+                cmd.Parameters.AddWithValue("@id", Uobj.UserId);
+                cmd.Parameters.AddWithValue("@equipment", newAvaEquip);
+
+                try
+                {
+                    db.Open();
+                    cmd.ExecuteNonQuery();
+                }
+                catch
+                {
+                    PrefFailLbl.Text = "We failed horribly!";
+                    PrefFailLbl.Visible = true;
+                }
+                finally
+                {
+                    db.Close();
+                }
+
+                Response.Redirect(Request.RawUrl);
+
+            }
+            else
+            {
+                //do nothing
             }
 
         }

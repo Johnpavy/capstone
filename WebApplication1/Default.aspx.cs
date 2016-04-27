@@ -252,6 +252,8 @@ namespace WebApplication1
                             Uobj.FirstName = sdr["User_FirstName"].ToString();
                             Uobj.LastName = sdr["User_LastName"].ToString();
                             Uobj.ImagePath = sdr["User_Image"].ToString();
+                            Uobj.Equipment = sdr["User_Equipment"].ToString();
+                            Uobj.TrainingPref = sdr["User_TrainingPref"].ToString();
                         }
 
                         Session["UserInfo"] = Uobj;

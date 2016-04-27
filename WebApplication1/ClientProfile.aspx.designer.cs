@@ -103,6 +103,24 @@ namespace WebApplication1 {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl preferences;
         
         /// <summary>
+        /// PrefTextBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox PrefTextBox;
+        
+        /// <summary>
+        /// PrefFailLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label PrefFailLbl;
+        
+        /// <summary>
         /// equipment control.
         /// </summary>
         /// <remarks>
@@ -110,6 +128,24 @@ namespace WebApplication1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl equipment;
+        
+        /// <summary>
+        /// AvaEquipTxt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox AvaEquipTxt;
+        
+        /// <summary>
+        /// AvEqFailLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label AvEqFailLbl;
         
         /// <summary>
         /// myModal control.
@@ -121,13 +157,49 @@ namespace WebApplication1 {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl myModal;
         
         /// <summary>
-        /// TempTextBox2 control.
+        /// TrainerPrefTxt control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TempTextBox2;
+        protected global::System.Web.UI.WebControls.TextBox TrainerPrefTxt;
+        
+        /// <summary>
+        /// TempUpdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton TempUpdate;
+        
+        /// <summary>
+        /// myModal2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl myModal2;
+        
+        /// <summary>
+        /// AvailableEquipTxt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox AvailableEquipTxt;
+        
+        /// <summary>
+        /// LinkButton1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LinkButton1;
         
         /// <summary>
         /// PicUploadModal control.
