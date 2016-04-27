@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -33,9 +34,31 @@ namespace WebApplication1
             Label7.Text = field7;
             Label8.Text = field8;
 
+            int calendarID = Int32.Parse(Session["CalendarID"].ToString());
 
             //add Section that marks the database
+            SqlConnection db = new SqlConnection(SqlDataSource1.ConnectionString);
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = System.Data.CommandType.Text;
+            cmd.Connection = db;
 
+            cmd.CommandText = "UPDATE [MFNCalendarTable] SET Calendar_PaidByClient = @paid  WHERE Calendar_Id = @id";
+            cmd.Parameters.AddWithValue("@paid", true);
+            cmd.Parameters.AddWithValue("@id", calendarID);
+
+            try
+            {
+                db.Open();
+                cmd.ExecuteNonQuery();
+            }
+            catch
+            {
+                Response.Write(@"<script language='javascript'>alert('Error Loading Events');</script>");
+            }
+            finally
+            {
+                db.Close();
+            }
 
         }
 

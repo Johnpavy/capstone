@@ -60,6 +60,7 @@
             <br />
            </div>
             <asp:LinkButton ID="ReturnToProfile" runat="server" href="ClientProfile.aspx">Back To Your Profile</asp:LinkButton>
+            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" SelectCommand="SELECT * FROM [MFNCalendarTable]"></asp:SqlDataSource>
         </form>
     </div>
 </body>
