@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
+  <title>View Trainer Profile</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -180,7 +180,6 @@
                         <div class="panel-body" id ="bio" runat="server">
                             <asp:TextBox ID="BioTextBox" runat="server" width ="75%" Height="300px" ReadOnly="true" BorderStyle="None" TextMode="MultiLine" MaxLength="4000"></asp:TextBox>
                             <!-- Trigger the modal with a button -->
-                          <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal" style="float:right;">Edit Biography</button>
                             <asp:Label ID="BioFailLbl" runat="server" Text="Label" Visible="False"></asp:Label>
                         </div>
                       </div>
@@ -203,10 +202,10 @@
                       </div>
                       <div id="collapse3" class="panel-collapse collapse">
                         <div class="panel-body">
-                            For an idividual session <asp:TextBox ID="IndividualRatesTxtBox" runat="server" ReadOnly="true" Width="15%"></asp:TextBox> per hour.
+                            For an idividual session $<asp:Label ID="IndividualRatesLbl" runat="server" Text=""></asp:Label> per hour.<br />
                                                         <!--Trigger Modal with a button -->
-                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal2" style="float:right;">Edit Rates</button><br />
-                            For each additional person <asp:TextBox ID="AdditionalPersonRateTxtBox" runat="server" ReadOnly="true" Width="15%"></asp:TextBox> per hour.<br />
+                            For each additional person $<asp:Label ID="AdditionalPersonRateLbl" runat="server" Text=""></asp:Label> per hour.<br />
+                            Max additional number of people: <asp:Label ID="MaxNumberPeopleLbl" runat="server" Text=""></asp:Label><br />
                         </div>
                       </div>
                     </div>
@@ -271,51 +270,6 @@
             <footer class="FooterContainer col-xs-12 col-sm-12 text-center">
                 <p class="FooterContent">TEST FOOTER</p>
             </footer>
-
-            <!-- Bio Modal -->
-            <div id="myModal" class="modal fade" role="dialog" runat="server" >
-              <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Edit Bio </h4>
-                  </div>
-                  <div class="modal-body">
-                    <p>Enter your Biography:<br />
-                         (2000 character limit)</p>
-                      <asp:TextBox ID="TempTextBox2" runat="server" Width="100%" Height="500px"  BorderStyle="Solid" TextMode="MultiLine" MaxLength="4000"></asp:TextBox>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-
-            <!--Rates Modal -->
-            <div id="myModal2" class="modal fade" role="dialog" runat="server" >
-              <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Edit Rates </h4>
-                  </div>
-                  <div class="modal-body">
-                    <p>Enter your New Rates:</p>
-                      Individual Rate: <asp:TextBox ID="NewIndividualRateTxtBox" runat="server"></asp:TextBox> per hour <br />
-                      Additional  Person Rate: <asp:TextBox ID="NewAdditionalPersonRateTxtBox" runat="server"></asp:TextBox> per hour
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="ComfirmUpdateRatesButton_Click">Close</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            </div>
 
             </ContentTemplate>
             </asp:UpdatePanel>

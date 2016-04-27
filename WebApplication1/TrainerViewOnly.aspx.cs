@@ -46,6 +46,7 @@ namespace WebApplication1
                         Tobj.Bio = sdr["Trainer_Bio"].ToString();
                         Tobj.IndividualRate = sdr["Trainer_IndividualRate"].ToString();
                         Tobj.AdditionalPersonRate = sdr["Trainer_AdditionalPersonRate"].ToString();
+                        Tobj.MaxNumPeople = sdr["Trainer_MaxPeople"].ToString();
                         Tobj.Speciality = sdr["Trainer_Specialty"].ToString();
 
                     }
@@ -72,13 +73,15 @@ namespace WebApplication1
             //section to add client rates
             if (Tobj.AdditionalPersonRate == null || Tobj.IndividualRate == null)
             {
-                IndividualRatesTxtBox.Text = "0.00";
-                AdditionalPersonRateTxtBox.Text = "0.00";
+                IndividualRatesLbl.Text = "0.00";
+                AdditionalPersonRateLbl.Text = "0.00";
+                MaxNumberPeopleLbl.Text = "0";
             }
             else
             {
-                IndividualRatesTxtBox.Text = Tobj.IndividualRate;
-                AdditionalPersonRateTxtBox.Text = Tobj.AdditionalPersonRate;
+                IndividualRatesLbl.Text = Tobj.IndividualRate;
+                AdditionalPersonRateLbl.Text = Tobj.AdditionalPersonRate;
+                MaxNumberPeopleLbl.Text = Tobj.MaxNumPeople;
             }
 
             //changes default profile pic to user uploaded one
