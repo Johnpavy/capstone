@@ -56,7 +56,7 @@
             -->
             <label>Total: </label>
                <br />
-               <asp:Label ID="Label7" runat="server" class="form-group" Text="Currency"></asp:Label> <asp:Label ID="Label8" runat="server" class="form-group" Text="Total"></asp:Label>
+               <asp:Label ID="Label7" runat="server" class="form-group" Text="Currency"></asp:Label> &nbsp;$<asp:Label ID="Label8" runat="server" class="form-group" Text="Total"></asp:Label>
             <br />
             <asp:Button ID="Button1" Class="btn btn-lg btn-inf center-block" runat="server" OnClick="Button1_Click" Text="Go Home" />
            </div>
