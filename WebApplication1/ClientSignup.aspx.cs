@@ -77,13 +77,13 @@ namespace WebApplication1
             }
             else
             {
-                if(zipInt < 78401 || zipInt > 78480)
+              /*  if(zipInt < 78401 || zipInt > 78480)
                 {
                     String message;
                     message = "The Mobile Fitness Network is currently available in Corpus Christi, TX but will be expanding soon! You can still complete signup";
 
                     ClientScript.RegisterStartupScript(GetType(), "alert", "alert('" + message + "');", true);
-                }
+                }*/
                 adrs.Address = clientAddress;
                 adrs.GeoCode();
                 // retrieve session id variable
@@ -92,6 +92,7 @@ namespace WebApplication1
                 String dBLng = adrs.Longitude;
                 // add info to session object
                 Uobj.CopyUserObject((UserObject)Session["UserInfo"]);
+               // int userID = Uobj.UserId;
                 Uobj.TrainingPref = interests;
                 Uobj.Equipment = equipment;
                 Session["UserInfo"] = Uobj;

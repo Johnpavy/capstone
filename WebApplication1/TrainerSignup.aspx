@@ -105,7 +105,6 @@
                                 <asp:ListItem Text="Select Specialty" Value="0"></asp:ListItem>
                                 <asp:ListItem Text="Personal Training" Value="Personal Training"></asp:ListItem>
                                 <asp:ListItem Text="Yoga" Value="Yoga"></asp:ListItem>
-                                <asp:ListItem Text="Both" Value="Personal Traning and Yoga"></asp:ListItem>
                             </asp:DropDownList>
                         </div>
 					</div>	
