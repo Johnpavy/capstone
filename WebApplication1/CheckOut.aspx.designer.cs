@@ -22,6 +22,15 @@ namespace WebApplication1 {
         protected global::System.Web.UI.WebControls.Label baseRateLbl;
         
         /// <summary>
+        /// NumberAttendingLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label NumberAttendingLbl;
+        
+        /// <summary>
         /// AdditionalRateLbl control.
         /// </summary>
         /// <remarks>
@@ -31,13 +40,22 @@ namespace WebApplication1 {
         protected global::System.Web.UI.WebControls.Label AdditionalRateLbl;
         
         /// <summary>
-        /// NumberAttendingLbl control.
+        /// SubTotalLbl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label NumberAttendingLbl;
+        protected global::System.Web.UI.WebControls.Label SubTotalLbl;
+        
+        /// <summary>
+        /// ServiceCostLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label ServiceCostLbl;
         
         /// <summary>
         /// TotalLbl control.

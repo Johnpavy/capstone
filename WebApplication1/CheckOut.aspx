@@ -23,8 +23,10 @@
            <div class="col-lg-12 well">
                 <h3 class="well">Transaction Details</h3>
                <asp:Label ID="baseRateLbl" runat="server" Text=""></asp:Label><br />
+                <asp:Label ID="NumberAttendingLbl" runat="server" Text=""></asp:Label><br />
                <asp:Label ID="AdditionalRateLbl" runat="server" Text=""></asp:Label><br />
-               <asp:Label ID="NumberAttendingLbl" runat="server" Text=""></asp:Label><br />
+               <asp:Label ID="SubTotalLbl" runat="server" Text="Label"></asp:Label>
+               <asp:Label ID="ServiceCostLbl" runat="server" Text=""></asp:Label>
                <asp:Label ID="TotalLbl" runat="server" Text=""></asp:Label>
             </div>
  
