@@ -26,8 +26,7 @@
 <div class="container">
     <h1 class="well">Client Registration</h1>
 	<div class="col-lg-12 well">
-	        <div class="row">
-			</div>
+
 					<div class="col-sm-12">
 			
 						<div class="form-group">
@@ -105,7 +104,7 @@
                             </asp:DropDownList>
                         </div>
 					</div>	
-                     <div class="col-sm-4 form-group">
+                    <div class="col-sm-4 form-group">
 						<label>Training Interest</label>
                         <div class="dropdown">
                             <asp:DropDownList ID="DropDownList5" runat="server" CssClass="form-control">
@@ -116,13 +115,17 @@
                             </asp:DropDownList>
                         </div>
 					</div>	
-					<div class="form-group">
+					<div class="col-sm-12">
 
-						<span class="auto-style1">Available Equipment</span>
-						<asp:TextBox ID="Equipment" runat="server" TextMode="MultiLine" Width="100%" placeholder="What equipment do you have available for client use during sessions?" CssClass ="form-control"></asp:TextBox>
-                        <span class="auto-style1">Biography</span>
+						<div class="form-group">
+                            <label>Available Equipment</label>
+                            <asp:TextBox ID="Equipment" runat="server" TextMode="MultiLine" Width="100%" placeholder="What equipment do you have available for client use during sessions?" CssClass ="form-control"></asp:TextBox>
+						</div>
+                        <div class="form-group">
+                            <label>Biography</label>
 						<asp:TextBox ID="Bio" runat="server" TextMode="MultiLine" Width="100%" placeholder="Tell fitness professionals a little bit about yourself. Include your goals, injuries, and anything else you would like fitness professionals to know." CssClass ="form-control"></asp:TextBox>
-                        <div class="CreateAccountContainer text-center">
+                        </div>
+                            <div class="CreateAccountContainer text-center">
                             <br />
 					        <asp:LinkButton ID="button" Class="btn btn-lg btn-inf" runat="server" OnClick="button_Click">Create Account</asp:LinkButton>									
 					        <br />
@@ -132,7 +135,7 @@
                             <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" SelectCommand="SELECT * FROM [MFNUserTable]"></asp:SqlDataSource>
                         </div>
 				    </div>
-	</div>
+	         </div>
       <br />
 
         &nbsp&nbsp

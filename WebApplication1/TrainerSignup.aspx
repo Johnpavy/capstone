@@ -107,14 +107,20 @@
                                 <asp:ListItem Text="Yoga" Value="Yoga"></asp:ListItem>
                             </asp:DropDownList>
                         </div>
-					</div>	
-					<div class="form-group">
-                        <label>Available Equipment</label>
-						<asp:TextBox ID="Equipment" runat="server" TextMode="MultiLine" Width="100%" placeholder="What equipment do you have available for client use during sessions?" CssClass ="form-control"></asp:TextBox>
-						<label>Biography</label>
-						<asp:TextBox ID="Bio" runat="server" TextMode="MultiLine" Width="100%" placeholder="Tell clients a little bit about yourself. Include certifications, specialties, training philosophy, training style, and anything else you would like clients to know. " CssClass ="form-control"></asp:TextBox>
-
-&nbsp;<div class="CreateAccountContainer text-center">
+					</div>
+                    
+                    <div class="col-sm-12">	
+					    <div class="form-group">
+                            <label>Available Equipment</label>
+						    <asp:TextBox ID="Equipment" runat="server" TextMode="MultiLine" Width="100%" placeholder="What equipment do you have available for client use during sessions?" CssClass ="form-control"></asp:TextBox>
+					    </div>
+                    
+                        <div class="form-group">
+                            <label>Biography</label>
+						    <asp:TextBox ID="Bio" runat="server" TextMode="MultiLine" Width="100%" placeholder="Tell clients a little bit about yourself. Include certifications, specialties, training philosophy, training style, and anything else you would like clients to know. " CssClass ="form-control"></asp:TextBox>
+                        </div>
+                     </div>
+                               &nbsp;<div class="CreateAccountContainer text-center">
                             <br />
 					        <asp:LinkButton ID="button" Class="btn btn-lg btn-inf" runat="server" OnClick="button_Click">Create Account</asp:LinkButton>									
 					        <br />
@@ -127,39 +133,6 @@
         &nbsp&nbsp
         </div>
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" DeleteCommand="DELETE FROM [MFNTrainerLocTable] WHERE [TrainerLoc_Id] = @original_TrainerLoc_Id AND (([Trainer_Id] = @original_Trainer_Id) OR ([Trainer_Id] IS NULL AND @original_Trainer_Id IS NULL)) AND (([TrainerLoc_Lat] = @original_TrainerLoc_Lat) OR ([TrainerLoc_Lat] IS NULL AND @original_TrainerLoc_Lat IS NULL)) AND (([TrainerLoc_Long] = @original_TrainerLoc_Long) OR ([TrainerLoc_Long] IS NULL AND @original_TrainerLoc_Long IS NULL)) AND (([TrainerLoc_StreetAddress] = @original_TrainerLoc_StreetAddress) OR ([TrainerLoc_StreetAddress] IS NULL AND @original_TrainerLoc_StreetAddress IS NULL)) AND (([TrainerLoc_Description] = @original_TrainerLoc_Description) OR ([TrainerLoc_Description] IS NULL AND @original_TrainerLoc_Description IS NULL)) AND (([TrainerLoc_Prefered] = @original_TrainerLoc_Prefered) OR ([TrainerLoc_Prefered] IS NULL AND @original_TrainerLoc_Prefered IS NULL))" InsertCommand="INSERT INTO [MFNTrainerLocTable] ([TrainerLoc_Id], [Trainer_Id], [TrainerLoc_Lat], [TrainerLoc_Long], [TrainerLoc_StreetAddress], [TrainerLoc_Description], [TrainerLoc_Prefered]) VALUES (@TrainerLoc_Id, @Trainer_Id, @TrainerLoc_Lat, @TrainerLoc_Long, @TrainerLoc_StreetAddress, @TrainerLoc_Description, @TrainerLoc_Prefered)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT * FROM [MFNTrainerLocTable]" UpdateCommand="UPDATE [MFNTrainerLocTable] SET [Trainer_Id] = @Trainer_Id, [TrainerLoc_Lat] = @TrainerLoc_Lat, [TrainerLoc_Long] = @TrainerLoc_Long, [TrainerLoc_StreetAddress] = @TrainerLoc_StreetAddress, [TrainerLoc_Description] = @TrainerLoc_Description, [TrainerLoc_Prefered] = @TrainerLoc_Prefered WHERE [TrainerLoc_Id] = @original_TrainerLoc_Id AND (([Trainer_Id] = @original_Trainer_Id) OR ([Trainer_Id] IS NULL AND @original_Trainer_Id IS NULL)) AND (([TrainerLoc_Lat] = @original_TrainerLoc_Lat) OR ([TrainerLoc_Lat] IS NULL AND @original_TrainerLoc_Lat IS NULL)) AND (([TrainerLoc_Long] = @original_TrainerLoc_Long) OR ([TrainerLoc_Long] IS NULL AND @original_TrainerLoc_Long IS NULL)) AND (([TrainerLoc_StreetAddress] = @original_TrainerLoc_StreetAddress) OR ([TrainerLoc_StreetAddress] IS NULL AND @original_TrainerLoc_StreetAddress IS NULL)) AND (([TrainerLoc_Description] = @original_TrainerLoc_Description) OR ([TrainerLoc_Description] IS NULL AND @original_TrainerLoc_Description IS NULL)) AND (([TrainerLoc_Prefered] = @original_TrainerLoc_Prefered) OR ([TrainerLoc_Prefered] IS NULL AND @original_TrainerLoc_Prefered IS NULL))">
-            <DeleteParameters>
-                <asp:Parameter Name="original_TrainerLoc_Id" Type="Int32" />
-                <asp:Parameter Name="original_Trainer_Id" Type="Int32" />
-                <asp:Parameter Name="original_TrainerLoc_Lat" Type="Decimal" />
-                <asp:Parameter Name="original_TrainerLoc_Long" Type="Decimal" />
-                <asp:Parameter Name="original_TrainerLoc_StreetAddress" Type="String" />
-                <asp:Parameter Name="original_TrainerLoc_Description" Type="String" />
-                <asp:Parameter Name="original_TrainerLoc_Prefered" Type="Boolean" />
-            </DeleteParameters>
-            <InsertParameters>
-                <asp:Parameter Name="TrainerLoc_Id" Type="Int32" />
-                <asp:Parameter Name="Trainer_Id" Type="Int32" />
-                <asp:Parameter Name="TrainerLoc_Lat" Type="Decimal" />
-                <asp:Parameter Name="TrainerLoc_Long" Type="Decimal" />
-                <asp:Parameter Name="TrainerLoc_StreetAddress" Type="String" />
-                <asp:Parameter Name="TrainerLoc_Description" Type="String" />
-                <asp:Parameter Name="TrainerLoc_Prefered" Type="Boolean" />
-            </InsertParameters>
-            <UpdateParameters>
-                <asp:Parameter Name="Trainer_Id" Type="Int32" />
-                <asp:Parameter Name="TrainerLoc_Lat" Type="Decimal" />
-                <asp:Parameter Name="TrainerLoc_Long" Type="Decimal" />
-                <asp:Parameter Name="TrainerLoc_StreetAddress" Type="String" />
-                <asp:Parameter Name="TrainerLoc_Description" Type="String" />
-                <asp:Parameter Name="TrainerLoc_Prefered" Type="Boolean" />
-                <asp:Parameter Name="original_TrainerLoc_Id" Type="Int32" />
-                <asp:Parameter Name="original_Trainer_Id" Type="Int32" />
-                <asp:Parameter Name="original_TrainerLoc_Lat" Type="Decimal" />
-                <asp:Parameter Name="original_TrainerLoc_Long" Type="Decimal" />
-                <asp:Parameter Name="original_TrainerLoc_StreetAddress" Type="String" />
-                <asp:Parameter Name="original_TrainerLoc_Description" Type="String" />
-                <asp:Parameter Name="original_TrainerLoc_Prefered" Type="Boolean" />
-            </UpdateParameters>
         </asp:SqlDataSource>
         <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" SelectCommand="SELECT * FROM [MFNTrainerTable]"></asp:SqlDataSource>
       </form>

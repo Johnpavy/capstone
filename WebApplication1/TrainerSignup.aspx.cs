@@ -21,7 +21,7 @@ namespace WebApplication1
         {
             if(!IsPostBack)
             {
-                if (Session["TrainerInfo"] == null)
+              /*  if (Session["TrainerInfo"] == null)
                 {
                     //Forces a redirect to splash page if this page is loaded without a session state.
                     Response.Redirect("Default.aspx");
@@ -30,7 +30,7 @@ namespace WebApplication1
                 {
                     Tobj = (TrainerObject)Session["TrainerInfo"];
                
-                }
+                }*/
             }
         
 
@@ -90,7 +90,7 @@ namespace WebApplication1
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd2.CommandType = System.Data.CommandType.Text;
                 cmd.CommandText = "insert into MFNTrainerLocTable ([TrainerLoc_Lat], [TrainerLoc_Long], [TrainerLoc_StreetAddress], [Trainer_Id], [TrainerLoc_Description]) values (@lat, @lng, @home, @id, @description)";
-                cmd2.CommandText = "UPDATE MFNTrainerTable SET Trainer_HomeAddress = @home, Trainer_Bio = @bio, Trainer_Gender = @gender, Trainer_Phone = @phone, Trainer_Specialty = @specialty, Trainer_Weight = @weight, Trainer_Height = @height Trainer_Equipment = @Equipment WHERE Trainer_Id = @id"; 
+                cmd2.CommandText = "UPDATE MFNTrainerTable SET Trainer_HomeAddress = @home, Trainer_Bio = @bio, Trainer_Gender = @gender, Trainer_Phone = @phone, Trainer_Specialty = @specialty, Trainer_Weight = @weight, Trainer_Height = @height, Trainer_Equipment = @equipment WHERE Trainer_Id = @id"; 
                 // add values to location table
                 cmd.Parameters.AddWithValue("@lat", dBLat);
                 cmd.Parameters.AddWithValue("@lng", dBLng);
