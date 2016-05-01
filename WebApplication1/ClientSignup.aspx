@@ -32,20 +32,20 @@
 			
 						<div class="form-group">
 							<label>Street Address</label>
-							<asp:TextBox ID="Street" runat="server" Height="35px" TextMode="MultiLine" Width="100%" CssClass ="form-control"></asp:TextBox>
+							<asp:TextBox ID="Street" runat="server" Height="35px" TextMode="MultiLine" Width="100%" placeholder="Enter a valid address for accurate trainer search results" CssClass ="form-control"></asp:TextBox>
 						</div>	
 						<div class="row">
 							<div class="col-sm-4 form-group">
 								<label>City</label>
-								 <asp:TextBox ID="City" runat="server" Width="100%" CssClass ="form-control"></asp:TextBox>
+								 <asp:TextBox ID="City" runat="server" Width="100%" placeholder="Enter City Name" CssClass ="form-control"></asp:TextBox>
 							</div>	
 							<div class="col-sm-4 form-group">
 								<label>State</label>
-								<asp:TextBox ID="State" runat="server" Width="100%" CssClass ="form-control"></asp:TextBox>
+								<asp:TextBox ID="State" runat="server" Width="100%" placeholder="Enter State" CssClass ="form-control"></asp:TextBox>
 							</div>	
 							<div class="col-sm-4 form-group">
 								<label>Zip</label>
-								<asp:TextBox ID="Zip" CssClass ="form-control" runat="server"></asp:TextBox>
+								<asp:TextBox ID="Zip" placeholder="Enter Your Zip Code" CssClass ="form-control" runat="server"></asp:TextBox>
 							</div>		
 						</div>
 						<div class="row">
@@ -85,21 +85,22 @@
                                </div>	
 							<div class="col-sm-4 form-group">
 								<label>Weight Pounds</label>
-								<asp:TextBox ID="Weight" runat="server" Width="100%" CssClass ="form-control"></asp:TextBox>
+								<asp:TextBox ID="Weight" runat="server" Width="100%" placeholder="Weight" CssClass ="form-control"></asp:TextBox>
 							</div>	
 						</div>	
                        </div>					
 					<div class="col-sm-4 form-group" style="left: 0px; top: 0px">
 						<label>Phone Number</label>
-						<asp:TextBox ID="Phone" runat="server" Width="100%" CssClass ="form-control"></asp:TextBox>
+						<asp:TextBox ID="Phone" runat="server" placeholder="Enter Valid Number" Width="100%" CssClass ="form-control"></asp:TextBox>
 					</div>		
                     <div class="col-sm-4 form-group">
-						<label>Gender</label>
+						<label>Trainer Gender Preference</label>
                         <div class="dropdown">
                             <asp:DropDownList ID="DropDownList3" runat="server" CssClass="form-control" OnSelectedIndexChanged="DropDownList3_SelectedIndexChanged">
-                                <asp:ListItem Text="Select Gender" Value="0"></asp:ListItem>
+                                <asp:ListItem Text="Select Preference" Value="0"></asp:ListItem>
                                 <asp:ListItem Text="Male" Value="Male"></asp:ListItem>
                                 <asp:ListItem Text="Female" Value="Female"></asp:ListItem>
+                                <asp:ListItem Text="No Preference" Value="None"></asp:ListItem>
 
                             </asp:DropDownList>
                         </div>
@@ -118,7 +119,9 @@
 					<div class="form-group">
 
 						<span class="auto-style1">Available Equipment</span>
-						<asp:TextBox ID="Equipment" runat="server" TextMode="MultiLine" Width="100%" CssClass ="form-control"></asp:TextBox>
+						<asp:TextBox ID="Equipment" runat="server" TextMode="MultiLine" Width="100%" placeholder="What equipment do you have available for client use during sessions?" CssClass ="form-control"></asp:TextBox>
+                        <span class="auto-style1">Biography</span>
+						<asp:TextBox ID="Bio" runat="server" TextMode="MultiLine" Width="100%" placeholder="Tell fitness professionals a little bit about yourself. Include your goals, injuries, and anything else you would like fitness professionals to know." CssClass ="form-control"></asp:TextBox>
                         <div class="CreateAccountContainer text-center">
                             <br />
 					        <asp:LinkButton ID="button" Class="btn btn-lg btn-inf" runat="server" OnClick="button_Click">Create Account</asp:LinkButton>									
