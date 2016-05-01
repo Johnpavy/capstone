@@ -52,18 +52,20 @@ namespace WebApplication1
         protected void button_Click(object sender, EventArgs e)
         {
             Adress adrs = new Adress();
+            // save the full client address as a string to pass to google geocode
             String clientAddress = Street.Text + " " + City.Text + " " + State.Text;
             String equipment = Equipment.Text;
             String gender = DropDownList3.SelectedValue;
             String pnumber = Phone.Text;
             String interests = DropDownList5.SelectedValue;
+            String bio = Bio.Text;
             String zip = Zip.Text;
             int zipInt;
             bool isInt = Int32.TryParse(zip, out zipInt);
 
 
             // Check to make sure all fields are filled out
-            if (interests.Equals("0") || Street.Text.Equals("") || City.Text.Equals("") || Zip.Text.Equals("") || State.Text.Equals("") || equipment.Equals("") || gender.Equals("0") || pnumber.Equals(""))
+            if (Bio.Equals("") || interests.Equals("0") || Street.Text.Equals("") || City.Text.Equals("") || Zip.Text.Equals("") || State.Text.Equals("") || equipment.Equals("") || gender.Equals("0") || pnumber.Equals(""))
             {
                 Label1.ForeColor = System.Drawing.Color.Red;
                 Label1.Text = "All fields required";
@@ -84,6 +86,7 @@ namespace WebApplication1
 
                     ClientScript.RegisterStartupScript(GetType(), "alert", "alert('" + message + "');", true);
                 }*/
+                // get the address geocode
                 adrs.Address = clientAddress;
                 adrs.GeoCode();
                 // retrieve session id variable
@@ -92,9 +95,7 @@ namespace WebApplication1
                 String dBLng = adrs.Longitude;
                 // add info to session object
                 Uobj.CopyUserObject((UserObject)Session["UserInfo"]);
-               // int userID = Uobj.UserId;
-                Uobj.TrainingPref = interests;
-                Uobj.Equipment = equipment;
+ 
                 Session["UserInfo"] = Uobj;
 
                 SqlConnection userLocDB = new SqlConnection(SqlDataSource2.ConnectionString);
@@ -106,7 +107,7 @@ namespace WebApplication1
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd2.CommandType = System.Data.CommandType.Text;
                 cmd.CommandText = "insert into MFNUserLocTable ([UserLoc_Lat], [UserLoc_Long], [UserLoc_StreetAddress], [User_Id], [UserLoc_Description]) values (@lat, @lng, @home, @id, @description)";
-                cmd2.CommandText = "UPDATE MFNUserTable SET User_HomeAddress = @home, User_Equipment = @equipment, User_Gender = @gender, User_Phone = @phone, User_TrainingPref = @prefs WHERE User_Id = @id";
+                cmd2.CommandText = "UPDATE MFNUserTable SET User_HomeAddress = @home, User_Equipment = @equipment, User_Gender = @gender, User_Phone = @phone, User_TrainingPref = @prefs , User_Bio = @bio WHERE User_Id = @id";
                 // add values to location table
                 cmd.Parameters.AddWithValue("@lat", dBLat);
                 cmd.Parameters.AddWithValue("@lng", dBLng);
@@ -122,10 +123,17 @@ namespace WebApplication1
                 cmd2.Parameters.AddWithValue("@phone", pnumber);
                 cmd2.Parameters.AddWithValue("@prefs", interests);
                 cmd2.Parameters.AddWithValue("@equipment", equipment);
+                cmd2.Parameters.AddWithValue("@bio", bio);
 
                 //Add values to session object
                 Uobj.TrainingPref = interests;
                 Uobj.Equipment = equipment;
+                Uobj.Bio = bio;
+                Uobj.UserId = userID;
+                Uobj.Gender = gender;
+                Uobj.Phone = pnumber;
+                Uobj.TrainingPref = interests;
+
 
                 cmd.Connection = userLocDB;
                 cmd2.Connection = userDB;
