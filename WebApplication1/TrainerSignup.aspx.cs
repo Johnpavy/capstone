@@ -77,6 +77,9 @@ namespace WebApplication1
                 Tobj.CopyTrainerObject((TrainerObject)Session["TrainerInfo"]);
                 Tobj.Speciality = specialty;
                 Tobj.Bio = bio;
+                Tobj.Equipment = equipment;
+                Tobj.TrainerId = trainerID;
+
                 Session["TrainerInfo"] = Tobj;
                 SqlConnection trainerLocDB = new SqlConnection(SqlDataSource1.ConnectionString);
                 SqlConnection trainerDB = new SqlConnection(SqlDataSource2.ConnectionString);
@@ -87,7 +90,7 @@ namespace WebApplication1
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd2.CommandType = System.Data.CommandType.Text;
                 cmd.CommandText = "insert into MFNTrainerLocTable ([TrainerLoc_Lat], [TrainerLoc_Long], [TrainerLoc_StreetAddress], [Trainer_Id], [TrainerLoc_Description]) values (@lat, @lng, @home, @id, @description)";
-                cmd2.CommandText = "UPDATE MFNTrainerTable SET Trainer_HomeAddress = @home, Trainer_Bio = @bio, Trainer_Gender = @gender, Trainer_Phone = @phone, Trainer_Specialty = @specialty, Trainer_Weight = @weight, Trainer_Height = @height WHERE Trainer_Id = @id"; 
+                cmd2.CommandText = "UPDATE MFNTrainerTable SET Trainer_HomeAddress = @home, Trainer_Bio = @bio, Trainer_Gender = @gender, Trainer_Phone = @phone, Trainer_Specialty = @specialty, Trainer_Weight = @weight, Trainer_Height = @height Trainer_Equipment = @Equipment WHERE Trainer_Id = @id"; 
                 // add values to location table
                 cmd.Parameters.AddWithValue("@lat", dBLat);
                 cmd.Parameters.AddWithValue("@lng", dBLng);
@@ -104,6 +107,7 @@ namespace WebApplication1
                 cmd2.Parameters.AddWithValue("@specialty", specialty);
                 cmd2.Parameters.AddWithValue("@weight", weight);
                 cmd2.Parameters.AddWithValue("@height", height);
+                cmd2.Parameters.AddWithValue("@equipment", equipment);
 
 
                 cmd.Connection = trainerLocDB;
