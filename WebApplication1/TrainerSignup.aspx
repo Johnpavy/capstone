@@ -20,8 +20,7 @@
 <div class="container">
     <h1 class="well">Complete Your Fitness Professional Profile</h1>
 	<div class="col-lg-12 well">
-	        <div class="row">
-			</div>
+
 					<div class="col-sm-12">
 			
 						<div class="form-group">
@@ -108,8 +107,20 @@
                             </asp:DropDownList>
                         </div>
 					</div>
-                    
-                    <div class="col-sm-12">	
+
+							<div class="col-sm-4 form-group">
+								<label>Individual Rate</label>&nbsp;
+                                <asp:TextBox ID="rateIndividual" runat="server" Width="100%" placeholder="$ Per hour" CssClass ="form-control"></asp:TextBox>
+							</div>	
+							<div class="col-sm-4 form-group">
+								<label>Additional Person Rate</label>&nbsp;
+                                <asp:TextBox ID="rateAdditional" runat="server" Width="100%" placeholder="$ Per Additional" CssClass ="form-control"></asp:TextBox>
+							</div>	
+							<div class="col-sm-4 form-group">
+								<label>Max Clients</label>&nbsp;
+                                <asp:TextBox ID="clientNum" placeholder="How many clients?" CssClass ="form-control" runat="server"></asp:TextBox>
+							</div>		
+
 					    <div class="form-group">
                             <label>Available Equipment</label>
 						    <asp:TextBox ID="Equipment" runat="server" TextMode="MultiLine" Width="100%" placeholder="What equipment do you have available for client use during sessions?" CssClass ="form-control"></asp:TextBox>
@@ -119,8 +130,8 @@
                             <label>Biography</label>
 						    <asp:TextBox ID="Bio" runat="server" TextMode="MultiLine" Width="100%" placeholder="Tell clients a little bit about yourself. Include certifications, specialties, training philosophy, training style, and anything else you would like clients to know. " CssClass ="form-control"></asp:TextBox>
                         </div>
-                     </div>
-                               &nbsp;<div class="CreateAccountContainer text-center">
+
+                     &nbsp;<div class="CreateAccountContainer text-center">
                             <br />
 					        <asp:LinkButton ID="button" Class="btn btn-lg btn-inf" runat="server" OnClick="button_Click">Create Account</asp:LinkButton>									
 					        <br />

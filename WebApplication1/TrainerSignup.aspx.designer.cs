@@ -112,6 +112,33 @@ namespace WebApplication1 {
         protected global::System.Web.UI.WebControls.DropDownList DropDownList5;
         
         /// <summary>
+        /// rateIndividual control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox rateIndividual;
+        
+        /// <summary>
+        /// rateAdditional control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox rateAdditional;
+        
+        /// <summary>
+        /// clientNum control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox clientNum;
+        
+        /// <summary>
         /// Equipment control.
         /// </summary>
         /// <remarks>
