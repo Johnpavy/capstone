@@ -18,7 +18,7 @@
 <body>
     <form id="form1" runat="server">
 <div class="container">
-    <h1 class="well">Trainer Registration</h1>
+    <h1 class="well">Complete Your Fitness Professional Profile</h1>
 	<div class="col-lg-12 well">
 	        <div class="row">
 			</div>
@@ -26,20 +26,20 @@
 			
 						<div class="form-group">
 							<label>Street Address</label>&nbsp;
-                            <asp:TextBox ID="Street" runat="server" Height="35px" TextMode="MultiLine" Width="100%" CssClass ="form-control"></asp:TextBox>
+                            <asp:TextBox ID="Street" runat="server" Height="35px" TextMode="MultiLine" Width="100%" placeholder="Enter a Valid Address for Accurate Trainer Search Results" CssClass ="form-control"></asp:TextBox>
 						</div>	
 						<div class="row">
 							<div class="col-sm-4 form-group">
 								<label>City</label>&nbsp;
-                                <asp:TextBox ID="City" runat="server" Width="100%" CssClass ="form-control"></asp:TextBox>
+                                <asp:TextBox ID="City" runat="server" Width="100%" placeholder="Enter City Name" CssClass ="form-control"></asp:TextBox>
 							</div>	
 							<div class="col-sm-4 form-group">
 								<label>State</label>&nbsp;
-                                <asp:TextBox ID="State" runat="server" Width="100%" CssClass ="form-control"></asp:TextBox>
+                                <asp:TextBox ID="State" runat="server" Width="100%" placeholder="Enter State" CssClass ="form-control"></asp:TextBox>
 							</div>	
 							<div class="col-sm-4 form-group">
 								<label>Zip</label>&nbsp;
-                                <asp:TextBox ID="Zip" CssClass ="form-control" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="Zip" placeholder="Enter Zip" CssClass ="form-control" runat="server"></asp:TextBox>
 							</div>		
 						</div>
 						<div class="row">
@@ -79,13 +79,13 @@
                                </div>	
 							<div class="col-sm-4 form-group">
 								<label>Weight Pounds</label>&nbsp;
-                                <asp:TextBox ID="Weight" runat="server" Width="100%" CssClass ="form-control"></asp:TextBox>
+                                <asp:TextBox ID="Weight" runat="server" Width="100%" placeholder="Weight" CssClass ="form-control"></asp:TextBox>
 							</div>	
 						</div>	
                        </div>					
 					<div class="col-sm-4 form-group">
 						<label>Phone Number</label>&nbsp;
-                        <asp:TextBox ID="Phone" runat="server" Width="100%" CssClass ="form-control"></asp:TextBox>
+                        <asp:TextBox ID="Phone" runat="server" placeholder="Enter Valid Number" Width="100%" CssClass ="form-control"></asp:TextBox>
 					</div>		
                     <div class="col-sm-4 form-group">
 						<label>Gender</label>
@@ -109,9 +109,11 @@
                         </div>
 					</div>	
 					<div class="form-group">
-
+                        <label>Available Equipment</label>
+						<asp:TextBox ID="Equipment" runat="server" TextMode="MultiLine" Width="100%" placeholder="What equipment do you have available for client use during sessions?" CssClass ="form-control"></asp:TextBox>
 						<label>Biography</label>
-						<asp:TextBox ID="Bio" runat="server" TextMode="MultiLine" Width="100%" CssClass ="form-control"></asp:TextBox>
+						<asp:TextBox ID="Bio" runat="server" TextMode="MultiLine" Width="100%" placeholder="Tell clients a little bit about yourself. Include certifications, specialties, training philosophy, training style, and anything else you would like clients to know. " CssClass ="form-control"></asp:TextBox>
+
 &nbsp;<div class="CreateAccountContainer text-center">
                             <br />
 					        <asp:LinkButton ID="button" Class="btn btn-lg btn-inf" runat="server" OnClick="button_Click">Create Account</asp:LinkButton>									

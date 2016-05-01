@@ -48,11 +48,12 @@ namespace WebApplication1
             String weight = Weight.Text;
             String specialty = DropDownList5.SelectedValue;
             String zip = Zip.Text;
+            String equipment = Equipment.Text;
             int zipInt;
             bool isInt = Int32.TryParse(zip, out zipInt);
 
             // Check to make sure all fields are filled out
-            if(Street.Text.Equals("") || State.Text.Equals("") || Zip.Text.Equals("")|| City.Text.Equals("") || gender.Equals("0") || pnumber.Equals("") || height.Equals("0'\"") || specialty.Equals("0") || weight.Equals(""))
+            if(Equipment.Text.Equals("") || Street.Text.Equals("") || State.Text.Equals("") || Zip.Text.Equals("")|| City.Text.Equals("") || gender.Equals("0") || pnumber.Equals("") || height.Equals("0'\"") || specialty.Equals("0") || weight.Equals(""))
             {
                 Label1.ForeColor = System.Drawing.Color.Red;
                 Label1.Text = "All fields required";
