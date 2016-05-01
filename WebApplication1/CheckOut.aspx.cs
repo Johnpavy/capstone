@@ -199,12 +199,16 @@ namespace WebApplication1
             int numberOfPeople = Int32.Parse(info[2]);
 
             baseRateLbl.Text = "Base Rate: $" + standardRate;
-            AdditionalRateLbl.Text = "For Addition Persons: $" + additonalPersonRate;
-            NumberAttendingLbl.Text = "Number of People Attending: "+ numberOfPeople.ToString();
+            NumberAttendingLbl.Text = "Number of People Attending: " + numberOfPeople.ToString();
+            AdditionalRateLbl.Text = "Cost From Additional Persons: $" + additonalPersonRate * (numberOfPeople - 1);
+           
 
 
 
-            double finalTotal = standardRate + (additonalPersonRate * (numberOfPeople - 1));
+            double subTotal = standardRate + (additonalPersonRate * (numberOfPeople - 1));
+            SubTotalLbl.Text = "Subtotal: $" + subTotal;
+            ServiceCostLbl.Text = "Service Fee: $" + subTotal * 0.05;
+            double finalTotal = subTotal * 1.05;
 
             TotalLbl.Text = "Final Total: $" + finalTotal;
 
