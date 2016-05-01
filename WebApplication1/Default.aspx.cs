@@ -138,6 +138,14 @@ namespace WebApplication1
                             Tobj.IndividualRate = sdr["Trainer_IndividualRate"].ToString();
                             Tobj.AdditionalPersonRate = sdr["Trainer_AdditionalPersonRate"].ToString();
                             Tobj.MaxNumPeople = sdr["Trainer_MaxPeople"].ToString();
+                            Tobj.DateOfBirth = sdr["Trainer_DateofBirth"].ToString();
+                            Tobj.Email = sdr["Trainer_Email"].ToString();
+                            Tobj.Phone = sdr["Trainer_Phone"].ToString();
+                            Tobj.Speciality = sdr["Trainer_Specialty"].ToString();
+                            Tobj.Gender = sdr["Trainer_Gender"].ToString();
+                            Tobj.HomeAddress = sdr["Trainer_HomeAddress"].ToString();
+                            Tobj.MiddleName = sdr["Trainer_MiddleName"].ToString();
+                            //Tobj.FavLoc = sdr["TrainerLoc_Prefered"].ToString();
 
                         }
 
@@ -250,10 +258,16 @@ namespace WebApplication1
                         {
                             Uobj.UserId = Int32.Parse(sdr["User_Id"].ToString());
                             Uobj.FirstName = sdr["User_FirstName"].ToString();
+                            Uobj.MiddleName = sdr["User_MiddleName"].ToString();
                             Uobj.LastName = sdr["User_LastName"].ToString();
                             Uobj.ImagePath = sdr["User_Image"].ToString();
                             Uobj.Equipment = sdr["User_Equipment"].ToString();
                             Uobj.TrainingPref = sdr["User_TrainingPref"].ToString();
+                            Uobj.DateOfBirth = sdr["User_DateofBirth"].ToString();
+                            Uobj.Email = sdr["User_Email"].ToString();
+                            Uobj.Gender = sdr["User_Gender"].ToString();
+                            Uobj.HomeAddress = sdr["User_HomeAddress"].ToString();
+                            Uobj.Phone = sdr["User_Phone"].ToString();
                         }
 
                         Session["UserInfo"] = Uobj;
@@ -307,6 +321,7 @@ namespace WebApplication1
             String password = Request.Form["password"];
             String CPassword = Request.Form["Cpassword"];
             string message = string.Empty;
+            string errorMessage = string.Empty;
             // If true, trainer confirmation email is sent if false, client email confirmation is sent
             bool isTrainer = true;
 
@@ -401,7 +416,16 @@ namespace WebApplication1
                     // Create new Directory with email as name
                     Directory.CreateDirectory(appPath + newTrainerPath);
                     string newPath = appPath + newTrainerPath + @"ProfilePic.jpg";
-                    File.Copy(defaultPic, newPath);
+
+                    try
+                    {
+                        File.Copy(defaultPic, newPath);
+                    }
+                    catch
+                    {
+                         errorMessage = "User file has already been created";
+                        ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + errorMessage + "');", true);
+                    }
 
                     SqlCommand cmd = new SqlCommand();
 
@@ -506,10 +530,10 @@ namespace WebApplication1
             {
                 mm.Subject = "Account Activation";
                 string body = "Hello " + name + ",";
-                body += "<br /><br />Please click the following link to activate your account";
+               
                 if (isTrainer)
                 {
-                    
+                    body += "<br /><br />Thank you for creating your fitness professional account! Please allow 2-3 business days for MFN to conduct its screening process. You will be notified via email whether or not your account has been approved. You may now choose to complete your profile, although your account will not be activated until approved.";
                     // for live web app hosted on azure, uncomment this and comment the local host line 
                     // body += "<br /><a href = '" + Request.Url.AbsoluteUri.Replace("http://mobilefitnessnetwork.azurewebsites.net", "http://mobilefitnessnetwork.azurewebsites.net/ConfirmationPage.aspx?ActivationCode=" + activationCode) + "'>Click here to activate your account.</a>";
 
@@ -518,6 +542,7 @@ namespace WebApplication1
                 }
                 else
                 {
+                    body += "<br /><br />Please click the following link to activate your account";
                     // for live web app hosted on azure, uncomment this and comment the local host line
                     // body += "<br /><a href = '" + Request.Url.AbsoluteUri.Replace("http://mobilefitnessnetwork.azurewebsites.net", "http://mobilefitnessnetwork.azurewebsites.net/ClientConfirmationPage?ActivationCode=" + activationCode) + "'>Click here to activate your account.</a>";
                     // uncomment line below for local host testing and comment line above
@@ -652,6 +677,7 @@ namespace WebApplication1
 
                     string salt = CreateSalt(125);
                     string hashedPassword = CreatePasswordHash(password, salt);
+                    string errorMessage = string.Empty;
 
                     string newUserPath = @"/MFNRoot/Clients/" + email + @"/ProfilePic/";
                     // Get the physical file system path for the currently
@@ -661,7 +687,15 @@ namespace WebApplication1
                     // Create new Directory with email as name
                     Directory.CreateDirectory(appPath + newUserPath);
                     string newPath = appPath + newUserPath + @"ProfilePic.jpg";
-                    File.Copy(defaultPic, newPath);
+                    try
+                    {
+                        File.Copy(defaultPic, newPath);
+                    }
+                    catch
+                    {
+                        errorMessage = "User file has already been created";
+                        ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + errorMessage + "');", true);
+                    }
 
                     SqlCommand cmd = new SqlCommand();
 
