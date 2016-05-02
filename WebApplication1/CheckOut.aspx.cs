@@ -198,7 +198,8 @@ namespace WebApplication1
             // String email = Request.Form["email"];
             string activationCode = Guid.NewGuid().ToString();
             string userEmail = Uobj.Email;
-
+            string sessionDetails = (string)(Session["session_details"]);
+            DateTime localDate = DateTime.Now;
             //Response.Write("<script>alert('" + email + "')</script>");
 
             using (MailMessage mm = new MailMessage("MobileFitnessNetwork@gmail.com", userEmail))
@@ -209,9 +210,10 @@ namespace WebApplication1
                 
                 body += "<br /><br />Your approved training session has been payed for.";
                 body += "<br /><br /> ---Payment Details---";
-                body += "<br /><br />" + "Name: " + first_name + " " + last_name + "<br />" + "Address: " + address + "<br />" + "City: " + city + "<br />" + "Zip: " + postal_code + "<br />" + 
+                body += "<br /><br />" + "Transaction Date/Time: " + localDate + "<br />" + "Name: " + first_name + " " + last_name + "<br />" + "Address: " + address + "<br />" + "City: " + city + "<br />" + "Zip: " + postal_code + "<br />" + 
                     "Card Type: " + card_type + "<br />" + "Total: " + SampleTotal;
-                
+                body += "<br /><br /> ---Session Details--- <br /><br />";
+                body += sessionDetails;
 
                 body += "<br /><br />Thank you";
                 mm.Body = body;
