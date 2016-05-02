@@ -13,7 +13,7 @@
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="JS/JavaScript.js"></script>
     <link href="CSS/TrainerSignup.css" rel="stylesheet" />
-  
+    
     <style type="text/css">
         .auto-style1 {
             font-weight: bold;

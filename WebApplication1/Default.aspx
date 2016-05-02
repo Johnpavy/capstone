@@ -1,341 +1,316 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" MaintainScrollPositionOnPostback="true" Inherits="WebApplication1.WebForm4" %>
 
 <!DOCTYPE html>
-<html lang="en">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
   <link rel="shortcut icon" type="image/x-icon" href="/Pictures/favicon.ico"/>
   <title>Welcome to MFN</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1/"/>
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="JS/JavaScript.js"></script>
+    <link href="CSS/default.css" rel="stylesheet" />
+  <style>
+    body {background-color: #231F1E;}
+    html, body, #container { height: 100%; }
+    textarea{resize:none; background-color: #FFFFFF;}
+    hr{background-color: #FFFFFF;}
     
-    
-    <script>
-        var firstClick = 0;
-        var trainerFlag = 0;
-        var clientFlag = 0;
-        
-        $(function()
-        {
-             $(".HowItWorksButton").click(function()
-             {
-                $(".HowItWorksContainer").slideToggle();
-                return false;
-             }); 
-        });
-        $(function()
-        {
-             $(".TrainerRegisterPane").click(function()
-             {
-                if(firstClick === 0)
-                {
-                    document.getElementById("RegistrationLabelId").innerHTML = "TRAINER REGISTRATION";
-                    $(".RegisterFormContainer").hide();
-                    $(".RegisterFormContainer").slideToggle();
-                    document.getElementById("RegisterFormTextBoxFirstNameId").focus();
-                    clientFlag = 0;
-                    trainerFlag = 1;
-                    firstClick = 1;
-                    return false;
-                }
-                else if(clientFlag === 1)
-                {
-                    document.getElementById("RegistrationLabelId").innerHTML = "TRAINER REGISTRATION";
-                    $(".RegisterFormContainer").hide();
-                    $(".RegisterFormContainer").slideToggle();
-                    document.getElementById("RegisterFormTextBoxFirstNameId").focus();
-                    clientFlag = 0;
-                    trainerFlag = 1;
-                    firstClick = 1;
-                    return false;
-                }
-             });
-        });
-        $(function()
-        {
-             $(".ClientRegisterPane").click(function()
-             {
-                if(firstClick === 0)
-                {   
-                    document.getElementById("RegistrationLabelId").innerHTML = "CLIENT REGISTRATION";
-                    $(".RegisterFormContainer").hide();
-                    $(".RegisterFormContainer").slideToggle();
-                    document.getElementById("RegisterFormTextBoxFirstNameId").focus();
-                    clientFlag = 1;
-                    trainerFlag = 0;
-                    firstClick = 1;
-                    return false;
-                }
-                else if(trainerFlag === 1)
-                {
-                    document.getElementById("RegistrationLabelId").innerHTML = "CLIENT REGISTRATION";
-                    $(".RegisterFormContainer").hide();
-                    $(".RegisterFormContainer").slideToggle();
-                    document.getElementById("RegisterFormTextBoxFirstNameId").focus();
-                    clientFlag = 1;
-                    trainerFlag = 0;
-                    firstClick = 1;
-                    return false;
-                }
-             });
-        });
-    </script>
+.centered-form{
+	margin-top: 60px;
+}
 
-    
-    <style>
-        body{background-color: #393839;}
-        .content{width: 100%;margin: 0 auto;}
-        .HowItWorksContainer{background-color: #f1f1f2; display: none;padding-bottom: 2%;}
-        .HIWInfoText{margin-left: auto; margin-right: auto;}
-        .HowItWorksInfoContainer{padding-bottom: 2%; padding-top: 2%;}
-        .HeaderContainer{background-color: #FFFFFF;padding-bottom: 1%;}
-        .LoginContainer{float: right;}
-        .FindATrainerSearch, .LoginButton{float:right;}
-        .HeaderLogoContainer
-        {
-            width:106px; 
-            height: 96px;
-            padding-bottom: 3%; 
-            padding-top: 1%;
-            margin-left: auto; margin-right: auto;
-        }
-        .MFNContainer{background-color: #393839; padding-bottom: 5%; padding-top: 3%;}
-        .MFNPicture{margin-left: auto; margin-right: auto;}
-        .ClientRegisterPictureColumn, .TrainerRegisterPictureColumn{}
-        .ClientRegisterPictureColumn{}
-        .HowItWorksButton, .HowItWorksCloseButton{margin-left: auto; margin-right: auto;}
-        .RegisterContainer{background-color: #f1f1f2;}
-        .TrainerRegisterPane, .RegisterLogo{float: left;}
-        .ClientRegisterPictureColumn, .TrainerRegisterPictureColumn {width: 50%; }
-        .HowItWorksPictureColumnLeft, .HowItWorksPictureColumnRight {width: 50%;}
-        .ClientRegisterPictureColumn{float: right;}
-        .HowItWorksPictureColumnRight {float: right;}
-        .RegisterFormContainer{padding-top: 2%; padding-bottom: 3%; display:none;}
-        .HeaderComponentContainer{float: right; padding-bottom: 1%; padding-top: 25px; padding-right: 30px;}
-        .LoginButton, .LoginEmail, .LoginPassword{
-            display: inline-block;
-            top: 30px;
-            border: 2px solid #848484; 
-            -webkit-border-radius: 30px; 
-            -moz-border-radius: 30px; 
-            border-radius: 30px; 
-            outline:0; 
-            height:35px; 
-            width: 150px; 
-            padding-left:10px; 
-            padding-right:10px;
-            border-color: #008cc1;
-            color: #008cc1;
-          }
-        .IsAdminLabel{color: #008cc1;}
-        .HeaderComponentContainer > li{
-            padding-left: 20px;
-        }
-        .FormInput{padding-bottom: 2%;}
-        .RegisterNameForm, .RegisterEmailForm{
-            padding-bottom: 1%;
-        }
-        .RegisterFormTextBoxFirstName, .RegisterFormTextBoxLastName, .RegisterFormTextBoxEmail, .RegisterFormTextBoxPassword, .RegisterFormTextBoxConfirmPassword
-        {
-            background-color : #393839;
-            border: 4px solid #FFFFFF;
-            border-radius: 0px;
-            width: 300px;
-            height: 40px;
-            color: #008cc1;
-        }
-        .RegisterFormTextBoxEmail{width: 408px !important;}
-        .GetStartedButton, .HowItWorksButton
-        {
-            background-color: #939598;
-            border: none;
-            border-radius: 0px;
-            color: white;
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-        }
-        .Footer
-        {
-            width: 100%;
-            height: 200px;
-            background-color: #000000;
-            position: relative;
-            bottom: 0;
-        }
+.centered-form .panel{
+	background: rgba(255, 255, 255, 0.8);
+	box-shadow: rgba(0, 0, 0, 0.3) 20px 20px 20px;
+}
+    label, p, button, span, footer
+    {
+        font-family: OptimaSegoe, 'Segoe UI', Candara, Calibri, Arial, sans-serif;
+        font-variant: normal;
+        font-weight: 500;
+        font-size: 16px;
+          text-align: left;
+      }
         
-        /* CSS FOR LOGIN TOGGLE BUTTON */
-        .onoffswitch {
-        position: relative; width: 60px;
-        -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
-        }
-        .onoffswitch-checkbox {
-            display: none;
-        }
-        .onoffswitch-label {
-            display: block; overflow: hidden; cursor: pointer;
-            height: 36px; padding: 0; line-height: 36px;
-            border: 2px solid #CCCCCC; border-radius: 36px;
-            background-color: #FFFFFF;
-            transition: background-color 0.3s ease-in;
-        }
-        .onoffswitch-label:before {
-            content: "";
-            display: block; width: 36px; margin: 0px;
-            background: #FFFFFF;
-            position: absolute; top: 0; bottom: 0;
-            right: 22px;
-            border: 2px solid #CCCCCC; border-radius: 36px;
-            transition: all 0.3s ease-in 0s; 
-        }
-        .onoffswitch-checkbox:checked + .onoffswitch-label {
-            background-color: #008cc1;
-        }
-        .onoffswitch-checkbox:checked + .onoffswitch-label, .onoffswitch-checkbox:checked + .onoffswitch-label:before {
-           border-color: #008cc1;
-        }
-        .onoffswitch-checkbox:checked + .onoffswitch-label:before {
-            right: 0px; 
-        }
-        .IsAdminLabel{padding: 10px;float:right;}
-        .RegistrationLabel
-        {
-            font-size: 24px;
-            color: #FFFFFF;
-            text-align: center;
-        }
-    </style>
-    
-    
+    .FitnessNetworkImage
+    {
+        width: 100%;
+        /*max-height: 584px; <- Original Size
+        max-width: 1181px; <- Original Size*/
+        max-height: 438px; /*Shrunk by 25%*/
+        max-width: 886px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .LoginButton
+    {
+        color: #FFFFFF;
+        background-color: rgb(0, 141, 183);
+        border-color: rgb(40, 94, 142);
+    }
+
+    .LoginButton
+    {
+        padding-bottom: 5px;
+        width: 50%;
+        max-width: 960px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .LoginButton2
+    {
+        padding-bottom: 5px;
+        width: 15%;
+        max-width: 960px;
+        margin-right: auto;
+        margin-left: auto;
+        background-color: rgb(0, 141, 183);
+        width: 15%;
+        float: right;
+    }
+
+    .TrainerSignupButton
+    {
+        background-color: rgb(255,255,255);
+        padding-bottom: 5px;
+        width: 50%;
+        max-width: 960px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .ClientSignupButton
+    {
+        background-color: rgb(0, 141, 183);
+        padding-bottom: 5px;
+        width: 50%;
+        max-width: 960px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .AboutButton
+    {
+        /*background-color: rgb(255,255,255);*/
+        background-color: rgb(0, 141, 183);
+        padding-bottom: 5px;
+        width: 50%;
+        max-width: 960px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+    .TrainerStartupButton
+    {
+        background-color: rgb(255,255,255);
+        padding-bottom: 5px;
+        width: 20%;
+        max-width: 960px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+    .LinkButton1
+    {
+        background-color: rgb(0, 141, 183);
+    }
+    .LoginInformationPannel
+    {
+        width: 100%;
+        display: block;
+        float: right;
+    }
+
+    .UsernameInput
+    {
+        width: 20%;
+        float: right;
+    }
+    .PasswordInput
+    {
+        width: 20%;
+        float: right;
+    }
+
+    .ErrorLbl
+    {
+        float: right;
+    }
+
+    .TrainerToggle
+    {
+        width: 25%;
+        float: right;
+    }
+
+    .Username
+    {
+        padding-bottom: 5px;
+        width: 23%;
+        max-width: 960px;
+        margin-left: auto;
+    }
+        
+    .Password
+    {
+        padding-bottom: 5px;
+        width: 23%;
+        max-width: 960px;
+        margin-left: auto;
+    }
+
+    .newclass
+    {
+        padding-bottom: 5px;
+        width: 70%;
+        max-width: 960px;
+        margin-left: auto;
+    }
+
+
+  </style>
 </head>
 <body>
-    <form runat="server">
-    <div class="content">
+    <form id="form1" runat="server">
+        <div class ="LoginInformationPannel">
+                  <div class="Username input-group">
+                  <span class="input-group-addon primary" id="sizing-addon1">
+                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                    </span>
+                  <input type="text" class="UsernameInput form-control" placeholder="Email" name="UserEmail" aria-describedby="sizing-addon2"/>
+            </div>
         
-        
-        <div class="HowItWorksContainer container-fluid text-center">
-            <!--
-            <div class="row row-no-gutter">
-                <div class="HowItWorksPictureColumnLeft text-center">
-                    <img src="Pictures/TrainerRegisterPane2.png" class="TrainerRegisterPane img-responsive" alt="MFN Logo">
+                <div class="Password input-group">
+                  <span class="input-group-addon primary" id="sizing-addon2">
+                    <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
+                    </span>
+                  <input type="password" class="PasswordInput form-control" placeholder="Password" name="Password2"  aria-describedby="sizing-addon2"/>
                 </div>
-                <div class="HowItWorksPictureColumnRight text-center">
-                    <img src="Pictures/ClientRegisterPane2.png" class="ClientRegisterPane img-responsive" alt="MFN Logo">
-                </div>
-            </div>
-            -->
-            <div class="HowItWorksInfoContainer row">
-                <div class="HIWRightPictureColumn text-center">
-                    <img src="MFNDesignSplashPage/MFNHowItWorksBanner.png" class="HIWInfoText img-responsive" alt="HowItWorks Info">
-                </div>
-            </div>
-            <div class="row">
-                <button type="submit" class="HowItWorksButton btn btn-default">CLOSE</button>
-            </div>
+            <div class="newclass">
+                  <asp:Label ID="ErrorLbl" runat="server" Text="*Error" ForeColor="#FF3300" Visible="False"></asp:Label>
+                  <asp:LinkButton ID="LinkButton2" Class="LoginButton2 btn btn-primary btn-lg btn-block" runat="server" OnClick="login_Click">Login</asp:LinkButton>
+                  <asp:CheckBox ID="CheckBox1" Class="TrainerToggle" runat="server"  CssClass="TrainerToggle form-control" Text="Login as Trainer"/>
+             </div>
+
+             <br /><br /><a style="float:right; padding-right:5px" href ="ResetPassword.aspx">Reset Password</a>
         </div>
-        
-        <nav class="HeaderContainer" >
-              <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
-
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="row row-no-gutter">
-                    <div class="HeaderComponentContainer">
-                        <div>
-
-                            <input id="LoginEmailID" class="LoginEmail form-control" name="UserEmail" placeholder="Email Address" runat="server" TextMode="Email" />
-
-                            <input type="password" id="LoginPasswordId" class="LoginPassword form-control" name="Password2" placeholder="Password" runat="server" TextMode="Password"/>
-
-                        </div>
-                        <div>
-                               
-                                <asp:Button ID="LoginButton" class="LoginButton btn btn-default" runat="server" onclick="login_Click" role="button" Text="LOG IN"></asp:Button>
-
-                                <label class="IsAdminLabel">Trainer?</label>
-                                <div class="onoffswitch">
-                                    <asp:CheckBox type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" ID="CheckBox1" runat="server"  CssClass="TrainerToggle form-control" Text="Login as Trainer"/>
-                                    <label class="onoffswitch-label" for="CheckBox1"></label>
-                                    <asp:Label ID="ErrorLbl" runat="server" Text="*Error" ForeColor="#FF3300" Visible="False"></asp:Label>
-                                </div>
-                                 <br /><br /><a style="float:right; padding-right:5px" href ="ResetPassword.aspx">Reset Password</a>
-                        </div>
-                    </div>
-                    <div class="HeaderLogoContainer">
-                        <img src="MFNDesignSplashPage/MFNLogoBlue.png" class="HeaderLogo img-responsive" alt="MFN Logo">
-                    </div>
-                      
-                    </div>
-              </div><!-- /.container-fluid -->
-            </nav>
-
-        <div class="MFNContainer container-fluid text-center">
-            <div class="row">
-                <div class="HeaderLogoPictureColumn col-xs-12 col-sm-12 text-center">
-                    <img src="Pictures/MFNBannerNoBG.png" class="MFNPicture img-responsive" alt="MFN Logo">
-                </div>
-            </div>
-            <button type="submit" class="HowItWorksButton btn btn-default">HOW IT WORKS</button>
+        <div class="FitnessNetworkImageContainer">
+            <img class="FitnessNetworkImage" src="Pictures/MobileFitnessNetworkPic.jpg" alt="Mountain View"/>
         </div>
-        
-        <div class="RegisterContainer container-fluid text-center">
-            <div class="row row-no-gutter">
-                <div class="TrainerRegisterPictureColumn text-center">
-                    <img src="MFNDesignSplashPage/MFNTrainerPanel.png" class="TrainerRegisterPane img-responsive" alt="MFN Logo">
-                </div>
-                <div class="ClientRegisterPictureColumn text-center">
-                    <img src="MFNDesignSplashPage/MFNClientPanel.png" class="ClientRegisterPane img-responsive" alt="MFN Logo">
-                </div>
+        <div class="LoginButtonContainer text-center">
+           <!-- <asp:LinkButton ID="login" Class="LoginButton btn btn-primary btn-lg btn-block" runat="server">Login</asp:LinkButton> -->
+            <asp:LinkButton ID="ClientSignup" Class="ClientSignupButton btn btn-primary btn-lg btn-block" runat="server" OnClick="ClientSignup_Click" >Client Sign Up</asp:LinkButton>
+            <asp:LinkButton ID="TrainerSignup" Class="TrainerSignupButton btn btn-secondary btn-lg btn-block" runat="server" OnClick="signup_Click" >Trainer Sign Up</asp:LinkButton> 
+            <asp:LinkButton ID="about" Class="AboutButton btn btn-primary btn-lg btn-block" runat="server" OnClick="about_Click">How It Works</asp:LinkButton>
             </div>
-        </div>
-        
-        <div class="RegisterFormContainer text-center">
             
-            <label class="RegistrationLabel text-center" id="RegistrationLabelId"></label>
-            
-            <div class="FormInput">
+          <div class="container">
+        <div class="row centered-form">
+        <div id="TrainerSignupPanel" runat="server" class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4" visible ="false">
+        	<div class="panel panel-default">
+        		<div class="panel-heading">
+			    		<h3 class="panel-title">Register as a Trainer</h3>
+			 			</div>
+			 			<div class="panel-body">
 
-              <div class="form-group">
-                  <asp:TextBox runat="server" name="FName" type="text" class="RegisterFormTextBoxFirstName form-control" id="first_name" placeholder="First Name"></asp:TextBox>
-              </div>
-              <div class="form-group">
-                <asp:TextBox runat="server" name="LName" type="text" class="RegisterFormTextBoxLastName form-control" Id="last_name" placeholder="Last Name"></asp:TextBox>
-              </div>
+			    			<div class="row">
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+			                
+			    					 <asp:TextBox  name="FName" id="first_name" class="form-control input-sm" placeholder="First Name" runat="server"/>
+                                    </div>
+			    				</div>
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+                                        <asp:TextBox  name="LName" id="last_name" class="form-control input-sm" placeholder="Last Name" runat="server"/>
+			    					</div>
+			    				</div>
+			    			</div>
 
+			    			<div class="form-group">
+                                <asp:TextBox  name="Email" id="Email" class="form-control input-sm" placeholder="Email Address" runat="server"/>
+			    			
+                            </div>
 
-                <div class="form-group">
-                
-                    <asp:TextBox name="Email" id="Email" class="RegisterFormTextBoxEmail form-control"  placeholder="Email Address" runat="server" TextMode="Email" />
-              </div>
+			    			<div class="row">
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+			    						<input type="password" name="password" id="password" class="form-control input-sm" placeholder="Password"/>
+			    					</div>
+			    				</div>
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+			    						<input type="password" name="Cpassword" id="password_confirmation" class="form-control input-sm" placeholder="Confirm Password"/>
+			    					</div>
+			    				</div>
+			    			</div>
+			    			
+			    			<asp:LinkButton ID = "LinkButton1" Class="btn btn-info btn-block" runat="server" OnClick="startup_Click" >Get Started</asp:LinkButton>
+			    		
 
-              <div class="form-group">
-                <input type="password" class="RegisterFormTextBoxPassword form-control" id="password" placeholder="Password">
-              </div>
-                <div class="form-group">
-                <input type="text" class="RegisterFormTextBoxConfirmPassword form-control" id="password_confirmation" placeholder="Confirm Password">
-              </div>
-                <asp:Label ID="ErrorLabel" runat="server" Text="Password:  length &gt;8, 1 upper, 1 lower, 1 number"></asp:Label>
+			    	</div>
+                  <asp:Label ID="ErrorLabel" runat="server" Text="Password:  length &gt;8, 1 upper, 1 lower, 1 number"></asp:Label>
+	    		</div>
+            <!Register as client below>
+    		</div>
 
-            </div>
-            <button type="submit" ID="LinkButton1" class="GetStartedButton btn btn-default" OnClick="startup_Click">GET STARTED</button>
-        </div>
-        
-        <footer class="Footer">
-            <a href="AdminLogin.aspx"><u>Login as Admin</u></a>
-        </footer>
+            <div id="ClientSignupPanel" runat="server" class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4" visible ="false">
+        	<div class="panel panel-default">
+        		<div class="panel-heading">
+			    		<h3 class="panel-title">Register as a Client</h3>
+			 			</div>
+			 			<div class="panel-body">
+
+			    			<div class="row">
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+                                        <asp:TextBox  name="cFName" id="cfirst_name" class="form-control input-sm" placeholder="First Name" runat="server"/>
+			    					</div>
+			    				</div>
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+                                        <asp:TextBox  name="cLName" id="clast_name" class="form-control input-sm" placeholder="Last Name" runat="server"/>
+			    					</div>
+			    				</div>
+			    			</div>
+
+			    			<div class="form-group">
+                                <asp:TextBox  name="CEmail" id="cemail" class="form-control input-sm" placeholder="Email Address" runat="server"/>
+			    			</div>
+
+			    			<div class="row">
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+			    						<input type="password" name="CLpassword" id="clpassword" class="form-control input-sm" placeholder="Password"/>
+			    					</div>
+			    				</div>
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+			    						<input type="password" name="CCpassword" id="cpassword_confirmation" class="form-control input-sm" placeholder="Confirm Password"/>
+			    					</div>
+			    				</div>
+			    			</div>
+			    			
+			    			<asp:LinkButton ID = "LinkButton3" Class="btn btn-info btn-block" runat="server" OnClick="cstartup_Click" >Get Started</asp:LinkButton>
+			    		
+
+			    	</div>
+                  <asp:Label ID="ErrorLabel2" runat="server" Text="Password:  length &gt;8, 1 upper, 1 lower, 1 number"></asp:Label>
+	    		</div>
+    		</div>
+    	</div>
+    </div>
+        <a href="AdminLogin.aspx"><u>Login as Admin</u></a>
 
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" SelectCommand="SELECT * FROM [MFNTrainerTable]"></asp:SqlDataSource>
         <br />
         <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" SelectCommand="SELECT * FROM [MFNTrainerTable]"></asp:SqlDataSource>
         <br />
         <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" SelectCommand="SELECT * FROM [MFNUserTable]"></asp:SqlDataSource>
-
-    </div>
-   </form>
+    </form>
 </body>
 </html>
