@@ -21,7 +21,7 @@ namespace WebApplication1
         {
             if(!IsPostBack)
             {
-                if (Session["TrainerInfo"] == null)
+              /*  if (Session["TrainerInfo"] == null)
                 {
                     //Forces a redirect to splash page if this page is loaded without a session state.
                     Response.Redirect("Default.aspx");
@@ -30,7 +30,7 @@ namespace WebApplication1
                 {
                     Tobj = (TrainerObject)Session["TrainerInfo"];
                
-                }
+                }*/
             }
         
 
@@ -49,8 +49,14 @@ namespace WebApplication1
             String specialty = DropDownList5.SelectedValue;
             String zip = Zip.Text;
             String equipment = Equipment.Text;
-            int zipInt;
+            // String rateI = rateIndividual.Text;
+            //String rateA = rateAdditional.Text;
+            //String numClients = clientNum.Text;
+            double rateI, rateA;
+         
+            int zipInt, numClients;
             bool isInt = Int32.TryParse(zip, out zipInt);
+
 
             // Check to make sure all fields are filled out
             if(Equipment.Text.Equals("") || Street.Text.Equals("") || State.Text.Equals("") || Zip.Text.Equals("")|| City.Text.Equals("") || gender.Equals("0") || pnumber.Equals("") || height.Equals("0'\"") || specialty.Equals("0") || weight.Equals(""))
@@ -65,9 +71,29 @@ namespace WebApplication1
                 Label1.Text = "Zip code must be a 5 digit number";
                 Label1.Visible = true;
             }
-
+            // quality check the payment info
+            else if (!double.TryParse(rateIndividual.Text, out rateI))
+            {
+                Label1.ForeColor = System.Drawing.Color.Red;
+                Label1.Text = "Please enter an amount in Dollars for the individual hourly rate.";
+                Label1.Visible = true;
+            }
+            // quality check the rate for additional clients
+            else if (!double.TryParse(rateAdditional.Text, out rateA))
+            {
+                Label1.ForeColor = System.Drawing.Color.Red;
+                Label1.Text = "Please enter an amount in Dollars for the additional hourly rate.";
+                Label1.Visible = true;
+            }
+            else if (!Int32.TryParse(clientNum.Text, out numClients))
+            {
+                Label1.ForeColor = System.Drawing.Color.Red;
+                Label1.Text = "Please enter the max number of clients.";
+                Label1.Visible = true;
+            }
             else
             {
+
                 adrs.Address = trainerAddress;
                 adrs.GeoCode();
                 int trainerID = (int)Session["trainerID"];
@@ -77,6 +103,12 @@ namespace WebApplication1
                 Tobj.CopyTrainerObject((TrainerObject)Session["TrainerInfo"]);
                 Tobj.Speciality = specialty;
                 Tobj.Bio = bio;
+                Tobj.Equipment = equipment;
+                Tobj.TrainerId = trainerID;
+                Tobj.IndividualRate = rateI.ToString();
+                Tobj.AdditionalPersonRate = rateA.ToString();
+                Tobj.MaxNumPeople = numClients.ToString();
+
                 Session["TrainerInfo"] = Tobj;
                 SqlConnection trainerLocDB = new SqlConnection(SqlDataSource1.ConnectionString);
                 SqlConnection trainerDB = new SqlConnection(SqlDataSource2.ConnectionString);
@@ -87,7 +119,7 @@ namespace WebApplication1
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd2.CommandType = System.Data.CommandType.Text;
                 cmd.CommandText = "insert into MFNTrainerLocTable ([TrainerLoc_Lat], [TrainerLoc_Long], [TrainerLoc_StreetAddress], [Trainer_Id], [TrainerLoc_Description]) values (@lat, @lng, @home, @id, @description)";
-                cmd2.CommandText = "UPDATE MFNTrainerTable SET Trainer_HomeAddress = @home, Trainer_Bio = @bio, Trainer_Gender = @gender, Trainer_Phone = @phone, Trainer_Specialty = @specialty, Trainer_Weight = @weight, Trainer_Height = @height WHERE Trainer_Id = @id"; 
+                cmd2.CommandText = "UPDATE MFNTrainerTable SET Trainer_HomeAddress = @home, Trainer_Bio = @bio, Trainer_Gender = @gender, Trainer_Phone = @phone, Trainer_Specialty = @specialty, Trainer_Weight = @weight, Trainer_Height = @height, Trainer_Equipment = @equipment, Trainer_IndividualRate = @rateI, Trainer_AdditionalPersonRate = @rateA, Trainer_MaxPeople = @clientNum WHERE Trainer_Id = @id"; 
                 // add values to location table
                 cmd.Parameters.AddWithValue("@lat", dBLat);
                 cmd.Parameters.AddWithValue("@lng", dBLng);
@@ -104,6 +136,11 @@ namespace WebApplication1
                 cmd2.Parameters.AddWithValue("@specialty", specialty);
                 cmd2.Parameters.AddWithValue("@weight", weight);
                 cmd2.Parameters.AddWithValue("@height", height);
+                cmd2.Parameters.AddWithValue("@equipment", equipment);
+                cmd2.Parameters.AddWithValue("@rateI", rateI);
+                cmd2.Parameters.AddWithValue("@rateA", rateA);
+                cmd2.Parameters.AddWithValue("@clientNum", numClients);
+
 
 
                 cmd.Connection = trainerLocDB;

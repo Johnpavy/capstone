@@ -13,7 +13,7 @@ namespace WebApplication1
     public partial class searchTrainersPage : System.Web.UI.Page
     {
         int trainerID;
-        String imagePath, fName, lName, rate;
+        String imagePath, fName, lName, rateIndividual, rateGroup, equipment;
         protected void Page_Load(object sender, EventArgs e)
         {
             // Retrieve session variable from selection from the client profile page
@@ -42,7 +42,11 @@ namespace WebApplication1
                    imagePath = sdr["Trainer_Image"].ToString();
                    fName = sdr["Trainer_FirstName"].ToString();
                    lName = sdr["Trainer_LastName"].ToString();
-                   rate = sdr["Trainer_IndividualRate"].ToString();
+                   
+                   rateIndividual = sdr["Trainer_IndividualRate"].ToString();
+                   rateGroup = sdr["Trainer_AdditionalPersonRate"].ToString();
+                   equipment = sdr["Trainer_Equipment"].ToString();
+                   
                    CreateDiv("div" + x);
                    
                 }
@@ -63,7 +67,7 @@ namespace WebApplication1
             div.Attributes.Add("class", "row centered-form");
             imagePath = imagePath + "ProfilePic.jpg";
             //this line is an absolute nightmare,but it should work!
-            div.InnerHtml = "<div class=\"row centered-form\" runat=\"server\"><div class=\"col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4\"><div class=\"panel panel-default\"><div class=\"panel-heading\"><h3 class=\"panel-title\">Local Trainer</h3></div><div class=\"panel-body\"><img src=\"" + imagePath + "\" class=\"UserPicture img-circle img - responsive\" style=\"width: 50px; height: 50px; \">" + " " + fName + " " + lName + " <a href='" + Request.Url.AbsoluteUri.Replace("searchTrainersPage.aspx", "TrainerViewOnly.aspx?TrainerID=" + trainerID) + "' ><br />Check out their profile</a></div></div></div></div>"; //not completed need button event to launch session!
+            div.InnerHtml = "<div class=\"row centered-form\" runat=\"server\"><div class=\"col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4\"><div class=\"panel panel-default\"><div class=\"panel-heading\"><h3 class=\"panel-title\">Local Trainer</h3></div><div class=\"panel-body\"><img src=\"" + imagePath + "\" class=\"UserPicture img-circle img - responsive\" style=\"width: 50px; height: 50px; \">" + " " + fName + " " + lName + "<br />Equipment: " + equipment +"<br /> Individual Rate: $" + rateIndividual + "/hr <br />Group Rate: $" + rateGroup + "/hr <br /> <a href='" + Request.Url.AbsoluteUri.Replace("searchTrainersPage.aspx", "TrainerViewOnly.aspx?TrainerID=" + trainerID) + "' ><br />Check out their profile</a></div></div></div></div>"; //not completed need button event to launch session!
             TrainerResults.Controls.Add(div);
         }
 
