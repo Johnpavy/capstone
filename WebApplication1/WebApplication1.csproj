@@ -88,7 +88,6 @@
     <Content Include="ConfirmationPage.aspx" />
     <Content Include="CSS\Checkout.css" />
     <Content Include="CSS\TrainerSignup.css" />
-    <Content Include="JS\JavaScript.js" />
     <Content Include="LogOut.aspx" />
     <Content Include="MFNDesignSplashPage\ClientRegisterPane.png" />
     <Content Include="MFNDesignSplashPage\ClientRegisterPane2.png" />
@@ -106,6 +105,7 @@
     <Content Include="MFNDesignSplashPage\TrainerRegisterPane2.png" />
     <Content Include="MFNRoot\Trainers\aspoonamore93%40gmail.com\ProfilePic\ProfilePic.jpg" />
     <Content Include="MFNRoot\Trainers\test%40email\ProfilePic\ProfilePic.jpg" />
+    <Content Include="DefaultNew.aspx" />
     <Content Include="PasswordResetComfirm.aspx" />
     <Content Include="PaymentConfirmation.aspx" />
     <Content Include="Pictures\AdminPic.jpg" />
@@ -211,6 +211,13 @@
     </Compile>
     <Compile Include="CheckOut.aspx.designer.cs">
       <DependentUpon>CheckOut.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DefaultNew.aspx.cs">
+      <DependentUpon>DefaultNew.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DefaultNew.aspx.designer.cs">
+      <DependentUpon>DefaultNew.aspx</DependentUpon>
     </Compile>
     <Compile Include="TransactionObject.cs" />
     <Compile Include="ClientConfirmationPage.aspx.cs">
@@ -378,6 +385,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="JS\" />
     <Folder Include="MFNRoot\Clients\" />
   </ItemGroup>
   <PropertyGroup>
