@@ -27,36 +27,61 @@
             <h2 class="well">Detailed Payment Information:</h2>
             <label>Name: </label>
                <br />
-               <asp:Label ID="Label1" runat="server" class="form-group" Text="Name"></asp:Label>
+               <asp:Label ID="Namelbl" runat="server" class="form-group" Text="Name"></asp:Label>
                <br />
             <br />
             <label>Address: </label>
                <br />
-               <asp:Label ID="Label2" runat="server" class="form-group" Text="Address"></asp:Label>
+               <asp:Label ID="Addresslbl" runat="server" class="form-group" Text="Address"></asp:Label>
                <br />
             <br />
             <label>City: </label>
                <br />
-               <asp:Label ID="Label3" runat="server" class="form-group" Text="City"></asp:Label>
+               <asp:Label ID="Citylbl" runat="server" class="form-group" Text="City"></asp:Label>
                <br />
             <br />
             <label>Zip: </label>
                <br />
-               <asp:Label ID="Label4" runat="server" class="form-group" Text="Zip"></asp:Label>
+               <asp:Label ID="Ziplbl" runat="server" class="form-group" Text="Zip"></asp:Label>
                <br />
             <br />
             <label>Card Type: </label>
                <br />
-               <asp:Label ID="Label5" runat="server" class="form-group" Text="CardType"></asp:Label>
+               <asp:Label ID="Typelbl" runat="server" class="form-group" Text="CardType"></asp:Label>
+               <br />
+            <br />
+               <label>Trainers Standard Rate: </label>
+               <br />
+               $<asp:Label ID="Ratelbl" runat="server" class="form-group" Text="StandardRate"></asp:Label>
+               <br />
+            <br />
+               <label>Additional Persons Rate: </label>
+               <br />
+               $<asp:Label ID="AddPersonRatelbl" runat="server" class="form-group" Text="AdditionalPersons"></asp:Label>
+               <br />
+            <br />
+               <label>Number of People Attending: </label>
+               <br />
+               <asp:Label ID="NumPeoplelbl" runat="server" class="form-group" Text="NumberPeople"></asp:Label>
+               <br />
+            <br />
+            <label>SubTotal: </label>
+               <br />
+               $<asp:Label ID="SubTotallbl" runat="server" class="form-group" Text="CardType"></asp:Label>
+               <br />
+            <br />
+            <label>Service Fee: </label>
+               <br />
+               $<asp:Label ID="ServiceFeelbl" runat="server" class="form-group" Text="ServiceFee"></asp:Label>
                <br />
             <br />
             <!--
-            <asp:Label ID="Label6" runat="server" class="form-group" Text="CardNumber"></asp:Label>
+            <asp:Label ID="CardNumlbl" runat="server" class="form-group" Text="CardNumber"></asp:Label>
             <br />
             -->
             <label>Total: </label>
                <br />
-               <asp:Label ID="Label7" runat="server" class="form-group" Text="Currency"></asp:Label> &nbsp;$<asp:Label ID="Label8" runat="server" class="form-group" Text="Total"></asp:Label>
+               <asp:Label ID="Currencylbl" runat="server" class="form-group" Text="Currency"></asp:Label> &nbsp;$<asp:Label ID="Totallbl" runat="server" class="form-group" Text="Total"></asp:Label>
             <br />
             <asp:Button ID="Button1" Class="btn btn-lg btn-inf center-block" runat="server" OnClick="Button1_Click" Text="Go Home" />
            </div>

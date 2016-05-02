@@ -6,6 +6,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using PayPal.Api;
 using PayPal.Sample;
+using System.Net.Mail;
+using System.Net;
 
 namespace WebApplication1
 {
@@ -13,6 +15,7 @@ namespace WebApplication1
     {
         TransactionObject TranObj = new TransactionObject();
         TrainerObject Tobj = new TrainerObject();
+        UserObject Uobj = new UserObject();
         String calendarID;
         String transactionString;
         string[] transactionInfo = new string[3];
@@ -38,6 +41,7 @@ namespace WebApplication1
             {
                 transactionInfo = transactionString.Split('|');
                 SampleTotal = calcPriceOfSession(transactionInfo);
+                Uobj = (UserObject)Session["UserInfo"];
 
                 /*
                 Tobj.CopyTrainerObject((TrainerObject)Session["TrainerInfo"]);
@@ -59,12 +63,6 @@ namespace WebApplication1
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            //TranObj.IndividaulPersonCost;
-
-
-            //Calc Price Method
-
-            
             // ### Api Context
             // Pass in a `APIContext` object to authenticate 
             // the call and to send a unique request id 
@@ -145,6 +143,7 @@ namespace WebApplication1
                 },
                 payer_info = new PayerInfo
                 {
+                    //Not sure what this does
                     email = "test@email.com"
                 }
             };
@@ -176,6 +175,7 @@ namespace WebApplication1
                 Session["currency"] = "USD";
                 Session["total"] = SampleTotal;
 
+                SendConfirmationEmail(first_name.Text, last_name.Text, address.Text, city.Text, postal_code.Text, card_type.Text, SampleTotal);
                 Response.Redirect("PaymentConfirmation.aspx");
 
             }
@@ -185,11 +185,48 @@ namespace WebApplication1
             }
 
             // ^ Ignore workflow code segment
-            #region Track Workflow
+            //#region Track Workflow
             //  this.flow.RecordResponse(createdPayment);
-            #endregion
+            //#
 
             // For more information, please visit [PayPal Developer REST API Reference](https://developer.paypal.com/docs/api/).
+        }
+
+        private void SendConfirmationEmail(string first_name, string last_name, string address, string city, string postal_code, string card_type, string SampleTotal)
+        {
+            // String firstName = Request.Form["FName"];
+            // String email = Request.Form["email"];
+            string activationCode = Guid.NewGuid().ToString();
+            string userEmail = Uobj.Email;
+
+            //Response.Write("<script>alert('" + email + "')</script>");
+
+            using (MailMessage mm = new MailMessage("MobileFitnessNetwork@gmail.com", userEmail))
+            {
+                mm.Subject = "Training Session Payment Confirmation";
+                string body = "Hello " + first_name + ",";
+
+                
+                body += "<br /><br />Your approved training session has been payed for.";
+                body += "<br /><br /> ---Payment Details---";
+                body += "<br /><br />" + "Name: " + first_name + " " + last_name + "<br />" + "Address: " + address + "<br />" + "City: " + city + "<br />" + "Zip: " + postal_code + "<br />" + 
+                    "Card Type: " + card_type + "<br />" + "Total: " + SampleTotal;
+                
+
+                body += "<br /><br />Thank you";
+                mm.Body = body;
+                mm.IsBodyHtml = true;
+                SmtpClient smtp = new SmtpClient();
+                // the smtp host below will only work for gmail. 
+                smtp.Host = "smtp.gmail.com";
+                smtp.EnableSsl = true;
+                // The function below takes in the email address account that will be used and the associated password
+                NetworkCredential NetworkCred = new NetworkCredential("MobileFitnessNetwork@gmail.com", "6tfc^TFC");
+                smtp.UseDefaultCredentials = true;
+                smtp.Credentials = NetworkCred;
+                smtp.Port = 587;
+                smtp.Send(mm);
+            }
         }
 
         string calcPriceOfSession(string[] info)
@@ -198,21 +235,26 @@ namespace WebApplication1
             double additonalPersonRate = Double.Parse(info[1]);
             int numberOfPeople = Int32.Parse(info[2]);
 
-            baseRateLbl.Text = "Base Rate: $" + standardRate;
+            baseRateLbl.Text = "Base Rate: $" + standardRate.ToString("0.00");
             NumberAttendingLbl.Text = "Number of People Attending: " + numberOfPeople.ToString();
-            AdditionalRateLbl.Text = "Cost From Additional Persons: $" + additonalPersonRate * (numberOfPeople - 1);
-           
+            AdditionalRateLbl.Text = "Cost From Additional Persons: $" + (additonalPersonRate * (numberOfPeople - 1)).ToString("0.00");
 
+            double subTotal;
 
-
-            double subTotal = standardRate + (additonalPersonRate * (numberOfPeople - 1));
-            SubTotalLbl.Text = "Subtotal: $" + subTotal;
-            ServiceCostLbl.Text = "Service Fee: $" + subTotal * 0.05;
+            subTotal = standardRate + (additonalPersonRate * (numberOfPeople - 1));
+            subTotal.ToString("0.00");
+            SubTotalLbl.Text = "Subtotal: $" + subTotal.ToString("0.00");
+            ServiceCostLbl.Text = "Service Fee: $" + (subTotal * 0.05).ToString("0.00");
             double finalTotal = subTotal * 1.05;
+            TotalLbl.Text = "Final Total: $" + finalTotal.ToString("0.00");
 
-            TotalLbl.Text = "Final Total: $" + finalTotal;
+            Session["standard_rate"] = standardRate.ToString("0.00");
+            Session["additional_person"] = (additonalPersonRate * (numberOfPeople - 1)).ToString("0.00");
+            Session["number_people"] = numberOfPeople.ToString();
+            Session["service_fee"] = (subTotal * 0.05).ToString("0.00");
+            Session["sub_total"] = subTotal.ToString("0.00");
 
-            return finalTotal.ToString();
+            return finalTotal.ToString("0.00");
 
         }
 

@@ -12,27 +12,37 @@ namespace WebApplication1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            string field1 = (string)(Session["first_name"]);
-            string field2 = (string)(Session["address"]);
-            string field3 = (string)(Session["city"]);
-            string field4 = (string)(Session["postal_code"]);
-            string field5 = (string)(Session["card_type"]);
-            //string field6 = (string)(Session["card_number"]);
-            string field7 = (string)(Session["currency"]);
-            string field8 = (string)(Session["total"]);
+            string first_name = (string)(Session["first_name"]);
+            string address = (string)(Session["address"]);
+            string city = (string)(Session["city"]);
+            string zip = (string)(Session["postal_code"]);
+            string type = (string)(Session["card_type"]);
+            //string card_num = (string)(Session["card_number"]);
+            string service_fee = (string)(Session["service_fee"]);
+            string standard_rate = (string)(Session["standard_rate"]);
+            string additional_person = (string)(Session["additional_person"]);
+            string number_people = (string)(Session["number_people"]);
+            string sub_total = (string)(Session["sub_total"]);
+            string currency = (string)(Session["currency"]);
+            string total = (string)(Session["total"]);
      
             // var frm1 = new CheckOut();
             // frm1.ShowDialog(this); // make sure this instance of Form1 is visible
             // Label1.Text = frm1.MyValue;
 
-            Label1.Text = field1;
-            Label2.Text = field2;
-            Label3.Text = field3;
-            Label4.Text = field4;
-            Label5.Text = field5;
-            //Label6.Text = field6;
-            Label7.Text = field7;
-            Label8.Text = field8;
+            Namelbl.Text = first_name;
+            Addresslbl.Text = address;
+            Citylbl.Text = city;
+            Ziplbl.Text = zip;
+            Typelbl.Text = type;
+            //CardNumlbl.Text = card_num;
+            Ratelbl.Text = standard_rate;
+            AddPersonRatelbl.Text = additional_person;
+            NumPeoplelbl.Text = number_people;
+            ServiceFeelbl.Text = service_fee;
+            SubTotallbl.Text = sub_total;
+            Currencylbl.Text = currency;
+            Totallbl.Text = total;
 
             int calendarID = Int32.Parse(Session["CalendarID"].ToString());
 
