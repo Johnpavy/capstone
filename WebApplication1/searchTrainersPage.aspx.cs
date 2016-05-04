@@ -17,46 +17,103 @@ namespace WebApplication1
         protected void Page_Load(object sender, EventArgs e)
         {
             // Retrieve session variable from selection from the client profile page
-            String selection = (String)Session["Selection"];
+            bool isNameSearch = (bool)Session["NameSearch"];
             SqlConnection db = new SqlConnection(SqlDataSource1.ConnectionString);
             SqlCommand cmd = new SqlCommand();
             int x = 0;
             cmd.CommandType = System.Data.CommandType.Text;
             cmd.Connection = db;
-           
 
-            try
+            if (!isNameSearch)
             {
-                cmd.CommandText = "Select * FROM [MFNTrainerTable] WHERE Trainer_Specialty = @selection AND Trainer_VerifiedCert = @verified";
-                
-                db.Open();
 
-                cmd.Parameters.AddWithValue("@selection", selection);
-                cmd.Parameters.AddWithValue("@verified", true);
-                SqlDataReader sdr = cmd.ExecuteReader();
+                String selection = (String)Session["Selection"];
+               
 
-                while (sdr.Read())
+
+                try
                 {
-                   
-                   trainerID = Int32.Parse(sdr["Trainer_Id"].ToString());
-                   imagePath = sdr["Trainer_Image"].ToString();
-                   fName = sdr["Trainer_FirstName"].ToString();
-                   lName = sdr["Trainer_LastName"].ToString();
-                   
-                   rateIndividual = sdr["Trainer_IndividualRate"].ToString();
-                   rateGroup = sdr["Trainer_AdditionalPersonRate"].ToString();
-                   equipment = sdr["Trainer_Equipment"].ToString();
-                   
-                   CreateDiv("div" + x);
-                   
+                    cmd.CommandText = "Select * FROM [MFNTrainerTable] WHERE Trainer_Specialty = @selection AND Trainer_VerifiedCert = @verified";
+
+                    db.Open();
+
+                    cmd.Parameters.AddWithValue("@selection", selection);
+                    cmd.Parameters.AddWithValue("@verified", true);
+                    SqlDataReader sdr = cmd.ExecuteReader();
+
+                    while (sdr.Read())
+                    {
+
+                        trainerID = Int32.Parse(sdr["Trainer_Id"].ToString());
+                        imagePath = sdr["Trainer_Image"].ToString();
+                        fName = sdr["Trainer_FirstName"].ToString();
+                        lName = sdr["Trainer_LastName"].ToString();
+
+                        rateIndividual = sdr["Trainer_IndividualRate"].ToString();
+                        rateGroup = sdr["Trainer_AdditionalPersonRate"].ToString();
+                        equipment = sdr["Trainer_Equipment"].ToString();
+
+                        CreateDiv("div" + x);
+
+                    }
+                    if (!sdr.HasRows)
+                    {
+                        ErrorLbl.Visible = true;
+                        ErrorLbl.Text = "No trainers found in your area.";
+                    }
+                }
+                catch
+                {
+                    ErrorLbl.Visible = true;
+                    ErrorLbl.Text = "Error while reading from Database";
                 }
 
+
+
             }
-            catch
+            else
             {
-                ErrorLbl.Visible = true;
-                ErrorLbl.Text = "Error while reading from Database";
+                String trainerToSearchFor = "%" + (String)Session["TrainerName"] + "%";
+
+                try
+                {
+                    cmd.CommandText = "Select * FROM [MFNTrainerTable] WHERE Trainer_FirstName like @trainerName OR Trainer_LastName like @trainerName OR Trainer_FirstName + ' ' +Trainer_LastName + ' ' like @trainerName AND Trainer_VerifiedCert = @verified";
+
+                    db.Open();
+
+                    cmd.Parameters.AddWithValue("@trainerName", trainerToSearchFor);
+                    cmd.Parameters.AddWithValue("@verified", true);
+                    SqlDataReader sdr = cmd.ExecuteReader();
+
+                    while (sdr.Read())
+                    {
+
+                        trainerID = Int32.Parse(sdr["Trainer_Id"].ToString());
+                        imagePath = sdr["Trainer_Image"].ToString();
+                        fName = sdr["Trainer_FirstName"].ToString();
+                        lName = sdr["Trainer_LastName"].ToString();
+
+                        rateIndividual = sdr["Trainer_IndividualRate"].ToString();
+                        rateGroup = sdr["Trainer_AdditionalPersonRate"].ToString();
+                        equipment = sdr["Trainer_Equipment"].ToString();
+
+                        CreateDiv("div" + x);
+
+                    }
+                    if(!sdr.HasRows)
+                    {
+                        ErrorLbl.Visible = true;
+                        ErrorLbl.Text = "No trainers found in your area with that name.";
+                    }
+
+                }
+                catch
+                {
+                    ErrorLbl.Visible = true;
+                    ErrorLbl.Text = "Error while reading from Database";
+                }
             }
+           
 
         }
         private void CreateDiv(string divId)

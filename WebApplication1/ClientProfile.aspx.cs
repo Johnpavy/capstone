@@ -19,7 +19,7 @@ namespace WebApplication1
     public partial class WebForm1 : System.Web.UI.Page
     {
         UserObject Uobj = new UserObject();
-
+       
         protected void Page_Load(object sender, EventArgs e)
         {
             //needs to be added to every page in the page load to prevent back on logout.
@@ -58,7 +58,9 @@ namespace WebApplication1
             else
             {
                 Session["Selection"] = DropDownList1.SelectedValue;
+                Session["NameSearch"] = false;
                 Response.Redirect("searchTrainersPage.aspx");
+                
             }
 
         }
@@ -231,5 +233,23 @@ namespace WebApplication1
 
         }
 
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            String name = TextBox1.Text;
+            if(name.Equals(""))
+            {
+               
+                Label1.Text = "Enter a name to search";
+                Label1.Visible = true;
+            
+            }
+            else
+            {
+                Session["TrainerName"] = name;
+                Session["NameSearch"] = true;
+                Response.Redirect("searchTrainersPage.aspx");
+            }
+            
+        }
     }
 }

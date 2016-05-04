@@ -163,6 +163,9 @@
                             </li>
                           </ul>
                         </div><!-- /.navbar-collapse -->
+                          <asp:TextBox ID="TextBox1" runat="server" CssClass="form-control" Width="10%"></asp:TextBox>
+                          <asp:Button ID="Button1" runat="server" Text="Search by Name" CssClass ="btn btn-primary" OnClick="Button1_Click"/>
+                          <asp:Label ID="Label2" runat="server" ForeColor="Red" Text="Label" Visible="False"></asp:Label>
                       </div><!-- /.container-fluid -->
                     </nav>
                 </div>
