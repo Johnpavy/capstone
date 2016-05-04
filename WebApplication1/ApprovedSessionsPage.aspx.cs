@@ -106,6 +106,9 @@ namespace WebApplication1
                 ErrorLbl.Text = "Error while reading from Database2";
             }
 
+            string sessionDetails;
+            sessionDetails = "Your session with " + fName + " " + lName + " will occur on " + date + ", and go from " + startTime + " to " + endTime;
+            Session["session_details"] = sessionDetails;
 
             HtmlGenericControl div = new HtmlGenericControl("div");
             div.Attributes.Add("id", divId);
