@@ -105,7 +105,7 @@
     <Content Include="MFNDesignSplashPage\TrainerRegisterPane2.png" />
     <Content Include="MFNRoot\Trainers\aspoonamore93%40gmail.com\ProfilePic\ProfilePic.jpg" />
     <Content Include="MFNRoot\Trainers\test%40email\ProfilePic\ProfilePic.jpg" />
-    <Content Include="DefaultNew.aspx" />
+    <Content Include="Default.aspx" />
     <Content Include="PasswordResetComfirm.aspx" />
     <Content Include="PaymentConfirmation.aspx" />
     <Content Include="Pictures\AdminPic.jpg" />
@@ -133,12 +133,13 @@
     <Content Include="Pictures\UserPicture.jpg" />
     <Content Include="ResetPassword.aspx" />
     <Content Include="searchTrainersPage.aspx" />
+    <Content Include="TestSplashPage.aspx" />
     <Content Include="ThankYou.aspx" />
     <Content Include="TrainerScheduler.aspx" />
     <Content Include="TrainerSignup.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Pictures\MobileFitnessNetworkPic.jpg" />
-    <Content Include="Default.aspx" />
+    <Content Include="OldDefault.aspx" />
     <Content Include="TrainerViewOnly.aspx" />
     <Content Include="UploadProfilePic.aspx" />
     <Content Include="UserProfile.aspx" />
@@ -212,12 +213,19 @@
     <Compile Include="CheckOut.aspx.designer.cs">
       <DependentUpon>CheckOut.aspx</DependentUpon>
     </Compile>
-    <Compile Include="DefaultNew.aspx.cs">
-      <DependentUpon>DefaultNew.aspx</DependentUpon>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="DefaultNew.aspx.designer.cs">
-      <DependentUpon>DefaultNew.aspx</DependentUpon>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestSplashPage.aspx.cs">
+      <DependentUpon>TestSplashPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestSplashPage.aspx.designer.cs">
+      <DependentUpon>TestSplashPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="TransactionObject.cs" />
     <Compile Include="ClientConfirmationPage.aspx.cs">
@@ -306,12 +314,12 @@
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
+    <Compile Include="OldDefault.aspx.cs">
+      <DependentUpon>OldDefault.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
+    <Compile Include="OldDefault.aspx.designer.cs">
+      <DependentUpon>OldDefault.aspx</DependentUpon>
     </Compile>
     <Compile Include="TrainerViewOnly.aspx.cs">
       <DependentUpon>TrainerViewOnly.aspx</DependentUpon>

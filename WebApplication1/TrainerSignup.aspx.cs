@@ -40,7 +40,10 @@ namespace WebApplication1
         {
             
             Adress adrs = new Adress();
-            String trainerAddress = Street.Text + " " + City.Text + " " + State.Text;
+            String streetAddr = Street.Text;
+            String cityAddr = City.Text;
+            String stateAddr = State.Text;
+            String trainerAddress = streetAddr + " " + cityAddr + " " + stateAddr;
             String bio = Bio.Text;
             String gender = DropDownList3.SelectedValue;
             String pnumber = Phone.Text;

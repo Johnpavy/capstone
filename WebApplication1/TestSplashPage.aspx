@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="DefaultNew.aspx.cs" Inherits="WebApplication1.NewDefault" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="TestSplashPage.aspx.cs" Inherits="WebApplication1.TestSplashPage" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -217,7 +217,8 @@
     
 </head>
 <body>
-    <form runat ="server">
+    <form runat="server">
+
 
     <div class="content">
         
@@ -256,15 +257,13 @@
                             <asp:TextBox runat="server" name = "Password" class="LoginPassword form-control" id="LoginPasswordId" placeholder="Password"></asp:TextBox>
                         </div>
                         <div>
-                                <asp:LinkButton runat="server" type="submit" OnClick="login_Click" class="LoginButton btn btn-default">LOG IN</asp:LinkButton>
-                    
+                                 <asp:LinkButton runat="server" type="submit" OnClick="login_Click" class="LoginButton btn btn-default">LOG IN</asp:LinkButton>
                                 <label class="IsAdminLabel">Trainer?</label>
                                 <div class="onoffswitch">
                                     <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
                                     <label class="onoffswitch-label" for="myonoffswitch"></label>
                                 </div>
                         </div>
-                        <asp:Label ID="ErrorLbl" runat="server" Text="Label" Visible="False"></asp:Label>
                     </div>
                     <div class="HeaderLogoContainer">
                         <img src="MFNDesignSplashPage/MFNLogoBlue.png" class="HeaderLogo img-responsive" alt="MFN Logo">
@@ -301,41 +300,33 @@
             <div class="FormInput">
             <div class="RegisterNameForm form-inline">
               <div class="form-group">
-                <asp:TextBox runat = "server" type="text" class="RegisterFormTextBoxFirstName form-control" Id="firstName" placeholder="First Name"> </asp:TextBox>
+                <asp:TextBox runat = "server" type="text" class="RegisterFormTextBoxFirstName form-control" Id="RegisterFormTextBoxFirstNameId" placeholder="First Name"> </asp:TextBox>
               </div>
               <div class="form-group">
-                <asp:TextBox runat="server" type="text" class="RegisterFormTextBoxLastName form-control" Id = "lastName" placeholder="Last Name"></asp:TextBox>
+                <input type="email" class="RegisterFormTextBoxLastName form-control" placeholder="Last Name">
               </div>
             </div>
             <div class="RegisterEmailForm form-inline">
                 <div class="form-group">
-                <asp:TextBox runat="server" type="email" class="RegisterFormTextBoxEmail form-control" ID="emailBox" placeholder="Email"></asp:TextBox>
+                <input type="text" class="RegisterFormTextBoxEmail form-control" placeholder="Email">
               </div>
             </div>
             <div class="RegisterPasswordForm form-inline">
               <div class="form-group">
-                <asp:TextBox runat="server" type="password" class="RegisterFormTextBoxPassword form-control" Id = "passwordBox" placeholder="Password"></asp:TextBox>
+                <input type="password" class="RegisterFormTextBoxPassword form-control" placeholder="Password">
               </div>
                 <div class="form-group">
-                <asp:TextBox runat="server" type="text" class="RegisterFormTextBoxConfirmPassword form-control" Id = "cPasswordBox" placeholder="Confirm Password"></asp:TextBox>
-
-                </div>
-
-                
+                <input type="text" class="RegisterFormTextBoxConfirmPassword form-control" placeholder="Confirm Password">
+              </div>
             </div>
             </div>
-            <asp:LinkButton runat="server" type="submit" OnClick="startup_Click" class="GetStartedButton btn btn-default">GET STARTED</asp:LinkButton>
-            <br />
-            <asp:Label ID="ErrorLabel" runat="server" Text="Label"></asp:Label>
+            <button type="submit" class="GetStartedButton btn btn-default">GET STARTED</button>
         </div>
         
         <footer class="Footer">
-            <asp:CheckBox ID="IsClientRegisterCheckbox" runat="server" />
-            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" SelectCommand="SELECT * FROM [MFNTrainerTable]"></asp:SqlDataSource>
             <a href="#">Admin Login</a>
-            <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" SelectCommand="SELECT * FROM [MFNUserTable]"></asp:SqlDataSource>
+            <asp:CheckBox ID="IsClientRegisterCheckbox" runat="server" />
         </footer>
-
 </div>
 </form>
 </body>
