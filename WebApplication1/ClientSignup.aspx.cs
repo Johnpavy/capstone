@@ -21,7 +21,7 @@ namespace WebApplication1
         {
             if (!IsPostBack)
             {
-               /* if (Session["UserInfo"] == null)
+                if (Session["UserInfo"] == null)
                 {
                     //Forces a redirect to splash page if this page is loaded without a session state.
                     Response.Redirect("Default.aspx");
@@ -30,7 +30,7 @@ namespace WebApplication1
                 {
                     Uobj = (UserObject)Session["UserInfo"];
 
-                }*/
+                }
             }
         }
 
