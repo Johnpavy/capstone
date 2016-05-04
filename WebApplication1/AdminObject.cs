@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
+
+//This object is used to hold information on an Admin from the database
+//inorder to pass this information as a session state.
 namespace WebApplication1
 {
     public class AdminObject

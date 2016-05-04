@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
+/*
+This object contains information needed to calculate the cost of a session
+The individualCost is the cost for 1 person per hour
+The additonalPersonCost is the cost for each additonal person per hour
+The numberAttending is the TOTAl number of people attending (individual + additional persons).
+*/
+
 namespace WebApplication1
 {
     public class TransactionObject
@@ -36,6 +43,9 @@ namespace WebApplication1
             set { numberAttending = value; }
         }
 
+        //ToString()
+        //This Function is needed so that these values maybe passed via URl to the CheckoutPage
+        // "|" is a safe delimiter in the URL.
         new public string ToString()
         {
             return this.IndividualCost + "|" + this.AdditionalPersonCost + "|" + this.NumberAttending;
