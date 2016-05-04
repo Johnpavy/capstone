@@ -273,7 +273,7 @@
                         <div>
                             <asp:TextBox runat="server" name = "UserName" class="LoginEmail form-control" id="LoginEmailId" placeholder="Email"></asp:TextBox>
 
-                            <asp:TextBox runat="server" name = "Password" class="LoginPassword form-control" id="LoginPasswordId" placeholder="Password"></asp:TextBox>
+                            <asp:TextBox runat="server" name = "Password" class="LoginPassword form-control" id="LoginPasswordId" placeholder="Password" TextMode="Password"></asp:TextBox>
                         </div>
                         <div>
                                 <asp:LinkButton runat="server" type="submit" OnClick="login_Click" class="LoginButton btn btn-default">LOG IN</asp:LinkButton>

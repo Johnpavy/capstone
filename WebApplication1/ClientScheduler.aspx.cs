@@ -27,6 +27,7 @@ namespace WebApplication1
         protected void Page_Load(object sender, EventArgs e)
         {
             Tobj = (TrainerObject)Session["TrainerInfo"];
+
             //needs to be added to every page in the page load to prevent back on logout.
             Response.Cache.SetCacheability(HttpCacheability.NoCache);
             Response.Cache.SetExpires(DateTime.UtcNow.AddHours(-1));
@@ -36,6 +37,8 @@ namespace WebApplication1
             //For now, this is a query to MFNTrainerTable to emulate this.
             //This will pull the stuff under trainer 86
 
+            //SqlDataSource1: MFNTrainerTable
+            //This loads Trainer Information from DB into the local instance of Tobj
             SqlConnection db = new SqlConnection(SqlDataSource1.ConnectionString);
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = System.Data.CommandType.Text;
@@ -90,6 +93,8 @@ namespace WebApplication1
                 }
             }
 
+            //This section of code populates the date text box with the current date, or
+            //the date that was selected by the Client previously
             string startDate = Calendar1.TodaysDate.ToShortDateString();
 
             if (Session["SelectedDate"] == null)
@@ -112,9 +117,6 @@ namespace WebApplication1
                     ListItem l = new ListItem(number, number, true);
                     NumberInAttendance.Items.Add(l);
 
-                    //for dynamic div testing
-                    // CreateDiv("div"+x);
-
                 }
 
                 LocationDrpDown.Items.Clear();
@@ -127,7 +129,10 @@ namespace WebApplication1
 
 
 
-
+            //SqlDataSource2: MFNBlockedDatesTable
+            //This counts the blocked dates as defined by the Trainer.
+            //These are populated into arrays that will be used to poulate
+            //the calendar
             SqlConnection db2 = new SqlConnection(SqlDataSource2.ConnectionString);
             SqlCommand cmd2 = new SqlCommand();
             cmd2.CommandType = System.Data.CommandType.Text;
@@ -172,11 +177,13 @@ namespace WebApplication1
 
         }
 
+        //This redirects to ClientProfile Page
         protected void BackToProfile_Click(object sender, EventArgs e)
         {
             Response.Redirect("ClientProfile.aspx");
         }
 
+        //This Checks and Holds the changed date from the calendar
         protected void Calendar1_SelectionChanged(object sender, EventArgs e)
         {
             Session["SelectedDate"] = Calendar1.SelectedDate.ToShortDateString();
@@ -184,6 +191,8 @@ namespace WebApplication1
 
         }
 
+        //This populates the calendar with blocked and partially blocked
+        //dates from the blockedFulldays and blockedPartialDays arrays
         protected void Calendar1_DayRender(object sender, DayRenderEventArgs e)
         {
 
@@ -208,6 +217,8 @@ namespace WebApplication1
 
         }
 
+        //This method converts time in the HH:MM AM/PM format into
+        // HH:MM:SS format to be stored on the database
         protected string convertAMPMTime(string time)
         {
             string timeValue;
@@ -511,6 +522,9 @@ namespace WebApplication1
             return timeValue;
         }
 
+        //This method makes sure that the time selected by the Client is
+        //Valid. Times must be in one hour blocks, and StartTime must be
+        //Less then the EndTime.
         protected bool GetValidTime(string startTime, string endTime)
         {
             int startValue, endValue;
@@ -1115,6 +1129,7 @@ namespace WebApplication1
             }
         }
 
+        //This method sends out a request for a session with the Trainer
         protected void RequestAppointmentBtn_Click(object sender, EventArgs e)
         {
             string startTime;
@@ -1271,22 +1286,12 @@ namespace WebApplication1
             }
 
           //Response.Redirect("ClientScheduler.aspx");
+
+            //NEED TO SEND OUT EMAIL
         }
 
-
-
-
-        private void CreateDiv(string divId)
-        {
-            HtmlGenericControl div = new HtmlGenericControl("div");
-            div.Attributes.Add("id", divId);
-            div.Attributes.Add("runat", "server");
-            div.Attributes.Add("class", "row centered-form");
-            //this line is an absolute nightmare,but it should work!
-            div.InnerHtml = "<div class=\"row centered-form\" runat=\"server\"><div class=\"col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4\"><div class=\"panel panel-default\"><div class=\"panel-heading\"><h3 class=\"panel-title\">Approved Session</h3></div><div class=\"panel-body\"><img src=\""+ Tobj.ImagePath+ "\" class=\"UserPicture img-circle img - responsive\" style=\"width: 50px; height: 50px; \">" + Tobj.FirstName + " " + Tobj.LastName + " has accepted your session! <a href=\"CheckOut.aspx\">Click Here to Pay!</a></div></div></div></div>"; //not completed need button event to launch session!
-            YourComfirmedSessions.Controls.Add(div); 
-        }
-
+        //This method Dynamically Adds all address that the trainer and user have associated with their
+        //profiles
         private void AddTrainerAndUserLocations()
         {
             ListItem l = new ListItem("---User Addresses---", "", true);
@@ -1340,7 +1345,8 @@ namespace WebApplication1
 
         }
 
-        
+       //This method checks to make sure that a client is not attempting to request a session
+       //on a date that the Trianer has marked off as unavaliable. 
         private bool isTimeFreeOnPartiallyBlockedDate(string ClientStrartTime, string ClientEndTime)
         {
             //returns false is time is blocked, true if time is avaliable
@@ -1433,35 +1439,6 @@ namespace WebApplication1
             {
                 return false;
             }
-            /*
-            else if(count > 0)
-            {
-
-                int clientStart = getTimeValue(ClientStrartTime);
-                int clientEnd = getTimeValue(ClientEndTime);
-                int trainerStart = getTimeValue(TrainerStartTime);
-                int trainerEnd = getTimeValue(TrainerEndTime);
-
-                if(clientEnd > trainerStart && clientEnd < trainerEnd)
-                {
-                    return false;
-                }
-                else if(clientStart > trainerStart && clientStart < trainerEnd)
-                {
-                    return false;
-                }
-                else if(clientStart < trainerStart && clientEnd > trainerEnd)
-                {
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
-
-
-            }
-                */
             else
             {
                 return true;
@@ -1471,6 +1448,9 @@ namespace WebApplication1
 
         }
 
+
+        //This method gets the value associated with a time inorder to check if it comes before 
+        //or after another time
         int getTimeValue(string time)
         {
             int value;

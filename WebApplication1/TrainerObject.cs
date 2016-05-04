@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
+//This object is used for holding data from the MFNTrainerTable
+//This allows a local instance to be created and passed as a sessions state.
+
 namespace WebApplication1
 {
     public class TrainerObject
