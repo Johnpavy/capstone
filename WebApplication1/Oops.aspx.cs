@@ -16,6 +16,7 @@ namespace WebApplication1
 
         protected void Button1_Click(object sender, EventArgs e)
         {
+            //redirect to the home page
             Response.Redirect("Default.aspx");
         }
     }

@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="UploadProfilePic.aspx.cs" Inherits="WebApplication1.UploadProfilePic" %>
 
 <!DOCTYPE html>
-
+<!-- THIS PAGE WAS MADE FOR TESTING THE FILE UPLOADER -->
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>

@@ -34,6 +34,7 @@ namespace WebApplication1
 
         private static string CreatePasswordHash(string pwd, string salt)
         {
+            //hash the password
             string saltAndPwd = String.Concat(pwd, salt);
             string hashedPwd = FormsAuthentication.HashPasswordForStoringInConfigFile(saltAndPwd, "sha1");
             return hashedPwd;
@@ -44,7 +45,7 @@ namespace WebApplication1
             String password = TextBox1.Text;
             String CPassword = TextBox2.Text;
             string message = string.Empty;
-
+            //user and trainer database connections
             SqlConnection trainerDB = new SqlConnection(SqlDataSource1.ConnectionString);
             SqlConnection clientDB = new SqlConnection(SqlDataSource2.ConnectionString);
 
@@ -82,7 +83,7 @@ namespace WebApplication1
                 ErrorLabel2.Visible = true;
                 trainerDB.Close();
             }
-            else if (!password.Equals(CPassword))
+            else if (!password.Equals(CPassword)) //checks if passwords match
             {
                 ErrorLabel2.ForeColor = System.Drawing.Color.Red;
                 ErrorLabel2.Text = "Passwords must match.";
@@ -97,6 +98,7 @@ namespace WebApplication1
                 string salt = CreateSalt(125);
                 string hashedPassword = CreatePasswordHash(password, salt);
                 int count = -1;
+                //used to identify user
                 string activationCode = !string.IsNullOrEmpty(Request.QueryString["ActivationCode"]) ? Request.QueryString["ActivationCode"] : Guid.Empty.ToString();
                 SqlConnection con = new SqlConnection(SqlDataSource1.ConnectionString); //trainer database
                 SqlConnection con2 = new SqlConnection(SqlDataSource2.ConnectionString); //user database
@@ -116,7 +118,7 @@ namespace WebApplication1
 
                 try
                 {
-                    if (count == 0)
+                    if (count == 0) 
                     {
                         //if not found in trainer db, update user database
                         cmd.Connection = con2;
