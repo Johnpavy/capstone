@@ -18,8 +18,8 @@ namespace WebApplication1
     
     public partial class WebForm1 : System.Web.UI.Page
     {
-        UserObject Uobj = new UserObject();
-       
+        UserObject Uobj = new UserObject(); //create user object
+
         protected void Page_Load(object sender, EventArgs e)
         {
             //needs to be added to every page in the page load to prevent back on logout.
@@ -35,9 +35,9 @@ namespace WebApplication1
             else
             {
                 Uobj.CopyUserObject((UserObject)Session["UserInfo"]);
-                PrefTextBox.Text = Uobj.TrainingPref;
-                AvaEquipTxt.Text = Uobj.Equipment;
-                UserNameLbl.Text = Uobj.FirstName + " " + Uobj.LastName + " ";
+                PrefTextBox.Text = Uobj.TrainingPref; //display training prefrences in text box
+                AvaEquipTxt.Text = Uobj.Equipment; //display available equipment in textbox
+                UserNameLbl.Text = Uobj.FirstName + " " + Uobj.LastName + " "; //combine first and last name for username label
 
                 //changes default profile pic to user uploaded one
                 if (Uobj.ImagePath != "")
@@ -50,7 +50,7 @@ namespace WebApplication1
         }
         protected void SearchBtn_Click(object sender, EventArgs e)
         {
-            if(DropDownList1.SelectedValue == "")
+            if(DropDownList1.SelectedValue == "") //drop down list for search trainer by training type
             {
                 ErrorLbl.Visible = true;
                 ErrorLbl.Text = "You must select a type of training";
@@ -67,38 +67,43 @@ namespace WebApplication1
 
         protected void ComfirmUpdateTrainerPrefButton2_Click(object sender, EventArgs e)
         {
+            //this is for the update button within the model
             string newTrainPref = TrainerPrefTxt.Text;
-
+            //limit to 2000 characters
             if (newTrainPref.Length < 2000)
             {
+                //place all of this info into the user session object 
                 Uobj.TrainingPref = newTrainPref;
                 Session["UserInfo"] = Uobj;
-
+                //update the database with this new info
                 SqlConnection db = new SqlConnection(SqlDataSource1.ConnectionString);
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd.Connection = db;
-
+                //SQL command
                 cmd.CommandText = "UPDATE [MFNUserTable] SET User_TrainingPref = @trainPref where User_Id = @id";
-
+                //SQL parameters with newly added values
                 cmd.Parameters.AddWithValue("@id", Uobj.UserId);
                 cmd.Parameters.AddWithValue("@trainPref", newTrainPref);
 
                 try
                 {
-                    db.Open();
+                    //attempt to write to the database
+                    db.Open(); 
                     cmd.ExecuteNonQuery();
                 }
                 catch
                 {
+                    //error
                     PrefFailLbl.Text = "We failed horribly!";
                     PrefFailLbl.Visible = true;
                 }
                 finally
                 {
+                    //finish, and close the database connection
                     db.Close();
                 }
-
+                //refresh the page
                 Response.Redirect(Request.RawUrl);
 
             }
@@ -111,38 +116,43 @@ namespace WebApplication1
 
         protected void ComfirmUpdateAvaEquipButton2_Click(object sender, EventArgs e)
         {
+            //this is for the update button within the model
             string newAvaEquip = AvailableEquipTxt.Text;
-
+            //limit to 2000 characters
             if (newAvaEquip.Length < 2000)
             {
+                //place all of this info into the user session object 
                 Uobj.Equipment = newAvaEquip;
                 Session["UserInfo"] = Uobj;
-
+                //update the database with this new info
                 SqlConnection db = new SqlConnection(SqlDataSource1.ConnectionString);
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd.Connection = db;
-
+                //SQL command
                 cmd.CommandText = "UPDATE [MFNUserTable] SET User_Equipment = @equipment where User_Id = @id";
-
+                //SQL parameters with newly added values
                 cmd.Parameters.AddWithValue("@id", Uobj.UserId);
                 cmd.Parameters.AddWithValue("@equipment", newAvaEquip);
 
                 try
                 {
+                    //attempt to write to the database
                     db.Open();
                     cmd.ExecuteNonQuery();
                 }
                 catch
                 {
+                    //error
                     PrefFailLbl.Text = "We failed horribly!";
                     PrefFailLbl.Visible = true;
                 }
                 finally
                 {
+                    //finish, and close the database connection
                     db.Close();
                 }
-
+                // refresh the page
                 Response.Redirect(Request.RawUrl);
 
             }
@@ -207,7 +217,9 @@ namespace WebApplication1
                         // Notify the user that their file was successfully uploaded.
                         // myStringVariable = "Your file was uploaded successfully to: " + savePath;
                         // ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + myStringVariable + "');", true);
-                        Response.Redirect(Request.RawUrl);
+                        // refresh the profile page
+                        Response.Redirect(Request.RawUrl); //THIS DOESNT ALWAYS WORK FOR SOME REASON
+                        //SOMETIMES YOU NEED TO MANUALLY REFRESH THE PAGE 
                     }
                     else
                     {
@@ -233,7 +245,7 @@ namespace WebApplication1
 
         }
 
-        protected void Button1_Click(object sender, EventArgs e)
+        protected void Button1_Click(object sender, EventArgs e) //search trainer by name
         {
             String name = TextBox1.Text;
             if(name.Equals(""))

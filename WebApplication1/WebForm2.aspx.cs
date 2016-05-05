@@ -20,8 +20,8 @@ namespace WebApplication1
         TrainerObject Tobj = new TrainerObject(); //create trainer object
 
         protected void Page_Load(object sender, EventArgs e)
-        { 
-
+        {
+            //needs to be added to every page in the page load to prevent back on logout.
             HttpContext.Current.Response.AddHeader("Cache-Control", "no-cache, no-store, must-revalidate");
             HttpContext.Current.Response.AddHeader("Pragma", "no-cache");
             HttpContext.Current.Response.AddHeader("Expires", "0");
@@ -112,7 +112,7 @@ namespace WebApplication1
                 }
                 finally
                 {
-                    //finish, and close the database
+                    //finish, and close the database connection
                     db.Close();
                 }
                 //refresh the page
