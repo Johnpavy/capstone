@@ -208,7 +208,7 @@
                       <div id="collapse3" class="panel-collapse collapse">
                         <div class="panel-body">
                             For an idividual session $<asp:Label ID="IndividualRatesLbl" runat="server" Text=""></asp:Label> per hour.
-                                                        <!--Trigger Modal with a button -->
+                            <!--Trigger Modal with a button -->
                             <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal2" style="float:right;">Edit Rates</button><br />
                             For each additional person $<asp:Label ID="AdditionalPersonRateLbl" runat="server" Text=""></asp:Label> per hour.<br />
                             Max additional number of people: <asp:Label ID="MaxNumberPeopleLbl" runat="server" Text=""></asp:Label><br />

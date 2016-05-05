@@ -10,14 +10,14 @@ using System.Configuration;
 using System.Data;
 using System.Net.Mail;
 using System.Net;
-using System.Text.RegularExpressions;
+using System.Text.RegularExpressions; 
 using System.IO;
 
 namespace WebApplication1
 {
     public partial class WebForm2 : System.Web.UI.Page
     {
-        TrainerObject Tobj = new TrainerObject();
+        TrainerObject Tobj = new TrainerObject(); //create trainer object
 
         protected void Page_Load(object sender, EventArgs e)
         { 
@@ -33,20 +33,23 @@ namespace WebApplication1
             }
             else
             {
-                Tobj.CopyTrainerObject((TrainerObject)Session["TrainerInfo"]);
-                BioTextBox.Text = Tobj.Bio;
-                TrainerTypesLbl.Text = Tobj.Speciality;
-                UserNameLbl.Text = Tobj.FirstName + " " + Tobj.LastName + " ";
+                Tobj.CopyTrainerObject((TrainerObject)Session["TrainerInfo"]); //get a copy of the trainer session object
+                //populate these values with the trainer's data
+                BioTextBox.Text = Tobj.Bio; //for the trainer bio
+                TrainerTypesLbl.Text = Tobj.Speciality; //for the trainer types/specialty
+                UserNameLbl.Text = Tobj.FirstName + " " + Tobj.LastName + " "; //for the trianers firat and last name
 
                 //section to add client rates
                 if (Tobj.AdditionalPersonRate == null || Tobj.IndividualRate == null)
                 {
+                    //populate these values with zero if they have not been set
                     IndividualRatesLbl.Text = "0.00";
                     AdditionalPersonRateLbl.Text = "0.00";
                     MaxNumberPeopleLbl.Text = "0";
                 }
                   else
                 {
+                    //populate these values with the trainer's data
                     IndividualRatesLbl.Text = Tobj.IndividualRate;
                     AdditionalPersonRateLbl.Text = Tobj.AdditionalPersonRate;
                     MaxNumberPeopleLbl.Text = Tobj.MaxNumPeople;
@@ -63,6 +66,7 @@ namespace WebApplication1
 
         protected void BookTrainer_Click(object sender, EventArgs e)
         {
+            //redirect after clicking book trainer button
             Response.Redirect("TrainerScheduler.aspx");
         }
 
@@ -75,38 +79,43 @@ namespace WebApplication1
 
         protected void ComfirmUpdateBioButton2_Click(object sender, EventArgs e)
         {
+            //this is for the update button within the model
             string newBio = TempTextBox2.Text;
-
+            //limit to 2000 characters
             if(newBio.Length < 2000)
             {
+                //place all of this info into the trainer session object 
                 Tobj.Bio = newBio;
                 Session["TrainerInfo"] = Tobj;
-
+                //update the database with this new info
                 SqlConnection db = new SqlConnection(SqlDataSource1.ConnectionString);
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd.Connection = db;
-
+                //SQL command
                 cmd.CommandText = "UPDATE [MFNTrainerTable] SET Trainer_Bio = @bio where Trainer_Id = @id";
-
+                //SQL parameters with newly added values
                 cmd.Parameters.AddWithValue("@id", Tobj.TrainerId);
                 cmd.Parameters.AddWithValue("@bio", newBio);
 
                 try
                 {
+                    //attempt to write to the database
                     db.Open();
                     cmd.ExecuteNonQuery();
                 }
                 catch
                 {
+                    //error
                     BioFailLbl.Text = "We failed horribly!";
                     BioFailLbl.Visible = true;
                 }
                 finally
                 {
+                    //finish, and close the database
                     db.Close();
                 }
-
+                //refresh the page
                 Response.Redirect("WebForm2.aspx");
 
             }
@@ -119,40 +128,45 @@ namespace WebApplication1
 
         protected void ComfirmUpdateTrainType_Click(object sender, EventArgs e)
         {
+            //this is for the training specialty/type model update button
             string trainType = TrainerSpecialtyDrop.Text;
 
-            if (trainType == "Select")
+            if (trainType == "Select") //allow the traineing type not to be changed if updated without selecting a new type
             {
                 trainType = TrainerTypesLbl.Text;
             }
 
+            //place all of this info into the trainer session object 
             Tobj.Speciality = trainType;
             Session["TrainerInfo"] = Tobj;
-
+            //update the database with this new info
             SqlConnection db = new SqlConnection(SqlDataSource1.ConnectionString);
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = System.Data.CommandType.Text;
             cmd.Connection = db;
-
+            //SQL command
             cmd.CommandText = "UPDATE [MFNTrainerTable] SET Trainer_Specialty = @specialty WHERE Trainer_Id = @id";
-
+            //SQL parameters with newly added values
             cmd.Parameters.AddWithValue("@id", Tobj.TrainerId);
             cmd.Parameters.AddWithValue("@specialty", trainType);
 
             try
             {
+                //attempt to write to the database
                 db.Open();
                 cmd.ExecuteNonQuery();
             }
             catch
             {
+                //error
                 //Response.Write(@"<script language='javascript'>alert('Error Removing from Database!');</script>");
             }
             finally
             {
+                //finish, and close the database
                 db.Close();
             }
-
+            //refresh the trainer profile page
             Response.Redirect("WebForm2.aspx");
         }
 
@@ -164,39 +178,42 @@ namespace WebApplication1
 
         protected void ComfirmUpdateRatesButton_Click(object sender, EventArgs e)
         {
-            string newIndividualRate = NewIndividualRateTxtBox.Text;
-            string newAdditonalRate = NewAdditionalPersonRateTxtBox.Text;
-            string newMaxPeople = MaxNumberPeopleDrop.Text;
+            //this is for the trainers rates model update button
+            string newIndividualRate = NewIndividualRateTxtBox.Text; //how much it cost for an individual's session
+            string newAdditonalRate = NewAdditionalPersonRateTxtBox.Text; //how much it costs for additional participants
+            string newMaxPeople = MaxNumberPeopleDrop.Text; //the max amount of participants allowed by the trainer, capped at 10
            
-            Regex rgx = new Regex("[0-9]?[0-9]?(\\.[0-9][0-9]?)?");
+            Regex rgx = new Regex("[0-9]?[0-9]?(\\.[0-9][0-9]?)?"); //regex for price input
 
-            if (newIndividualRate == "" || !rgx.IsMatch(newIndividualRate))
+            if (newIndividualRate == "" || !rgx.IsMatch(newIndividualRate)) //error handling for input
             {
                 newIndividualRate = IndividualRatesLbl.Text;
             }
            
-            if(newAdditonalRate == "" || !rgx.IsMatch(newIndividualRate))
+            if(newAdditonalRate == "" || !rgx.IsMatch(newIndividualRate))//error handling for input
             {
                 newAdditonalRate = AdditionalPersonRateLbl.Text;
             }
 
-            if (newMaxPeople == "Select")
+            if (newMaxPeople == "Select") //allow the max amount of people not to be changed if updated without selecting a new number
             {
                 newMaxPeople = MaxNumberPeopleLbl.Text;
             }
-            
+
+            //place all of this info into the trainer session object            
             Tobj.IndividualRate = newIndividualRate;
             Tobj.AdditionalPersonRate = newAdditonalRate;
             Tobj.MaxNumPeople = newMaxPeople;
             Session["TrainerInfo"] = Tobj;
 
+            //update the database with this new info
             SqlConnection db = new SqlConnection(SqlDataSource1.ConnectionString);
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = System.Data.CommandType.Text;
             cmd.Connection = db;
-
+            //SQL command
             cmd.CommandText = "UPDATE [MFNTrainerTable] SET Trainer_MaxPeople = @maxPeople, Trainer_IndividualRate = @indRate, Trainer_AdditionalPersonRate = @addPerson WHERE Trainer_Id = @id";
-
+            //SQL parameters with newly added values
             cmd.Parameters.AddWithValue("@id", Tobj.TrainerId);
             cmd.Parameters.AddWithValue("@indRate", newIndividualRate);
             cmd.Parameters.AddWithValue("@addPerson", newAdditonalRate);
@@ -204,18 +221,22 @@ namespace WebApplication1
 
             try
             {
+                //attempt to write to the database
                 db.Open();
                 cmd.ExecuteNonQuery();
             }
             catch
             {
+                //error
                 //Response.Write(@"<script language='javascript'>alert('Error Removing from Database!');</script>");
             }
             finally
             {
+                //finish, and close the database
                 db.Close();
             }
 
+            //refresh the trainers profile page
             Response.Redirect("WebForm2.aspx");
 
         }
@@ -274,6 +295,7 @@ namespace WebApplication1
                         // Notify the user that their file was successfully uploaded.
                         // myStringVariable = "Your file was uploaded successfully to: " + savePath;
                         // ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + myStringVariable + "');", true);
+                        // refresh the profile page, FOR SOME REASON THIS DOES NOT ALWAYS WORK, SOMETIMES YOU HAVE TO REFRESH MANUALLY!
                          Response.Redirect(Request.RawUrl);
                     }
                     else
@@ -294,6 +316,7 @@ namespace WebApplication1
             }
             catch
             {
+                //something went horribly wrong
                 myStringVariable = "Invalid Upload.";
                 ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + myStringVariable + "');", true);
             }

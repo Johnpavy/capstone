@@ -12,12 +12,13 @@ namespace WebApplication1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            //get all of the payment session information and populate the appropriate string
             string first_name = (string)(Session["first_name"]);
             string address = (string)(Session["address"]);
             string city = (string)(Session["city"]);
             string zip = (string)(Session["postal_code"]);
             string type = (string)(Session["card_type"]);
-            //string card_num = (string)(Session["card_number"]);
+            //string card_num = (string)(Session["card_number"]); //exclude credit card number
             string service_fee = (string)(Session["service_fee"]);
             string standard_rate = (string)(Session["standard_rate"]);
             string additional_person = (string)(Session["additional_person"]);
@@ -25,11 +26,8 @@ namespace WebApplication1
             string sub_total = (string)(Session["sub_total"]);
             string currency = (string)(Session["currency"]);
             string total = (string)(Session["total"]);
-     
-            // var frm1 = new CheckOut();
-            // frm1.ShowDialog(this); // make sure this instance of Form1 is visible
-            // Label1.Text = frm1.MyValue;
 
+            //set the correct lable to the session value
             Namelbl.Text = first_name;
             Addresslbl.Text = address;
             Citylbl.Text = city;
@@ -44,6 +42,7 @@ namespace WebApplication1
             Currencylbl.Text = currency;
             Totallbl.Text = total;
 
+            //get the calendar ID from the calendar session
             int calendarID = Int32.Parse(Session["CalendarID"].ToString());
 
             //add Section that marks the database
@@ -51,13 +50,14 @@ namespace WebApplication1
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = System.Data.CommandType.Text;
             cmd.Connection = db;
-
+            // SQL querry
             cmd.CommandText = "UPDATE [MFNCalendarTable] SET Calendar_PaidByClient = @paid  WHERE Calendar_Id = @id";
             cmd.Parameters.AddWithValue("@paid", true);
             cmd.Parameters.AddWithValue("@id", calendarID);
 
             try
             {
+                //open the connection and execute the querry
                 db.Open();
                 cmd.ExecuteNonQuery();
             }
@@ -67,6 +67,7 @@ namespace WebApplication1
             }
             finally
             {
+                //close the connection to the database
                 db.Close();
             }
 
@@ -74,6 +75,7 @@ namespace WebApplication1
 
         protected void Button1_Click(object sender, EventArgs e)
         {
+            //return home button, redirects to the home page after a session has been paid for
             Response.Redirect("Default.aspx");
         }
 
