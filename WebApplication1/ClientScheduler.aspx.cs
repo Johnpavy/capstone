@@ -53,6 +53,7 @@ namespace WebApplication1
             while (sdr.Read())
             {
                 Tobj.TrainerId = Int32.Parse(sdr["Trainer_Id"].ToString());
+                Tobj.Email = sdr["Trainer_Email"].ToString();
                 Tobj.ImagePath = sdr["Trainer_Image"].ToString();
                 Tobj.FirstName = sdr["Trainer_FirstName"].ToString();
                 Tobj.LastName = sdr["Trainer_LastName"].ToString();
@@ -1248,10 +1249,12 @@ namespace WebApplication1
                                 if (SlectedNumberOfPeople == "1")
                                 {
                                     Response.Write(@"<script language='javascript'>alert('Reqest for a session on " + SelectedDateTxtBox.Text + " from " + StartTimeDrpList.Text + " to " + EndTimeDrpList.Text + " for " + SlectedNumberOfPeople + " person has been sent to " + UserNameLbl.Text + "!');</script>");
+                                    SendRequestEmail(Uobj.FirstName, Uobj.LastName, address, SelectedDateTxtBox.Text, StartTimeDrpList.Text, EndTimeDrpList.Text, SlectedNumberOfPeople);
                                 }
                                 else
                                 {
                                     Response.Write(@"<script language='javascript'>alert('Reqest for a session on " + SelectedDateTxtBox.Text + " from " + StartTimeDrpList.Text + " to " + EndTimeDrpList.Text + " for " + SlectedNumberOfPeople + " people has been sent to " + UserNameLbl.Text + "!');</script>");
+                                    SendRequestEmail(Uobj.FirstName, Uobj.LastName, address, SelectedDateTxtBox.Text, StartTimeDrpList.Text, EndTimeDrpList.Text, SlectedNumberOfPeople);
                                 }
                             }
                             catch
@@ -1285,9 +1288,6 @@ namespace WebApplication1
                 }
             }
 
-          //Response.Redirect("ClientScheduler.aspx");
-
-            //NEED TO SEND OUT EMAIL
         }
 
         //This method Dynamically Adds all address that the trainer and user have associated with their
@@ -1751,6 +1751,46 @@ namespace WebApplication1
             }
 
             return value;
+        }
+
+        private void SendRequestEmail(string first_name, string last_name, string address, string date, string startTime, string endTime, string numberOfPeople)
+        {
+            // String firstName = Request.Form["FName"];
+            // String email = Request.Form["email"];
+            string trainerEmail = Tobj.Email;
+            DateTime localDate = DateTime.Now;
+            //Response.Write("<script>alert('" + email + "')</script>");
+
+            using (MailMessage mm = new MailMessage("MobileFitnessNetwork@gmail.com", trainerEmail))
+            {
+                mm.Subject = "Training Session Request";
+                string body = "Hello " + Tobj.FirstName+ " " + Tobj.LastName+",";
+
+
+                body += "<br /><br />Someone has requested a session from you.";
+                body += "<br/><br/>---Session Details ---";
+                body += "<br/>Client Name: " + first_name + " " + last_name;
+                body += "<br/>Date: " + date;
+                body += "<br/>Start Time: " + startTime;
+                body += "<br/>End Time: " + endTime;
+                body += "<br/>Location: " + address;
+                body += "<br/>Total Number Attending: " + numberOfPeople;
+
+                body += "<br/><br/>Please go to your schedule to confirm the session.";
+                body += "<br/><br/>Thank you";
+                mm.Body = body;
+                mm.IsBodyHtml = true;
+                SmtpClient smtp = new SmtpClient();
+                // the smtp host below will only work for gmail. 
+                smtp.Host = "smtp.gmail.com";
+                smtp.EnableSsl = true;
+                // The function below takes in the email address account that will be used and the associated password
+                NetworkCredential NetworkCred = new NetworkCredential("MobileFitnessNetwork@gmail.com", "6tfc^TFC");
+                smtp.UseDefaultCredentials = true;
+                smtp.Credentials = NetworkCred;
+                smtp.Port = 587;
+                smtp.Send(mm);
+            }
         }
 
     }

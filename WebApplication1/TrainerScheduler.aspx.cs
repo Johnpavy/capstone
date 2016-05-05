@@ -15,10 +15,13 @@ namespace WebApplication1
     public partial class TrainerScheduler : System.Web.UI.Page
     {
         TrainerObject Tobj = new TrainerObject();
+        UserObject Uobj = new UserObject();
         int blockedFullDaysCount = 0;
         string[] blockedFullDays = new string[1000];
         int blockedParitalDaysCount = 0;
         string[] blockedPartialDays = new string[1000];
+
+        string address, start, end, numPeople, date;
 
 
         protected void Page_Load(object sender, EventArgs e)
@@ -33,6 +36,22 @@ namespace WebApplication1
                 Tobj.CopyTrainerObject((TrainerObject)Session["TrainerInfo"]);
                 Session["TrainerId"] = Tobj.TrainerId;
                 UserNameLbl.Text = Tobj.FirstName + " " + Tobj.LastName;
+
+                if (Session["UserInfo2"] != null)
+                {
+                    Uobj = (UserObject)Session["UserInfo2"];
+                }
+
+
+                if(Session["address"] != null)
+                {
+                    address = Session["address"].ToString();
+                    start = Session["start"].ToString();
+                    end = Session["end"].ToString();
+                    numPeople = Session["numPeople"].ToString();
+                    date = Session["date"].ToString();
+                }
+
 
                 //changes default profile pic to user uploaded one
                 if (Tobj.ImagePath != "")
@@ -188,6 +207,9 @@ namespace WebApplication1
         protected void SelectThisClientBtn_Click(object sender, EventArgs e)
         {
             ConfirmAppointment.Enabled = true;
+            DeclineAppointment.Enabled = true;
+            RescheduleAppointment.Enabled = true;
+            int userID = -1;
             SqlConnection db3 = new SqlConnection(SqlDataSource3.ConnectionString);
             SqlCommand cmd3 = new SqlCommand();
             cmd3.CommandType = System.Data.CommandType.Text;
@@ -201,15 +223,30 @@ namespace WebApplication1
                 SummaryTextBox.Text = "";
                 while (sdr.Read())
                 {
-                    SummaryTextBox.Text += "Start Time: " + convertMilitartTimetoAMPM( sdr["Calendar_StartTime"].ToString() )+ "\n";
-                    SummaryTextBox.Text += "End Time: " + convertMilitartTimetoAMPM(sdr["Calendar_EndTime"].ToString() )+ "\n";
-                    SummaryTextBox.Text += "Total Number of People: " + sdr["Calendar_NumberOfClients"].ToString() + "\n";
-                    SummaryTextBox.Text += "Address: " + sdr["Calendar_Location"].ToString() + "\n";
+                    start = convertMilitartTimetoAMPM(sdr["Calendar_StartTime"].ToString());
+                    SummaryTextBox.Text += "Start Time: " + start+ "\n";
+                    Session["start"] = start;
+                    end = convertMilitartTimetoAMPM(sdr["Calendar_EndTime"].ToString());
+                    Session["end"] = end;
+                    SummaryTextBox.Text += "End Time: " + end + "\n";
+                    numPeople = sdr["Calendar_NumberOfClients"].ToString();
+                    Session["numPeople"] = numPeople;
+                    SummaryTextBox.Text += "Total Number of People: "+ numPeople + "\n";
+                    address = sdr["Calendar_Location"].ToString();
+                    SummaryTextBox.Text += "Address: " + address + "\n";
+                    Session["address"] = address;
+                    userID = Int32.Parse(sdr["User_Id"].ToString());
+                    SummaryTextBox.Text += "ID: " + userID + "\n";
+
+
+                    DateTime dt = Convert.ToDateTime(sdr["Calendar_Date"].ToString());
+                    date = dt.ToShortDateString();
+                    Session["date"] = date;
                 }
             }
             catch
             {
-                SummaryTextBox.Text = ClientsDrpDown.SelectedValue + "errpr reading from database";
+                SummaryTextBox.Text = ClientsDrpDown.SelectedValue + "error reading from database";
             }
             finally
             {
@@ -217,6 +254,36 @@ namespace WebApplication1
             }
 
 
+            SqlConnection db4 = new SqlConnection(SqlDataSource2.ConnectionString);
+            SqlCommand cmd4 = new SqlCommand();
+            cmd4.CommandType = System.Data.CommandType.Text;
+            cmd4.Connection = db4;
+            cmd4.CommandText = "SELECT * FROM [MFNUserTable] WHERE User_Id = @Uid";
+            cmd4.Parameters.AddWithValue("@Uid", userID);
+            try
+            {
+                db4.Open();
+                
+                SqlDataReader sdr2 = cmd4.ExecuteReader();
+                while (sdr2.Read())
+                {
+
+                    Uobj.FirstName = sdr2["User_FirstName"].ToString();
+                    Uobj.LastName = sdr2["User_LastName"].ToString();
+                    Uobj.Email = sdr2["User_Email"].ToString();
+
+                    Session["UserInfo2"] = Uobj; 
+                }
+               
+            }
+            catch
+            {
+                SummaryTextBox.Text += "FAIL";
+            }
+            finally
+            {
+                db4.Close();
+            }
 
         }
 
@@ -1082,8 +1149,149 @@ namespace WebApplication1
 
         protected void CancelAppointmentManagement_Click(object sender, EventArgs e)
         {
+            ConfirmAppointment.Enabled = false;
+            DeclineAppointment.Enabled = false;
+            RescheduleAppointment.Enabled = false;
             OptionsDiv.Visible = true;
             ManageAppointmentDiv.Visible = false;
+        }
+
+        protected void DeclineAppointment_Click(object sender, EventArgs e)
+        {
+
+
+            ConfirmAppointment.Enabled = false;
+            DeclineAppointment.Enabled = false;
+            RescheduleAppointment.Enabled = false;
+            SqlConnection db3 = new SqlConnection(SqlDataSource3.ConnectionString);
+            SqlCommand cmd3 = new SqlCommand();
+            cmd3.CommandType = System.Data.CommandType.Text;
+            cmd3.Connection = db3;
+            cmd3.CommandText = "DELETE FROM [MFNCalendarTable] WHERE Calendar_Id = @id";
+            cmd3.Parameters.AddWithValue("@id", ClientsDrpDown.SelectedValue);
+            SendDeclineEmail(Uobj.FirstName, Uobj.LastName, address, date, start, end, numPeople);
+
+
+            try
+            {
+                db3.Open();
+                cmd3.ExecuteNonQuery();
+                Response.Write(@"<script language='javascript'>alert('Successfuly Declined Client.');</script>");
+            }
+            catch
+            {
+                Response.Write(@"<script language='javascript'>alert('Error Removing Event');</script>");
+            }
+            finally
+            {
+                db3.Close();
+            }
+
+
+            SqlConnection db = new SqlConnection(SqlDataSource3.ConnectionString);
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = System.Data.CommandType.Text;
+            cmd.Connection = db;
+
+            ClientsDrpDown.Items.Clear();
+            ListItem l = new ListItem("---Select---", "", true);
+            ClientsDrpDown.Items.Add(l);
+
+            cmd.CommandText = "SELECT * FROM [MFNCalendarTable] WHERE Trainer_Id = @Tid AND Calendar_ApprovedByTrainer = @app";
+            cmd.Parameters.AddWithValue("@Tid", Tobj.TrainerId);
+            cmd.Parameters.AddWithValue("@app", false);
+
+            try
+            {
+                db.Open();
+                SqlDataReader sdr = cmd.ExecuteReader();
+
+                while (sdr.Read())
+                {
+                    string name = sdr["Calendar_EventName"].ToString();
+                    string calendarId = sdr["Calendar_Id"].ToString();
+                    l = new ListItem(name, calendarId, true);
+                    ClientsDrpDown.Items.Add(l);
+                }
+            }
+            catch
+            {
+                Response.Write(@"<script language='javascript'>alert('Error Loading Events');</script>");
+            }
+            finally
+            {
+                db.Close();
+            }
+
+
+
+        }
+
+        protected void RescheduleAppointment_Click(object sender, EventArgs e)
+        {
+            ConfirmAppointment.Enabled = false;
+            DeclineAppointment.Enabled = false;
+            RescheduleAppointment.Enabled = false;
+            SqlConnection db3 = new SqlConnection(SqlDataSource3.ConnectionString);
+            SqlCommand cmd3 = new SqlCommand();
+            cmd3.CommandType = System.Data.CommandType.Text;
+            cmd3.Connection = db3;
+            cmd3.CommandText = "DELETE FROM [MFNCalendarTable] WHERE Calendar_Id = @id";
+            cmd3.Parameters.AddWithValue("@id", ClientsDrpDown.SelectedValue);
+            SendRescheduleEmail(Uobj.FirstName, Uobj.LastName, address, date, start, end, numPeople);
+
+
+            try
+            {
+                db3.Open();
+                cmd3.ExecuteNonQuery();
+                Response.Write(@"<script language='javascript'>alert('Successfuly Requested a Reschedule for Client.');</script>");
+            }
+            catch
+            {
+                Response.Write(@"<script language='javascript'>alert('Error Removing Event');</script>");
+            }
+            finally
+            {
+                db3.Close();
+            }
+
+
+            SqlConnection db = new SqlConnection(SqlDataSource3.ConnectionString);
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = System.Data.CommandType.Text;
+            cmd.Connection = db;
+
+            ClientsDrpDown.Items.Clear();
+            ListItem l = new ListItem("---Select---", "", true);
+            ClientsDrpDown.Items.Add(l);
+
+            cmd.CommandText = "SELECT * FROM [MFNCalendarTable] WHERE Trainer_Id = @Tid AND Calendar_ApprovedByTrainer = @app";
+            cmd.Parameters.AddWithValue("@Tid", Tobj.TrainerId);
+            cmd.Parameters.AddWithValue("@app", false);
+
+            try
+            {
+                db.Open();
+                SqlDataReader sdr = cmd.ExecuteReader();
+
+                while (sdr.Read())
+                {
+                    string name = sdr["Calendar_EventName"].ToString();
+                    string calendarId = sdr["Calendar_Id"].ToString();
+                    l = new ListItem(name, calendarId, true);
+                    ClientsDrpDown.Items.Add(l);
+                }
+            }
+            catch
+            {
+                Response.Write(@"<script language='javascript'>alert('Error Loading Events');</script>");
+            }
+            finally
+            {
+                db.Close();
+            }
+
         }
 
         protected void CancelManageBlockedOutDate_Click(object sender, EventArgs e)
@@ -1094,9 +1302,12 @@ namespace WebApplication1
 
         protected void ConfirmAppointment_Click(object sender, EventArgs e)
         {
-            
 
             ConfirmAppointment.Enabled = false;
+            DeclineAppointment.Enabled = false;
+            RescheduleAppointment.Enabled = false;
+
+
             SqlConnection db3 = new SqlConnection(SqlDataSource3.ConnectionString);
             SqlCommand cmd3 = new SqlCommand();
             cmd3.CommandType = System.Data.CommandType.Text;
@@ -1109,6 +1320,8 @@ namespace WebApplication1
             {
                 db3.Open();
                 cmd3.ExecuteNonQuery();
+                Response.Write(@"<script language='javascript'>alert('Successfuly Accepted Client.');</script>");
+                SendComfrimEmail(Uobj.FirstName, Uobj.LastName, address, date, start, end, numPeople);
             }
             catch
             {
@@ -1119,7 +1332,7 @@ namespace WebApplication1
                 db3.Close();
             }
 
-            Response.Write(@"<script language='javascript'>alert('Successfuly Approved Client.');</script>");
+
 
             SqlConnection db = new SqlConnection(SqlDataSource3.ConnectionString);
             SqlCommand cmd = new SqlCommand();
@@ -1162,6 +1375,129 @@ namespace WebApplication1
         {
             string newTime = DateTime.Parse(time).ToString(@"hh\:mm\:ss tt");
             return newTime;
+        }
+
+        private void SendComfrimEmail(string first_name, string last_name, string address, string date, string startTime, string endTime, string numberOfPeople)
+        {
+            Uobj = (UserObject)Session["UserInfo2"];
+
+            // String firstName = Request.Form["FName"];
+            // String email = Request.Form["email"];
+            string userEmail = Uobj.Email;
+            DateTime localDate = DateTime.Now;
+            //Response.Write("<script>alert('" + email + "')</script>");
+
+            using (MailMessage mm = new MailMessage("MobileFitnessNetwork@gmail.com", userEmail))
+            {
+                mm.Subject = "Training Session Request Approved";
+                string body = "Hello " + Uobj.FirstName + " " + Uobj.LastName + ",";
+
+
+                body += "<br /><br />Your Session has been approved by " + Tobj.FirstName + " " +Tobj.LastName;
+                body += "<br/><br/>---Session Details ---";
+                body += "<br/>Client Name: " + first_name + " " + last_name;
+                body += "<br/>Date: " + date;
+                body += "<br/>Start Time: " + startTime;
+                body += "<br/>End Time: " + endTime;
+                body += "<br/>Location: " +address;
+                body += "<br/>Number of People: " + numberOfPeople;
+                body += "<br/><br/>Your session is ready for purchase.";
+                body += "<br/><br/>Thank you";
+                mm.Body = body;
+                mm.IsBodyHtml = true;
+                SmtpClient smtp = new SmtpClient();
+                // the smtp host below will only work for gmail. 
+                smtp.Host = "smtp.gmail.com";
+                smtp.EnableSsl = true;
+                // The function below takes in the email address account that will be used and the associated password
+                NetworkCredential NetworkCred = new NetworkCredential("MobileFitnessNetwork@gmail.com", "6tfc^TFC");
+                smtp.UseDefaultCredentials = true;
+                smtp.Credentials = NetworkCred;
+                smtp.Port = 587;
+                smtp.Send(mm);
+            }
+        }
+
+        private void SendDeclineEmail(string first_name, string last_name, string address, string date, string startTime, string endTime, string numberOfPeople)
+        {
+            Uobj = (UserObject)Session["UserInfo2"];
+
+            // String firstName = Request.Form["FName"];
+            // String email = Request.Form["email"];
+            string userEmail = Uobj.Email;
+            DateTime localDate = DateTime.Now;
+            //Response.Write("<script>alert('" + email + "')</script>");
+
+            using (MailMessage mm = new MailMessage("MobileFitnessNetwork@gmail.com", userEmail))
+            {
+                mm.Subject = "Training Session Request Declined";
+                string body = "Hello " + Uobj.FirstName + " " + Uobj.LastName + ",";
+
+
+                body += "<br /><br />Your Session has been DECLINED by " + Tobj.FirstName + " " + Tobj.LastName;
+                body += "<br/><br/>---Declined Session Details ---";
+                body += "<br/>Client Name: " + first_name + " " + last_name;
+                body += "<br/>Date: " + date;
+                body += "<br/>Start Time: " + startTime;
+                body += "<br/>End Time: " + endTime;
+                body += "<br/>Location: " + address;
+                body += "<br/>Number of People: " + numberOfPeople;
+                body += "<br/><br/>No further action is needed on your part.";
+                body += "<br/><br/>Thank you";
+                mm.Body = body;
+                mm.IsBodyHtml = true;
+                SmtpClient smtp = new SmtpClient();
+                // the smtp host below will only work for gmail. 
+                smtp.Host = "smtp.gmail.com";
+                smtp.EnableSsl = true;
+                // The function below takes in the email address account that will be used and the associated password
+                NetworkCredential NetworkCred = new NetworkCredential("MobileFitnessNetwork@gmail.com", "6tfc^TFC");
+                smtp.UseDefaultCredentials = true;
+                smtp.Credentials = NetworkCred;
+                smtp.Port = 587;
+                smtp.Send(mm);
+            }
+        }
+
+        private void SendRescheduleEmail(string first_name, string last_name, string address, string date, string startTime, string endTime, string numberOfPeople)
+        {
+            Uobj = (UserObject)Session["UserInfo2"];
+
+            // String firstName = Request.Form["FName"];
+            // String email = Request.Form["email"];
+            string userEmail = Uobj.Email;
+            DateTime localDate = DateTime.Now;
+            //Response.Write("<script>alert('" + email + "')</script>");
+
+            using (MailMessage mm = new MailMessage("MobileFitnessNetwork@gmail.com", userEmail))
+            {
+                mm.Subject = "Training Session Request Needs To Be Rescheduled";
+                string body = "Hello " + Uobj.FirstName + " " + Uobj.LastName + ",";
+
+
+                body += "<br /><br />A request to reschedule your session has been sent by " + Tobj.FirstName + " " + Tobj.LastName;
+                body += "<br/><br/>---Reschedule Session Details ---";
+                body += "<br/>Client Name: " + first_name + " " + last_name;
+                body += "<br/>Date: " + date;
+                body += "<br/>Start Time: " + startTime;
+                body += "<br/>End Time: " + endTime;
+                body += "<br/>Location: " + address;
+                body += "<br/>Number of People: " + numberOfPeople;
+                body += "<br/><br/>To reschedule your appoint, please head back to "+ Tobj.FirstName + " " + Tobj.LastName+ "'s profile and request a new appointment.";
+                body += "<br/><br/>Thank you";
+                mm.Body = body;
+                mm.IsBodyHtml = true;
+                SmtpClient smtp = new SmtpClient();
+                // the smtp host below will only work for gmail. 
+                smtp.Host = "smtp.gmail.com";
+                smtp.EnableSsl = true;
+                // The function below takes in the email address account that will be used and the associated password
+                NetworkCredential NetworkCred = new NetworkCredential("MobileFitnessNetwork@gmail.com", "6tfc^TFC");
+                smtp.UseDefaultCredentials = true;
+                smtp.Credentials = NetworkCred;
+                smtp.Port = 587;
+                smtp.Send(mm);
+            }
         }
     }
 }

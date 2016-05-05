@@ -199,10 +199,10 @@
                              <table style="width: 100%;">
                                  <tr>
                                      <td><asp:LinkButton ID = "ConfirmAppointment" Class="btn btn-info btn-block" runat="server" OnClick="ConfirmAppointment_Click" Enabled="false">Confirm Appointment</asp:LinkButton></td>
-                                     <td><asp:LinkButton ID = "LinkButton1" Class="btn btn-info btn-block" runat="server">Decline Appointment</asp:LinkButton></td>
+                                     <td><asp:LinkButton ID = "DeclineAppointment" Class="btn btn-info btn-block" runat="server" OnClick="DeclineAppointment_Click" Enabled="false">Decline Appointment</asp:LinkButton></td>
                                  </tr>
                                  <tr>
-                                     <td><asp:LinkButton ID = "RescheduleAppointment" Class="btn btn-info btn-block" runat="server">Reschedule Appointment</asp:LinkButton></td>
+                                     <td><asp:LinkButton ID = "RescheduleAppointment" Class="btn btn-info btn-block" runat="server" OnClick="RescheduleAppointment_Click" Enabled="false">Reschedule Appointment</asp:LinkButton></td>
                                      <td> <asp:LinkButton ID = "CancelAppointmentManagement" Class="btn btn-info btn-block" Style="background-color:green"  runat="server" OnClick="CancelAppointmentManagement_Click">Cancel Appointment Management</asp:LinkButton></td>
                                  </tr>
                              </table>

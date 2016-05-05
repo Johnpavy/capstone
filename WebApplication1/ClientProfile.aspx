@@ -151,14 +151,10 @@
                               <ul class="dropdown-menu">
                                 <li><a href="AccountSettings.aspx">Settings</a></li>
                                 <li role="separator" class="divider"></li>
-                                <li><a href="LogOut.aspx">Log Out</a></li>
-                                  <li role="separator" class="divider"></li>
-                                  <!--Remove Next Line after testing! -->
-                                <li><a href="ClientScheduler.aspx">For Testing</a></li>
+                                <li><a href="ApprovedSessionsPage.aspx">Check My Approved Sessions</a></li>
                                 <li role="separator" class="divider"></li>
-                                  <li><a href="ApprovedSessionsPage.aspx">Check my approved sessions</a></li>
-                                  <li role="separator" class="divider"></li>
-
+                                <li><a href="LogOut.aspx">Log Out</a></li>
+                                <li role="separator" class="divider"></li>
                               </ul>
                             </li>
                           </ul>
