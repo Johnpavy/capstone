@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="TestSplashPage.aspx.cs" Inherits="WebApplication1.TestSplashPage" %>
 
+<!-- This Page is Deprecated and No Longer needs to be within the project-->
 <!DOCTYPE html>
 <html lang="en">
 <head>

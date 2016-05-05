@@ -23,7 +23,7 @@ namespace WebApplication1
 
         string address, start, end, numPeople, date;
 
-
+        //Page loads with datastructures holding the appropriate data
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["TrainerInfo"] == null)
@@ -167,13 +167,15 @@ namespace WebApplication1
 
         }
 
+        //Changes the selected date on click on the calendar
         protected void Calendar1_SelectionChanged(object sender, EventArgs e)
         {
             Session["SelectedDate"] = Calendar1.SelectedDate.ToShortDateString();
             BlockedOutSelctedDateTxtBox.Text = Calendar1.SelectedDate.ToShortDateString();
             DateTextBox.Text = Calendar1.SelectedDate.ToShortDateString();
         }
-
+        
+        //Renders the blocked and parially blocked dates on the calendar
         protected void Calendar1_DayRender(object sender, DayRenderEventArgs e)
         { 
 
@@ -197,13 +199,14 @@ namespace WebApplication1
 
 
         }
-
+       
+        //Goes Back to Trainer Profile
         protected void BackToProfile_Click(object sender, EventArgs e)
         {
             Response.Redirect("WebForm2.aspx");
         }
 
-
+        //Populates textbox and Uobj with selcted client details
         protected void SelectThisClientBtn_Click(object sender, EventArgs e)
         {
             ConfirmAppointment.Enabled = true;
@@ -1134,19 +1137,20 @@ namespace WebApplication1
 
         }
 
+        //Opens Manage Session Pannel
         protected void ManageSession_Click(object sender, EventArgs e)
         {
             OptionsDiv.Visible = false;
             ManageAppointmentDiv.Visible = true;
 
         }
-
+        //Opens Manage Blocked Out Times Pannel
         protected void ManageBlackedOutTimes_Click(object sender, EventArgs e)
         {
             OptionsDiv.Visible = false;
             ManageBlockedTimeDiv.Visible = true;
         }
-
+        //Closes Appointment Manage Pannel
         protected void CancelAppointmentManagement_Click(object sender, EventArgs e)
         {
             ConfirmAppointment.Enabled = false;
@@ -1156,6 +1160,7 @@ namespace WebApplication1
             ManageAppointmentDiv.Visible = false;
         }
 
+        //Deletes Entry From Calendar Table and Sends Decline Email
         protected void DeclineAppointment_Click(object sender, EventArgs e)
         {
 
@@ -1227,6 +1232,7 @@ namespace WebApplication1
 
         }
 
+        //Deletes Entry from Calendar Table and Sends Reschedule Email to Client
         protected void RescheduleAppointment_Click(object sender, EventArgs e)
         {
             ConfirmAppointment.Enabled = false;
@@ -1294,12 +1300,14 @@ namespace WebApplication1
 
         }
 
+        //Closes Manage Blocked Date Panel
         protected void CancelManageBlockedOutDate_Click(object sender, EventArgs e)
         {
             OptionsDiv.Visible = true;
             ManageBlockedTimeDiv.Visible = false;
         }
 
+        //Comfirms Client Appointment and Sends Email
         protected void ConfirmAppointment_Click(object sender, EventArgs e)
         {
 
@@ -1371,12 +1379,14 @@ namespace WebApplication1
 
         }
 
+        //Converts HH:MM:SS to AM or PM Equivalent
         private string convertMilitartTimetoAMPM(string time)
         {
             string newTime = DateTime.Parse(time).ToString(@"hh\:mm\:ss tt");
             return newTime;
         }
 
+        //For A Comfirmation Email
         private void SendComfrimEmail(string first_name, string last_name, string address, string date, string startTime, string endTime, string numberOfPeople)
         {
             Uobj = (UserObject)Session["UserInfo2"];
@@ -1417,7 +1427,7 @@ namespace WebApplication1
                 smtp.Send(mm);
             }
         }
-
+        //For a Decline Email
         private void SendDeclineEmail(string first_name, string last_name, string address, string date, string startTime, string endTime, string numberOfPeople)
         {
             Uobj = (UserObject)Session["UserInfo2"];
@@ -1458,7 +1468,7 @@ namespace WebApplication1
                 smtp.Send(mm);
             }
         }
-
+        //For a Reschedule Email
         private void SendRescheduleEmail(string first_name, string last_name, string address, string date, string startTime, string endTime, string numberOfPeople)
         {
             Uobj = (UserObject)Session["UserInfo2"];

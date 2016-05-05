@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AdminRegistration.aspx.cs" Inherits="WebApplication1.WebForm7" %>
 
 <!DOCTYPE html>
-
+<!-- This Page is Deprecated and No Longer needs to be within the project-->
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <link rel="shortcut icon" type="image/x-icon" href="/Pictures/favicon.ico"/>

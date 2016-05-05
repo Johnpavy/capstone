@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Oops.aspx.cs" Inherits="WebApplication1.WebForm8" %>
 
 <!DOCTYPE html>
-
+<!--Page that is shown if an error occurs (such as 404) -->
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
             <link rel="shortcut icon" type="image/x-icon" href="/Pictures/favicon.ico"/>

@@ -2,6 +2,7 @@
 
 <!DOCTYPE html>
 
+<!-- This Page is Deprecated and No Longer needs to be within the project-->
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
