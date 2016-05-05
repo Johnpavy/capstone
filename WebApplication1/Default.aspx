@@ -277,12 +277,12 @@
                         </div>
                         <div>
                                 <asp:LinkButton runat="server" type="submit" OnClick="login_Click" class="LoginButton btn btn-default">LOG IN</asp:LinkButton>
-                    
                                 <label class="IsAdminLabel">Trainer?</label>
                                 <div class="onoffswitch">
                                     <input type="checkbox" runat="server" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
                                     <label class="onoffswitch-label" for="myonoffswitch"></label>
                                 </div>
+                            <a href="ResetPassword.aspx">Forgot your Password?</a>
                         </div>
                         <asp:Label ID="ErrorLbl" runat="server" Text="Label" Visible="False"></asp:Label>
                     </div>
@@ -353,7 +353,7 @@
         
         <footer class="Footer">
             <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" SelectCommand="SELECT * FROM [MFNTrainerTable]"></asp:SqlDataSource>
-            <a href="#">Admin Login</a>
+            <a href="AdminLogin.aspx">Admin Login</a>
             <input id="hiddenControl" type="hidden" runat="server" />
             <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Mobile Fitness Network DBConnectionString %>" SelectCommand="SELECT * FROM [MFNUserTable]"></asp:SqlDataSource>
 
