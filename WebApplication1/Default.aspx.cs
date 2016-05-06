@@ -626,7 +626,7 @@ namespace WebApplication1
                     // for live web app hosted on azure, uncomment this and comment the local host line 
                     // body += "<br /><a href = '" + Request.Url.AbsoluteUri.Replace("http://mobilefitnessnetwork.azurewebsites.net", "http://mobilefitnessnetwork.azurewebsites.net/ConfirmationPage.aspx?ActivationCode=" + activationCode) + "'>Click here to activate your account.</a>";
 
-                    // for local host comment this and uncomment link generator above
+                    // for local host uncomment this and comment link generator above
                     body += "<br /><a href = '" + Request.Url.AbsoluteUri.Replace("Default.aspx", "ConfirmationPage.aspx?ActivationCode=" + activationCode + "&UserID=" + userId) + "'>Click here to activate your account.</a>";
                 }
                 else
