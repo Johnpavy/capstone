@@ -84,6 +84,7 @@
     <Content Include="ApprovedSessionsPage.aspx" />
     <Content Include="CheckOut.aspx" />
     <Content Include="ClientConfirmationPage.aspx" />
+    <Content Include="ClientProfile.html" />
     <Content Include="ClientSignup.aspx" />
     <Content Include="ConfirmationPage.aspx" />
     <Content Include="CSS\Checkout.css" />
@@ -106,6 +107,24 @@
     <Content Include="MFNRoot\Trainers\aspoonamore93%40gmail.com\ProfilePic\ProfilePic.jpg" />
     <Content Include="MFNRoot\Trainers\test%40email\ProfilePic\ProfilePic.jpg" />
     <Content Include="Default.aspx" />
+    <Content Include="MFNTrainerPage\MFNContactUs.png" />
+    <Content Include="MFNTrainerPage\MFNDocIcon.png" />
+    <Content Include="MFNTrainerPage\MFNFacebookIcon.png" />
+    <Content Include="MFNTrainerPage\MFNFlickrIcon.png" />
+    <Content Include="MFNTrainerPage\MFNFooterBar.png" />
+    <Content Include="MFNTrainerPage\MFNHeightWeightBG.png" />
+    <Content Include="MFNTrainerPage\MFNHeightWeightBG2.png" />
+    <Content Include="MFNTrainerPage\MFNHeightWeightBG3.png" />
+    <Content Include="MFNTrainerPage\MFNLockIcon.png" />
+    <Content Include="MFNTrainerPage\MFNLogoBlue.png" />
+    <Content Include="MFNTrainerPage\MFNProfileBG.png" />
+    <Content Include="MFNTrainerPage\MFNProfileHeader.png" />
+    <Content Include="MFNTrainerPage\MFNSaveButton.png" />
+    <Content Include="MFNTrainerPage\MFNScheduleButton.png" />
+    <Content Include="MFNTrainerPage\MFNTrainerProfileBG.png" />
+    <Content Include="MFNTrainerPage\MFNTrainerProfileBGNoHeader.png" />
+    <Content Include="MFNTrainerPage\MFNTrainerProfileBGNoHeader2.png" />
+    <Content Include="MFNTrainerPage\MFNYoutubeIcon.png" />
     <Content Include="PasswordResetComfirm.aspx" />
     <Content Include="PaymentConfirmation.aspx" />
     <Content Include="Pictures\AdminPic.jpg" />
@@ -134,6 +153,7 @@
     <Content Include="ResetPassword.aspx" />
     <Content Include="searchTrainersPage.aspx" />
     <Content Include="ThankYou.aspx" />
+    <Content Include="TrainerProfile.html" />
     <Content Include="TrainerScheduler.aspx" />
     <Content Include="TrainerSignup.aspx" />
     <Content Include="Login.aspx" />
@@ -149,22 +169,6 @@
     <Content Include="ClientScheduler.aspx" />
     <Content Include="AdminRegistration.aspx" />
     <Content Include="Oops.aspx" />
-    <Content Include="MFNDesignSplashPage\ClientRegisterPane.psd" />
-    <Content Include="MFNDesignSplashPage\ClientRegisterPane2.psd" />
-    <Content Include="MFNDesignSplashPage\HowItWorksInfo.psd" />
-    <Content Include="MFNDesignSplashPage\MFNBannerNoBG.psd" />
-    <Content Include="MFNDesignSplashPage\MFNClientLabel.psd" />
-    <Content Include="MFNDesignSplashPage\MFNClientPanel.psd" />
-    <Content Include="MFNDesignSplashPage\MFNHowItWorksBanner.psd" />
-    <Content Include="MFNDesignSplashPage\MFNLogoBlue.psd" />
-    <Content Include="MFNDesignSplashPage\MFNLogoGrey.psd" />
-    <Content Include="MFNDesignSplashPage\MFNLogoWhite.psd" />
-    <Content Include="MFNDesignSplashPage\MFNTrainerPanel.psd" />
-    <Content Include="MFNDesignSplashPage\TrainerRegisterPane.psd" />
-    <Content Include="MFNDesignSplashPage\TrainerRegisterPane2.psd" />
-    <Content Include="Pictures\MFNSymbol.psd" />
-    <Content Include="Pictures\MobileFitnessNetworkPicCropped.psd" />
-    <Content Include="Pictures\ProfilePageBanner.psd" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

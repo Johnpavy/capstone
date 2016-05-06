@@ -177,7 +177,7 @@
 			 			        </div>
 			 			        <div class="panel-body">
 			    		            <asp:LinkButton ID = "ManageSession" Class="btn btn-info btn-block" runat="server" OnClick="ManageSession_Click">Manage Session</asp:LinkButton>
-                                    <asp:LinkButton ID = "ManageBlackedOutTimes" Class="btn btn-info btn-block" runat="server" OnClick="ManageBlackedOutTimes_Click">Manage Blacked Out Times</asp:LinkButton>
+                                    <asp:LinkButton ID = "ManageBlackedOutTimes" Class="btn btn-info btn-block" runat="server" OnClick="ManageBlackedOutTimes_Click">Manage Blocked Out Times</asp:LinkButton>
 			    	            </div>
                           <asp:Label ID="Label2" runat="server" Text="Label" Visible="False"></asp:Label>
 	    		        </div>
