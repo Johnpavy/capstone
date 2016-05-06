@@ -312,13 +312,11 @@ namespace WebApplication1
             string errorMessage = "";
             // to detirmine if a new user clicked on client or trainer check the hidden field and get the value
             var trainerOrClient = this.HiddenField1.Value;
-    
+            // If true, trainer confirmation email is sent if false, client email confirmation is sent
             bool isTrainer = trainerOrClient.Equals("trainer");
 
-            // If true, trainer confirmation email is sent if false, client email confirmation is sent
-            //bool isTrainer = !IsClientRegisterCheckbox.Checked;
-            //String isClientTrainer = Label1.Text;
-            //String isClientTrainer = Request.Form["RegistrationLabelId"];
+            
+
             bool userNameExists;
             SqlConnection trainerDb = new SqlConnection(SqlDataSource1.ConnectionString);
 
@@ -544,7 +542,7 @@ namespace WebApplication1
                             clientDB.Close();
                             Session["userID"] = userID;
 
-                            Uobj.FirstName = lName;
+                            Uobj.FirstName = fName;
                             Uobj.LastName = lName;
                             Uobj.Email = email;
                             Uobj.UserId = userID;
