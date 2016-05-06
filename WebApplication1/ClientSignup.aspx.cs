@@ -79,6 +79,7 @@ namespace WebApplication1
             }
             else
             {
+              // This section can be used to tell new clients the service is only in Corpus Christi
               /*  if(zipInt < 78401 || zipInt > 78480)
                 {
                     String message;

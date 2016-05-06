@@ -481,7 +481,17 @@ namespace WebApplication1
                     bool clientNameExists;
 
                     SqlConnection clientDB = new SqlConnection(SqlDataSource2.ConnectionString);
-                    clientDB.Open();
+                    try
+                    {
+                        clientDB.Open();
+                    }
+                    catch
+                    {
+                        ErrorLabel.ForeColor = System.Drawing.Color.Red;
+                        ErrorLabel.Text = "Problem opening the database";
+                        ErrorLabel.Visible = true;
+                    }
+                    
                     // Check to see if email exists in the database
 
                     using (SqlCommand checkCmd = new SqlCommand("select count(*) from MFNUserTable where User_Email = @email", clientDB))

@@ -133,7 +133,6 @@
     <Content Include="Pictures\UserPicture.jpg" />
     <Content Include="ResetPassword.aspx" />
     <Content Include="searchTrainersPage.aspx" />
-    <Content Include="TestSplashPage.aspx" />
     <Content Include="ThankYou.aspx" />
     <Content Include="TrainerScheduler.aspx" />
     <Content Include="TrainerSignup.aspx" />
@@ -219,13 +218,6 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="TestSplashPage.aspx.cs">
-      <DependentUpon>TestSplashPage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="TestSplashPage.aspx.designer.cs">
-      <DependentUpon>TestSplashPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="TransactionObject.cs" />
     <Compile Include="ClientConfirmationPage.aspx.cs">
