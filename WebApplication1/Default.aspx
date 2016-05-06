@@ -337,7 +337,7 @@
                 <asp:TextBox runat="server" type="password" class="RegisterFormTextBoxPassword form-control" Id = "passwordBox" placeholder="Password"></asp:TextBox>
               </div>
                 <div class="form-group">
-                <asp:TextBox runat="server" type="text" class="RegisterFormTextBoxConfirmPassword form-control" Id = "cPasswordBox" placeholder="Confirm Password"></asp:TextBox>
+                <asp:TextBox runat="server" type="password" class="RegisterFormTextBoxConfirmPassword form-control" Id = "cPasswordBox" placeholder="Confirm Password"></asp:TextBox>
 
                 </div>
 
