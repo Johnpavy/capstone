@@ -84,7 +84,6 @@
     <Content Include="ApprovedSessionsPage.aspx" />
     <Content Include="CheckOut.aspx" />
     <Content Include="ClientConfirmationPage.aspx" />
-    <Content Include="ClientProfile.html" />
     <Content Include="ClientSignup.aspx" />
     <Content Include="ConfirmationPage.aspx" />
     <Content Include="CSS\Checkout.css" />
@@ -154,7 +153,6 @@
     <Content Include="searchTrainersPage.aspx" />
     <Content Include="TestSplashPage.aspx" />
     <Content Include="ThankYou.aspx" />
-    <Content Include="TrainerProfile.html" />
     <Content Include="TrainerScheduler.aspx" />
     <Content Include="TrainerSignup.aspx" />
     <Content Include="Login.aspx" />
